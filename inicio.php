@@ -74,14 +74,14 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                                     </div>
                                 </div>
                             </a>
-                            <a href="">
+                            <a href="cadastrar_opcoes.php">
                                 <div>
                                     <div id="box-infos-verde">
                                         <span>
-                                            <h4>ATALHO</h4>
+                                            <h4>CADASTRO DE OPÇÕES</h4>
                                         </span>
-                                        <h3>Atalho</h3>
-                                        <i class="fa-solid fa-circle-question"></i>
+                                        <h3>Cadastrar</h3>
+                                        <i class="fa-solid fa-gears"></i>
                                         <p class="texto-filtro">Clique para abrir</p>
                                     </div>
                                 </div>

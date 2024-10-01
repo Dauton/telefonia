@@ -1,5 +1,7 @@
 <?php
 
+require_once "Validacoes.php";
+
 class CadastroOpcoes
 {
     private PDO $pdo;
@@ -31,6 +33,11 @@ class CadastroOpcoes
 
     public function cadastraOpcao(string $tipo, string $descricao) : void
     {
+        // VALIDA SE O CAMPO DA DESCRIÇÃO É NUMERICA CASO O TIPO SELECIONADO SEJA CENTRO DE CUSTOS...
+        if($_POST['tipo'] === 'CENTRO DE CUSTOS') {
+            Validacoes::validaCampoNumerico('descricao',"../../cadastrar_opcoes.php?verifica_campo=centro_custo_nao_numerico");
+        }
+
         $sql = "INSERT INTO tb_cadastros_opcoes (tipo, descricao) VALUES ( ?,? )";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, mb_strtoupper(trim($tipo)), PDO::PARAM_STR);
