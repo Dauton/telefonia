@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
 
         $senhaUsuario = $_SESSION['id_usuario'];
-        $sql = "UPDATE tb_usuarios SET senha_primeiro_acesso = 'Alterada' WHERE id_usuario = $senhaUsuario";
+        $sql = "UPDATE tb_usuarios SET senha_primeiro_acesso = 'ALTERADA' WHERE id_usuario = $senhaUsuario";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 
 
         session_destroy();
-        header("Location: index.php?valida_senha=primeiro_acesso");
+        header("Location: index.php?verifica_senha=primeiro_acesso");
         die();
     }
 }
@@ -55,16 +55,10 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_SESSION['id_usuario']);
                             <h1>Primeiro acesso</h1>
                             <i class="fa-solid fa-key"></i>
                         </header>
-                        <?php
-                        if (empty($_SESSION['foto_perfil'])) {
-                            // SE NÃO TIVER SIDO ENVIADO UMA FOTO, UM ÍCONE DE USER SERÁ EXIBIDO
-                            echo "<i class='fa-solid fa-circle-user'></i>";
-                        } else {
-                            // SE TIVER SIDO ENVIADO UMA FOTO, ESSA FOTO SERÁ EXIBIDA
-                            echo "<img src='$_SESSION[foto_perfil]' id='form-foto-perfil'>";
-                        }
-                        ?>
-                        <h2 style="text-align: center">Olá, <?= htmlentities($_SESSION['nome_usuario']) ?>!<br><p>Para continuar, altere sua senha seguindo os requisitos informados no botão <i class="fa-regular fa-circle-question"></i></p></h2>
+                        
+                        <i class='fa-solid fa-circle-user'></i>
+                        
+                        <h2 style="text-align: center">Olá, <?= htmlentities($_SESSION['nome']) ?>!<br><p>Para continuar, altere sua senha seguindo os requisitos informados no botão <i class="fa-regular fa-circle-question"></i></p></h2>
 
                         <label for="senha">Nova senha
                             <div>

@@ -33,6 +33,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     die();
 }
 
+// LISTA TODOS AS MARCAS DE APARELHOS CADASTRADAS...
+$marca = new CadastroOpcoes($pdo);
+$listaMarcasAparelho = $marca->listaOpcoes('MARCA');
+
+// LISTA TODOS OS MODELOS DE APARELHOS CADASTRADOS...
+$modelo = new CadastroOpcoes($pdo);
+$listaModelosAparelho = $modelo->listaOpcoes('MODELO');
+
+// LISTA TODOS AS UNIDADES CADASTRADOS...
+$unidade = new CadastroOpcoes($pdo);
+$listaUnidades = $unidade->listaOpcoes('UNIDADE');
+
+// LISTA TODOS OS CENTROS DE CUSTOS CADASTRADOS...
+$cdc = new CadastroOpcoes($pdo);
+$listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
+
 ?>
 
 
@@ -72,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </header>
                 <section class="conteudo-center">
-                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" enctype="multipart/form-data" autocomplete="off">
+                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado"autocomplete="off">
                         <header id="form-cabecalho">
                             <h1>Cadastro de dispositivo</h1>
                             <i class="fa-solid fa-sim-card"></i>
@@ -181,11 +197,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <i class="fa-solid fa-mobile-screen"></i>
                                     <select name="marca_aparelho">
                                         <option value="">Selecione</option>
-                                        <option value="IPHONE">IPHONE</option>
-                                        <option value="LG">LG</option>
-                                        <option value="Motorola">MOTOROLA</option>
-                                        <option value="Samsung">SAMSUNG</option>
-                                        <option value="Xiaomi">XIAOMI</option>
+                                        <?php foreach($listaMarcasAparelho as $marca) : ?>
+                                            <option value="<?= htmlentities($marca['descricao']) ?>"><?= htmlentities($marca['descricao']) ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                             </label>
@@ -193,7 +207,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="modelo_aparelho">Modelo<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-mobile-screen"></i>
-                                    <input type="text" name="modelo_aparelho" id="modelo_aparelho" placeholder="Modelo do aparelho">
+                                    <select name="modelo_aparelho">
+                                        <option value="">Selecione</option>
+                                        <?php foreach($listaModelosAparelho as $modelo) : ?>
+                                            <option value="<?= htmlentities($modelo['descricao']) ?>"><?= htmlentities($modelo['descricao']) ?></option>
+                                        <?php endforeach ?>
+                                    </select>
                                 </div>
                             </label>
 
@@ -217,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         </section>
 
-                        <label for="servico">Possui usuário?<span style="color: red;"> *</span>
+                        <label for="servico">Essa linha ou aparelho possui usuário?<span style="color: red;"> *</span>
                             <div>
                                 <i class="fa-solid fa-user"></i>
                                 <select name="possui_usuario" required>
@@ -271,8 +290,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <i class="fa-regular fa-map"></i>
                                     <select name="unidade">
                                         <option value="">Selecione</option>
-                                        <option value="CDARCEX">CDARCEX</option>
-                                        <option value="CDAMBEX">CDAMBEX</option>
+                                        <?php foreach($listaUnidades as $unidade) : ?>
+                                            <option value="<?= htmlentities($unidade['descricao']) ?>"><?= htmlentities($unidade['descricao']) ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                             </label>
@@ -282,8 +302,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <i class="fa-solid fa-wallet"></i>
                                     <select name="centro_custo">
                                         <option value="">Selecione</option>
-                                        <option value="219002">219002</option>
-                                        <option value="204303">204303</option>
+                                        <?php foreach($listaCentrosDeCustos as $cdc) : ?>
+                                            <option value="<?= htmlentities($cdc['descricao']) ?>"><?= htmlentities($cdc['descricao']) ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                             </label>

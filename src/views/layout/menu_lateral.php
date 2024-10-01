@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario'])) {
         <span>
             <i class="fa-solid fa-circle-user"></i>
             <h3>Bem-vindo(a)!</h3>
-            <p><?= $_SESSION['nome_usuario'] ?></p>
+            <p><?= $_SESSION['nome'] ?></p>
             <a href="src/config/logout.php"><button type="button" id="btn-sair">Sair</button></a>
         </span>
     </div>
@@ -24,12 +24,12 @@ if (!isset($_SESSION['usuario'])) {
         <div></div>
     </div>
     <ul>
-        <li><a href="inicio.php"><i class="fa-solid fa-circle-question"></i>Início<i class="fa-solid fa-angle-right"></i></a></li>
+        <li><a href="inicio.php"><i class="fa-solid fa-house"></i></i>Início<i class="fa-solid fa-angle-right"></i></a></li>
 
-        <li id="menu_02"><a><i class="fa-solid fa-circle-question"></i>Dispositivos<i class="fa-solid fa-angle-right"></i></a>
+        <li id="menu_02"><a><i class="fa-solid fa-microchip"></i>Cadastros<i class="fa-solid fa-angle-right"></i></a>
             <ul id="menusub_02">
-                <li><a href="cadastrar_dispositivo.php"><i class="fa-solid fa-arrow-pointer"></i>Cadastro<i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href='consulta_dispositivos.php'><i class='fa-solid fa-arrow-pointer'></i>Consulta<i class='fa-solid fa-angle-right'></i></a></li>
+                <li><a href="cadastrar_dispositivo.php"><i class="fa-solid fa-arrow-pointer"></i>Dispositivo<i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href='cadastrar_opcoes.php'><i class='fa-solid fa-arrow-pointer'></i>Opções de cadastro<i class='fa-solid fa-angle-right'></i></a></li>
                 <li><a href='#'><i class='fa-solid fa-arrow-pointer'></i>Submenu 02/03<i class='fa-solid fa-angle-right'></i></a></li>
 
             </ul>

@@ -5,6 +5,9 @@ require_once "vendor/autoload.php";
 
 senhaPrimeiroAcesso();
 
+$dadoDispositivo = new Telefonia($pdo);
+$exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade();
+
 ?>
 
 
@@ -47,14 +50,14 @@ senhaPrimeiroAcesso();
                     <article class="conteudo-center-boxs">
                         <div class="conteudo-center-box-01">
                             <h1>Alguns atalhos</h1>
-                            <a href="">
+                            <a href="cadastrar_dispositivo.php">
                                 <div>
                                     <div id="box-infos-amarela">
                                         <span>
-                                            <h4>ATALHO</h4>
+                                            <h4>CADASTRAR DISPOSITIVO</h4>
                                         </span>
-                                        <h3>Atalho</h3>
-                                        <i class="fa-solid fa-circle-question"></i>
+                                        <h3>Cadastrar</h3>
+                                        <i class="fa-solid fa-microchip"></i>
                                         <p class="texto-filtro">Clique para abrir</p>
                                     </div>
                                 </div>
@@ -63,10 +66,10 @@ senhaPrimeiroAcesso();
                                 <div>
                                     <div id="box-infos-azul">
                                         <span>
-                                            <h4>ATALHO</h4>
+                                            <h4>CONSULTAR DISPOSITIVO</h4>
                                         </span>
-                                        <h3>Atalho</h3>
-                                        <i class="fa-solid fa-circle-question"></i>
+                                        <h3>Consultar</h3>
+                                        <i class="fa-solid fa-magnifying-glass-plus"></i>
                                         <p class="texto-filtro">Clique para abrir</p>
                                     </div>
                                 </div>
@@ -121,38 +124,35 @@ senhaPrimeiroAcesso();
                             </a>
                         </div>
                         <div class="conteudo-center-box-02">
-                            <h1>Título da tabela</h1>
+                            <h1>Minha unidade</h1>
                             <table>
                                 <thead>
                                     <tr>
-                                        <td>Coluna 01</td>
-                                        <td>Coluna 02</td>
-                                        <td>Coluna 03</td>
-                                        <td>Coluna 04</td>
-                                        <td>Coluna 05</td>
-                                        <td>Coluna 06</td>
-                                        <td>Status</td>
-                                        <td>Ações</td>
+                                        <td>Nome usuário</td>
+                                        <td>Linha</td>
+                                        <td>Status da linha</td>
+                                        <td>IMEI aparelho</td>
+                                        <td>Unidade</td>
+                                        <td>Centro de custos</td>
+                                        <td>Ponto focal</td>
+                                        <td>Visualizar</td>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php foreach($exibeDispositivosMinhaUnidade as $dadoDispositivo) : ?>
                                     <tr>
-                                        <td>Dado 01</td>
-                                        <td>Dado 02</td>
-                                        <td>Dado 03</td>
-                                        <td>Dado 04</td>
-                                        <td>Dado 05</td>
-                                        <td>Dado 06</td>
-                                        <td id="status" title="Status">
-                                            <p>ENTREGUE</p>
-                                        </td>
+                                        <td><?= $dadoDispositivo['nome'] ?></td>
+                                        <td><?= $dadoDispositivo['linha'] ?></td>
+                                        <td id="Status"><p><?= $dadoDispositivo['status'] ?></p></td>
+                                        <td><?= $dadoDispositivo['imei_aparelho'] ?></td>
+                                        <td><?= $dadoDispositivo['unidade'] ?></td>
+                                        <td><?= $dadoDispositivo['centro_custo'] ?></td>
+                                        <td><?= $dadoDispositivo['ponto_focal'] ?></td>
                                         <td>
-                                            <form method="post" action="">
-                                                <input type="hidden" name="id" value="">
-                                                <button id="table-form-btn-excluir"><i class="fa-solid fa-square-xmark"></i></button>
-                                            </form>
+                                            <a href="visualiza_dispositivo.php?id=<?= $dadoDispositivo['id'] ?>"><i class="fa-solid fa-eye"></i></a>
                                         </td>
                                     </tr>
+                                    <?php endforeach ?>
                                 </tbody>
                             </table>
                             <p>Não há mais dados a serem exibidos</p>

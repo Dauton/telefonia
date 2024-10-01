@@ -18,12 +18,29 @@ USE `telefonia`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping events for database 'telefonia'
+-- Table structure for table `tb_cadastros_opcoes`
 --
 
+DROP TABLE IF EXISTS `tb_cadastros_opcoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_cadastros_opcoes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(100) DEFAULT NULL,
+  `descricao` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 --
--- Dumping routines for database 'telefonia'
+-- Dumping data for table `tb_cadastros_opcoes`
 --
+
+LOCK TABLES `tb_cadastros_opcoes` WRITE;
+/*!40000 ALTER TABLE `tb_cadastros_opcoes` DISABLE KEYS */;
+INSERT INTO `tb_cadastros_opcoes` VALUES (1,'MARCA','IPHONE'),(2,'MARCA','LG'),(3,'MARCA','MOTOROLA'),(4,'MARCA','SAMSUNG'),(5,'MARCA','XIAOMI'),(6,'MODELO','GALAXY A03 CORE'),(7,'MODELO','GALAXY A05 CORE'),(8,'MODELO','MOTO E22'),(9,'UNIDADE','CDARCEX'),(10,'UNIDADE','CDAMBEX'),(11,'CENTRO DE CUSTOS','219002'),(12,'CENTRO DE CUSTOS','204303'),(13,'MARCA','NOKIA');
+/*!40000 ALTER TABLE `tb_cadastros_opcoes` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -34,4 +51,4 @@ USE `telefonia`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-01 17:34:18
+-- Dump completed on 2024-10-01 17:34:15

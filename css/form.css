@@ -8,18 +8,20 @@
     box-shadow: 0 0 .3em #cdcdcd;
     border-radius: 3px;
  }
+ form section[name='form-cadastro-usuario'] {
+    display: flex !important;
+ }
  .form-secao-04 {
-    display: flex 
+    display: flex;
  }
  form {
-    width: 370px;
+    width: 100%;
     height: fit-content;
     margin: 13px auto;
     padding: 60px 30px 30px 30px;
     position: relative;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
     border-radius: 3px;
     box-shadow: 0 0 1em #cdcdcd;
     background:#fff;
@@ -41,6 +43,7 @@ form::-webkit-scrollbar {
     top: 0;
     left: 0;
     box-shadow: 0 0 .3em #cdcdcd;
+    border-radius: 3px 3px 0 0;
     background: linear-gradient(to right, var(--secundary-color), var(--terciary-color));
 }
 
@@ -212,7 +215,6 @@ form #btn-cancelar:hover {
         padding: 60px 10px 10px 10px;
         box-shadow: none;
         border: none;
-        overflow: scroll;
     }
 
     form::-webkit-scrollbar {

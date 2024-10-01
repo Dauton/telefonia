@@ -197,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div>
                                     <i class="fa-solid fa-shield-halved"></i>
                                     <select name="gestao_mdm">
-                                        <option value="">Selecione</option>
+                                        <option value="<?= htmlentities($dadoDispositivo['gestao_mdm']) ?>"><?= htmlentities($dadoDispositivo['gestao_mdm']) ?></option>
                                         <option value="Sim">Sim</option>
                                         <option value="Não">Não</option>
                                     </select>

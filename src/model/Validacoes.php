@@ -43,6 +43,7 @@ class Validacoes
         return $valor;
     }
 
+
     public static function executaValidacoes(): void                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
     {
         // VALIDA CAMPOS VAZIOS
@@ -86,6 +87,13 @@ class Validacoes
         // VALIDA CAMPO DE E-MAIL...
         if (!empty($_POST['email'])) {
             Validacoes::validaCampoEmail('email', "../../cadastrar_dispositivo.php?verifica_campo=email_invalido");
+        }
+
+        // VALIDA SE POSSUI PELO MENOS LINHA OU APARELHO
+        if($_POST['possui_linha'] === 'Não' && $_POST['possui_aparelho'] === 'Não')
+        {
+            header("Location: ../../cadastrar_dispositivo.php?verifica_campo=linha_ou_aparelho");
+            die();
         }
     }
 

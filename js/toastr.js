@@ -46,7 +46,7 @@ $(document).ready(function () {
     // SUCESSO NA EDIÇÃO DE UM USUÁRIO...
     exibeMensagemSucesso('edita_usuario', 'edita_usuario', 'editado_com_sucesso', 'Usuário editado com sucesso!');
     // SUCESSO NA EXCLUSÃO DE UM USUÁRIO...
-    exibeMensagemSucesso('exclui_usuario', 'exclui_usuario', 'excluido_com_sucesso', "<br>Todas as requisições desse usuário foram excluídas do histórico.", 'Usuário excluido com sucesso!');
+    exibeMensagemSucesso('exclui_usuario', 'exclui_usuario', 'excluido_com_sucesso', 'Usuário excluido com sucesso!');
     // ERRO NA EXCLUSÃO DE UM USUÁRIO...
     exibeMensagemErro('exclui_usuario', 'exclui_usuario', 'erro_na_exclusao', '<a href="../gerenciar_requisicoes.php"><br>Esse usuário possui requisições em aberto.<br>Entregue ou cancele essas requisições antes de exclui-lo.<br><br>Clique para exibir todas as requisições em aberto</a>', '<a href="../gerenciar_requisicoes.php">Não foi possível excluir esse usuário!</a>');
 
@@ -66,6 +66,40 @@ $(document).ready(function () {
     exibeMensagemSucesso('verifica_senha', 'verifica_senha', 'primeiro_acesso', '<br>Agora realize o login com a nova senha e começe a utilizar o sistema!', 'Senha alterada com sucesso!');
 
 
+// VALIDAÇÃO CAMPOS VAZIOS...
+    // LINHA
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campo_linha_vazio', 'O campo da linha deve ser preenchido.', 'Erro!');
+    // OPERADORA
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campo_operadora_vazio', 'O campo da operadora deve ser preenchido.', 'Erro!');
+    // MARCA APARELHO
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campo_marca_vazio', 'O campo da marca deve ser preenchido.', 'Erro!');
+    // MODELO APARELHO
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campo_modelo_vazio', 'O campo do modelo deve ser preenchido.', 'Erro!');
+    // NOME USUÁRIO
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campo_nome_vazio', 'O campo do nome do usuário deve ser preenchido.', 'Erro!');
+    // TODOS OS CAMPOS DA LOCALIDADE
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campos_localidade', 'Todos os campos da localidade devem ser preenchidos.', 'Erro!');
+
+
+// VALIDAÇÃO CAMPOS NUMÉRICOS...
+    // LINHA
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'linha_nao_numerico', 'O campo da linha deve ser numérico.', 'Erro!');
+    // IMEI 
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'imei_nao_numerico', 'O campo do IMEI deve ser numérico.', 'Erro!');
+    // SIM CARD 
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'sim_card_nao_numerico', 'O campo do SIM card deve ser numérico.', 'Erro!');
+    // CENTRO DE CUSTOS 
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'centro_custo_nao_numerico', 'O campo do centro de custos deve ser numérico.', 'Erro!');
+    // MATRÍCULA 
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'matricula_nao_numerico', 'O campo da matrícula deve ser numérico.', 'Erro!');
+
+// VALIDAÇÃO DE EMAIL...
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'email_invalido', 'O e-mail informado não é válido.', 'Erro!');
+
+// VALIDAÇÃO SE POSSUI PELO MENOS LINHA OU APARELHO...
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'linha_ou_aparelho', 'O cadastro deve possuir uma linha, um aparelho, ou ambos.', 'Erro!');
+
+
 // MENSAGEM DE DISPOSITIVO
     // SUCESSO NO CADASTRO DE UM DISPOSITIVO...
     exibeMensagemSucesso('dispositivo', 'dispositivo', 'cadastrado', 'Dispositivo cadastrado com sucesso!');
@@ -74,35 +108,8 @@ $(document).ready(function () {
     // SUCESSO NA EXCLUSÃO DE UM DISPOSITIVO...
     exibeMensagemSucesso('dispositivo', 'dispositivo', 'excluido', 'Dispositivo excluído com sucesso!');
 
-// VALIDA CAMPOS VAZIOS...
-    // LINHA
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campo_linha_vazio', 'O campo da linha deve ser preenchido', 'Erro!');
-    // OPERADORA
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campo_operadora_vazio', 'O campo da operadora deve ser preenchido', 'Erro!');
-    // MARCA APARELHO
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campo_marca_vazio', 'O campo da marca deve ser preenchido', 'Erro!');
-    // MODELO APARELHO
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campo_modelo_vazio', 'O campo do modelo deve ser preenchido', 'Erro!');
-    // NOME USUÁRIO
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campo_nome_vazio', 'O campo do nome do usuário deve ser preenchido', 'Erro!');
-    // TODOS OS CAMPOS DA LOCALIDADE
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'campos_localidade', 'Todos os campos da localidade devem ser preenchidos', 'Erro!');
 
-
-//VALIDA CAMPOS NUMÉRICOS...
-    // LINHA
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'linha_nao_numerico', 'O campo da linha deve ser numérico', 'Erro!');
-    // IMEI 
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'imei_nao_numerico', 'O campo do IMEI deve ser numérico', 'Erro!');
-    // SIM CARD 
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'sim_card_nao_numerico', 'O campo do SIM card deve ser numérico', 'Erro!');
-    // CENTRO DE CUSTOS 
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'centro_custo_nao_numerico', 'O campo do centro de custos deve ser numérico', 'Erro!');
-    // MATRÍCULA 
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'matricula_nao_numerico', 'O campo da matrícula deve ser numérico', 'Erro!');
-
-// VALIDA EMAIL...
-    exibeMensagemErro('verifica_campo', 'verifica_campo', 'email_invalido', 'O e-mail informado não é válido', 'Erro!');
-
+// MENSAGEM DE CADASTRO DE OPÇÃO
+    exibeMensagemSucesso('opcao', 'opcao', 'cadastrada', 'Opção cadastrada com sucesso!');
 
 });

@@ -13,10 +13,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     } else {
         $resetaSenhaUsuario = new Usuario($pdo);
         $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
-
-        $atividade = "Resetou a própria senha";
-        $regitraLogUsuario = new Logs($pdo);
-        $regitraLogUsuario->registraLogUsuario("$atividade");
     
         header("Location: inicio.php?verifica_senha=senha_resetada");
         die();

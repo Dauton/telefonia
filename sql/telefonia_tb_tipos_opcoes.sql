@@ -18,12 +18,28 @@ USE `telefonia`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping events for database 'telefonia'
+-- Table structure for table `tb_tipos_opcoes`
 --
 
+DROP TABLE IF EXISTS `tb_tipos_opcoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_tipos_opcoes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao_tipo` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 --
--- Dumping routines for database 'telefonia'
+-- Dumping data for table `tb_tipos_opcoes`
 --
+
+LOCK TABLES `tb_tipos_opcoes` WRITE;
+/*!40000 ALTER TABLE `tb_tipos_opcoes` DISABLE KEYS */;
+INSERT INTO `tb_tipos_opcoes` VALUES (1,'MARCA'),(2,'MODELO'),(3,'UNIDADE'),(4,'CENTRO DE CUSTOS');
+/*!40000 ALTER TABLE `tb_tipos_opcoes` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -34,4 +50,4 @@ USE `telefonia`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-01 17:34:18
+-- Dump completed on 2024-10-01 17:34:17

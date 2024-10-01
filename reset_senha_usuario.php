@@ -12,10 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resetaSenhaUsuario = new Usuario($pdo);
         $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
 
-        $atividade = "Resetou a senha do usuário \"$_POST[usuario]\"";
-        $regitraLogUsuario = new Logs($pdo);
-        $regitraLogUsuario->registraLogUsuario("$atividade");
-
         header("Location: gerenciar_usuarios.php?verifica_senha=senha_resetada");
         die();
     }
@@ -74,17 +70,10 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_GET['id_usuario']);
                             <h1>Reset de senha</h1>
                             <i class="fa-solid fa-key"></i>
                         </header>
-
-                        <?php
-                        if (empty($buscaIdUsuario['foto_perfil'])) {
-                            // SE NÃO TIVER SIDO ENVIADO UMA FOTO, UM ÍCONE DE USER SERÁ EXIBIDO
-                            echo "<i class='fa-solid fa-circle-user'></i>";
-                        } else {
-                            // SE TIVER SIDO ENVIADO UMA FOTO, ESSA FOTO SERÁ EXIBIDA
-                            echo "<img src='$buscaIdUsuario[foto_perfil]' id='form-foto-perfil'>";
-                        }
-                        ?>
-                        <h2 style="text-align: center"><?= htmlentities($buscaIdUsuario['nome_usuario']) ?></h2>
+                        
+                        <i class='fa-solid fa-circle-user'></i>
+                        
+                        <h2 style="text-align: center"><?= htmlentities($buscaIdUsuario['nome']) ?></h2>
                         
                         <label for="senha">Nova senha
                             <div>

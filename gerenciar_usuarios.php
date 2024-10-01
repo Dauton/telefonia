@@ -80,7 +80,7 @@ senhaPrimeiroAcesso();
                                         }
                                     ?>
                                 </td>
-                                <td><?= htmlentities($exibeUsuarios['nome_usuario']) ?></td>
+                                <td><?= htmlentities($exibeUsuarios['nome']) ?></td>
                                 <td><?= htmlentities($exibeUsuarios['usuario']) ?></td>
                                 <td><?= htmlentities($exibeUsuarios['perfil']) ?></td>
                                 <td><?= htmlentities($exibeUsuarios['status']) ?></td>

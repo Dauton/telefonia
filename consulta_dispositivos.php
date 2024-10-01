@@ -135,7 +135,7 @@ $exibeTodosDispositivos = $dispositivo->exibeDispositivos();
                                         <td>Unidade</td>
                                         <td>Centro de custos</td>
                                         <td>Ponto focal</td>
-                                        <td>Visualzar</td>
+                                        <td>Visualizar</td>
                                     </tr>
                                 </thead>
                                 <tbody>
