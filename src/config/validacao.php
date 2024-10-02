@@ -12,7 +12,7 @@ if (isset($_POST['usuario']) && !empty($_POST['usuario']) && isset($_POST['senha
     $senha = trim($_POST['senha']);
 
     // BUSCA O USUÁRIO INFORMADO NO BANCO DE DADOS...
-    $sql = "SELECT * FROM tb_usuarios WHERE usuario = :usuario";
+    $sql = "SELECT * FROM tb_users WHERE usuario = :usuario";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([":usuario" => $usuario]);
     $resultado = $stmt->fetch();
@@ -20,26 +20,30 @@ if (isset($_POST['usuario']) && !empty($_POST['usuario']) && isset($_POST['senha
     if ($resultado) {
 
         // VERIFICA SE O USUÁRIO INFORMADO ESTÁ ATIVADO, CASO CONTRÁRIO NÃO SERÁ POSSÍVEL REALIZAR O LOGIN...
-        if ($resultado['status'] == "ATIVADO") {
+        if ($resultado['status'] == "Ativado") {
 
             // VERIFICA SE A SENHA INFORMADA PERTENCE AO USUÁRIO INFORMADO E ENCONTRADO...
             if (password_verify($senha, $resultado['senha'])) {
 
                 // SE ENCONTRADO OS DADOS DESSE USUÁRIO É ARMAZENADO NA SESSÃO...
                 $_SESSION['usuario'] = $resultado['usuario'];
-                $_SESSION['nome'] = $resultado['nome'];
-                $_SESSION['matricula'] = $resultado['matricula'];
-                $_SESSION['unidade'] = $resultado['unidade'];
+                $_SESSION['nome_usuario'] = $resultado['nome_usuario'];
                 $_SESSION['perfil'] = $resultado['perfil'];
+                $_SESSION['foto_perfil'] = $resultado['foto_perfil'];
                 $_SESSION['senha_primeiro_acesso'] = $resultado['senha_primeiro_acesso'];
                 $_SESSION['id_usuario'] = $resultado['id_usuario'];
 
                 // ARMAZENA O LOG DE LOGIN NO BANCO DE DADOS COM UMA MENSAGEM DE SUCESSO...
                 $registraLog = new Logs($pdo);
                 $registraLog->registraLogAcesso($_POST['usuario'], "Sucesso: Usuário logado!");
-
-                header("Location: ../../inicio.php");
-                die();
+                
+                if($_SESSION['perfil'] === 'Admin') {
+                    header("Location: ../../controle_estoque.php");
+                    die();
+                } else {
+                    header("Location: ../../inicio.php");
+                    die();
+                }
                 
             } else {
 

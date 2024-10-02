@@ -6,6 +6,10 @@ require_once "vendor/autoload.php";
 apenasAdmin();
 senhaPrimeiroAcesso();
 
+// EXIBE TODAS AS MINHAS REQUISIÇÕES
+$todasMinhas = new Requisicao($pdo);
+$todasMinhasRequisicoes = $todasMinhas->exibeMinhasRequisicoesHistorico();
+
 $logs = new Logs($pdo);
 $dados_logs = $logs->exibeRegistrosLogUsuarios();
 
@@ -78,6 +82,11 @@ $dados_logs = $logs->exibeRegistrosLogUsuarios();
             </article>
         </section>
     </main>
+
+    <?php
+        // EXIBE A ESTRUTURA HTML QUE EXIBE O HISTORICO DE REQUISIÇÕES DO USUÁRIO LOGADO...
+        require_once "src/views/layout/meu_historico_requisicoes.php";
+    ?>
 
     <div class="btns-atalhos">
         <a href="src/excel/extrair_registros_usuarios.php"><button id="btn-atalho" title="Extrair para Excel">

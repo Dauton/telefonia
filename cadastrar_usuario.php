@@ -6,27 +6,27 @@ require_once "vendor/autoload.php";
 apenasAdmin();
 senhaPrimeiroAcesso();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if($_SERVER['REQUEST_METHOD'] === 'POST')
+{
     // VALIDA SE TODOS OS CAMPOS OBRGATORIOS ESTÃO PREENCHIDOS...
-    if (
-        (isset($_POST['nome'])) && (!empty($_POST['nome'])) &&
+    if(
+        (isset($_POST['nome_usuario'])) && (!empty($_POST['nome_usuario'])) &&
         (isset($_POST['usuario'])) && (!empty($_POST['usuario'])) &&
         (isset($_POST['senha'])) && (!empty($_POST['senha'])) &&
         (isset($_POST['perfil'])) && (!empty($_POST['perfil']))
     ) {
         // VERIFICA SE A SENHA INFORMA RESPEITA OS REQUISITOS DE SENHA...
-        if (validacaoSenha($pdo)) {
+        if(validacaoSenha($pdo)) {
+
         } else {
             $cadastraUsuario = new Usuario($pdo);
-            $cadastraUsuario->cadastraUsuario(
-                $_POST['nome'],
-                $_POST['matricula'],
-                $_POST['unidade'],
-                $_POST['cargo'],
-                $_POST['perfil'],
-                $_POST['usuario'],
-                $_POST['senha'],
-            );
+            $cadastraUsuario->cadastraUsuario($_POST['nome_usuario'], $_POST['usuario'], $_POST['senha'], $_POST['perfil']);
+
+            // RESGISTRA O LOG DE CADASTRO DE USUÁRIO...
+            $evento = "Cadastrou o usuário \"$_POST[usuario]\"";
+            $regitraLogUsuario = new Logs($pdo);
+            $regitraLogUsuario->registraLogUsuario("$evento");
+
             header("Location: gerenciar_usuarios.php?cadastra_usuario=cadastrado_com_sucesso");
             die();
         }
@@ -36,7 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: cadastrar_usuario.php?verifica_campos=campos_nao_preenchidos");
         die();
     }
+
 }
+
+    // EXIBE TODAS AS MINHAS REQUISIÇÕES
+    $todasMinhas = new Requisicao($pdo);
+    $todasMinhasRequisicoes = $todasMinhas->exibeMinhasRequisicoesHistorico();
 
 ?>
 
@@ -47,25 +52,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
 
     <?php
-    // META TAGS E LINKS DO HEAD...
-    require_once "src/views/layout/head.php";
+        // META TAGS E LINKS DO HEAD...
+        require_once "src/views/layout/head.php";
     ?>
-
+    
 </head>
 
 <body>
     <main class="corpo">
 
         <?php
-        // EXIBE O MENU LATERAL... 
-        require_once "src/views/layout/menu_lateral.php";
+            // EXIBE O MENU LATERAL... 
+            require_once "src/views/layout/menu_lateral.php"; 
         ?>
 
         <section class="principal">
-
+            
             <?php
-            // EXIBE O CABEÇALHO...
-            require_once "src/views/layout/cabecalho.php";
+                // EXIBE O CABEÇALHO...
+                require_once "src/views/layout/cabecalho.php";
             ?>
 
             <article class="conteudo">
@@ -76,102 +81,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <a href="requisicao.php"><i class="fa-solid fa-basket-shopping"></i></a>
                     </div>
                 </header>
-                <section class="conteudo-center" name="cadastro-usuario">
-                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
+                <section class="conteudo-center">
+                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" enctype="multipart/form-data" autocomplete="off">
                         <header id="form-cabecalho">
                             <h1>Cadastro de usuário</h1>
                             <i class="fa-solid fa-boxes-packing"></i>
                         </header>
 
-                        <section class="form-secao-01" name="form-cadastro-usuario">
+                        <h2>Preencha os campos</h2>
 
-                            <h2>Preencha os campos</h2>
 
-                            <label for="nome">Nome completo
-                                <div>
-                                    <i class="fa-solid fa-user"></i>
-                                    <input type="text" name="nome" placeholder="Insira o nome do usuário">
-                                </div>
-                            </label>
-
-                            <label for="matricula">Matrícula
-                                <div>
-                                    <i class="fa-solid fa-user-tag"></i>
-                                    <input type="text" name="matricula" placeholder="Insira a matrícula">
-                                </div>
-                            </label>
-
-                            <label for="unidade">Unidade
-                                <div>
-                                    <i class="fa-solid fa-map"></i>
-                                    <select name="unidade" required>
-                                        <option value="">Selecione</option>
-                                        <option value="CDARCEX">CDARCEX</option>
-                                        <option value="CDAMBEX">CDAMBEX</option>
-                                    </select>
-                                </div>
-                            </label>
-
-                            <label for="cargo">Cargo
-                                <div>
-                                    <i class="fa-solid fa-briefcase"></i>
-                                    <select name="cargo" required>
-                                        <option value="">Selecione</option>
-                                        <option value="ANALISTA DE TI">ANALISTA DE TI</option>
-                                    </select>
-                                </div>
-                            </label>
-
-                            <label for="perfil">Perfil
-                                <div>
-                                    <i class="fa-solid fa-user-shield"></i>
-                                    <select name="perfil" required>
-                                        <option value="">Selecione o perfil</option>
-                                        <option value="CONSULTANTE">CONSULTANTE</option>
-                                        <option value="ADMIN">ADMIN</option>
-                                    </select>
-                                </div>
-                            </label>
-
-                            <label for="usuario">Usuário
-                                <div>
-                                    <i class="fa-solid fa-id-card-clip"></i>
-                                    <input type="text" name="usuario" placeholder="Crie o usuário" required>
-                                </div>
-                            </label>
-
-                            <label for="senha">senha
-                                <div>
-                                    <i class="fa-solid fa-key"></i>
-                                    <input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="new-password" required>
-                                    <i id="mostrar-senha" class="fa-solid fa-eye"></i>
-                                    <i id="ocultar-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
-                                </div>
-                            </label>
-
-                            <label for="repete_senha">Repita a senha
-                                <div>
-                                    <i class="fa-solid fa-key"></i>
-                                    <input type="password" name="repete_senha" id="repete-senha" placeholder="Repita a senha" autocomplete="new-password" required>
-                                    <i id="mostrar-repete-senha" class="fa-solid fa-eye"></i>
-                                    <i id="ocultar-repete-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
-                                </div>
-                            </label>
-
+                        <label for="nome_usuario">Nome completo
                             <div>
-                                <button type="submit" name="btn-requisitar">Cadastrar</but>
+                                <i class="fa-solid fa-user"></i>
+                                <input type="text" name="nome_usuario" placeholder="Insira o nome do usuário" >
                             </div>
-                        </section>
+                        </label>
+
+                        <label for="usuario">Usuário
+                            <div>
+                                <i class="fa-solid fa-user-tag"></i>
+                                <input type="text" name="usuario" placeholder="Crie o usuário" required>
+                            </div>
+                        </label>
+                        
+                        <label for="perfil">Perfil
+                            <div>
+                                <i class="fa-solid fa-user-shield"></i>
+                                <select name="perfil" required>
+                                    <option value="">Selecione o perfil</option>
+                                        <option value="Requisitante">Requisitante</option>
+                                        <option value="Admin">Admin</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label for="senha">senha
+                            <div>
+                                <i class="fa-solid fa-key"></i>
+                                <input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="new-password" required>
+                                <i id="mostrar-senha" class="fa-solid fa-eye"></i>
+                                <i id="ocultar-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
+                            </div>
+                        </label>
+
+                        <label for="repete_senha">Repita a senha
+                            <div>
+                                <i class="fa-solid fa-key"></i>
+                                <input type="password" name="repete_senha" id="repete-senha" placeholder="Repita a senha" autocomplete="new-password" required>
+                                <i id="mostrar-repete-senha" class="fa-solid fa-eye"></i>
+                                <i id="ocultar-repete-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
+                            </div>
+                        </label>
+
+                        <label for="foto_perfil">Foto de perfil
+                            <div>
+                                <input type="file" name="foto_perfil" accept="image/*">
+                            </div>
+                        </label>
+
+                        <button type="submit" name="btn-requisitar">Cadastrar</button>
                     </form>
                 </section>
 
                 <?php
-                // EXIBE O RODAPÉ...
-                require_once "src/views/layout/rodape.php";
+                    // EXIBE O RODAPÉ...
+                    require_once "src/views/layout/rodape.php";
                 ?>
 
-            </article>
-
+            </article>            
+            
             <div id="box-ajuda">
                 <header class="box-ajuda-cabecalho">
                     <h1>Requisitos de senha</h1>
@@ -189,11 +168,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
     </main>
 
+    <?php
+        // EXIBE A ESTRUTURA HTML QUE EXIBE O HISTORICO DE REQUISIÇÕES DO USUÁRIO LOGADO...
+        require_once "src/views/layout/meu_historico_requisicoes.php";
+    ?>
+
     <div class="btns-atalhos">
         <button type="button" id="btn-atalho" title="Caixa de ajuda"><i class="fa-regular fa-circle-question"></i></button>
         <a href="gerenciar_usuarios.php"><button id="btn-atalho" title="Gerenciar usuários">
-                <i class="fa-solid fa-users"></i>
-            </button></a>
+            <i class="fa-solid fa-users"></i>
+        </button></a>
     </div>
 
 

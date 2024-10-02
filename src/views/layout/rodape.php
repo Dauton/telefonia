@@ -9,5 +9,5 @@
 ?>
 
 <footer class="conteudo-rodape">
-    <small>Inventário de Telefonia - ID DO BRASIL LOGÍSTICA LTDA. - 2024</small>
+    <small>Controle e Requisição de Insumos - ID DO BRASIL LOGISTICA LTDA - 2024</small>
 </footer>

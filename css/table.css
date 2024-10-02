@@ -117,9 +117,8 @@ table form button i:hover, #btn-inventariar:hover {
     filter: brightness(60%);
     transition: .1s;
 }
-table .fa-eye {
+table form button .fa-eye {
     color: var(--primary-color);
-    font-size: 20px;
 }
 #table-form-btn-excluir i {
     color: #ff3737;

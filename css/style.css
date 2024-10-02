@@ -166,7 +166,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(to right, var(--secundary-color), var(--terciary-color));
+    background: linear-gradient(to right, var(--primary-color), var(--terciary-color));
     color: var(--white-color);
 }
 

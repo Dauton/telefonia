@@ -130,14 +130,38 @@ function corStatus() {
 
     cells.forEach(function(cell) {
 
-        // SE A RLINHA ESTIVER ATIVADA, FICARÁ VERDE..
-        if (cell.textContent.trim() === "ATIVADO") {
+        // SE A REQUISIÇÃO AINDA NÃO FOI ATENDIDA, O FUNDO FICARÁ AZUL...
+        if (cell.textContent.trim() === "EM ABERTO") {
+            cell.style.backgroundColor = '#0088ff';
+
+        // SE A REQUISIÇÃO ESTIVER SIDO ENTREGUE, O FUNDO FICARÁ VERDE..
+        } if (cell.textContent.trim() === "ENTREGUE") {
             cell.style.backgroundColor = '#00a000';
 
-            
-        // SE A RLINHA ESTIVER DESATIVADA, FICARÁ VERMELHO...
-        } if (cell.textContent.trim() === "DESATIVADO") {
+        // SE A REQUISIÇÃO ESTIVER SIDO RECUSADA, O FUNDO FICARÁ VERMELHO...
+        } if (cell.textContent.trim() === "RECUSADA") {
             cell.style.backgroundColor = '#cc2626';
+
+        // SE A REQUISIÇÃO ESTIVER SIDO CANCELADA, O FUNDO FICARÁ VERMELHO...
+        } if (cell.textContent.trim() === "CANCELADA PELO SOLICITANTE") {
+            cell.style.backgroundColor = '#cc2626';
+
+
+        } if (cell.textContent.trim() === "FINALIZADO") {
+            cell.style.backgroundColor = '#00a000';
+
+
+        } if (cell.textContent.trim() === "INVENTARIADO") {
+            cell.style.backgroundColor = '#00a000';
+
+
+        } if (cell.textContent.trim() === "EM ANDAMENTO") {
+            cell.style.backgroundColor = '#0088ff';
+
+
+        } if (cell.textContent.trim() === "NÃO INVENTARIADO") {
+            cell.style.backgroundColor = '#cc2626';
+
 
         }
         

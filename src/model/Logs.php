@@ -65,6 +65,20 @@ class Logs
     }
 
 
+
+    // LOGS DE USUÁRIO...
+    // MÉTODO QUE REGISTRA O LOG DE EVENTO REALIZADO EM UM USUÁRIO OU NOVO USUÁRIO...
+    public function registraLogUsuario(string $evento) : void
+    {
+
+        $sql = "INSERT INTO tb_logs_usuarios (usuario, id_usuario, evento) VALUES ( ?, ?, ? )";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $_SESSION['nome_usuario'],  PDO::PARAM_STR);
+        $stmt->bindValue(2, $_SESSION['id_usuario'], PDO::PARAM_INT);
+        $stmt->bindValue(3, $evento,  PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
     // MÉTODO QUE EXIBE OS REGISTROS DE CADASTRO, EXCLUSÃO E EDIÇÃO DE UM USUÁRIO DOS ÚLTIMOS 30 DIAS...
     public function exibeRegistrosLogUsuarios() : array
     {

@@ -13,6 +13,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     } else {
         $resetaSenhaUsuario = new Usuario($pdo);
         $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
+
+        $atividade = "Resetou a própria senha";
+        $regitraLogUsuario = new Logs($pdo);
+        $regitraLogUsuario->registraLogUsuario("$atividade");
     
         header("Location: inicio.php?verifica_senha=senha_resetada");
         die();
@@ -21,6 +25,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 
 $idUsuario = new Usuario($pdo);
 $buscaIdUsuario = $idUsuario->buscaIdUsuario($_SESSION['id_usuario']);
+
+// EXIBE TODAS AS MINHAS REQUISIÇÕES
+$todasMinhas = new Requisicao($pdo);
+$todasMinhasRequisicoes = $todasMinhas->exibeMinhasRequisicoesHistorico();
 
 ?>
 
@@ -127,6 +135,11 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_SESSION['id_usuario']);
             </div>
         </section>
     </main>
+
+    <?php
+        // EXIBE A ESTRUTURA HTML QUE EXIBE O HISTORICO DE REQUISIÇÕES DO USUÁRIO LOGADO...
+        require_once "src/views/layout/meu_historico_requisicoes.php";
+    ?>
 
     <div class="btns-atalhos">
         <button type="button" id="btn-atalho" title="Caixa de ajuda"><i class="fa-regular fa-circle-question"></i></button>

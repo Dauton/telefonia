@@ -6,6 +6,10 @@ require_once "vendor/autoload.php";
 apenasAdmin();
 senhaPrimeiroAcesso();
 
+    // EXIBE TODAS AS MINHAS REQUISIÇÕES
+    $todasMinhas = new Requisicao($pdo);
+    $todasMinhasRequisicoes = $todasMinhas->exibeMinhasRequisicoesHistorico();
+
     // EXIBE TODOS OS USUÁRIOS CADASTRADOS
     $exibeUsuarios = new Usuario($pdo);
     $exibeTodosUsuarios = $exibeUsuarios->exibeUsuarios();
@@ -80,7 +84,7 @@ senhaPrimeiroAcesso();
                                         }
                                     ?>
                                 </td>
-                                <td><?= htmlentities($exibeUsuarios['nome']) ?></td>
+                                <td><?= htmlentities($exibeUsuarios['nome_usuario']) ?></td>
                                 <td><?= htmlentities($exibeUsuarios['usuario']) ?></td>
                                 <td><?= htmlentities($exibeUsuarios['perfil']) ?></td>
                                 <td><?= htmlentities($exibeUsuarios['status']) ?></td>
@@ -105,6 +109,11 @@ senhaPrimeiroAcesso();
             </article>
         </section>
     </main>
+
+    <?php
+        // EXIBE A ESTRUTURA HTML QUE EXIBE O HISTORICO DE REQUISIÇÕES DO USUÁRIO LOGADO...
+        require_once "src/views/layout/meu_historico_requisicoes.php";
+    ?>
 
     <div class="btns-atalhos">
         <a href="cadastrar_usuario.php"><button id="btn-atalho" title="Cadastrar um novo usuário">

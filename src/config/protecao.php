@@ -16,7 +16,7 @@ if ((!isset($_SESSION['usuario']) === true) && (!isset($_SESSION['senha']) === t
 // FUNÇÃO DE LIBERAÇÃO DE ACESSO APENAS PARA ADMIN
 function apenasAdmin()
 {
-    if ($_SESSION['perfil'] != "ADMIN") {
+    if ($_SESSION['perfil'] != "Admin") {
         header("Location: inicio.php");
         die();
     }
@@ -25,7 +25,7 @@ function apenasAdmin()
 // FUNÇÃO DE BLOQUEIO CASO O USUÁRIO ESTEJA DESATIVADO
 function usuarioDesativado()
 {
-    if($_SESSION['status'] != "ATIVADO") {
+    if($_SESSION['status'] != "Ativado") {
 
         header("Location: index.php?valida_login=usuario_desativado");
         die();
@@ -36,7 +36,7 @@ function usuarioDesativado()
 // SE FOR O PRIMEIRO ACESSO DESSE USUÁRIO, SERÁ PEDIDO PARA ALTERAR A SENHA
 function senhaPrimeiroAcesso()
 {
-    if($_SESSION['senha_primeiro_acesso'] != "ALTERADA") {
+    if($_SESSION['senha_primeiro_acesso'] != "Alterada") {
 
         header("Location: primeiro_acesso.php");
         die();
