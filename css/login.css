@@ -1,0 +1,228 @@
+@import url(menu_lateral.css);
+
+:root {
+    --primary-color: #0088ff;
+    --secundary-color: #005876;
+    --terciary-color: #00384b;
+    --white-color: #f1f1f1;
+    --primary-shadow: 0 0 .5em #808080
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Playpen Sans', cursive;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.principal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white-color);
+}
+
+.center {
+    width: 600px;
+    display: flex;
+    font-size: 13px;
+    box-shadow: .2em .2em 1em #cdcdcd;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.center h1 {
+    font-size: 20px;
+}
+
+.center h2 {
+    font-size: 15px;
+}
+
+.center form,
+.left-form {
+    width: 50%;
+    height: 100%;
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #ffffff;
+}
+
+.left-form {
+    height: inherit;
+    text-align: center;
+    color: var(--white-color);
+    background: url(../img/background-left-form.jpg);
+    background-size: 100% 100%;
+}
+
+.left-form img {
+    width: 130px;
+    margin-top: auto;
+}
+
+.center form img {
+    width: 130px;
+    margin-bottom: 20px;
+}
+
+.center form label {
+    width: 80%;
+    border-radius: 30px;
+}
+
+.center form label p {
+    text-align: left;
+    margin-bottom: 3px;
+}
+
+.center form label div {
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.center form div i {
+    padding: 10px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #454545;
+}
+
+.center form input {
+    width: 100%;
+    padding: 10px 10px 10px 30px;
+    border: none;
+    border-radius: 3px;
+    background: #eaf5ff;
+}
+
+.center form div .fa-eye,
+.center form div .fa-eye-slash {
+    height: 100%;
+    padding: 10px;
+    left: auto;
+    right: 0;
+    color: #454545;
+    cursor: pointer;
+}
+
+.center form input:focus {
+    outline-color: var(--secundary-color);
+}
+
+.center form button {
+    width: 80%;
+    margin: 15px 0;
+    padding: 7px;
+    background: var(--secundary-color);
+    border: none;
+    border-radius: 3px;
+    color: var(--white-color);
+    cursor: pointer;
+    transition: background .2s;
+}
+.center form button:hover {
+    background: var(--terciary-color);
+    transition: background .2s;
+}
+.center form p {
+    text-align: center;
+}
+
+.rodape {
+    position: fixed;
+    bottom: 10px;
+    color: #808080;
+    font-size: 12px;
+    font-style: italic;
+}
+
+#id-logo {
+    display: none;
+}
+
+
+
+            /* RESPONSIVO */ 
+
+@media screen and (max-width: 720px) {
+    #id-logo {
+        display: block;
+        width: 80px;
+        margin-top: 20px;
+    }
+
+    .principal {
+        align-items: center;
+    }
+
+    .left-form img {
+        display: none;
+    }
+
+    .center {
+        width: 90%;
+        max-width: 400px;
+        flex-direction: column;
+        border-radius: 5px;
+    }
+
+    .left-form,
+    .center form {
+        width: 100%;
+        padding: 0px;
+    }
+
+    .left-form {
+        padding: 20px;
+    }
+
+    .center form {
+        padding-top: 30px;
+    }
+    .center form label p {
+        margin: 3px 2px;
+    }
+    .center form input {
+        padding: 15px 10px 15px 30px;
+    }
+    .center form p {
+        margin: 10px 0;
+    }
+    .center form button {
+        padding: 10px;
+    }
+    .toast {
+        top: 0 !important;
+        right: 25px !important;
+        height: 50px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (width <= 960px) and (orientation: landscape) {
+
+    .principal {
+        align-items: baseline;
+        padding: 10px;
+        overflow: auto;
+    }
+
+}
