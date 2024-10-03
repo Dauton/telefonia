@@ -14,9 +14,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     die();
 }
 
-// LISTA TODOS AS MARCAS DE APARELHOS CADASTRADAS...
+// LISTA TODOS OS TIPOS DISPONÍVEIS...
 $tipo = new CadastroOpcoes($pdo);
 $listaTipos = $tipo->listaTiposOpcoes();
+
+$marca = new CadastroOpcoes($pdo);
+$listaMarcas = $marca->listaOpcoes('MARCA');
+
+$modelo = new CadastroOpcoes($pdo);
+$listaModelos = $modelo->listaOpcoes('MODELO');
+
+$unidade = new CadastroOpcoes($pdo);
+$listaUnidade = $unidade->listaOpcoes('UNIDADE');
+
+$centro_custo = new CadastroOpcoes($pdo);
+$listaCentroCustos = $centro_custo->listaOpcoes('CENTRO DE CUSTOS');
 
 ?>
 
@@ -60,7 +72,7 @@ $listaTipos = $tipo->listaTiposOpcoes();
 
                     <form method="post" action="">
                         <header id="form-cabecalho">
-                            <h1>Cadastrar opções</h1>
+                            <h1>Cadastrar e gerenciar opções</h1>
                             <i class="fa-solid fa-gears"></i>
                         </header>
 
@@ -68,9 +80,9 @@ $listaTipos = $tipo->listaTiposOpcoes();
                         <label for="tipo">Tipo da opção<span style="color: red;"> *</span>
                             <div>
                                 <i class="fa-solid fa-gears"></i>
-                                <select id="tipo" name="tipo">    
+                                <select id="tipo" name="tipo">
                                     <option value="">Selecione</option>
-                                    <?php foreach($listaTipos as $tipo) : ?>
+                                    <?php foreach ($listaTipos as $tipo) : ?>
                                         <option value="<?= htmlentities($tipo['descricao_tipo']) ?>"><?= htmlentities($tipo['descricao_tipo']) ?></option>
                                     <?php endforeach ?>
                                 </select>
@@ -85,8 +97,98 @@ $listaTipos = $tipo->listaTiposOpcoes();
                         <div>
                             <button type="submit" name="btn-requisitar">Cadastrar</button>
                         </div>
+                        <br><br>
+                        <table>
+                            <h2>Marcas de aparelho</h2>
+                            <thead>
+                                <tr>
+                                    <td>Tipo</td>
+                                    <td>Descrição</td>
+                                    <td>Ação</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($listaMarcas as $marca) : ?>
+                                    <tr>
+                                        <td><?= htmlentities($marca['tipo']) ?></td>
+                                        <td><?= htmlentities($marca['descricao']) ?></td>
+                                        <td id="status">
+                                            <a href="visualiza_dispositivo.php?id=<?= $marca['id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                        <br>
+                        <h2>Modelos de aparelho</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Tipo</td>
+                                    <td>Descrição</td>
+                                    <td>Ação</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($listaModelos as $modelo) : ?>
+                                    <tr>
+                                        <td><?= htmlentities($modelo['tipo']) ?></td>
+                                        <td><?= htmlentities($modelo['descricao']) ?></td>
+                                        <td id="status">
+                                            <a href="visualiza_dispositivo.php?id=<?= $modelo['id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                        <br>
+                        <h2>Unidades</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Tipo</td>
+                                    <td>Descrição</td>
+                                    <td>Ação</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($listaUnidade as $unidade) : ?>
+                                    <tr>
+                                        <td><?= htmlentities($unidade['tipo']) ?></td>
+                                        <td><?= htmlentities($unidade['descricao']) ?></td>
+                                        <td id="status">
+                                            <a href="visualiza_dispositivo.php?id=<?= $unidade['id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                        <br>
+                        <h2>Centros de custos</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Tipo</td>
+                                    <td>Descrição</td>
+                                    <td>Ação</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($listaCentroCustos as $centro_custo) : ?>
+                                    <tr>
+                                        <td><?= htmlentities($centro_custo['tipo']) ?></td>
+                                        <td><?= htmlentities($centro_custo['descricao']) ?></td>
+                                        <td id="status">
+                                            <a href="visualiza_dispositivo.php?id=<?= $centro_custo['id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
                     </form>
                 </section>
+
+
 
                 <?php
                 // EXIBE O RODAPÉ...
@@ -123,55 +225,6 @@ $listaTipos = $tipo->listaTiposOpcoes();
     <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/javascript.js"></script>
     <script type="text/javascript" src="js/toastr.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const selectPossuiLinha = document.querySelector('select[name="possui_linha"]');
-            const selectPossuiAparelho = document.querySelector('select[name="possui_aparelho"]');
-            const selectPossuiUsuario = document.querySelector('select[name="possui_usuario"]');
-
-            const secaoLinha = document.querySelector('.form-secao-01');
-            const secaoAparelho = document.querySelector('.form-secao-02');
-            const secaoUsuario = document.querySelector('.form-secao-03');
-
-            const linha = secaoLinha.querySelector('input[name="linha"]');
-            const operadora = secaoLinha.querySelector('select[name="operadora"]');
-
-            const marcaAparelho = secaoAparelho.querySelector('select[name="marca_aparelho"]');
-            const modeloAparelho = secaoAparelho.querySelector('input[name="modelo_aparelho"]');
-            const imeiAparelho = secaoAparelho.querySelector('input[name="imei_aparelho"]');
-            const mdmAparelho = secaoAparelho.querySelector('select[name="gestao_mdm"]');
-
-            const nomeUsuario = secaoUsuario.querySelector('input[name="nome"]');
-
-            secaoLinha.style.display = 'none';
-            secaoAparelho.style.display = 'none';
-            secaoUsuario.style.display = 'none';
-
-            function toggleSection(select, section, camposObrigatorios) {
-                if (select.value === 'Sim') {
-                    section.style.display = 'flex';
-                } else {
-                    section.style.display = 'none';
-                }
-            }
-
-            selectPossuiLinha.addEventListener('change', function() {
-                toggleSection(selectPossuiLinha, secaoLinha, [linha, operadora]);
-            });
-
-            selectPossuiAparelho.addEventListener('change', function() {
-                toggleSection(selectPossuiAparelho, secaoAparelho, [marcaAparelho, modeloAparelho, imeiAparelho, mdmAparelho]);
-            });
-
-            selectPossuiUsuario.addEventListener('change', function() {
-                toggleSection(selectPossuiUsuario, secaoUsuario, [nomeUsuario]);
-            });
-        });
-    </script>
-
-
-
 
 </body>
 

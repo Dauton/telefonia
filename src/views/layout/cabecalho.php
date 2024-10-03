@@ -12,19 +12,19 @@
     <div>
         <a>
             <div id="cabecalho-botao-verde">
-                <i class="fa-solid fa-clock-rotate-left"></i>
+                <i class="fa-solid fa-circle-question"></i>
                 <span>
-                    <p>Exibir meu historico de</p>
-                    <h3>Requisições</h3>
+                    <p>Preebcher</p>
+                    <h3>Preencher</h3>
                 </span>
             </div>
         </a>
-        <a href="requisicao.php">
+        <a href="">
             <div id="cabecalho-botao-amarelo">
-                <i class="fa-solid fa-basket-shopping"></i>
+                <i class="fa-solid fa-circle-question"></i>
                 <span>
-                    <p>Abrir uma nova</p>
-                    <h3>Requisição</h3>
+                    <p>Preebcher</p>
+                    <h3>Preencher</h3>
                 </span>
             </div>
         </a>

@@ -117,8 +117,9 @@ table form button i:hover, #btn-inventariar:hover {
     filter: brightness(60%);
     transition: .1s;
 }
-table form button .fa-eye {
+table .fa-eye {
     color: var(--primary-color);
+    font-size: 20px;
 }
 #table-form-btn-excluir i {
     color: #ff3737;
@@ -177,6 +178,10 @@ table .fa-circle {
 }
 #form-hidden-input:focus {
     outline: none;
+}
+
+.conteudo-center-tables table thead {
+    background: var(--secundary-color);
 }
 
 @media (width <= 1020px) and (orientation: landscape) {

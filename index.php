@@ -7,9 +7,8 @@
     <title>Almoxarifado IDL</title>
     <link rel="shortcut icon" type="imagex/png" href="img/id-logo-browser.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <meta name="desciption" content="Controle de requisição de insumos">
+    <meta name="desciption" content="Inventário de Telefonia">
     <meta name="author" content="Desenvolvedor - Dauton Pereira Félix, Analista de TI - 2024">
-    <meta name="author" content="Apoio - Alexandre Toffanin, Analista de Controladoria - 2024">
     <meta name="theme-color" content="#0088ff">
 
     <link rel='stylesheet' type='text/css' media='screen' href='css/login.css'>
@@ -33,7 +32,7 @@
                 <h1>Olá!<br>
                     <h2>Seja muito bem-vindo(a)!</h2>
                     <br>
-                    <p>Entre com seu usuário e senha e tenha acesso ao sistema de Controle e Requisição de Insumos!</p>
+                    <p>Entre com seu usuário e senha e tenha acesso ao sistema Nome do Sistema!</p>
                     <img src="img/id-logo-branco-extenso.png">
             </article>
             <form method="post" action="src/config/validacao.php">

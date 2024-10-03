@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <i class="fa-solid fa-clipboard-user"></i>
                         </header>
 
-                        <h1>Atualize algum campo caso necessário</h1>
+                        <h2>Atualize algum campo caso necessário</h2>
 
                         <section class="form-secao-01">
 
@@ -313,7 +313,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </select>
                                 </div>
                             </label>
-
                             <label for="gestor">Nome do ponto focal<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-house-user"></i>

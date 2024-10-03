@@ -10,12 +10,11 @@
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-<title>Almoxarifado IDL</title>
+<title>Título do sistema</title>
 <link rel="shortcut icon" type="imagex/png" href="img/id-logo-browser.png">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name="desciption" content="Controle de requisição de insumos">
-<meta name="author" content="Desenvolvedor - Dauton Pereira Félix, Analista de TI - 2024">
-<meta name="author" content="Apoio - Alexandre Toffanin, Analista de Controladoria - 2024">
+<meta name="desciption" content="Descrição do sistema">
+<meta name="author" content="Nome do desenvolvedor">
 <meta name="theme-color" content="#00384b">
 <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
 <link rel="preconnect" href="https://fonts.googleapis.com">

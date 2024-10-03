@@ -13,10 +13,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     } else {
         $resetaSenhaUsuario = new Usuario($pdo);
         $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
-
-        $atividade = "Resetou a própria senha";
-        $regitraLogUsuario = new Logs($pdo);
-        $regitraLogUsuario->registraLogUsuario("$atividade");
     
         header("Location: inicio.php?verifica_senha=senha_resetada");
         die();
@@ -25,10 +21,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 
 $idUsuario = new Usuario($pdo);
 $buscaIdUsuario = $idUsuario->buscaIdUsuario($_SESSION['id_usuario']);
-
-// EXIBE TODAS AS MINHAS REQUISIÇÕES
-$todasMinhas = new Requisicao($pdo);
-$todasMinhasRequisicoes = $todasMinhas->exibeMinhasRequisicoesHistorico();
 
 ?>
 
@@ -74,16 +66,8 @@ $todasMinhasRequisicoes = $todasMinhas->exibeMinhasRequisicoesHistorico();
                             <h1>Reset minha senha</h1>
                             <i class="fa-solid fa-key"></i>
                         </header>
-                        <?php
-                        if (empty($_SESSION['foto_perfil'])) {
-                            // SE NÃO TIVER SIDO ENVIADO UMA FOTO, UM ÍCONE DE USER SERÁ EXIBIDO
-                            echo "<i class='fa-solid fa-circle-user'></i>";
-                        } else {
-                            // SE TIVER SIDO ENVIADO UMA FOTO, ESSA FOTO SERÁ EXIBIDA
-                            echo "<img src='$_SESSION[foto_perfil]' id='form-foto-perfil'>";
-                        }
-                        ?>
-                        <h2 style="text-align: center"><?= htmlentities($_SESSION['nome_usuario']) ?></h2>
+                        <i class='fa-solid fa-circle-user'></i>
+                        <h2 style="text-align: center"><?= htmlentities($_SESSION['nome']) ?></h2>
 
                         <label for="senha">Nova senha
                             <div>
@@ -135,11 +119,6 @@ $todasMinhasRequisicoes = $todasMinhas->exibeMinhasRequisicoesHistorico();
             </div>
         </section>
     </main>
-
-    <?php
-        // EXIBE A ESTRUTURA HTML QUE EXIBE O HISTORICO DE REQUISIÇÕES DO USUÁRIO LOGADO...
-        require_once "src/views/layout/meu_historico_requisicoes.php";
-    ?>
 
     <div class="btns-atalhos">
         <button type="button" id="btn-atalho" title="Caixa de ajuda"><i class="fa-regular fa-circle-question"></i></button>

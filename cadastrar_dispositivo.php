@@ -129,7 +129,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                     </select>
                                 </div>
                             </label>
-
+                            
                             <label for="servico">Serviço
                                 <div>
                                     <i class="fa-solid fa-network-wired"></i>
@@ -280,7 +280,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             </label>
 
                         </section>
-
+                        
                         <section class="form-secao-04">
 
                             <h2>Informações da localidade</h2>

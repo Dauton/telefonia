@@ -124,6 +124,7 @@ $exibeTodosDispositivos = $dispositivo->exibeDispositivos();
                             </a>
                         </div>
                         <div class="conteudo-center-box-02">
+                            
                             <h1>Dispositivos cadastrados</h1>
                             <table>
                                 <thead>

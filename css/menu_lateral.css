@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: var(--primary-color);
+    background: var(--secundary-color);
     border-radius: 0 3px 3px 0;
     overflow: scroll;
     z-index: 8;
@@ -36,6 +36,7 @@
 .menu-user-info i {
     font-size: 50px;
     margin-bottom: 5px;
+    color: var(--terciary-color);
 }
 .menu-user-info img {
     width: 50px;
@@ -95,7 +96,7 @@
 .menu li a {
     margin-bottom: 10px;
     display: block;
-    background: var(--secundary-color);
+    background: var(--terciary-color);
     padding: 10px;
     border-radius: 3px;
     display: flex;
@@ -109,7 +110,7 @@
 }
 
 .menu li a:hover {
-    background: var(--terciary-color);
+    background: #001c25;
     transition: background .2s;
 }
 
@@ -165,7 +166,7 @@
 .data-atual {
     width: 100px;
     padding: 5px;
-    background: var(--secundary-color);
+    background: var(--terciary-color);
     border-radius: 2px;
     font-size: 11px;
     color: #ffffff;
