@@ -20,10 +20,10 @@ class Usuario
 
 
     // MÉTODO QUE CADASTRA USUÁRIO
-    public function cadastraUsuario(string $nome, string $matricula, string $unidade, string $cargo, string $perfil, string $usuario, string $senha, string $repete_senha): void
+    public function cadastraUsuario(string $nome, string $matricula, string $unidade, string $cargo, string $perfil, string $usuario, string $senha, string $repete_senha, PDO $pdo): void
     {
 
-        // VALIDA SE EXISTE ALGUM CAMPO NÃO PREENCHIDO...
+        // VALIDA OS CAMPOS...
         Validacoes::validaCampoVazio($nome, "../../cadastrar_usuario.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($matricula, "../../cadastrar_usuario.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($unidade, "../../cadastrar_usuario.php?verifica_campo=todos_campos");
@@ -32,12 +32,14 @@ class Usuario
         Validacoes::validaCampoVazio($usuario, "../../cadastrar_usuario.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($senha, "../../cadastrar_usuario.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($repete_senha, "../../cadastrar_usuario.php?verifica_campo=todos_campos");
-
-        // VALIDA SE O NOME INFORMADO POSSUI SOBRENOME...
-        Validacoes::validaNomeCompleto($nome, "../../cadastrar_usuario.php?verifica_campo=nome_incompleto");
-
-        // VALIDA SE O VALOR INFORMADO NA MATRÍCULA É NUMÉRICO...
+        Validacoes::validaNomeCompleto($nome, "../../cadastrar_usuario.php?usuario=nome_incompleto");
         Validacoes::validaCampoNumerico($matricula, "../../cadastrar_usuario.php?verifica_campo=matricula_nao_numerico");
+        Validacoes::validaUsuarioExistenteCadastro($usuario, "../../cadastrar_usuario.php?usuario=usuario_ja_cadastrado", $pdo);
+
+        Validacoes::validaComprimentoSenha($senha, '../../cadastrar_usuario.php?verifica_senha=senha_curta');
+        Validacoes::validaNumeroSenha($senha, '../../cadastrar_usuario.php?verifica_senha=numeros');
+        Validacoes::validaCaractereEspecialSenha($senha, '../../cadastrar_usuario.php?verifica_senha=caracteres_especiais');
+        Validacoes::validaSenhaRepeteSenha($senha, $repete_senha, '../../cadastrar_usuario.php?verifica_senha=desiguais');
 
         $sql = "INSERT INTO tb_usuarios (nome, matricula, unidade, cargo, perfil, usuario, senha, cadastrado_por, status, senha_primeiro_acesso) VALUES (?,?,?,?,?,?,?,?,?,?)";
         $stmt = $this->pdo->prepare($sql);
@@ -66,38 +68,23 @@ class Usuario
     }
 
     // MÉTODO QUE EDITA O USUÁRIO SELECIONADO
-    public function editaUsuario(string $nome, string $matricula, string $unidade, string $cargo, string $perfil, string $usuario, string $status): void
+    public function editaUsuario(string $nome, string $matricula, string $unidade, string $cargo, string $perfil, string $usuario, string $status, PDO $pdo): void
     {
         $sql = "UPDATE tb_usuarios SET nome = ?, matricula = ?, unidade = ?, cargo = ?, perfil = ?, usuario = ?, status = ? WHERE id_usuario = ?";
 
         // VALIDA SE EXISTE ALGUM CAMPO NÃO PREENCHIDO...
-        Validacoes::validaCampoVazio($_POST['nome'], "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
-        Validacoes::validaCampoVazio($_POST['matricula'], "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
-        Validacoes::validaCampoVazio($_POST['unidade'], "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
-        Validacoes::validaCampoVazio($_POST['cargo'], "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
-        Validacoes::validaCampoVazio($_POST['perfil'], "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
-        Validacoes::validaCampoVazio($_POST['usuario'], "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
-        Validacoes::validaCampoVazio($_POST['status'], "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
-
-        // VERIFICA SE O USUÁRIO INFORMADO JÁ EXISTE NO BANCO DE DADOS...
-        $sqlVerificaUsuario = "SELECT * FROM tb_usuarios WHERE usuario = :usuario";
-        $stmt = $this->pdo->prepare($sqlVerificaUsuario);
-        $stmt->execute([':usuario' => $usuario]);
-        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($resultado) {
-
-            if ($usuario === $resultado['usuario']) {
-                header("Location: ../../editar_usuario.php?id_usuario=$_GET[id_usuario]&usuario=usuario_ja_cadastrado");
-                die();
-            }
-        }
-
-        // VALIDA SE O NOME INFORMADO POSSUI SOBRENOME...
-        Validacoes::validaNomeCompleto($_POST['nome'], "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=nome_incompleto");
-
-        // VALIDA SE O VALOR INFORMADO NA MATRÍCULA É NUMÉRICO...
-        Validacoes::validaCampoNumerico($_POST['matricula'], "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=matricula_nao_numerico");
+        Validacoes::validaCampoVazio($nome, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
+        Validacoes::validaCampoVazio($matricula, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
+        Validacoes::validaCampoVazio($unidade, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
+        Validacoes::validaCampoVazio($cargo, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
+        Validacoes::validaCampoVazio($perfil, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
+        Validacoes::validaCampoVazio($usuario, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
+        Validacoes::validaCampoVazio($status, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
+        Validacoes::validaNomeCompleto($nome, "../../cadastrar_usuario.php?usuario=nome_incompleto");
+        Validacoes::validaCampoNumerico($matricula, "../../cadastrar_usuario.php?verifica_campo=matricula_nao_numerico");
+        Validacoes::validaUsuarioExistenteEdição($usuario,"editar_usuario.php?id_usuario=$_GET[id_usuario]&usuario=usuario_ja_cadastrado", $pdo);
+        Validacoes::validaNomeCompleto($nome, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=nome_incompleto");
+        Validacoes::validaCampoNumerico($matricula, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=matricula_nao_numerico");
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, mb_strtoupper(trim($nome)), PDO::PARAM_STR);
@@ -115,6 +102,20 @@ class Usuario
     // MÉTODO QUE RESETA A MINHA SENHA OU DO USUÁRIO SELECIONADO
     public function resetaSenhaUsuario(int $id_usuario, string $senha): void
     {
+            // VALIDA A MINHA SENHA
+        if($_GET['id_usuario'] === null) {
+            Validacoes::validaComprimentoSenha($senha, "minha_senha.php?verifica_senha=senha_curta");
+            Validacoes::validaNumeroSenha($senha, "minha_senha.php?verifica_senha=numeros");
+            Validacoes::validaCaractereEspecialSenha($senha, "minha_senha.php?verifica_senha=caracteres_especiais");
+            Validacoes::validaSenhaRepeteSenha($senha, $_POST['repete_senha'], "minha_senha.php?verifica_senha=desiguais");
+        } else {
+            // VALIDA A SENHA DE OUTRO USUÁRIO
+            Validacoes::validaComprimentoSenha($senha, "$_SERVER[HTTP_REFERER]&verifica_senha=senha_curta");
+            Validacoes::validaNumeroSenha($senha, "$_SERVER[HTTP_REFERER]&verifica_senha=numeros");
+            Validacoes::validaCaractereEspecialSenha($senha, "$_SERVER[HTTP_REFERER]&verifica_senha=caracteres_especiais");
+            Validacoes::validaSenhaRepeteSenha($senha, $_POST['repete_senha'], "$_SERVER[HTTP_REFERER]&verifica_senha=desiguais");
+        }
+
         $sql = "UPDATE tb_usuarios SET senha = ? WHERE id_usuario = ?";
         $stmt = $this->pdo->prepare($sql);
         $senha = password_hash($senha, PASSWORD_ARGON2ID);

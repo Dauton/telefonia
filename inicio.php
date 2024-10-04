@@ -105,13 +105,13 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                                 <tbody>
                                     <?php foreach($exibeDispositivosMinhaUnidade as $dadoDispositivo) : ?>
                                     <tr>
-                                        <td><?= $dadoDispositivo['nome'] ?></td>
-                                        <td><?= $dadoDispositivo['linha'] ?></td>
-                                        <td id="Status"><p><?= $dadoDispositivo['status'] ?></p></td>
-                                        <td><?= $dadoDispositivo['imei_aparelho'] ?></td>
-                                        <td><?= $dadoDispositivo['unidade'] ?></td>
-                                        <td><?= $dadoDispositivo['centro_custo'] ?></td>
-                                        <td><?= $dadoDispositivo['ponto_focal'] ?></td>
+                                        <td><?= htmlentities($dadoDispositivo['nome']) ?></td>
+                                        <td><?= htmlentities($dadoDispositivo['linha']) ?></td>
+                                        <td id="Status"><p><?= htmlentities($dadoDispositivo['status']) ?></p></td>
+                                        <td><?= htmlentities($dadoDispositivo['imei_aparelho']) ?></td>
+                                        <td><?= htmlentities($dadoDispositivo['unidade']) ?></td>
+                                        <td><?= htmlentities($dadoDispositivo['centro_custo']) ?></td>
+                                        <td><?= htmlentities($dadoDispositivo['ponto_focal']) ?></td>
                                         <td>
                                             <a href="visualiza_dispositivo.php?id=<?= $dadoDispositivo['id'] ?>"><i class="fa-solid fa-eye"></i></a>
                                         </td>

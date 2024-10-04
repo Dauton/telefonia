@@ -5,18 +5,12 @@ require_once "vendor/autoload.php";
 
 senhaPrimeiroAcesso();
 
-if($_SERVER['REQUEST_METHOD'] === 'POST')
-{
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $resetaSenhaUsuario = new Usuario($pdo);
+    $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
 
-    if(validacaoMinhaSenha($pdo)) {
-
-    } else {
-        $resetaSenhaUsuario = new Usuario($pdo);
-        $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
-    
-        header("Location: inicio.php?verifica_senha=senha_resetada");
-        die();
-    }
+    header("Location: inicio.php?verifica_senha=senha_resetada");
+    die();
 }
 
 $idUsuario = new Usuario($pdo);
@@ -31,25 +25,25 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_SESSION['id_usuario']);
 <head>
 
     <?php
-        // META TAGS E LINKS DO HEAD...
-        require_once "src/views/layout/head.php";
+    // META TAGS E LINKS DO HEAD...
+    require_once "src/views/layout/head.php";
     ?>
-    
+
 </head>
 
 <body>
     <main class="corpo">
-        
+
         <?php
-            // EXIBE O MENU LATERAL... 
-            require_once "src/views/layout/menu_lateral.php"; 
+        // EXIBE O MENU LATERAL... 
+        require_once "src/views/layout/menu_lateral.php";
         ?>
-        
+
         <section class="principal">
-            
+
             <?php
-                // EXIBE O CABEÇALHO...
-                require_once "src/views/layout/cabecalho.php";
+            // EXIBE O CABEÇALHO...
+            require_once "src/views/layout/cabecalho.php";
             ?>
 
             <article class="conteudo">
@@ -97,12 +91,12 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_SESSION['id_usuario']);
                 </section>
 
                 <?php
-                    // EXIBE O RODAPÉ...
-                    require_once "src/views/layout/rodape.php";
+                // EXIBE O RODAPÉ...
+                require_once "src/views/layout/rodape.php";
                 ?>
 
-            </article>            
-            
+            </article>
+
             <div id="box-ajuda">
                 <header class="box-ajuda-cabecalho">
                     <h1>Requisitos de senha</h1>

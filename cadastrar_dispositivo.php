@@ -4,33 +4,43 @@ require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cadastraDispositivo = new Telefonia($pdo);
-    $cadastraDispositivo->cadastraDispositivo(
-        $_POST['linha'],
-        $_POST['operadora'],
-        $_POST['servico'],
-        $_POST['perfil'],
-        $_POST['status'],
-        $_POST['data_ativacao'],
-        $_POST['sim_card'],
-        $_POST['marca_aparelho'],
-        $_POST['modelo_aparelho'],
-        $_POST['imei_aparelho'],
-        $_POST['gestao_mdm'],
-        $_POST['unidade'],
-        $_POST['centro_custo'],
-        $_POST['uf'],
-        $_POST['canal'],
-        $_POST['ponto_focal'],
-        $_POST['gestor'],
-        $_POST['nome'],
-        $_POST['matricula'],
-        $_POST['email'],
-        $_POST['funcao']
-    );
+    
+    // VALIDA SE EXISTE ALGUM DADOS DE LINHA OU APARELHO PREENCHIDOS...
+    if($_POST['possui_linha'] === "Não" && $_POST['possui_aparelho'] === "Não") {
 
-    header("Location: consulta_dispositivos.php?dispositivo=cadastrado");
-    die();
+        header('Location: cadastrar_dispositivo.php?verifica_campo=nenhum_dado');
+        die();
+
+    } else {
+        $cadastraDispositivo = new Telefonia($pdo);
+        $cadastraDispositivo->cadastraDispositivo(
+            $_POST['linha'],
+            $_POST['operadora'],
+            $_POST['servico'],
+            $_POST['perfil'],
+            $_POST['status'],
+            $_POST['data_ativacao'],
+            $_POST['sim_card'],
+            $_POST['marca_aparelho'],
+            $_POST['modelo_aparelho'],
+            $_POST['imei_aparelho'],
+            $_POST['gestao_mdm'],
+            $_POST['unidade'],
+            $_POST['centro_custo'],
+            $_POST['uf'],
+            $_POST['canal'],
+            $_POST['ponto_focal'],
+            $_POST['gestor'],
+            $_POST['nome'],
+            $_POST['matricula'],
+            $_POST['email'],
+            $_POST['funcao']
+        );
+    
+        header("Location: consulta_dispositivos.php?dispositivo=cadastrado");
+        die();
+    }
+
 }
 
 // LISTA TODOS AS MARCAS DE APARELHOS CADASTRADAS...

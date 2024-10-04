@@ -21,46 +21,34 @@ class Telefonia
 
         // VALIDA CAMPOS VAZIOS
         if ($_POST['possui_linha'] === 'Sim') {
-            Validacoes::validaCampoVazio('linha', "../../cadastrar_dispositivo?verifica_campo=campo_linha_vazio");
-            Validacoes::validaCampoVazio('operadora', "../../cadastrar_dispositivo?verifica_campo=campo_operadora_vazio");
+            Validacoes::validaCampoVazio($linha, "../../cadastrar_dispositivo.php?verifica_campo=campo_linha_vazio");
+            Validacoes::validaCampoVazio($operadora, "../../cadastrar_dispositivo.php?verifica_campo=campo_operadora_vazio");
         }
         if ($_POST['possui_aparelho'] === 'Sim') {
-            Validacoes::validaCampoVazio('marca_aparelho', "../../cadastrar_dispositivo?verifica_campo=campo_marca_vazio");
-            Validacoes::validaCampoVazio('modelo_aparelho', "../../cadastrar_dispositivo?verifica_campo=campo_modelo_vazio");
+            Validacoes::validaCampoVazio($marca_aparelho, "../../cadastrar_dispositivo.php?verifica_campo=campo_marca_vazio");
+            Validacoes::validaCampoVazio($modelo_aparelho, "../../cadastrar_dispositivo.php?verifica_campo=campo_modelo_vazio");
         }
         if ($_POST['possui_usuario'] === 'Sim') {
-            Validacoes::validaCampoVazio('nome', "../../cadastrar_dispositivo?verifica_campo=campo_nome_vazio");
+            Validacoes::validaCampoVazio($nome, "../../cadastrar_dispositivo.php?verifica_campo=campo_nome_vazio");
         }
         if ($_POST['possui_linha'] === 'Sim' || $_POST['possui_aparelho'] === 'Sim' || $_POST['possui_usuario'] === 'Sim') {
-            Validacoes::validaCampoVazio('unidade', "../../cadastrar_dispositivo?verifica_campo=campos_localidade");
-            Validacoes::validaCampoVazio('centro_custo', "../../cadastrar_dispositivo?verifica_campo=campos_localidade");
-            Validacoes::validaCampoVazio('uf', "../../cadastrar_dispositivo?verifica_campo=campos_localidade");
-            Validacoes::validaCampoVazio('canal', "../../cadastrar_dispositivo?verifica_campo=campos_localidade");
-            Validacoes::validaCampoVazio('ponto_focal', "../../cadastrar_dispositivo?verifica_campo=campos_localidade");
-            Validacoes::validaCampoVazio('gestor', "../../cadastrar_dispositivo?verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($unidade, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($centro_custo, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($uf, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($canal, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($ponto_focal, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($gestor, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
         }
 
         // VALIDA CAMPOS NUMÉRICOS...
-        if (isset($_POST['linha']) && trim($_POST['linha'] !== '')) {
-            Validacoes::validaCampoNumerico('linha', "../../cadastrar_dispositivo?verifica_campo=linha_nao_numerico");
-        }
-        if (isset($_POST['imei_aparelho']) && trim($_POST['imei_aparelho'] !== '')) {
-            Validacoes::validaCampoNumerico('imei_aparelho', "../../cadastrar_dispositivo?verifica_campo=imei_nao_numerico");
-        }
-        if (isset($_POST['sim_card']) && trim($_POST['sim_card'] !== '')) {
-            Validacoes::validaCampoNumerico('sim_card', "../../cadastrar_dispositivo?verifica_campo=sim_card_nao_numerico");
-        }
-        if (isset($_POST['centro_custo']) && trim($_POST['centro_custo'] !== '')) {
-            Validacoes::validaCampoNumerico('centro_custo', "../../cadastrar_dispositivo?verifica_campo=centro_custo_nao_numerico");
-        }
-        if (isset($_POST['matricula']) && trim($_POST['matricula'] !== '')) {
-            Validacoes::validaCampoNumerico('matricula', "../../cadastrar_dispositivo?verifica_campo=matricula_nao_numerico");
-        }
+        Validacoes::validaCampoNumerico($linha, "../../cadastrar_dispositivo.php?verifica_campo=linha_nao_numerico");
+        Validacoes::validaCampoNumerico($imei_aparelho, "../../cadastrar_dispositivo.php?verifica_campo=imei_nao_numerico");
+        Validacoes::validaCampoNumerico($sim_card, "../../cadastrar_dispositivo.php?verifica_campo=sim_card_nao_numerico");
+        Validacoes::validaCampoNumerico($centro_custo, "../../cadastrar_dispositivo.php?verifica_campo=centro_custo_nao_numerico");
+        Validacoes::validaCampoNumerico($matricula, "../../cadastrar_dispositivo.php?verifica_campo=matricula_nao_numerico");
 
         // VALIDA CAMPO DE E-MAIL...
-        if (!empty($_POST['email'])) {
-            Validacoes::validaCampoEmail('email', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=email_invalido");
-        }
+        Validacoes::validaCampoEmail($email, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=email_invalido");
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, trim($linha), PDO::PARAM_STR);
@@ -119,45 +107,33 @@ class Telefonia
     public function atualizaDispositivo(int $id, string $linha, string $operadora, string $servico, string $perfil, string $status, string $data_ativacao, string $sim_card, string $marca_aparelho, string $modelo_aparelho, string $imei_aparelho, string $gestao_mdm, string $unidade, string $centro_custo, string $uf, string $canal, string $ponto_focal, string $gestor, string $nome, string $matricula, string $email, string $funcao): void
     {
         $sql =
-        "UPDATE tb_dispositivos
+            "UPDATE tb_dispositivos
          SET linha = ?, operadora = ?, servico = ?, perfil = ?, status = ?, data_ativacao = ?, sim_card = ?, marca_aparelho = ?, modelo_aparelho = ?, imei_aparelho = ?, gestao_mdm = ?, unidade = ?, centro_custo = ?, uf = ?, canal = ?, ponto_focal = ?, gestor = ?, nome = ?, matricula = ?, email = ?, funcao = ?
          WHERE id = ?
         ";
 
         // VALIDA CAMPOS VAZIOS
-        Validacoes::validaCampoVazio('linha', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campo_linha_vazio");
-        Validacoes::validaCampoVazio('operadora', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campo_operadora_vazio");
-        Validacoes::validaCampoVazio('marca_aparelho', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campo_marca_vazio");
-        Validacoes::validaCampoVazio('modelo_aparelho', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campo_modelo_vazio");
-        Validacoes::validaCampoVazio('nome', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campo_nome_vazio");
-        Validacoes::validaCampoVazio('unidade', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
-        Validacoes::validaCampoVazio('centro_custo', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
-        Validacoes::validaCampoVazio('uf', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
-        Validacoes::validaCampoVazio('canal', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
-        Validacoes::validaCampoVazio('ponto_focal', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
-        Validacoes::validaCampoVazio('gestor', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
+        Validacoes::validaCampoVazio($linha, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campo_linha_vazio");
+        Validacoes::validaCampoVazio($operadora, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campo_operadora_vazio");
+        Validacoes::validaCampoVazio($imei_aparelho, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campo_marca_vazio");
+        Validacoes::validaCampoVazio($modelo_aparelho, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campo_modelo_vazio");
+        Validacoes::validaCampoVazio($nome, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campo_nome_vazio");
+        Validacoes::validaCampoVazio($unidade, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
+        Validacoes::validaCampoVazio($centro_custo, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
+        Validacoes::validaCampoVazio($uf, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
+        Validacoes::validaCampoVazio($canal, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
+        Validacoes::validaCampoVazio($ponto_focal, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
+        Validacoes::validaCampoVazio($gestor, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=campos_localidade");
 
         // VALIDA CAMPOS NUMÉRICOS...
-        if (isset($_POST['linha']) && trim($_POST['linha'] !== '')) {
-            Validacoes::validaCampoNumerico('linha', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=linha_nao_numerico");
-        }
-        if (isset($_POST['imei_aparelho']) && trim($_POST['imei_aparelho'] !== '')) {
-            Validacoes::validaCampoNumerico('imei_aparelho', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=imei_nao_numerico");
-        }
-        if (isset($_POST['sim_card']) && trim($_POST['sim_card'] !== '')) {
-            Validacoes::validaCampoNumerico('sim_card', "$../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=sim_card_nao_numerico");
-        }
-        if (isset($_POST['centro_custo']) && trim($_POST['centro_custo'] !== '')) {
-            Validacoes::validaCampoNumerico('centro_custo', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=centro_custo_nao_numerico");
-        }
-        if (isset($_POST['matricula']) && trim($_POST['matricula'] !== '')) {
-            Validacoes::validaCampoNumerico('matricula', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=matricula_nao_numerico");
-        }
+        Validacoes::validaCampoNumerico($linha, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=linha_nao_numerico");
+        Validacoes::validaCampoNumerico($imei_aparelho, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=imei_nao_numerico");
+        Validacoes::validaCampoNumerico($sim_card, "$../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=sim_card_nao_numerico");
+        Validacoes::validaCampoNumerico($centro_custo, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=centro_custo_nao_numerico");
+        Validacoes::validaCampoNumerico($matricula, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=matricula_nao_numerico");
 
         // VALIDA CAMPO DE E-MAIL...
-        if (!empty($_POST['email'])) {
-            Validacoes::validaCampoEmail('email', "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=email_invalido");
-        }
+        Validacoes::validaCampoEmail($email, "../../visualiza_dispositivo.php?id=$_GET[id]&verifica_campo=email_invalido");
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, trim($linha), PDO::PARAM_STR);

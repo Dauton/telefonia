@@ -19,7 +19,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['cargo'],
         $_POST['perfil'],
         $_POST['usuario'],
-        $_POST['status']
+        $_POST['status'],
+        $pdo // PASSADO POR PARÂMETRO POR CONTA DA VALIDAÇÃO DE USUÁRIO EXISTENTE, POIS O MÉTODO É ESTÁTICO...
 
     );
 

@@ -7,14 +7,11 @@ apenasAdmin();
 senhaPrimeiroAcesso();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (validacaoResetSenha($pdo)) {
-    } else {
-        $resetaSenhaUsuario = new Usuario($pdo);
-        $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
+    $resetaSenhaUsuario = new Usuario($pdo);
+    $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
 
-        header("Location: gerenciar_usuarios.php?verifica_senha=senha_resetada");
-        die();
-    }
+    header("Location: gerenciar_usuarios.php?verifica_senha=senha_resetada");
+    die();
 }
 
 // BUSCA O ID DO USUÁRIO SELECIONADO PARA RESET DE SENHA, SE NÃO FOR INFORMADO O ID NA URL, SERÁ REDIRECIONADO PARA TELA DE GERENCIAMENTO DE USUÁRIO...
@@ -35,25 +32,25 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_GET['id_usuario']);
 <head>
 
     <?php
-        // META TAGS E LINKS DO HEAD...
-        require_once "src/views/layout/head.php";
+    // META TAGS E LINKS DO HEAD...
+    require_once "src/views/layout/head.php";
     ?>
-    
+
 </head>
 
 <body>
     <main class="corpo">
-        
+
         <?php
-            // EXIBE O MENU LATERAL... 
-            require_once "src/views/layout/menu_lateral.php"; 
+        // EXIBE O MENU LATERAL... 
+        require_once "src/views/layout/menu_lateral.php";
         ?>
-        
+
         <section class="principal">
 
             <?php
-                // EXIBE O CABEÇALHO...
-                require_once "src/views/layout/cabecalho.php";
+            // EXIBE O CABEÇALHO...
+            require_once "src/views/layout/cabecalho.php";
             ?>
 
             <article class="conteudo">
@@ -70,11 +67,11 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_GET['id_usuario']);
                             <h1>Reset de senha</h1>
                             <i class="fa-solid fa-key"></i>
                         </header>
-                        
+
                         <i class='fa-solid fa-circle-user'></i>
-                        
+
                         <h2 style="text-align: center"><?= htmlentities($buscaIdUsuario['nome']) ?></h2>
-                        
+
                         <label for="senha">Nova senha
                             <div>
                                 <i class="fa-solid fa-key"></i>
@@ -94,7 +91,8 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_GET['id_usuario']);
                         </label>
 
                         <input type="hidden" name="id_usuario" value="<?= $buscaIdUsuario['id_usuario'] ?>">
-                        <input type="hidden" name="usuario" value="<?= $buscaIdUsuario['usuario'] // PARA ARMAZENAR O USUÁRIO ALTERADO NO LOG ?>">
+                        <input type="hidden" name="usuario" value="<?= $buscaIdUsuario['usuario'] // PARA ARMAZENAR O USUÁRIO ALTERADO NO LOG 
+                                                                    ?>">
 
                         <div>
                             <button type="submit">Concluir</button>
@@ -104,8 +102,8 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_GET['id_usuario']);
                 </section>
 
                 <?php
-                    // EXIBE O RODAPÉ...
-                    require_once "src/views/layout/rodape.php";
+                // EXIBE O RODAPÉ...
+                require_once "src/views/layout/rodape.php";
                 ?>
 
             </article>

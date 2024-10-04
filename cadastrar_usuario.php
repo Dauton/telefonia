@@ -16,7 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['perfil'],
         $_POST['usuario'],
         $_POST['senha'],
-        $_POST['repete_senha']
+        $_POST['repete_senha'],
+        $pdo // PASSADO POR PARÂMETRO POR CONTA DA VALIDAÇÃO DE USUÁRIO EXISTENTE, POS O MÉTODO É ESTÁTICO...
     );
     header("Location: gerenciar_usuarios.php?usuario=cadastrado_com_sucesso");
     die();
