@@ -62,7 +62,7 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                                     </div>
                                 </div>
                             </a>
-                            <a href="">
+                            <a href="consulta_dispositivos.php">
                                 <div>
                                     <div id="box-infos-azul">
                                         <span>

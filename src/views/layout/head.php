@@ -10,7 +10,7 @@
 
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-<title>Título do sistema</title>
+<title>Telefonia IDL</title>
 <link rel="shortcut icon" type="imagex/png" href="img/id-logo-browser.png">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name="desciption" content="Descrição do sistema">

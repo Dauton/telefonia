@@ -41,7 +41,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-    background: #0088ff;
+    background: var(--secundary-color);
     border-radius: 60px;
 }
 
@@ -69,7 +69,6 @@ body {
 
 .cabecalho {
     width: 100%;
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -208,10 +207,6 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-}
-
-.conteudo-center-boxs h1 {
-    margin-bottom: 10px;
 }
 
 .conteudo-center-box-01,
@@ -761,10 +756,11 @@ body {
     }
 
     .cabecalho {
+        margin-bottom: 10px;
         padding: 20px 20px 20px 15px;
         background: #ffffff;
         border-radius: 3px;
-        justify-content: space-between;
+        justify-content: right;
     }
 
     .cabecalho img {

@@ -49,79 +49,21 @@ $exibeTodosDispositivos = $dispositivo->exibeDispositivos();
                 <section class="conteudo-center">
                     <article class="conteudo-center-boxs">
                         <div class="conteudo-center-box-01">
-                            <h1>Alguns atalhos</h1>
-                            <a href="">
-                                <div>
-                                    <div id="box-infos-amarela">
-                                        <span>
-                                            <h4>ATALHO</h4>
-                                        </span>
-                                        <h3>Atalho</h3>
-                                        <i class="fa-solid fa-circle-question"></i>
-                                        <p class="texto-filtro">Clique para abrir</p>
+                            <form method="post" action="#">
+                                <header id="form-cabecalho">
+                                    <h1>Consulta de dispositivo</h1>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </header>
+                                <h2>Buscar dispositivo</h2>
+                                <label>Buscar
+                                    <div>
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                        <input type="search" name="busca" placeholder="Digite alguma informação do dispositivo">
                                     </div>
-                                </div>
-                            </a>
-                            <a href="">
-                                <div>
-                                    <div id="box-infos-azul">
-                                        <span>
-                                            <h4>ATALHO</h4>
-                                        </span>
-                                        <h3>Atalho</h3>
-                                        <i class="fa-solid fa-circle-question"></i>
-                                        <p class="texto-filtro">Clique para abrir</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="">
-                                <div>
-                                    <div id="box-infos-verde">
-                                        <span>
-                                            <h4>ATALHO</h4>
-                                        </span>
-                                        <h3>Atalho</h3>
-                                        <i class="fa-solid fa-circle-question"></i>
-                                        <p class="texto-filtro">Clique para abrir</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="">
-                                <div>
-                                    <div id="box-infos-vermelha">
-                                        <span>
-                                            <h4>ATALHO</h4>
-                                        </span>
-                                        <h3>Atalho</h3>
-                                        <i class="fa-solid fa-circle-question"></i>
-                                        <p class="texto-filtro">Clique para abrir</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="">
-                                <div>
-                                    <div id="box-infos-roxa">
-                                        <span>
-                                            <h4>ATALHO</h4>
-                                        </span>
-                                        <h3>Atalho</h3>
-                                        <i class="fa-solid fa-circle-question"></i>
-                                        <p class="texto-filtro">Clique para abrir</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="">
-                                <div>
-                                    <div id="box-infos-cinza">
-                                        <span>
-                                            <h4>ATALHO</h4>
-                                        </span>
-                                        <h3>Atalho</h3>
-                                        <i class="fa-solid fa-circle-question"></i>
-                                        <p class="texto-filtro">Clique para abrir</p>
-                                    </div>
-                                </div>
-                            </a>
+                                </label>
+                                <button type="submit">Buscar</button>
+                            </form>
+                            
                         </div>
                         <div class="conteudo-center-box-02">
                             

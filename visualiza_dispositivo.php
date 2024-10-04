@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
-                    <h3><a href="inicio.php">INÍCIO</a> / CADASTRO DE DISPOSITIVO</h3>
+                    <h3><a href="inicio.php">INÍCIO</a> / <a href="<?= $_SERVER['HTTP_REFERER'] ?>">CONSULTAR DISPOSITIVO</a> / EDITAR DISPOSITIVO</h3>
                     <div>
                         <i class="fa-solid fa-clock-rotate-left"></i>
                         <a href="requisicao.php"><i class="fa-solid fa-basket-shopping"></i></a>

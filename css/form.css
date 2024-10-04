@@ -83,7 +83,7 @@ form h2 {
 }
 
 form label {
-    width: 100%;
+    width: 49%;
     margin: 0 0 10px 0;
     font-size: 13px;
 }
@@ -206,6 +206,11 @@ form #btn-cancelar:hover {
 }
 
 @media (width <= 960px) {
+
+    form section {
+        padding: 0;
+        box-shadow: none;
+    }
 
     form {
         width: 100%;

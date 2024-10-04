@@ -72,21 +72,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <h2>Preencha os campos</h2>
 
-                            <label for="nome">Nome completo
+                            <label for="nome">Nome completo<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user"></i>
                                     <input type="text" name="nome" placeholder="Insira o nome do usuário">
                                 </div>
                             </label>
 
-                            <label for="matricula">Matrícula
+                            <label for="matricula">Matrícula<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user-tag"></i>
                                     <input type="text" name="matricula" placeholder="Insira a matrícula">
                                 </div>
                             </label>
 
-                            <label for="unidade">Unidade
+                            <label for="unidade">Unidade<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-map"></i>
                                     <select name="unidade">
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             </label>
 
-                            <label for="cargo">Cargo
+                            <label for="cargo">Cargo<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-briefcase"></i>
                                     <select name="cargo">
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             </label>
 
-                            <label for="perfil">Perfil
+                            <label for="perfil">Perfil<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user-shield"></i>
                                     <select name="perfil">
@@ -118,14 +118,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             </label>
 
-                            <label for="usuario">Usuário
+                            <label for="usuario">Usuário<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-id-card-clip"></i>
                                     <input type="text" name="usuario" placeholder="Crie o usuário">
                                 </div>
                             </label>
 
-                            <label for="senha">senha
+                            <label for="senha">Senha<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-key"></i>
                                     <input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="new-password">
@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             </label>
 
-                            <label for="repete_senha">Repita a senha
+                            <label for="repete_senha">Repita a senha<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-key"></i>
                                     <input type="password" name="repete_senha" id="repete-senha" placeholder="Repita a senha" autocomplete="new-password">

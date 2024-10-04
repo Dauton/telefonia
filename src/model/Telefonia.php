@@ -169,4 +169,5 @@ class Telefonia
         $stmt->bindValue(1, $id, PDO::PARAM_INT);
         $stmt->execute();
     }
+    
 }

@@ -4,13 +4,12 @@ require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+
     // VALIDA SE EXISTE ALGUM DADOS DE LINHA OU APARELHO PREENCHIDOS...
-    if($_POST['possui_linha'] === "Não" && $_POST['possui_aparelho'] === "Não") {
+    if ($_POST['possui_linha'] === "Não" && $_POST['possui_aparelho'] === "Não") {
 
         header('Location: cadastrar_dispositivo.php?verifica_campo=nenhum_dado');
         die();
-
     } else {
         $cadastraDispositivo = new Telefonia($pdo);
         $cadastraDispositivo->cadastraDispositivo(
@@ -36,27 +35,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['email'],
             $_POST['funcao']
         );
-    
+
         header("Location: consulta_dispositivos.php?dispositivo=cadastrado");
         die();
     }
-
 }
 
 // LISTA TODOS AS MARCAS DE APARELHOS CADASTRADAS...
-$marca = new CadastroOpcoes($pdo);
+$marca = new Opcoes($pdo);
 $listaMarcasAparelho = $marca->listaOpcoes('MARCA');
 
 // LISTA TODOS OS MODELOS DE APARELHOS CADASTRADOS...
-$modelo = new CadastroOpcoes($pdo);
+$modelo = new Opcoes($pdo);
 $listaModelosAparelho = $modelo->listaOpcoes('MODELO');
 
 // LISTA TODOS AS UNIDADES CADASTRADOS...
-$unidade = new CadastroOpcoes($pdo);
+$unidade = new Opcoes($pdo);
 $listaUnidades = $unidade->listaOpcoes('UNIDADE');
 
 // LISTA TODOS OS CENTROS DE CUSTOS CADASTRADOS...
-$cdc = new CadastroOpcoes($pdo);
+$cdc = new Opcoes($pdo);
 $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
 
 ?>
@@ -98,7 +96,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                     </div>
                 </header>
                 <section class="conteudo-center">
-                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado"autocomplete="off">
+                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
                         <header id="form-cabecalho">
                             <h1>Cadastro de dispositivo</h1>
                             <i class="fa-solid fa-sim-card"></i>
@@ -129,7 +127,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
 
                             <label for="operadora">Operadora<span style="color: red;"> *</span>
                                 <div>
-                                    <i class="fa-solid fa-tower-cell"></i>                                   
+                                    <i class="fa-solid fa-tower-cell"></i>
                                     <select name="operadora">
                                         <option value="">Selecione</option>
                                         <option value="CLARO">CLARO</option>
@@ -139,7 +137,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                     </select>
                                 </div>
                             </label>
-                            
+
                             <label for="servico">Serviço
                                 <div>
                                     <i class="fa-solid fa-network-wired"></i>
@@ -196,18 +194,18 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                 </select>
                             </div>
                         </label>
-                        
+
 
                         <section class="form-secao-02">
 
-                        <h2>Informações do aparelho</h2>
+                            <h2>Informações do aparelho</h2>
 
                             <label for="marca_aparelho">Marca<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-mobile-screen"></i>
                                     <select name="marca_aparelho">
                                         <option value="">Selecione</option>
-                                        <?php foreach($listaMarcasAparelho as $marca) : ?>
+                                        <?php foreach ($listaMarcasAparelho as $marca) : ?>
                                             <option value="<?= htmlentities($marca['descricao']) ?>"><?= htmlentities($marca['descricao']) ?></option>
                                         <?php endforeach ?>
                                     </select>
@@ -219,7 +217,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                     <i class="fa-solid fa-mobile-screen"></i>
                                     <select name="modelo_aparelho">
                                         <option value="">Selecione</option>
-                                        <?php foreach($listaModelosAparelho as $modelo) : ?>
+                                        <?php foreach ($listaModelosAparelho as $modelo) : ?>
                                             <option value="<?= htmlentities($modelo['descricao']) ?>"><?= htmlentities($modelo['descricao']) ?></option>
                                         <?php endforeach ?>
                                     </select>
@@ -290,17 +288,17 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             </label>
 
                         </section>
-                        
+
                         <section class="form-secao-04">
 
                             <h2>Informações da localidade</h2>
 
                             <label for="unidade">Unidade<span style="color: red;"> *</span>
                                 <div>
-                                    <i class="fa-regular fa-map"></i>
+                                    <i class="fa-solid fa-map-location-dot"></i>
                                     <select name="unidade">
                                         <option value="">Selecione</option>
-                                        <?php foreach($listaUnidades as $unidade) : ?>
+                                        <?php foreach ($listaUnidades as $unidade) : ?>
                                             <option value="<?= htmlentities($unidade['descricao']) ?>"><?= htmlentities($unidade['descricao']) ?></option>
                                         <?php endforeach ?>
                                     </select>
@@ -312,7 +310,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                     <i class="fa-solid fa-wallet"></i>
                                     <select name="centro_custo">
                                         <option value="">Selecione</option>
-                                        <?php foreach($listaCentrosDeCustos as $cdc) : ?>
+                                        <?php foreach ($listaCentrosDeCustos as $cdc) : ?>
                                             <option value="<?= htmlentities($cdc['descricao']) ?>"><?= htmlentities($cdc['descricao']) ?></option>
                                         <?php endforeach ?>
                                     </select>
@@ -402,11 +400,13 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                     <i class="fa-solid fa-mobile-screen-button"></i>
                 </header>
                 <p>
-                    <b>Caracteres</b>: a senha deve conter no mínimo 12 caracteres.<br><br>
-                    <b>Letras</b>: a senha deve conter letras maiúsculas e minúsculas.<br><br>
-                    <b>Números</b>: a senha deve conter pelo menos um número.<br><br>
-                    <b>Resumindo</b>: a senha deve possuir uma combinação de 12 caracteres sendo elas letras maiúsculas, minúsculas e números.
+                    Para que o cadastro seja bem-sucedido, é necessário preencher uma linha, um aparelho, ou ambos.<br><br>
+                    Ao preencher as informações de usuário, é obrigatório incluir pelo menos uma linha, um aparelho, ou ambos.<br><br>
+                    Caso seja incluída uma linha, é obrigatório preencher as informações de "linha" e "operadora".<br><br>
+                    Caso seja incluído um aparelho, é obrigatório preencher as informações de "marca" e "modelo".<br><br>
+                    Todas as informações de localidade são de preenchimento obrigatório.
                 </p>
+
                 <button id="box-ajuda-fechar-btn">Fechar</button>
 
             </div>
@@ -416,7 +416,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
     <div class="btns-atalhos">
         <button type="button" id="btn-atalho" title="Caixa de ajuda"><i class="fa-regular fa-circle-question"></i></button>
         <a href="consulta_dispositivos.php"><button id="btn-atalho" title="Gerenciar dispositivos">
-            <i class="fa-solid fa-house-laptop"></i>
+                <i class="fa-solid fa-house-laptop"></i>
             </button></a>
     </div>
 
@@ -426,51 +426,49 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
     <script type="text/javascript" src="js/toastr.js"></script>
 
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const selectPossuiLinha = document.querySelector('select[name="possui_linha"]');
-    const selectPossuiAparelho = document.querySelector('select[name="possui_aparelho"]');
-    const selectPossuiUsuario = document.querySelector('select[name="possui_usuario"]');
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectPossuiLinha = document.querySelector('select[name="possui_linha"]');
+            const selectPossuiAparelho = document.querySelector('select[name="possui_aparelho"]');
+            const selectPossuiUsuario = document.querySelector('select[name="possui_usuario"]');
 
-    const secaoLinha = document.querySelector('.form-secao-01');
-    const secaoAparelho = document.querySelector('.form-secao-02');
-    const secaoUsuario = document.querySelector('.form-secao-03');
+            const secaoLinha = document.querySelector('.form-secao-01');
+            const secaoAparelho = document.querySelector('.form-secao-02');
+            const secaoUsuario = document.querySelector('.form-secao-03');
 
-    const linha = secaoLinha.querySelector('input[name="linha"]');
-    const operadora = secaoLinha.querySelector('select[name="operadora"]');
+            const linha = secaoLinha.querySelector('input[name="linha"]');
+            const operadora = secaoLinha.querySelector('select[name="operadora"]');
 
-    const marcaAparelho = secaoAparelho.querySelector('select[name="marca_aparelho"]');
-    const modeloAparelho = secaoAparelho.querySelector('input[name="modelo_aparelho"]');
-    const imeiAparelho = secaoAparelho.querySelector('input[name="imei_aparelho"]');
-    const mdmAparelho = secaoAparelho.querySelector('select[name="gestao_mdm"]');
+            const marcaAparelho = secaoAparelho.querySelector('select[name="marca_aparelho"]');
+            const modeloAparelho = secaoAparelho.querySelector('input[name="modelo_aparelho"]');
+            const imeiAparelho = secaoAparelho.querySelector('input[name="imei_aparelho"]');
+            const mdmAparelho = secaoAparelho.querySelector('select[name="gestao_mdm"]');
 
-    const nomeUsuario = secaoUsuario.querySelector('input[name="nome"]');
+            const nomeUsuario = secaoUsuario.querySelector('input[name="nome"]');
 
-    secaoLinha.style.display = 'none';
-    secaoAparelho.style.display = 'none';
-    secaoUsuario.style.display = 'none';
+            secaoLinha.style.display = 'none';
+            secaoAparelho.style.display = 'none';
+            secaoUsuario.style.display = 'none';
 
-    function toggleSection(select, section, camposObrigatorios) {
-        if (select.value === 'Sim') {
-            section.style.display = 'flex';
-        } else {
-            section.style.display = 'none';
-        }
-    }
+            function toggleSection(select, section, camposObrigatorios) {
+                if (select.value === 'Sim') {
+                    section.style.display = 'flex';
+                } else {
+                    section.style.display = 'none';
+                }
+            }
 
-    selectPossuiLinha.addEventListener('change', function() {
-        toggleSection(selectPossuiLinha, secaoLinha, [linha, operadora]);
-    });
+            selectPossuiLinha.addEventListener('change', function() {
+                toggleSection(selectPossuiLinha, secaoLinha, [linha, operadora]);
+            });
 
-    selectPossuiAparelho.addEventListener('change', function() {
-        toggleSection(selectPossuiAparelho, secaoAparelho, [marcaAparelho, modeloAparelho, imeiAparelho, mdmAparelho]);
-    });
+            selectPossuiAparelho.addEventListener('change', function() {
+                toggleSection(selectPossuiAparelho, secaoAparelho, [marcaAparelho, modeloAparelho, imeiAparelho, mdmAparelho]);
+            });
 
-    selectPossuiUsuario.addEventListener('change', function() {
-        toggleSection(selectPossuiUsuario, secaoUsuario, [nomeUsuario]);
-    });
-});
-
-
+            selectPossuiUsuario.addEventListener('change', function() {
+                toggleSection(selectPossuiUsuario, secaoUsuario, [nomeUsuario]);
+            });
+        });
     </script>
 
 

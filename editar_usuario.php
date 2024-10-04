@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
-                    <h3><a href="inicio.php">INÍCIO</a> / EDIÇÃO DE USUÁRIO</h3>
+                    <h3><a href="inicio.php">INÍCIO</a> / <a href="gerenciar_usuarios.php">GERENCIAR USUÁRIOS</a> / EDIÇÃO DE USUÁRIO</h3>
                     <div>
                         <i class="fa-solid fa-clock-rotate-left"></i>
                         <a href="requisicao.php"><i class="fa-solid fa-basket-shopping"></i></a>
@@ -76,24 +76,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <h2 style="text-align: center"><?= htmlentities($buscaIdUsuario['nome']) ?></h2>
 
-                        <h2>Preencha os campos</h2>
-
                         <section class="form-secao-01" name="form-cadastro-usuario">
-                            <label for="nome">Nome completo
+
+                            <h2>Preencha os campos</h2>
+                            
+                            <label for="nome">Nome completo<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user"></i>
                                     <input type="text" name="nome" value="<?= $buscaIdUsuario['nome'] ?>" placeholder="Insira o nome do usuário">
                                 </div>
                             </label>
 
-                            <label for="matricula">Matrícula
+                            <label for="matricula">Matrícula<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user-tag"></i>
                                     <input type="text" name="matricula" value="<?= $buscaIdUsuario['matricula'] ?>" placeholder="Insira a matrícula">
                                 </div>
                             </label>
 
-                            <label for="unidade">Unidade
+                            <label for="unidade">Unidade<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-map"></i>
                                     <select name="unidade" required>
@@ -104,7 +105,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             </label>
 
-                            <label for="cargo">Cargo
+                            <label for="cargo">Cargo<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-briefcase"></i>
                                     <select name="cargo" required>
@@ -114,7 +115,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             </label>
 
-                            <label for="perfil">Perfil
+                            <label for="perfil">Perfil<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user-shield"></i>
                                     <select name="perfil" required>
@@ -125,14 +126,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             </label>
 
-                            <label for="usuario">Usuário
+                            <label for="usuario">Usuário<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-id-card-clip"></i>
                                     <input type="text" name="usuario" value="<?= $buscaIdUsuario['usuario'] ?>" placeholder="Crie o usuário" required>
                                 </div>
                             </label>
 
-                            <label for="status">Ativar / Desativar 
+                            <label for="status">Ativar / Desativar<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user-slash"></i>
                                     <select name="status" required>

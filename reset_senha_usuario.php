@@ -63,41 +63,43 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_GET['id_usuario']);
                 </header>
                 <section class="conteudo-center">
                     <form method="post" class="form-requisicao" id="form-requisicao">
-                        <header id="form-cabecalho">
-                            <h1>Reset de senha</h1>
-                            <i class="fa-solid fa-key"></i>
-                        </header>
-
-                        <i class='fa-solid fa-circle-user'></i>
-
-                        <h2 style="text-align: center"><?= htmlentities($buscaIdUsuario['nome']) ?></h2>
-
-                        <label for="senha">Nova senha
-                            <div>
+                        <section style="display: flex">
+                            <header id="form-cabecalho">
+                                <h1>Reset de senha</h1>
                                 <i class="fa-solid fa-key"></i>
-                                <input type="password" name="senha" id="senha" placeholder="Nova senha" required>
-                                <i id="mostrar-senha" class="fa-solid fa-eye"></i>
-                                <i id="ocultar-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
-                            </div>
-                        </label>
+                            </header>
 
-                        <label for="repete_senha">Repita a nova senha
+                            <i class='fa-solid fa-circle-user'></i>
+
+                            <h2 style="text-align: center"><?= htmlentities($buscaIdUsuario['nome']) ?></h2>
+
+                            <label for="senha">Nova senha
+                                <div>
+                                    <i class="fa-solid fa-key"></i>
+                                    <input type="password" name="senha" id="senha" placeholder="Nova senha" required>
+                                    <i id="mostrar-senha" class="fa-solid fa-eye"></i>
+                                    <i id="ocultar-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
+                                </div>
+                            </label>
+
+                            <label for="repete_senha">Repita a nova senha
+                                <div>
+                                    <i class="fa-solid fa-key"></i>
+                                    <input type="password" name="repete_senha" id="repete-senha" placeholder="Nova senha novamente" required>
+                                    <i id="mostrar-repete-senha" class="fa-solid fa-eye"></i>
+                                    <i id="ocultar-repete-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
+                                </div>
+                            </label>
+
+                            <input type="hidden" name="id_usuario" value="<?= $buscaIdUsuario['id_usuario'] ?>">
+                            <input type="hidden" name="usuario" value="<?= $buscaIdUsuario['usuario'] // PARA ARMAZENAR O USUÁRIO ALTERADO NO LOG 
+                                                                        ?>">
+
                             <div>
-                                <i class="fa-solid fa-key"></i>
-                                <input type="password" name="repete_senha" id="repete-senha" placeholder="Nova senha novamente" required>
-                                <i id="mostrar-repete-senha" class="fa-solid fa-eye"></i>
-                                <i id="ocultar-repete-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
+                                <button type="submit">Concluir</button>
+                                <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><button type="button" id="btn-cancelar">Cancelar</button></a>
                             </div>
-                        </label>
-
-                        <input type="hidden" name="id_usuario" value="<?= $buscaIdUsuario['id_usuario'] ?>">
-                        <input type="hidden" name="usuario" value="<?= $buscaIdUsuario['usuario'] // PARA ARMAZENAR O USUÁRIO ALTERADO NO LOG 
-                                                                    ?>">
-
-                        <div>
-                            <button type="submit">Concluir</button>
-                            <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><button type="button" id="btn-cancelar">Cancelar</button></a>
-                        </div>
+                        </section>
                     </form>
                 </section>
 

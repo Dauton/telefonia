@@ -28,23 +28,23 @@ if (!isset($_SESSION['usuario'])) {
 
         <li id="menu_02"><a><i class="fa-solid fa-microchip"></i>Cadastros<i class="fa-solid fa-angle-right"></i></a>
             <ul id="menusub_02">
-                <li><a href="cadastrar_dispositivo.php"><i class="fa-solid fa-arrow-pointer"></i>Dispositivo<i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href='cadastrar_opcoes.php'><i class='fa-solid fa-arrow-pointer'></i>Cadastro de opções<i class='fa-solid fa-angle-right'></i></a></li>
-                <li><a href='#'><i class='fa-solid fa-arrow-pointer'></i>Submenu 02/03<i class='fa-solid fa-angle-right'></i></a></li>
+                <li><a href="cadastrar_dispositivo.php"><i class="fa-regular fa-circle"></i>Dispositivo<i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href='cadastrar_opcoes.php'><i class="fa-regular fa-circle"></i>Cadastro de opções<i class='fa-solid fa-angle-right'></i></a></li>
+                <li><a href='#'><i class="fa-regular fa-circle"></i>Submenu 02/03<i class='fa-solid fa-angle-right'></i></a></li>
 
             </ul>
         </li>
-        <li id='menu_03'><a><i class="fa-solid fa-circle-question"></i>Consulta<i class='fa-solid fa-angle-right'></i></a>
+        <li id='menu_03'><a><i class="fa-solid fa-magnifying-glass"></i>Consulta<i class='fa-solid fa-angle-right'></i></a>
             <ul id='menusub_03'>
-                <li><a href='consulta_dispositivos.php'><i class='fa-solid fa-arrow-pointer'></i>Consultar dispositivos<i class='fa-solid fa-angle-right'></i></a></li>
+                <li><a href='consulta_dispositivos.php'><i class="fa-regular fa-circle"></i>Consultar dispositivos<i class='fa-solid fa-angle-right'></i></a></li>
             </ul>
         </li>
         <li id='menu_04'><a><i class='fa-solid fa-gear'></i>Admin<i class='fa-solid fa-angle-right'></i></a>
             <ul id='menusub_04'>
-                <li><a href='cadastrar_usuario.php'><i class='fa-solid fa-arrow-pointer'></i>Cadastrar usuário<i class='fa-solid fa-angle-right'></i></a></li>
-                <li><a href='gerenciar_usuarios.php'><i class='fa-solid fa-arrow-pointer'></i>Gerenciar usuários<i class='fa-solid fa-angle-right'></i></a></li>
-                <li><a href='log_logins.php'><i class='fa-solid fa-arrow-pointer'></i>Registros de acesso<i class='fa-solid fa-angle-right'></i></a></li>
-                <li><a href='log_usuarios.php'><i class='fa-solid fa-arrow-pointer'></i>Registros de usuários<i class='fa-solid fa-angle-right'></i></a></li>
+                <li><a href='cadastrar_usuario.php'><i class="fa-regular fa-circle"></i>Cadastrar usuário<i class='fa-solid fa-angle-right'></i></a></li>
+                <li><a href='gerenciar_usuarios.php'><i class="fa-regular fa-circle"></i>Gerenciar usuários<i class='fa-solid fa-angle-right'></i></a></li>
+                <li><a href='log_logins.php'><i class="fa-regular fa-circle"></i>Registros de acesso<i class='fa-solid fa-angle-right'></i></a></li>
+                <li><a href='log_usuarios.php'><i class="fa-regular fa-circle"></i>Registros de usuários<i class='fa-solid fa-angle-right'></i></a></li>
             </ul>
         </li>
 
