@@ -90,13 +90,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="matricula">Matrícula<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user-tag"></i>
-                                    <input type="text" name="matricula" value="<?= $buscaIdUsuario['matricula'] ?>" placeholder="Insira a matrícula">
+                                    <input type="text" name="matricula" value="<?= $buscaIdUsuario['matricula'] ?>" placeholder="Apenas números Ex: 123456">
                                 </div>
                             </label>
 
                             <label for="unidade">Unidade<span style="color: red;"> *</span>
                                 <div>
-                                    <i class="fa-solid fa-map"></i>
+                                    <i class="fa-solid fa-map-location-dot"></i>
                                     <select name="unidade" required>
                                         <option value="<?= $buscaIdUsuario['unidade'] ?>"><?= $buscaIdUsuario['unidade'] ?></option>
                                         <option value="CDARCEX">CDARCEX</option>

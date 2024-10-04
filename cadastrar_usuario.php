@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
                         <header id="form-cabecalho">
                             <h1>Cadastro de usuário</h1>
-                            <i class="fa-solid fa-boxes-packing"></i>
+                            <i class="fa-solid fa-user-plus"></i>
                         </header>
 
                         <section class="form-secao-01" name="form-cadastro-usuario">
@@ -82,13 +82,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="matricula">Matrícula<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user-tag"></i>
-                                    <input type="text" name="matricula" placeholder="Insira a matrícula">
+                                    <input type="text" name="matricula" placeholder="Apenas números Ex: 123456">
                                 </div>
                             </label>
 
                             <label for="unidade">Unidade<span style="color: red;"> *</span>
                                 <div>
-                                    <i class="fa-solid fa-map"></i>
+                                    <i class="fa-solid fa-map-location-dot"></i>
                                     <select name="unidade">
                                         <option value="">Selecione</option>
                                         <option value="CDARCEX">CDARCEX</option>

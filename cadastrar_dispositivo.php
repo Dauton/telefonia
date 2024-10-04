@@ -178,7 +178,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="sim_card">ICCID do SIM Card
                                 <div>
                                     <i class="fa-solid fa-sim-card"></i>
-                                    <input type="text" name="sim_card" id="sim_card" placeholder="Apenas números Ex: 123456789123456789">
+                                    <input type="text" name="sim_card" id="sim_card" placeholder="Apenas números Ex: 1234567891123456789123">
                                 </div>
                             </label>
 
@@ -227,7 +227,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="imei_aparelho">IMEI aparelho
                                 <div>
                                     <i class="fa-solid fa-mobile-screen"></i>
-                                    <input type="text" name="imei_aparelho" id="imei_aparelho" placeholder="IMEI do aparelho">
+                                    <input type="text" name="imei_aparelho" id="imei_aparelho" placeholder="Apenas números Ex: 123456789123456">
                                 </div>
                             </label>
 
@@ -269,7 +269,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="matricula">Matrícula
                                 <div>
                                     <i class="fa-solid fa-user-tag"></i>
-                                    <input type="text" name="matricula" id="matricula" placeholder="Matrícula do usuário">
+                                    <input type="text" name="matricula" id="matricula" placeholder="Apenas números Ex: 123456">
                                 </div>
                             </label>
 

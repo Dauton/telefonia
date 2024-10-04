@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="sim_card">ICCID do SIM Card
                                 <div>
                                     <i class="fa-solid fa-sim-card"></i>
-                                    <input type="text" name="sim_card" id="sim_card" placeholder="Apenas números Ex: 123456789123456789" value="<?= htmlentities($dadoDispositivo['sim_card']) ?>">
+                                    <input type="text" name="sim_card" id="sim_card" placeholder="Apenas números Ex: 1234567891123456789123" value="<?= htmlentities($dadoDispositivo['sim_card']) ?>">
                                 </div>
                             </label>
 
@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="imei_aparelho">IMEI aparelho
                                 <div>
                                     <i class="fa-solid fa-mobile-screen"></i>
-                                    <input type="text" name="imei_aparelho" id="imei_aparelho" placeholder="IMEI do aparelho" value="<?= htmlentities($dadoDispositivo['imei_aparelho']) ?>">
+                                    <input type="text" name="imei_aparelho" id="imei_aparelho" placeholder="Apenas números Ex: 123456789123456" value="<?= htmlentities($dadoDispositivo['imei_aparelho']) ?>">
                                 </div>
                             </label>
 
@@ -220,7 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="matricula">Matrícula
                                 <div>
                                     <i class="fa-solid fa-user-tag"></i>
-                                    <input type="text" name="matricula" id="matricula" placeholder="Matrícula do usuário" value="<?= htmlentities($dadoDispositivo['matricula']) ?>">
+                                    <input type="text" name="matricula" id="matricula" placeholder="Apenas números Ex: 123456" value="<?= htmlentities($dadoDispositivo['matricula']) ?>">
                                 </div>
                             </label>
 
@@ -246,7 +246,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <label for="unidade">Unidade<span style="color: red;"> *</span>
                                 <div>
-                                    <i class="fa-regular fa-map"></i>
+                                    <i class="fa-solid fa-map-location-dot"></i>
                                     <select name="unidade">
                                         <option value="<?= htmlentities($dadoDispositivo['unidade']) ?>"><?= htmlentities($dadoDispositivo['unidade']) ?></option>
                                         <option value="CDARCEX">CDARCEX</option>
