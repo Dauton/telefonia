@@ -154,28 +154,8 @@ input[type=date] {
 form p {
     text-align: left !important;
 }
-
-form button, #btn-finaliza-inv {
-    width: 70px;
-    padding: 5px;
-    background: var(--secundary-color);
-    color: var(--white-color);
-    border: 2px solid var(--secundary-color);
-    border-radius: 2px;
-    font-size: 10px;
-    text-align: center;
-    cursor: pointer;
-}
 form a:focus {
     outline: none;
-}
-#btn-finaliza-inv {
-    width: 120px;
-    margin: 0;
-}
-form button:hover, #btn-finaliza-inv:hover {
-    background: var(--terciary-color);
-    border-color: var(--terciary-color);
 }
 form div {
     width: 100%;

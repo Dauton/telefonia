@@ -646,7 +646,7 @@ body {
     color: var(--terciary-color) !important;
 }
 
-#box-confirmacao #btn-cancelar:hover {
+#box-confirmacao #btn-cancelar:hover, #btn-cancelar:hover {
     background: var(--terciary-color) !important;
     border: 1px solid var(--terciary-color) !important;
     color: #ffffff !important;
