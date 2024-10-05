@@ -96,6 +96,21 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                     </div>
                 </header>
                 <section class="conteudo-center">
+                    <div class="conteudo-center-box-01">
+                        <h1>Alguns atalhos</h1>
+                        <a href="consulta_dispositivos.php">
+                            <div>
+                                <div id="box-infos-amarela">
+                                    <span>
+                                        <h4>CONSULTAR DISPOSITIVO</h4>
+                                    </span>
+                                    <h3>Consultar</h3>
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                    <p class="texto-filtro">Clique para abrir</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                     <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
                         <header id="form-cabecalho">
                             <h1>Cadastro de dispositivo</h1>

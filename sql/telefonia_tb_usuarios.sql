@@ -4,7 +4,7 @@ USE `telefonia`;
 --
 -- Host: localhost    Database: telefonia
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.37
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -38,7 +38,7 @@ CREATE TABLE `tb_usuarios` (
   `data_cadastro` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `cadastrado_por` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `tb_usuarios` (
 
 LOCK TABLES `tb_usuarios` WRITE;
 /*!40000 ALTER TABLE `tb_usuarios` DISABLE KEYS */;
-INSERT INTO `tb_usuarios` VALUES (1,'DAUTON FÉLIX','123456','CDARCEX','ANALISTA DE TI','ADMIN','dpfelix','$argon2id$v=19$m=65536,t=4,p=1$Q0tPRVFUWG5scUczN1k3eA$gIA2x86uz0aQJxz+/MbuPCqdA42wxS0xejxSf+lTssQ','ATIVADO','ALTERADA','2024-09-30 17:00:36','DAUTON PEREIRA FÉLIX'),(4,'USUÁRIO DE TESTE','123456','CDARCEX','ANALISTA DE TI','ADMIN','teste','$argon2id$v=19$m=65536,t=4,p=1$Qk5RbnRHRkgySTF2UkFONw$33kbWFzt58Artf3i9GUjBCGUSlXLTbxR0YV5MLLUF88','ATIVADO','ALTERADA','2024-09-30 18:56:23','DAUTON FÉLIX');
+INSERT INTO `tb_usuarios` VALUES (1,'DAUTON FÉLIX','123456','CDARCEX','ANALISTA DE TI','ADMIN','dpfelix','$argon2id$v=19$m=65536,t=4,p=1$Vnp0NWNvSW1FVUNLamFhcw$IbLMJv9/EE6zLME+qELEl7HP0c7mBcp8bCIkjMTPVf4','ATIVADO','ALTERADA','2024-09-30 17:00:36','DAUTON PEREIRA FÉLIX'),(4,'USUÁRIO DE TESTE','123456','CDARCEX','ANALISTA DE TI','ADMIN','teste','$argon2id$v=19$m=65536,t=4,p=1$aEpyNFdOZ2FnYzZZTlFhQg$FRQz5DWyX5CXExjK1wyTIcdlAzP2tcWYEhYpiAIUXaw','ATIVADO','ALTERADA','2024-09-30 18:56:23','DAUTON FÉLIX');
 /*!40000 ALTER TABLE `tb_usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-01 17:34:16
+-- Dump completed on 2024-10-05 18:43:17

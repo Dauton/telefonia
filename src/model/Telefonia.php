@@ -72,6 +72,7 @@ class Telefonia
         $stmt->bindValue(19, trim($matricula), PDO::PARAM_STR);
         $stmt->bindValue(20, trim(mb_strtoupper($email)), PDO::PARAM_STR);
         $stmt->bindValue(21, trim(mb_strtoupper($funcao)), PDO::PARAM_STR);
+        
         $stmt->execute();
     }
 
@@ -168,6 +169,32 @@ class Telefonia
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id, PDO::PARAM_INT);
         $stmt->execute();
+    }
+
+    public function contagemMDM(): int
+    {
+        $sql = "SELECT COUNT(*) FROM tb_dispositivos WHERE gestao_mdm = 'Sim'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetchColumn();
+        return $resultado;
+    }
+
+    public function contagemLinhas(): int
+    {
+        $sql = "SELECT COUNT(*) FROM tb_dispositivos WHERE linha != ''";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetchColumn();
+        return $resultado;
+    }
+    public function contagemAparelhos(): int
+    {
+        $sql = "SELECT COUNT(*) FROM tb_dispositivos WHERE marca_aparelho != ''";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetchColumn();
+        return $resultado;
     }
     
 }

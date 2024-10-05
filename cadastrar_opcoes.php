@@ -218,7 +218,7 @@ $listaCentroCustos = $centro_custo->listaOpcoes('CENTRO DE CUSTOS');
                     <b> • Marca do aparelho;</b><br>
                     <b> • Modelo do aparelho;</b><br>
                     <b> • Unidade;</b><br>
-                    <b> • Centro.</b><br><br>
+                    <b> • Centro de custos.</b><br><br>
                     O campo "Unidade" também está presente no cadastro e edição de usuários.
                 </p>
 

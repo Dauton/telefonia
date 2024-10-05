@@ -4,7 +4,7 @@ USE `telefonia`;
 --
 -- Host: localhost    Database: telefonia
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.37
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +29,7 @@ CREATE TABLE `tb_cadastros_opcoes` (
   `tipo` varchar(100) DEFAULT NULL,
   `descricao` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `tb_cadastros_opcoes` (
 
 LOCK TABLES `tb_cadastros_opcoes` WRITE;
 /*!40000 ALTER TABLE `tb_cadastros_opcoes` DISABLE KEYS */;
-INSERT INTO `tb_cadastros_opcoes` VALUES (1,'MARCA','IPHONE'),(2,'MARCA','LG'),(3,'MARCA','MOTOROLA'),(4,'MARCA','SAMSUNG'),(5,'MARCA','XIAOMI'),(6,'MODELO','GALAXY A03 CORE'),(7,'MODELO','GALAXY A05 CORE'),(8,'MODELO','MOTO E22'),(9,'UNIDADE','CDARCEX'),(10,'UNIDADE','CDAMBEX'),(11,'CENTRO DE CUSTOS','219002'),(12,'CENTRO DE CUSTOS','204303'),(13,'MARCA','NOKIA');
+INSERT INTO `tb_cadastros_opcoes` VALUES (1,'MARCA','IPHONE'),(2,'MARCA','LG'),(3,'MARCA','MOTOROLA'),(4,'MARCA','SAMSUNG'),(5,'MARCA','XIAOMI'),(6,'MODELO','GALAXY A03 CORE'),(7,'MODELO','GALAXY A05 CORE'),(8,'MODELO','MOTO E22'),(9,'UNIDADE','CDARCEX'),(10,'UNIDADE','CDAMBEX'),(11,'CENTRO DE CUSTOS','219002'),(12,'CENTRO DE CUSTOS','204303'),(13,'MARCA','NOKIA'),(14,'','');
 /*!40000 ALTER TABLE `tb_cadastros_opcoes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-01 17:34:15
+-- Dump completed on 2024-10-05 18:43:17
