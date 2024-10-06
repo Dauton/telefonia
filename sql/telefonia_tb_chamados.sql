@@ -28,13 +28,15 @@ CREATE TABLE `tb_chamados` (
   `id` int NOT NULL AUTO_INCREMENT,
   `titulo` varchar(100) DEFAULT NULL,
   `departamento` varchar(100) DEFAULT NULL,
-  `prioridade` varchar(100) DEFAULT NULL,
   `categoria` varchar(100) DEFAULT NULL,
+  `prioridade` varchar(100) DEFAULT NULL,
   `descricao` varchar(256) DEFAULT NULL,
-  `nome_usuario` varchar(100) DEFAULT NULL,
+  `usuario` varchar(100) DEFAULT NULL,
   `unidade_usuario` varchar(100) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `data_abertura` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +45,7 @@ CREATE TABLE `tb_chamados` (
 
 LOCK TABLES `tb_chamados` WRITE;
 /*!40000 ALTER TABLE `tb_chamados` DISABLE KEYS */;
-INSERT INTO `tb_chamados` VALUES (1,'dsfgdfg','INFRAESTRUTURA IDL','BAIXA','AQUISIÇÃO DE LINHA E APARELHO','dfgdfsg',NULL,NULL),(2,'sdg','INFRAESTRUTURA IDL','BAIXA','AQUISIÇÃO DE APARELHO','dfgdfs','DAUTON FÉLIX','CDARCEX'),(3,'HJMHJK','INFRAESTRUTURA IDL','MÉDIA','AQUISIÇÃO DE LINHA E APARELHO','hjkhj','DAUTON FÉLIX','CDARCEX');
+INSERT INTO `tb_chamados` VALUES (1,'INCLUSÃO DE MDM','MOBIT','INCLUIR OU REMOVER MDM','URGENTE','Boa tarde!\r\n\r\nPoderiam incluir MDM nos seguintes tablets?\r\n\r\nSegue IMEIs\r\n\r\n210349719208477\r\n983298732474383\r\n\r\nAt.te,\r\nDauton Pereira Félix','dpfelix','CDARCEX','EM ABERTO','2024-10-06 20:24:56'),(2,'COMPRA DE CELULAR','INFRAESTRUTURA IDL','AQUISIÇÃO DE LINHA E APARELHO','ALTA','Bom dia!\r\n\r\nPreciso que seja comprado um aparelho + linha para o novo supervisor da unidade CDARCEX','dpfelix','CDARCEX','EM ABERTO','2024-10-06 20:27:26'),(3,'GCVNHFGD','INFRAESTRUTURA IDL','AQUISIÇÃO DE APARELHO','BAIXA','FGHFG','dpfelix','CDARCEX','EM ABERTO','2024-10-06 20:32:26'),(4,'SDFSDF','MOBIT','AQUISIÇÃO DE APARELHO','BAIXA','sdfsd','dpfelix','CDARCEX','EM ABERTO','2024-10-06 20:50:37'),(5,'DFGDRFG','INFRAESTRUTURA IDL','AQUISIÇÃO DE APARELHO','MÉDIA','dsfgsd','dpfelix','CDARCEX','EM ABERTO','2024-10-06 20:50:49');
 /*!40000 ALTER TABLE `tb_chamados` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-05 18:43:17
+-- Dump completed on 2024-10-06 17:56:11
