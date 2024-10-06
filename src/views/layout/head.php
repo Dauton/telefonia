@@ -16,6 +16,7 @@
 <meta name="desciption" content="Descrição do sistema">
 <meta name="author" content="Nome do desenvolvedor">
 <meta name="theme-color" content="#00384b">
+<meta name="google" content="notranslate">
 <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

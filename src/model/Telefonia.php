@@ -171,6 +171,15 @@ class Telefonia
         $stmt->execute();
     }
 
+    public function contagemDispositivos(): int
+    {
+        $sql = "SELECT COUNT(*) FROM tb_dispositivos";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetchColumn();
+        return $resultado;
+    }
+
     public function contagemMDM(): int
     {
         $sql = "SELECT COUNT(*) FROM tb_dispositivos WHERE gestao_mdm = 'Sim'";
@@ -194,6 +203,46 @@ class Telefonia
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $resultado = $stmt->fetchColumn();
+        return $resultado;
+    }
+
+    public function exibeComMDM(): array
+    {
+        $sql = "SELECT * FROM tb_dispositivos WHERE gestao_mdm = 'Sim'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $resultado;
+    }
+
+    public function exibeLinhas(): array
+    {
+        $sql = "SELECT * FROM tb_dispositivos WHERE linha != ''";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $resultado;
+    }
+
+    public function exibeAparelhos(): array
+    {
+        $sql = "SELECT * FROM tb_dispositivos WHERE marca_aparelho != ''";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $resultado;
+    }
+
+    public function buscaDispositivo() : array
+    {
+    
+        Validacoes::validaCampoVazio($_GET['busca'], "../../consulta_dispositivos.php?busca=campo_vazio");
+
+        $sql = "SELECT * FROM tb_dispositivos WHERE MATCH(linha, operadora, servico, perfil, status, sim_card, marca_aparelho, modelo_aparelho, imei_aparelho, unidade, centro_custo, uf, ponto_focal, gestor, nome, matricula) AGAINST (:busca)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":busca", "busca=$_SERVER[QUERY_STRING]");
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $resultado;
     }
     

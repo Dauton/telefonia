@@ -137,6 +137,8 @@ form textarea {
     padding: 10px;
     resize: none;
     border: none;
+    font-family: 'Playpen Sans', cursive;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 form input:focus,

@@ -15,13 +15,14 @@ table tr td {
 }
 
 table tr td p {
-    width: fit-content!important;
+    width: 75px !important;
     margin: 0 auto !important;
     padding: 5px 10px;
     border-radius: 2px;
     font-size: 8px;
     font-weight: bold;
     color: #fff;
+    text-align: center !important;
 }
 
 table thead {

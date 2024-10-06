@@ -134,16 +134,29 @@ function corStatus() {
 
     cells.forEach(function(cell) {
 
-        // SE A RLINHA ESTIVER ATIVADA, FICARÁ VERDE..
-        if (cell.textContent.trim() === "ATIVADO") {
+        // FICA VERDE...
+        if (cell.textContent.trim() === "ATIVADO" || cell.textContent.trim() === "FECHADO") {
             cell.style.backgroundColor = '#00a000';
 
-            
-        // SE A RLINHA ESTIVER DESATIVADA, FICARÁ VERMELHO...
-        } if (cell.textContent.trim() === "DESATIVADO") {
+        } // FICA VERMELHO...
+        if (cell.textContent.trim() === "DESATIVADO" || cell.textContent.trim() === "URGENTE") {
             cell.style.backgroundColor = '#cc2626';
 
-        }
+        } // FICA AMARELO 
+        if (cell.textContent.trim() === "MÉDIA") {
+            cell.style.backgroundColor = '#ffcc00';
+
+        } // FICA LARANJA...
+        if (cell.textContent.trim() === "ALTA") {
+            cell.style.backgroundColor = '#ff8c00';
+
+        }  // FICA AZUL...
+        if (cell.textContent.trim() === "EM ABERTO" || cell.textContent.trim() === "BAIXA") {
+            cell.style.backgroundColor = '#0088ff';
+
+        } 
+
+        
         
     });
 }

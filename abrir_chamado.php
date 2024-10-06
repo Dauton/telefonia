@@ -11,13 +11,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $abreChamado->abreChamado(
         $_POST['titulo'],
         $_POST['departamento'],
-        $_POST['prioridade'],
         $_POST['categoria'],
+        $_POST['prioridade'],
         $_POST['descricao']
     );
     header("Location: abrir_chamado.php?chamado=aberto");
     die();
 }
+
+$chamados = new Chamado($pdo);
+$exibeChamados = $chamados->exibeMeusChamados();
 
 ?>
 
@@ -51,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
-                    <h3><a href="inicio.php">INÍCIO</a> / CADASTRO DE USUÁRIO</h3>
+                    <h3><a href="inicio.php">INÍCIO</a> / PAINEL DE CHAMADOS</h3>
                     <div>
                         <i class="fa-solid fa-clock-rotate-left"></i>
                         <a href="requisicao.php"><i class="fa-solid fa-basket-shopping"></i></a>
@@ -60,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <section class="conteudo-center" name="cadastro-usuario">
                     <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
                         <header id="form-cabecalho">
-                            <h1>Cadastro de usuário</h1>
+                            <h1>Abertura de chamado</h1>
                             <i class="fa-solid fa-user-plus"></i>
                         </header>
 
@@ -86,6 +89,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             </label>
 
+                            <label for="categoria">Categoria<span style="color: red;"> *</span>
+                                <div>
+                                    <i class="fa-solid fa-cube"></i>
+                                    <select name="categoria">
+                                        <option value="">Selecione o perfil</option>
+                                        <option value="AQUISIÇÃO DE LINHA">AQUISIÇÃO DE LINHA</option>
+                                        <option value="AQUISIÇÃO DE APARELHO">AQUISIÇÃO DE APARELHO</option>
+                                        <option value="AQUISIÇÃO DE LINHA E APARELHO">AQUISIÇÃO DE LINHA E APARELHO</option>
+                                        <option value="CANCELAMENTO DE LINHA">CANCELAMENTO DE LINHA</option>
+                                        <option value="TROCA DE NÚMERO OU DDD">TROCA DE NÚMERO OU DDD</option>
+                                        <option value="INCLUIR OU REMOVER MDM">INCLUIR OU REMOVER MDM</option>
+                                        <option value="NÃO FAZ OU NÃO RECEBE LIGAÇÃO">NÃO FAZ OU NÃO RECEBE LIGAÇÃO</option>
+                                        <option value="ROUBO OU PERDA DE LINHA OU APARELHO">ROUBO OU PERDA DE LINHA OU APARELHO</option>
+                                        <option value="REPARO DE APARELHO">REPARO DE APARELHO</option>
+                                        <option value="ATUALIZAÇÃO DE INVENTÁRIO">ATUALIZAÇÃO DE INVENTÁRIO</option>
+                                    </select>
+                                </div>
+                            </label>
+
                             <label for="prioridade">Prioridade<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-triangle-exclamation"></i>
@@ -99,24 +121,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             </label>
 
-                            <label for="categoria">Categoria<span style="color: red;"> *</span>
-                                <div>
-                                    <i class="fa-solid fa-cube"></i>
-                                    <select name="categoria">
-                                        <option value="">Selecione o perfil</option>
-                                        <option value="AQUISIÇÃO DE LINHA">AQUISIÇÃO DE LINHA</option>
-                                        <option value="AQUISIÇÃO DE APARELHO">AQUISIÇÃO DE APARELHO</option>
-                                        <option value="AQUISIÇÃO DE LINHA E APARELHO">AQUISIÇÃO DE LINHA E APARELHO</option>
-                                        <option value="CANCELAMENTO DE LINHA">CANCELAMENTO DE LINHA</option>
-                                        <option value="TROCA DE NÚMERO OU DDD">TROCA DE NÚMERO OU DDD</option>
-                                        <option value="NÃO FAZ OU NÃO RECEBE LIGAÇÃO">NÃO FAZ OU NÃO RECEBE LIGAÇÃO</option>
-                                        <option value="ROUBO OU PERDA DE LINHA OU APARELHO">ROUBO OU PERDA DE LINHA OU APARELHO</option>
-                                        <option value="REPARO DE APARELHO">REPARO DE APARELHO</option>
-                                        <option value="ATUALIZAÇÃO DE INVENTÁRIO">ATUALIZAÇÃO DE INVENTÁRIO</option>
-                                    </select>
-                                </div>
-                            </label>
-                            
                             <label for="descricao" style="width: 70%">Descreva o chamado<span style="color: red;"> *</span>
                                 <div>
                                     <textarea name="descricao"></textarea>
@@ -127,6 +131,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <button type="submit" name="btn-requisitar">Abrir</but>
                             </div>
                         </section>
+
+                        <h2>Meus chamados</h2>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>ID chamado</td>
+                                    <td>Título</td>
+                                    <td>Departamento</td>
+                                    <td>Categoria</td>
+                                    <td>Prioridade</td>
+                                    <td>Usuário</td>
+                                    <td>Unidade</td>
+                                    <td>Data abertura</td>
+                                    <td>Status</td>
+                                    <td>Visualizar</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($exibeChamados as $chamados) : ?>
+                                    <tr>
+                                        <td><?= htmlentities($chamados['id']) ?></td>
+                                        <td><?= htmlentities($chamados['titulo']) ?></td>
+                                        <td><?= htmlentities($chamados['departamento']) ?></td>
+                                        <td><?= htmlentities($chamados['categoria']) ?></td>
+                                        <td id="status">
+                                            <p><?= htmlentities($chamados['prioridade']) ?></p>
+                                        </td>
+                                        <td><?= htmlentities($chamados['usuario']) ?></td>
+                                        <td><?= htmlentities($chamados['unidade_usuario']) ?></td>
+                                        <td><?= htmlentities($chamados['data_abertura']) ?></td>
+                                        <td id="status">
+                                            <p><?= htmlentities($chamados['status']) ?></p>
+                                        </td>
+                                        <td>
+                                            <a href="visualiza_dispositivo.php?id=<?= $chamados['id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
                     </form>
                 </section>
 

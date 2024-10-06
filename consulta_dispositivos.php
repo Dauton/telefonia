@@ -5,8 +5,41 @@ require_once "vendor/autoload.php";
 
 senhaPrimeiroAcesso();
 
-$dispositivo = new Telefonia($pdo);
-$exibeTodosDispositivos = $dispositivo->exibeDispositivos();
+if (($_SERVER['QUERY_STRING'] ?? '') === 'linhas') {
+
+    $titulo_tabela_filtrada = "Linhas cadastradas";
+
+    $dispositivo = new Telefonia($pdo);
+    $exibeDispositivos = $dispositivo->exibeLinhas();
+    
+} elseif(($_SERVER['QUERY_STRING'] ?? '') === 'aparelhos') {
+
+    $titulo_tabela_filtrada = "Aparelhos cadastrados";
+    
+    $dispositivo = new Telefonia($pdo);
+    $exibeDispositivos = $dispositivo->exibeAparelhos();
+
+} elseif(($_SERVER['QUERY_STRING'] ?? '') === 'mdm') {
+
+    $titulo_tabela_filtrada = "Aparelhos com MDM";
+
+    $dispositivo = new Telefonia($pdo);
+    $exibeDispositivos = $dispositivo->exibeComMDM();
+
+} elseif(($_SERVER['QUERY_STRING'] ?? '') !== 'mdm' && ($_SERVER['QUERY_STRING'] ?? '') !== 'linha' && ($_SERVER['QUERY_STRING'] ?? '') !== 'aparelho' && ($_SERVER['QUERY_STRING'] ?? '') !== '') {
+    
+    $titulo_tabela_filtrada = 'Resultado da busca';
+
+    $dispositivo = new Telefonia($pdo);
+    $exibeDispositivos = $dispositivo->buscaDispositivo();
+
+} else {
+
+    $titulo_tabela_filtrada = "Dispositivos cadastrados";
+
+    $dispositivo = new Telefonia($pdo);
+    $exibeDispositivos = $dispositivo->exibeDispositivos();
+}
 
 $mdm = new Telefonia($pdo);
 $totalMDM = $mdm->contagemMDM();
@@ -16,6 +49,10 @@ $totalLinhas = $linha->contagemLinhas();
 
 $aparelho = new Telefonia($pdo);
 $totalAparelhos = $aparelho->contagemAparelhos();
+
+$dispositivos = new Telefonia($pdo);
+$totaldispositivos = $dispositivos->contagemDispositivos();
+
 
 ?>
 
@@ -49,7 +86,7 @@ $totalAparelhos = $aparelho->contagemAparelhos();
 
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
-                    <h3>INÍCIO</h3>
+                <h3><a href="inicio.php">INÍCIO</a> / CONSULTA DE DISPOSITIVOS</h3>
                     <div>
                     <i class="fa-solid fa-circle-question"></i>
                         <a href=""><i class="fa-solid fa-circle-question"></i></a>
@@ -71,7 +108,7 @@ $totalAparelhos = $aparelho->contagemAparelhos();
                                     </div>
                                 </div>
                             </a>
-                            <a href="consulta_dispositivos.php">
+                            <a href="consulta_dispositivos.php?aparelhos">
                                 <div>
                                     <div id="box-infos-azul">
                                         <span>
@@ -83,7 +120,7 @@ $totalAparelhos = $aparelho->contagemAparelhos();
                                     </div>
                                 </div>
                             </a>
-                            <a href="consulta_dispositivos.php">
+                            <a href="consulta_dispositivos.php?linhas">
                                 <div>
                                     <div id="box-infos-verde">
                                         <span>
@@ -95,7 +132,7 @@ $totalAparelhos = $aparelho->contagemAparelhos();
                                     </div>
                                 </div>
                             </a>
-                            <a href="consulta_dispositivos.php">
+                            <a href="consulta_dispositivos.php?mdm">
                                 <div>
                                     <div id="box-infos-roxa">
                                         <span>
@@ -107,9 +144,21 @@ $totalAparelhos = $aparelho->contagemAparelhos();
                                     </div>
                                 </div>
                             </a>
+                            <a href="consulta_dispositivos.php">
+                                <div>
+                                    <div id="box-infos-cinza">
+                                        <span>
+                                            <h4>TOTAL DISPOSITIVOS</h4>
+                                        </span>
+                                        <h3><?= $totaldispositivos; ?> dispositivos</h3>
+                                        <i class="fa-solid fa-globe"></i>
+                                        <p class="texto-filtro">Clique para filtrar</p>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                         <div>
-                            <form method="post" action="#">
+                            <form method="get" action="consulta_dispositivos.php">
                                 <header id="form-cabecalho">
                                     <h1>Consulta de dispositivo</h1>
                                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -127,7 +176,7 @@ $totalAparelhos = $aparelho->contagemAparelhos();
                         </div>
                         <div>
                             
-                            <h1>Dispositivos cadastrados</h1>
+                            <h1><?= $titulo_tabela_filtrada ?></h1>
                             <table>
                                 <thead>
                                     <tr>
@@ -144,7 +193,7 @@ $totalAparelhos = $aparelho->contagemAparelhos();
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($exibeTodosDispositivos as $dispositivo) : ?>
+                                    <?php foreach($exibeDispositivos as $dispositivo) : ?>
                                     <tr>
                                         <td><?= htmlentities($dispositivo['nome']) ?></td>
                                         <td><?= htmlentities($dispositivo['linha']) ?></td>

@@ -57,6 +57,17 @@ $(document).ready(function () {
     // SUCESSO NA EXCLUSÃO DE UM DISPOSITIVO...
     exibeMensagemSucesso('dispositivo', 'dispositivo', 'excluido', 'Dispositivo excluído com sucesso!');
 
+    
+// MENSAGERM DE BUSCA E FILTRO DE DISPOSITIVOS
+    // SUCESSO NO FILTRO DE LINHA
+    exibeMensagemSucesso('linhas','linhas','', 'Exibindo linhas cadcastradas');
+    // SUCESSO NO FILTRO DE APARELHOS
+    exibeMensagemSucesso('aparelhos','aparelhos','', 'Exibindo aparelhos cadcastrados');
+    // SUCESSO NO FILTRO DE APARELHOS
+    exibeMensagemSucesso('mdm','mdm','', 'Exibindo aparelhos com MDM');
+    // SUCESSO NO FILTRO DE APARELHOS
+    exibeMensagemErro('busca','busca', 'campo_vazio', 'Preencha com alguma informação do dispositivo.', 'Erro!');
+
 
 // MENSAGENS DE MANIPULAÇÃO DE OPÇÕES...
     // SUCESSO NO CADASTRO DE UMA OPÇÃO...
@@ -65,6 +76,10 @@ $(document).ready(function () {
     exibeMensagemSucesso('opcao', 'opcao', 'editada', 'Opção editada com sucesso');
     // SUCESSO NA EXCLUSÃO DE UMA OPÇÃO...
     exibeMensagemSucesso('opcao', 'opcao', 'excluida', 'Opção excluida com sucesso');
+
+// MENSAGENS DE CHAMADOS...
+    // SUCESSO NA ABERTURA DE UM CHAMADO
+    exibeMensagemSucesso('chamado', 'chamado', 'aberto', 'Chamado aberto com sucesso!');
 
 
 // MENSAGENS DE VALIDAÇÃO DE SENHA...
