@@ -60,9 +60,9 @@ $(document).ready(function () {
     
 // MENSAGERM DE BUSCA E FILTRO DE DISPOSITIVOS
     // SUCESSO NO FILTRO DE LINHA
-    exibeMensagemSucesso('linhas','linhas','', 'Exibindo linhas cadcastradas');
+    exibeMensagemSucesso('linhas','linhas','', 'Exibindo linhas cadastradas');
     // SUCESSO NO FILTRO DE APARELHOS
-    exibeMensagemSucesso('aparelhos','aparelhos','', 'Exibindo aparelhos cadcastrados');
+    exibeMensagemSucesso('aparelhos','aparelhos','', 'Exibindo aparelhos cadastrados');
     // SUCESSO NO FILTRO DE APARELHOS
     exibeMensagemSucesso('mdm','mdm','', 'Exibindo aparelhos com MDM');
     // SUCESSO NO FILTRO DE APARELHOS
@@ -80,6 +80,8 @@ $(document).ready(function () {
 // MENSAGENS DE CHAMADOS...
     // SUCESSO NA ABERTURA DE UM CHAMADO
     exibeMensagemSucesso('chamado', 'chamado', 'aberto', 'Chamado aberto com sucesso!');
+    // SUCESSO NA EDIÇÃO DE UM CHAMADO
+    exibeMensagemSucesso('chamado', 'chamado', 'atualizado', 'Chamado atualizado com sucesso!');
 
 
 // MENSAGENS DE VALIDAÇÃO DE SENHA...

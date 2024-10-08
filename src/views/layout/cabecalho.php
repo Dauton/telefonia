@@ -9,5 +9,6 @@
 ?>
 
 <header class="cabecalho">
+    <a href="inicio.php"><img src="img/sistema-logo.png"></a>
     <i class="fa-solid fa-bars" id="btn-menu"></i>
 </header>

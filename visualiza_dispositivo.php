@@ -7,9 +7,25 @@ $buscaIdUsuario = new Telefonia($pdo);
 $dadoDispositivo = $buscaIdUsuario->buscaIdDispositivo($_GET['id']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // CASO O USUÁRIO ATUALIZE ESSE DISPOSITIVO INFORMANDO QUE NÃO CONTÉM LINHA, OS CAMPOS REFERENTES A LINHA SERÃO LIMPOS.
+    if ($_POST['possui_linha'] === 'Não') {
+        $_POST['linha'] = $_POST['operadora'] = $_POST['servico'] = $_POST['perfil'] = $_POST['status'] = $_POST['data_ativacao'] = $_POST['sim_card'] = null;
+    }
+    // CASO O USUÁRIO ATUALIZE ESSE DISPOSITIVO INFORMANDO QUE NÃO CONTÉM APARELHO, OS CAMPOS REFERENTES AO APARELHO SERÃO LIMPOS.
+    if ($_POST['possui_aparelho'] === 'Não') {
+        $_POST['marca_aparelho'] = $_POST['modelo_aparelho'] = $_POST['imei_aparelho'] = $_POST['gestao_mdm'] = null;
+    }
+    // CASO O USUÁRIO ATUALIZE ESSE DISPOSITIVO INFORMANDO QUE NÃO CONTÉM USUÁRIO, OS CAMPOS REFERENTES AO USUÁRIO SERÃO LIMPOS.
+    if ($_POST['possui_usuario'] === 'Não') {
+        $_POST['nome'] = $_POST['matricula'] = $_POST['email'] = $_POST['funcao'] = null;
+    }
+
     $editaUsuario = new Telefonia($pdo);
     $editaUsuario->atualizaDispositivo(
+
         $_GET['id'],
+
+        $_POST['possui_linha'],
         $_POST['linha'],
         $_POST['operadora'],
         $_POST['servico'],
@@ -17,6 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['status'],
         $_POST['data_ativacao'],
         $_POST['sim_card'],
+
+        $_POST['possui_aparelho'],
         $_POST['marca_aparelho'],
         $_POST['modelo_aparelho'],
         $_POST['imei_aparelho'],
@@ -27,18 +45,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['canal'],
         $_POST['ponto_focal'],
         $_POST['gestor'],
+
+        $_POST['possui_usuario'],
         $_POST['nome'],
         $_POST['matricula'],
         $_POST['email'],
         $_POST['funcao']
+
     );
 
     header("Location: consulta_dispositivos.php?dispositivo=atualizado");
     die();
 }
 
-?>
+// LISTA TODOS AS MARCAS DE APARELHOS CADASTRADAS...
+$marca = new Opcoes($pdo);
+$listaMarcasAparelho = $marca->listaOpcoes('MARCA');
 
+// LISTA TODOS OS MODELOS DE APARELHOS CADASTRADOS...
+$modelo = new Opcoes($pdo);
+$listaModelosAparelho = $modelo->listaOpcoes('MODELO');
+
+// LISTA TODOS AS UNIDADES CADASTRADOS...
+$unidade = new Opcoes($pdo);
+$listaUnidades = $unidade->listaOpcoes('UNIDADE');
+
+// LISTA TODOS OS CENTROS DE CUSTOS CADASTRADOS...
+$cdc = new Opcoes($pdo);
+$listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -54,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         form section {
             display: flex;
         }
+
     </style>
 
 </head>
@@ -75,22 +112,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
-                    <h3><a href="inicio.php">INÍCIO</a> / <a href="<?= $_SERVER['HTTP_REFERER'] ?>">CONSULTAR DISPOSITIVO</a> / EDITAR DISPOSITIVO</h3>
-                    <div>
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                        <a href="requisicao.php"><i class="fa-solid fa-basket-shopping"></i></a>
-                    </div>
+                    <h3><a href="inicio.php">INÍCIO</a> / <a href="<?= $_SERVER['HTTP_REFERER'] ?>">CONSULTAR DISPOSITIVO</a> / VISUALIZAR DISPOSITIVO</h3>
                 </header>
                 <section class="conteudo-center">
                     <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
                         <header id="form-cabecalho">
-                            <h1>Visualização e atualização de dispositivo</h1>
+                            <h1>Visualização de dispositivo</h1>
                             <i class="fa-solid fa-sim-card"></i>
                             <i class="fa-solid fa-mobile-screen"></i>
                             <i class="fa-solid fa-clipboard-user"></i>
                         </header>
 
-                        <h2>Atualize algum campo caso necessário</h2>
+                        <label for="possui_linha">Possui linha?<span style="color: red;"> *</span>
+                            <div>
+                                <i class="fa-solid fa-sim-card"></i>
+                                <select name="possui_linha" required>
+                                    <option value="<?= htmlentities($dadoDispositivo['possui_linha']) ?>"><?= htmlentities($dadoDispositivo['possui_linha']) ?></option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Não">Não</option>
+                                </select>
+                            </div>
+                        </label>
 
                         <section class="form-secao-01">
 
@@ -98,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="linha">Linha<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-phone"></i>
-                                    <input type="number" min='0' name="linha" placeholder="Apenas números Ex: 11912345678" value="<?= htmlentities($dadoDispositivo['linha']) ?>">
+                                    <input type="text" name="linha" placeholder="Apenas números Ex: 11912345678" value="<?= htmlentities($dadoDispositivo['linha']) ?>">
                                 </div>
                             </label>
 
@@ -155,11 +197,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="sim_card">ICCID do SIM Card
                                 <div>
                                     <i class="fa-solid fa-sim-card"></i>
-                                    <input type="text" name="sim_card" id="sim_card" placeholder="Apenas números Ex: 1234567891123456789123" value="<?= htmlentities($dadoDispositivo['sim_card']) ?>">
+                                    <input type="text" name="sim_card" id="sim_card" placeholder="Apenas números Ex: 1234567891123456789123" value="<?= $dadoDispositivo['sim_card'] ?>">
                                 </div>
                             </label>
 
                         </section>
+
+                        <label for="possui_aparelho">Possui aparelho?<span style="color: red;">*</span>
+                            <div>
+                                <i class="fa-solid fa-mobile-screen"></i>
+                                <select name="possui_aparelho" required>
+                                    <option value="<?= htmlentities($dadoDispositivo['possui_aparelho']) ?>"><?= htmlentities($dadoDispositivo['possui_aparelho']) ?></option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Não">Não</option>
+                                </select>
+                            </div>
+                        </label>
+
 
                         <section class="form-secao-02">
 
@@ -170,11 +224,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <i class="fa-solid fa-mobile-screen"></i>
                                     <select name="marca_aparelho">
                                         <option value="<?= htmlentities($dadoDispositivo['marca_aparelho']) ?>"><?= htmlentities($dadoDispositivo['marca_aparelho']) ?></option>
-                                        <option value="IPHONE">IPHONE</option>
-                                        <option value="LG">LG</option>
-                                        <option value="Motorola">MOTOROLA</option>
-                                        <option value="Samsung">SAMSUNG</option>
-                                        <option value="Xiaomi">XIAOMI</option>
+                                        <?php foreach ($listaMarcasAparelho as $marca) : ?>
+                                            <option value="<?= htmlentities($marca['descricao']) ?>"><?= htmlentities($marca['descricao']) ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                             </label>
@@ -182,7 +234,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="modelo_aparelho">Modelo<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-mobile-screen"></i>
-                                    <input type="text" name="modelo_aparelho" id="modelo_aparelho" placeholder="Modelo do aparelho" value="<?= htmlentities($dadoDispositivo['modelo_aparelho']) ?>">
+                                    <select name="modelo_aparelho">
+                                        <option value="<?= htmlentities($dadoDispositivo['modelo_aparelho']) ?>"><?= htmlentities($dadoDispositivo['modelo_aparelho']) ?></option>
+                                        <?php foreach ($listaModelosAparelho as $modelo) : ?>
+                                            <option value="<?= htmlentities($modelo['descricao']) ?>"><?= htmlentities($modelo['descricao']) ?></option>
+                                        <?php endforeach ?>
+                                    </select>
                                 </div>
                             </label>
 
@@ -197,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div>
                                     <i class="fa-solid fa-shield-halved"></i>
                                     <select name="gestao_mdm">
-                                        <option value="<?= htmlentities($dadoDispositivo['gestao_mdm']) ?>"><?= htmlentities($dadoDispositivo['gestao_mdm']) ?></option>
+                                        <option value="">Selecione</option>
                                         <option value="Sim">Sim</option>
                                         <option value="Não">Não</option>
                                     </select>
@@ -205,6 +262,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </label>
 
                         </section>
+
+                        <label for="possui_usuario">Essa linha ou aparelho possui usuário?<span style="color: red;"> *</span>
+                            <div>
+                                <i class="fa-solid fa-user"></i>
+                                <select name="possui_usuario" required>
+                                    <option value="<?= htmlentities($dadoDispositivo['possui_usuario']) ?>"><?= htmlentities($dadoDispositivo['possui_usuario']) ?></option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Não">Não</option>
+                                </select>
+                            </div>
+                        </label>
 
                         <section class="form-secao-03">
 
@@ -249,8 +317,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <i class="fa-solid fa-map-location-dot"></i>
                                     <select name="unidade">
                                         <option value="<?= htmlentities($dadoDispositivo['unidade']) ?>"><?= htmlentities($dadoDispositivo['unidade']) ?></option>
-                                        <option value="CDARCEX">CDARCEX</option>
-                                        <option value="CDAMBEX">CDAMBEX</option>
+                                        <?php foreach ($listaUnidades as $unidade) : ?>
+                                            <option value="<?= htmlentities($unidade['descricao']) ?>"><?= htmlentities($unidade['descricao']) ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                             </label>
@@ -260,8 +329,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <i class="fa-solid fa-wallet"></i>
                                     <select name="centro_custo">
                                         <option value="<?= htmlentities($dadoDispositivo['centro_custo']) ?>"><?= htmlentities($dadoDispositivo['centro_custo']) ?></option>
-                                        <option value="219002">219002</option>
-                                        <option value="204303">204303</option>
+                                        <?php foreach ($listaCentrosDeCustos as $cdc) : ?>
+                                            <option value="<?= htmlentities($cdc['descricao']) ?>"><?= htmlentities($cdc['descricao']) ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                             </label>
@@ -306,13 +376,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div>
                                     <i class="fa-solid fa-building"></i>
                                     <select name="canal">
-                                        <option value="<?= htmlentities($dadoDispositivo['canal']) ?>"><?= htmlentities($dadoDispositivo['canal']) ?></option>
+                                        <option value="<?= htmlentities($dadoDispositivo['canal']) ?>">Canal</option>
                                         <option value="ID ARMAZENS GERAIS LTDA">ID ARMAZENS GERAIS LTDA</option>
                                         <option value="ID DO BRASIL LOGÍSTICA LTDA">ID DO BRASIL LOGÍSTICA LTDA</option>
                                         <option value="PROSERV LTDA">PROSERV LTDA</option>
                                     </select>
                                 </div>
                             </label>
+
                             <label for="gestor">Nome do ponto focal<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-house-user"></i>
@@ -329,8 +400,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </section>
 
                         <div>
-                            <button type="submit">Atualizar</button>
-                            <a href="consulta_dispositivos.php"><button type="button" id="btn-cancelar">Cancelar</button></a>
+                            <button type="submit" name="btn-requisitar">Atualizar</button>
+                            <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><button type="button" id="btn-cancelar">Cancelar</button></a>
                         </div>
 
                     </form>
@@ -345,14 +416,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div id="box-ajuda">
                 <header class="box-ajuda-cabecalho">
-                    <h1>Requisitos de senha</h1>
-                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <h1>Caixa de ajuda</h1>
+                    <i class="fa-solid fa-clipboard-question"></i>
                 </header>
                 <p>
-                    <b>Caracteres</b>: a senha deve conter no mínimo 12 caracteres.<br><br>
-                    <b>Letras</b>: a senha deve conter letras maiúsculas e minúsculas.<br><br>
-                    <b>Números</b>: a senha deve conter pelo menos um número.<br><br>
-                    <b>Resumindo</b>: a senha deve possuir uma combinação de 12 caracteres sendo elas letras maiúsculas, minúsculas e números.
+                    <b>Linha:</b> Se houver uma linha, os campos "linha" e "operadora" devem ser preenchidos obrigatoriamente.<br><br>
+                    <b>Aparelho:</b> Se houver um aparelho, os campos "marca" e "modelo" devem ser preenchidos obrigatoriamente.<br><br>
+                    <b>Usuário:</b> Se houver um usuário, todos os campos relacionados serão obrigatórios.<br><br>
+                    <b>Localidade:</b> Todos os campos referentes à localidade são de preenchimento obrigatório.<br><br>
+                    Para que o cadastro seja bem-sucedido, é necessário incluir pelo menos uma linha ou um aparelho.
                 </p>
 
                 <button id="box-ajuda-fechar-btn">Fechar</button>

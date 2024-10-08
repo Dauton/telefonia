@@ -4,6 +4,7 @@ require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $cadastraDispositivo = new Opcoes($pdo);
     $cadastraDispositivo->cadastraOpcao(
         $_POST['tipo'],
@@ -63,10 +64,6 @@ $listaCentroCustos = $centro_custo->listaOpcoes('CENTRO DE CUSTOS');
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
                     <h3><a href="inicio.php">INÍCIO</a> / CADASTRO DE OPÇÕES</h3>
-                    <div>
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                        <a href="requisicao.php"><i class="fa-solid fa-basket-shopping"></i></a>
-                    </div>
                 </header>
                 <section class="conteudo-center">
 

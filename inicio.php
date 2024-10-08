@@ -41,10 +41,6 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
                     <h3>INÍCIO</h3>
-                    <div>
-                    <i class="fa-solid fa-circle-question"></i>
-                        <a href=""><<i class="fa-solid fa-circle-question"></i></a>
-                    </div>
                 </header>
                 <section class="conteudo-center">
                     <article class="conteudo-center-boxs">
@@ -57,7 +53,7 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                                             <h4>CADASTRAR DISPOSITIVO</h4>
                                         </span>
                                         <h3>Cadastrar</h3>
-                                        <i class="fa-solid fa-microchip"></i>
+                                        <i class="fa-solid fa-square-plus"></i>
                                         <p class="texto-filtro">Clique para abrir</p>
                                     </div>
                                 </div>

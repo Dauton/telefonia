@@ -49,10 +49,6 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_SESSION['id_usuario']);
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
                     <h3><a href="inicio.php">INÍCIO</a> / RESET MINHA SENHA</h3>
-                    <div>
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                        <a href="requisicao.php"><i class="fa-solid fa-basket-shopping"></i></a>
-                    </div>
                 </header>
                 <section class="conteudo-center">
                     <form method="post" class="form-requisicao" id="form-requisicao">

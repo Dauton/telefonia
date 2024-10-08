@@ -36,11 +36,11 @@ class Opcoes
     // CADASTRA UMA OPÇÃO...
     public function cadastraOpcao(string $tipo, string $descricao) : void
     {
+        
         // VALIDA SE O CAMPO DA DESCRIÇÃO É NUMERICA CASO O TIPO SELECIONADO SEJA CENTRO DE CUSTOS...
         if($_POST['tipo'] === 'CENTRO DE CUSTOS') {
-            Validacoes::validaCampoNumerico($descricao,"../../cadastrar_opcoes.php?verifica_campo=centro_custo_nao_numerico");
+            Validacoes::validaCampoNumerico('descricao', "../../cadastrar_opcoes.php?verifica_campo=centro_custo_nao_numerico");
         }
-
         // VALIDA SE TODOS OS CAMPOS FORAM PREENCHIDOS...
         Validacoes::validaCampoVazio($tipo, "cadastrar_opcoes.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($descricao, "cadastrar_opcoes.php?verifica_campo=todos_campos");
@@ -65,8 +65,8 @@ class Opcoes
     public function editaOpcao(string $tipo, string $descricao) : void
     {    
         // VALIDA SE O CAMPO DA DESCRIÇÃO É NUMERICA CASO O TIPO SELECIONADO SEJA CENTRO DE CUSTOS...
-        if($_POST['tipo'] === 'CENTRO DE CUSTOS') {
-            Validacoes::validaCampoNumerico($descricao,"$_GET[id]&verifica_campo=todos_campos");
+        if($tipo === 'CENTRO DE CUSTOS') {
+            Validacoes::validaCampoNumerico('descricao',"../../cadastrar_opcoes.php?$_GET[id]&verifica_campo=centro_custo_nao_numerico");
         }
 
         // VALIDA SE TODOS OS CAMPOS FORAM PREENCHIDOS...

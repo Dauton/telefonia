@@ -9,7 +9,7 @@ class Validacoes
         $this->pdo = $pdo;
     }
 
-    public static function validaCampoVazio(string $campo, string $caminho)
+    public static function validaCampoVazio(string $campo, string $caminho): void
     {
 
         if($campo === false || $campo === null || $campo === "") {
@@ -18,8 +18,7 @@ class Validacoes
         }
     }
 
-
-    public static function validaCampoNumerico(string $campo, string $caminho)
+    public static function validaCampoNumerico(string $campo, string $caminho): mixed
     {
         $valor = filter_input(INPUT_POST, $campo, FILTER_VALIDATE_INT);
         if ($valor === false) {

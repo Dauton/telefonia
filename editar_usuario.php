@@ -60,10 +60,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
                     <h3><a href="inicio.php">INÍCIO</a> / <a href="gerenciar_usuarios.php">GERENCIAR USUÁRIOS</a> / EDIÇÃO DE USUÁRIO</h3>
-                    <div>
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                        <a href="requisicao.php"><i class="fa-solid fa-basket-shopping"></i></a>
-                    </div>
                 </header>
                 <section class="conteudo-center">
                     <form method="post">

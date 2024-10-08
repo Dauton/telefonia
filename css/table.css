@@ -15,7 +15,7 @@ table tr td {
 }
 
 table tr td p {
-    width: 75px !important;
+    width: 80px !important;
     margin: 0 auto !important;
     padding: 5px 10px;
     border-radius: 2px;
@@ -68,9 +68,8 @@ table tr #btn-excluir {
     transition: .1s background;
 }
 
-table tr #btn-senha {
-    background: #ffdcb1;
-    color: #9b5500;
+table   a {
+    color: #000;
 }
 table form button {
     width: fit-content;

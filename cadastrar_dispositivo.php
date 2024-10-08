@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $cadastraDispositivo = new Telefonia($pdo);
         $cadastraDispositivo->cadastraDispositivo(
+            $_POST['possui_linha'],
             $_POST['linha'],
             $_POST['operadora'],
             $_POST['servico'],
@@ -20,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['status'],
             $_POST['data_ativacao'],
             $_POST['sim_card'],
+            $_POST['possui_aparelho'],
             $_POST['marca_aparelho'],
             $_POST['modelo_aparelho'],
             $_POST['imei_aparelho'],
@@ -30,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['canal'],
             $_POST['ponto_focal'],
             $_POST['gestor'],
+            $_POST['possui_usuario'],
             $_POST['nome'],
             $_POST['matricula'],
             $_POST['email'],
@@ -90,10 +93,6 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
                     <h3><a href="inicio.php">INÍCIO</a> / CADASTRO DE DISPOSITIVO</h3>
-                    <div>
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                        <a href="requisicao.php"><i class="fa-solid fa-basket-shopping"></i></a>
-                    </div>
                 </header>
                 <section class="conteudo-center">
                     <div class="conteudo-center-box-01">
@@ -136,7 +135,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="linha">Linha<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-phone"></i>
-                                    <input type="number" min='0' name="linha" placeholder="Apenas números Ex: 11912345678">
+                                    <input type="text" name="linha" placeholder="Apenas números Ex: 11912345678">
                                 </div>
                             </label>
 
@@ -411,15 +410,15 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
 
             <div id="box-ajuda">
                 <header class="box-ajuda-cabecalho">
-                    <h1>Requisitos de senha</h1>
+                    <h1>Caixa de ajuda</h1>
                     <i class="fa-solid fa-mobile-screen-button"></i>
                 </header>
                 <p>
-                    Para que o cadastro seja bem-sucedido, é necessário preencher uma linha, um aparelho, ou ambos.<br><br>
-                    Ao preencher as informações de usuário, é obrigatório incluir pelo menos uma linha, um aparelho, ou ambos.<br><br>
-                    Caso seja incluída uma linha, é obrigatório preencher as informações de "linha" e "operadora".<br><br>
-                    Caso seja incluído um aparelho, é obrigatório preencher as informações de "marca" e "modelo".<br><br>
-                    Todas as informações de localidade são de preenchimento obrigatório.
+                    <b>Linha:</b> Se houver uma linha, os campos "linha" e "operadora" devem ser preenchidos obrigatoriamente.<br><br>
+                    <b>Aparelho:</b> Se houver um aparelho, os campos "marca" e "modelo" devem ser preenchidos obrigatoriamente.<br><br>
+                    <b>Usuário:</b> Se houver um usuário, todos os campos relacionados serão obrigatórios.<br><br>
+                    <b>Localidade:</b> Todos os campos referentes à localidade são de preenchimento obrigatório.<br><br>
+                    Para que o cadastro seja bem-sucedido, é necessário incluir pelo menos uma linha ou um aparelho.
                 </p>
 
                 <button id="box-ajuda-fechar-btn">Fechar</button>
@@ -430,64 +429,11 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
 
     <div class="btns-atalhos">
         <button type="button" id="btn-atalho" title="Caixa de ajuda"><i class="fa-regular fa-circle-question"></i></button>
-        <a href="consulta_dispositivos.php"><button id="btn-atalho" title="Gerenciar dispositivos">
-                <i class="fa-solid fa-house-laptop"></i>
-            </button></a>
     </div>
-
 
     <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/javascript.js"></script>
     <script type="text/javascript" src="js/toastr.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const selectPossuiLinha = document.querySelector('select[name="possui_linha"]');
-            const selectPossuiAparelho = document.querySelector('select[name="possui_aparelho"]');
-            const selectPossuiUsuario = document.querySelector('select[name="possui_usuario"]');
-
-            const secaoLinha = document.querySelector('.form-secao-01');
-            const secaoAparelho = document.querySelector('.form-secao-02');
-            const secaoUsuario = document.querySelector('.form-secao-03');
-
-            const linha = secaoLinha.querySelector('input[name="linha"]');
-            const operadora = secaoLinha.querySelector('select[name="operadora"]');
-
-            const marcaAparelho = secaoAparelho.querySelector('select[name="marca_aparelho"]');
-            const modeloAparelho = secaoAparelho.querySelector('input[name="modelo_aparelho"]');
-            const imeiAparelho = secaoAparelho.querySelector('input[name="imei_aparelho"]');
-            const mdmAparelho = secaoAparelho.querySelector('select[name="gestao_mdm"]');
-
-            const nomeUsuario = secaoUsuario.querySelector('input[name="nome"]');
-
-            secaoLinha.style.display = 'none';
-            secaoAparelho.style.display = 'none';
-            secaoUsuario.style.display = 'none';
-
-            function toggleSection(select, section, camposObrigatorios) {
-                if (select.value === 'Sim') {
-                    section.style.display = 'flex';
-                } else {
-                    section.style.display = 'none';
-                }
-            }
-
-            selectPossuiLinha.addEventListener('change', function() {
-                toggleSection(selectPossuiLinha, secaoLinha, [linha, operadora]);
-            });
-
-            selectPossuiAparelho.addEventListener('change', function() {
-                toggleSection(selectPossuiAparelho, secaoAparelho, [marcaAparelho, modeloAparelho, imeiAparelho, mdmAparelho]);
-            });
-
-            selectPossuiUsuario.addEventListener('change', function() {
-                toggleSection(selectPossuiUsuario, secaoUsuario, [nomeUsuario]);
-            });
-        });
-    </script>
-
-
-
 
 </body>
 

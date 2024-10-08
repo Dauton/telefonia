@@ -6,21 +6,25 @@ require_once "vendor/autoload.php";
 apenasAdmin();
 senhaPrimeiroAcesso();
 
+$chamados = new Chamado($pdo);
+$exibeMeusChamados = $chamados->exibeMeusChamados();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $abreChamado = new Chamado($pdo);
-    $abreChamado->abreChamado(
+    $editaChamado = new Chamado($pdo);
+    $editaChamado->editaChamado(
+        $_GET['id'],
         $_POST['titulo'],
         $_POST['departamento'],
         $_POST['categoria'],
         $_POST['prioridade'],
-        $_POST['descricao']
+        $_POST['descricao'],
     );
-    header("Location: abrir_chamado.php?chamado=aberto");
+    header("Location: abrir_chamado.php?chamado=atualizado");
     die();
 }
 
-$chamados = new Chamado($pdo);
-$exibeMeusChamados = $chamados->exibeMeusChamados();
+$buscaIdChamado = new Chamado($pdo);
+$dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
 
 ?>
 
@@ -70,7 +74,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                             <label for="titulo">Título do chamado<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-file-pen"></i>
-                                    <input type="text" name="titulo" placeholder="Insira o título do chamado">
+                                    <input type="text" name="titulo" placeholder="Insira o título do chamado" value="<?= $dadoChamado['titulo'] ?>">
                                 </div>
                             </label>
 
@@ -78,7 +82,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                                 <div>
                                     <i class="fa-solid fa-building-flag"></i>
                                     <select name="departamento">
-                                        <option value="">Selecione</option>
+                                        <option value="<?= $dadoChamado['titulo'] ?>"><?= $dadoChamado['departamento'] ?></option>
                                         <option value="INFRAESTRUTURA IDL">INFRAESTRUTURA IDL</option>
                                         <option value="MOBIT">MOBIT</option>
                                     </select>
@@ -89,7 +93,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                                 <div>
                                     <i class="fa-solid fa-cube"></i>
                                     <select name="categoria">
-                                        <option value="">Selecione o perfil</option>
+                                        <option value="<?= $dadoChamado['titulo'] ?>"><?= $dadoChamado['categoria'] ?></option>
                                         <option value="AQUISIÇÃO DE LINHA">AQUISIÇÃO DE LINHA</option>
                                         <option value="AQUISIÇÃO DE APARELHO">AQUISIÇÃO DE APARELHO</option>
                                         <option value="AQUISIÇÃO DE LINHA E APARELHO">AQUISIÇÃO DE LINHA E APARELHO</option>
@@ -108,7 +112,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                                 <div>
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                     <select name="prioridade">
-                                        <option value="">Selecione</option>
+                                        <option value="<?= $dadoChamado['titulo'] ?>"><?= $dadoChamado['prioridade'] ?></option>
                                         <option value="BAIXA">BAIXA</option>
                                         <option value="MÉDIA">MÉDIA</option>
                                         <option value="ALTA">ALTA</option>
@@ -119,55 +123,15 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
 
                             <label for="descricao" style="width: 70%">Descreva o chamado<span style="color: red;"> *</span>
                                 <div>
-                                    <textarea name="descricao"></textarea>
+                                    <textarea name="descricao"><?= $dadoChamado['descricao'] ?></textarea>
                                 </div>
                             </label>
 
                             <div>
                                 <button type="submit" name="btn-requisitar">Abrir</but>
+                                <a href="abrir_chamado.php"><button type="button" id="btn-cancelar">Cancelar</button></a>
                             </div>
                         </section>
-
-                        <h2>Meus chamados</h2>
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>ID chamado</td>
-                                    <td>Título</td>
-                                    <td>Departamento</td>
-                                    <td>Categoria</td>
-                                    <td>Prioridade</td>
-                                    <td>Usuário</td>
-                                    <td>Unidade</td>
-                                    <td>Data abertura</td>
-                                    <td>Status</td>
-                                    <td>Visualizar</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($exibeMeusChamados as $chamados) : ?>
-                                    <tr>
-                                        <td><?= htmlentities($chamados['id']) ?></td>
-                                        <td><?= htmlentities($chamados['titulo']) ?></td>
-                                        <td><?= htmlentities($chamados['departamento']) ?></td>
-                                        <td><?= htmlentities($chamados['categoria']) ?></td>
-                                        <td id="status">
-                                            <p><?= htmlentities($chamados['prioridade']) ?></p>
-                                        </td>
-                                        <td><?= htmlentities($chamados['usuario']) ?></td>
-                                        <td><?= htmlentities($chamados['unidade_usuario']) ?></td>
-                                        <td><?= htmlentities($chamados['data_abertura']) ?></td>
-                                        <td id="status">
-                                            <p><?= htmlentities($chamados['status']) ?></p>
-                                        </td>
-                                        <td>
-                                            <a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><i class="fa-solid fa-eye"></i></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach ?>
-                            </tbody>
-                        </table>
                     </form>
                 </section>
 
@@ -189,7 +153,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                     <b>Números</b>: a senha deve conter pelo menos um número.<br><br>
                     <b>Resumindo</b>: a senha deve possuir uma combinação de 12 caracteres sendo elas letras maiúsculas, minúsculas e números.
                 </p>
-                <button id="box-ajuda-fechar-btn">Fechar</button>
+                <button id="box-ajuda-fechar-btn">Atualizar</button>
 
             </div>
         </section>

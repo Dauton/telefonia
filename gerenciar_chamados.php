@@ -5,54 +5,8 @@ require_once "vendor/autoload.php";
 
 senhaPrimeiroAcesso();
 
-if (($_SERVER['QUERY_STRING'] ?? '') === 'linhas') {
-
-    $titulo_tabela_filtrada = "Linhas cadastradas";
-
-    $dispositivo = new Telefonia($pdo);
-    $exibeDispositivos = $dispositivo->exibeLinhas();
-    
-} elseif(($_SERVER['QUERY_STRING'] ?? '') === 'aparelhos') {
-
-    $titulo_tabela_filtrada = "Aparelhos cadastrados";
-    
-    $dispositivo = new Telefonia($pdo);
-    $exibeDispositivos = $dispositivo->exibeAparelhos();
-
-} elseif(($_SERVER['QUERY_STRING'] ?? '') === 'mdm') {
-
-    $titulo_tabela_filtrada = "Aparelhos com MDM";
-
-    $dispositivo = new Telefonia($pdo);
-    $exibeDispositivos = $dispositivo->exibeComMDM();
-
-} elseif(($_SERVER['QUERY_STRING'] ?? '') !== 'mdm' && ($_SERVER['QUERY_STRING'] ?? '') !== 'linha' && ($_SERVER['QUERY_STRING'] ?? '') !== 'aparelho' && ($_SERVER['QUERY_STRING'] ?? '') !== '') {
-    
-    $titulo_tabela_filtrada = 'Resultado da busca';
-
-    $dispositivo = new Telefonia($pdo);
-    $exibeDispositivos = $dispositivo->buscaDispositivo();
-
-} else {
-
-    $titulo_tabela_filtrada = "Dispositivos cadastrados";
-
-    $dispositivo = new Telefonia($pdo);
-    $exibeDispositivos = $dispositivo->exibeDispositivos();
-}
-
-$mdm = new Telefonia($pdo);
-$totalMDM = $mdm->contagemMDM();
-
-$linha = new Telefonia($pdo);
-$totalLinhas = $linha->contagemLinhas();
-
-$aparelho = new Telefonia($pdo);
-$totalAparelhos = $aparelho->contagemAparelhos();
-
-$dispositivos = new Telefonia($pdo);
-$totaldispositivos = $dispositivos->contagemDispositivos();
-
+$chamados = new Chamado($pdo);
+$exibeTodosChamados = $chamados->exibeTodosChamados();
 
 ?>
 
@@ -86,7 +40,7 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
 
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
-                    <h3><a href="inicio.php">INÍCIO</a> / CONSULTA DE DISPOSITIVOS</h3>
+                    <h3><a href="inicio.php">INÍCIO</a> / GERENCIAMENTO DE CHAMADOS</h3>
                 </header>
                 <section class="conteudo-center">
                     <article class="conteudo-center-boxs">
@@ -96,9 +50,9 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
                                 <div>
                                     <div id="box-infos-amarela">
                                         <span>
-                                            <h4>CADASTRAR DISPOSITIVO</h4>
+                                            <h4>PREENCHER</h4>
                                         </span>
-                                        <h3>Cadastrar</h3>
+                                        <h3>PREENCHER</h3>
                                         <i class="fa-solid fa-square-plus"></i>
                                         <p class="texto-filtro">Clique para abrir</p>
                                     </div>
@@ -108,9 +62,9 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
                                 <div>
                                     <div id="box-infos-azul">
                                         <span>
-                                            <h4>TOTAL DE APARELHOS</h4>
+                                            <h4>PREENCHER</h4>
                                         </span>
-                                        <h3><?= $totalAparelhos ?> aparelho(os)</h3>
+                                        <h3>PREENCHER</h3>
                                         <i class="fa-solid fa-mobile-screen"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
@@ -120,9 +74,9 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
                                 <div>
                                     <div id="box-infos-verde">
                                         <span>
-                                            <h4>TOTAL DE LINHAS</h4>
+                                            <h4>PREENCHER</h4>
                                         </span>
-                                        <h3><?= $totalLinhas ?> linha(as)</h3>
+                                        <h3>PREENCHER</h3>
                                         <i class="fa-solid fa-sim-card"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
@@ -132,9 +86,9 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
                                 <div>
                                     <div id="box-infos-roxa">
                                         <span>
-                                            <h4>TOTAL DE APARELHOS COM MDM</h4>
+                                            <h4>PREENCHER</h4>
                                         </span>
-                                        <h3><?= $totalMDM; ?> aparelho(os) com MDM</h3>
+                                        <h3>PREENCHER</h3>
                                         <i class="fa-solid fa-shield-halved"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
@@ -144,9 +98,9 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
                                 <div>
                                     <div id="box-infos-cinza">
                                         <span>
-                                            <h4>TOTAL DE DISPOSITIVOS</h4>
+                                            <h4>PREENCHER</h4>
                                         </span>
-                                        <h3><?= $totaldispositivos; ?> dispositivo(os)</h3>
+                                        <h3>PREENCHER</h3>
                                         <i class="fa-solid fa-globe"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
@@ -156,54 +110,58 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
                         <div>
                             <form method="get" action="consulta_dispositivos.php">
                                 <header id="form-cabecalho">
-                                    <h1>Consulta de dispositivo</h1>
+                                    <h1>Consulta de chamados</h1>
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </header>
-                                <h2>Buscar dispositivo</h2>
+                                <h2>Buscar chamados</h2>
                                 <label>Buscar
                                     <div>
                                         <i class="fa-solid fa-magnifying-glass"></i>
-                                        <input type="search" name="busca" placeholder="Digite alguma informação do dispositivo">
+                                        <input type="search" name="busca" placeholder="Digite alguma informação do chamado">
                                     </div>
                                 </label>
                                 <button type="submit">Buscar</button>
                             </form>
-                            
+
                         </div>
                         <div>
-                            
-                            <h1><?= $titulo_tabela_filtrada ?></h1>
+
+                            <h1>Gerenciar chamados em aberto</h1>
                             <table>
                                 <thead>
                                     <tr>
-                                        <td>Nome usuário</td>
-                                        <td>Linha</td>
-                                        <td>Status da linha</td>
-                                        <td>Modelo do aparelho</td>
-                                        <td>IMEI aparelho</td>
-                                        <td>MDM</td>
+                                        <td>ID chamado</td>
+                                        <td>Título</td>
+                                        <td>Departamento</td>
+                                        <td>Categoria</td>
+                                        <td>Prioridade</td>
+                                        <td>Usuário</td>
                                         <td>Unidade</td>
-                                        <td>Centro de custos</td>
-                                        <td>Ponto focal</td>
-                                        <td>Visualizar</td>
+                                        <td>Data abertura</td>
+                                        <td>Status</td>
+                                        <td>Gerenciar</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($exibeDispositivos as $dispositivo) : ?>
-                                    <tr>
-                                        <td><?= htmlentities($dispositivo['nome']) ?></td>
-                                        <td><?= htmlentities($dispositivo['linha']) ?></td>
-                                        <td id="Status"><p><?= htmlentities($dispositivo['status']) ?></p></td>
-                                        <td><?= htmlentities($dispositivo['modelo_aparelho']) ?></td>
-                                        <td><?= htmlentities($dispositivo['imei_aparelho']) ?></td>
-                                        <td><?= htmlentities($dispositivo['gestao_mdm']) ?></td>
-                                        <td><?= htmlentities($dispositivo['unidade']) ?></td>
-                                        <td><?= htmlentities($dispositivo['centro_custo']) ?></td>
-                                        <td><?= htmlentities($dispositivo['ponto_focal']) ?></td>
-                                        <td id="status">
-                                            <a href="visualiza_dispositivo.php?id=<?= $dispositivo['id'] ?>"><i class="fa-solid fa-eye"></i></a>
-                                        </td>
-                                    </tr>
+                                    <?php foreach ($exibeTodosChamados as $chamados) : ?>
+                                        <tr>
+                                            <td><a href="gerencia_chamado.php?id=<?= $chamados['id'] ?>"><?= htmlentities($chamados['id']) ?></a></td>
+                                            <td><a href="gerencia_chamado.php?id=<?= $chamados['id'] ?>"><?= htmlentities($chamados['titulo']) ?></a></td>
+                                            <td><?= htmlentities($chamados['departamento']) ?></td>
+                                            <td><?= htmlentities($chamados['categoria']) ?></td>
+                                            <td id="status">
+                                                <p><?= htmlentities($chamados['prioridade']) ?></p>
+                                            </td>
+                                            <td><?= htmlentities($chamados['usuario']) ?></td>
+                                            <td><?= htmlentities($chamados['unidade_usuario']) ?></td>
+                                            <td><?= htmlentities($chamados['data_abertura']) ?></td>
+                                            <td id="status">
+                                                <p><?= htmlentities($chamados['status']) ?></p>
+                                            </td>
+                                            <td>
+                                                <a href="visualiza_dispositivo.php?id=<?= $chamados['id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                            </td>
+                                        </tr>
                                     <?php endforeach ?>
                                 </tbody>
                             </table>

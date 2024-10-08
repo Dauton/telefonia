@@ -344,3 +344,47 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     atualizarDiferenca();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const selectPossuiLinha = document.querySelector('select[name="possui_linha"]');
+    const selectPossuiAparelho = document.querySelector('select[name="possui_aparelho"]');
+    const selectPossuiUsuario = document.querySelector('select[name="possui_usuario"]');
+
+    const secaoLinha = document.querySelector('.form-secao-01');
+    const secaoAparelho = document.querySelector('.form-secao-02');
+    const secaoUsuario = document.querySelector('.form-secao-03');
+
+    const linha = secaoLinha.querySelector('input[name="linha"]');
+    const operadora = secaoLinha.querySelector('select[name="operadora"]');
+
+    const marcaAparelho = secaoAparelho.querySelector('select[name="marca_aparelho"]');
+    const modeloAparelho = secaoAparelho.querySelector('input[name="modelo_aparelho"]');
+    const imeiAparelho = secaoAparelho.querySelector('input[name="imei_aparelho"]');
+    const mdmAparelho = secaoAparelho.querySelector('select[name="gestao_mdm"]');
+
+    const nomeUsuario = secaoUsuario.querySelector('input[name="nome"]');
+
+    secaoLinha.style.display = 'none';
+    secaoAparelho.style.display = 'none';
+    secaoUsuario.style.display = 'none';
+
+    function toggleSection(select, section) {
+        if (select.value === 'Sim') {
+            section.style.display = 'flex';
+        } else {
+            section.style.display = 'none';
+        }
+    }
+
+    selectPossuiLinha.addEventListener('change', function() {
+        toggleSection(selectPossuiLinha, secaoLinha, [linha, operadora]);
+    });
+
+    selectPossuiAparelho.addEventListener('change', function() {
+        toggleSection(selectPossuiAparelho, secaoAparelho, [marcaAparelho, modeloAparelho, imeiAparelho, mdmAparelho]);
+    });
+
+    selectPossuiUsuario.addEventListener('change', function() {
+        toggleSection(selectPossuiUsuario, secaoUsuario, [nomeUsuario]);
+    });
+});

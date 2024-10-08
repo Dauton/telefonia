@@ -33,7 +33,7 @@ class Usuario
         Validacoes::validaCampoVazio($senha, "../../cadastrar_usuario.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($repete_senha, "../../cadastrar_usuario.php?verifica_campo=todos_campos");
         Validacoes::validaNomeCompleto($nome, "../../cadastrar_usuario.php?usuario=nome_incompleto");
-        Validacoes::validaCampoNumerico($matricula, "../../cadastrar_usuario.php?verifica_campo=matricula_nao_numerico");
+        Validacoes::validaCampoNumerico('matricula', "../../cadastrar_usuario.php?verifica_campo=matricula_nao_numerico");
         Validacoes::validaUsuarioExistenteCadastro($usuario, "../../cadastrar_usuario.php?usuario=usuario_ja_cadastrado", $pdo);
 
         Validacoes::validaComprimentoSenha($senha, '../../cadastrar_usuario.php?verifica_senha=senha_curta');
@@ -81,10 +81,9 @@ class Usuario
         Validacoes::validaCampoVazio($usuario, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($status, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
         Validacoes::validaNomeCompleto($nome, "../../cadastrar_usuario.php?usuario=nome_incompleto");
-        Validacoes::validaCampoNumerico($matricula, "../../cadastrar_usuario.php?verifica_campo=matricula_nao_numerico");
+        Validacoes::validaCampoNumerico('matricula', "../../cadastrar_usuario.php?verifica_campo=matricula_nao_numerico");
         Validacoes::validaUsuarioExistenteEdição($usuario,"editar_usuario.php?id_usuario=$_GET[id_usuario]&usuario=usuario_ja_cadastrado", $pdo);
         Validacoes::validaNomeCompleto($nome, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=nome_incompleto");
-        Validacoes::validaCampoNumerico($matricula, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=matricula_nao_numerico");
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, mb_strtoupper(trim($nome)), PDO::PARAM_STR);
