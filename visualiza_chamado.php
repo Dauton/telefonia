@@ -26,8 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $buscaIdChamado = new Chamado($pdo);
 $dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
 
-?>
 
+$respostas = new Chamado($pdo);
+$exibeRespostas = $respostas->exibeRespostas();
+
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -63,8 +67,8 @@ $dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
                 <section class="conteudo-center" name="cadastro-usuario">
                     <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
                         <header id="form-cabecalho">
-                            <h1>Abertura de chamado</h1>
-                            <i class="fa-solid fa-user-plus"></i>
+                            <h1>Atualizar chamado</h1>
+                            <i class="fa-solid fa-pen-to-square"></i>
                         </header>
 
                         <section class="form-secao-01" name="form-cadastro-usuario">
@@ -74,7 +78,7 @@ $dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
                             <label for="titulo">Título do chamado<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-file-pen"></i>
-                                    <input type="text" name="titulo" placeholder="Insira o título do chamado" value="<?= $dadoChamado['titulo'] ?>">
+                                    <input type="text" name="titulo" placeholder="Insira o título do chamado" value="<?= htmlentities($dadoChamado['titulo']) ?>">
                                 </div>
                             </label>
 
@@ -82,7 +86,7 @@ $dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
                                 <div>
                                     <i class="fa-solid fa-building-flag"></i>
                                     <select name="departamento">
-                                        <option value="<?= $dadoChamado['titulo'] ?>"><?= $dadoChamado['departamento'] ?></option>
+                                        <option value="<?= htmlentities($dadoChamado['departamento']) ?>"><?= htmlentities($dadoChamado['departamento']) ?></option>
                                         <option value="INFRAESTRUTURA IDL">INFRAESTRUTURA IDL</option>
                                         <option value="MOBIT">MOBIT</option>
                                     </select>
@@ -93,7 +97,7 @@ $dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
                                 <div>
                                     <i class="fa-solid fa-cube"></i>
                                     <select name="categoria">
-                                        <option value="<?= $dadoChamado['titulo'] ?>"><?= $dadoChamado['categoria'] ?></option>
+                                        <option value="<?= $dadoChamado['categoria'] ?>"><?= htmlentities($dadoChamado['categoria']) ?></option>
                                         <option value="AQUISIÇÃO DE LINHA">AQUISIÇÃO DE LINHA</option>
                                         <option value="AQUISIÇÃO DE APARELHO">AQUISIÇÃO DE APARELHO</option>
                                         <option value="AQUISIÇÃO DE LINHA E APARELHO">AQUISIÇÃO DE LINHA E APARELHO</option>
@@ -112,7 +116,7 @@ $dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
                                 <div>
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                     <select name="prioridade">
-                                        <option value="<?= $dadoChamado['titulo'] ?>"><?= $dadoChamado['prioridade'] ?></option>
+                                        <option value="<?= htmlentities($dadoChamado['prioridade']) ?>"><?= htmlentities($dadoChamado['prioridade']) ?></option>
                                         <option value="BAIXA">BAIXA</option>
                                         <option value="MÉDIA">MÉDIA</option>
                                         <option value="ALTA">ALTA</option>
@@ -123,16 +127,67 @@ $dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
 
                             <label for="descricao" style="width: 70%">Descreva o chamado<span style="color: red;"> *</span>
                                 <div>
-                                    <textarea name="descricao"><?= $dadoChamado['descricao'] ?></textarea>
+                                    <textarea name="descricao"><?= htmlentities($dadoChamado['descricao']) ?></textarea>
                                 </div>
                             </label>
 
                             <div>
-                                <button type="submit" name="btn-requisitar">Abrir</but>
+                                <button type="submit">Atualizar</button>
                                 <a href="abrir_chamado.php"><button type="button" id="btn-cancelar">Cancelar</button></a>
+                            </div>
+
+                        </section>
+                    </form>
+
+                    <?php foreach ($exibeRespostas as $respostas) : ?>
+                        <form class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
+                            <header id="form-cabecalho">
+                                <h1>Resposta</h1>
+                                <div>
+                                    <span><?= $respostas['usuario_resposta'] ?> - </span>
+                                    <span><?= $respostas['data_resposta'] ?></span>
+                                </div>
+                                <i class="fa-regular fa-comments"></i>
+                            </header>
+
+                            <label for="descricao_resposta" style="width: 70%"></span>
+                                <div>
+                                    <textarea readonly><?= htmlentities($respostas['descricao_resposta']) ?></textarea>
+                                </div>
+                            </label>
+                        </form>
+                    <?php endforeach ?>
+
+                    <form method="post" action="src/manipulacoes_chamados/envia_resposta.php" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
+                        <header id="form-cabecalho">
+                            <h1>Adicionar resposta</h1>
+                            <i class="fa-regular fa-comment-dots"></i>
+                        </header>
+
+                        <section class="form-secao-01">
+
+                            <h2>Preencha a resposta</h2>
+
+                            <label for="descricao_resposta" style="width: 70%">Resposta<span style="color: red;"> *</span>
+                                <div>
+                                    <textarea name="descricao_resposta"></textarea>
+                                </div>
+                            </label>
+
+                            <input type="hidden" name="id" value="<?= $dadoChamado['id'] ?>">
+
+                            <div>
+                                <button type="submit">Enviar</but>
                             </div>
                         </section>
                     </form>
+
+                    <form method="post" action="src/manipulacoes_chamados/fecha_chamado.php">
+                        <input type="hidden" name="id" value="<?= $dadoChamado['id'] ?>">
+                        <input type="hidden" name="data_fechamento" value="<?= exibeDataAtual() ?>">
+                        <button type="submit" id="btn-red">Fechar chamado</button>
+                    </form>
+                    
                 </section>
 
                 <?php

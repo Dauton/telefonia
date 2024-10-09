@@ -82,6 +82,10 @@ $(document).ready(function () {
     exibeMensagemSucesso('chamado', 'chamado', 'aberto', 'Chamado aberto com sucesso!');
     // SUCESSO NA EDIÇÃO DE UM CHAMADO
     exibeMensagemSucesso('chamado', 'chamado', 'atualizado', 'Chamado atualizado com sucesso!');
+    // SUCESSO NA EDIÇÃO DE UM CHAMADO
+    exibeMensagemSucesso('chamado', 'chamado', 'resposta_enviada', 'Resposta enviada com sucesso!');
+    // SUCESSO NA EDIÇÃO DE UM CHAMADO
+    exibeMensagemSucesso('chamado', 'chamado', 'fechado', 'Chamado fechado com sucesso!');
 
 
 // MENSAGENS DE VALIDAÇÃO DE SENHA...

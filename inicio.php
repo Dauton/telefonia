@@ -109,7 +109,7 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                                         <td><?= htmlentities($dadoDispositivo['centro_custo']) ?></td>
                                         <td><?= htmlentities($dadoDispositivo['ponto_focal']) ?></td>
                                         <td>
-                                            <a href="visualiza_dispositivo.php?id=<?= $dadoDispositivo['id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                            <a href="visualiza_chamado.php?id=<?= $dadoDispositivo['id'] ?>"><i class="fa-solid fa-eye"></i></a>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>

@@ -142,6 +142,8 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                                     <td>Unidade</td>
                                     <td>Data abertura</td>
                                     <td>Status</td>
+                                    <td>Fechado por</td>
+                                    <td>Data fechamento</td>
                                     <td>Visualizar</td>
                                 </tr>
                             </thead>
@@ -161,6 +163,8 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                                         <td id="status">
                                             <p><?= htmlentities($chamados['status']) ?></p>
                                         </td>
+                                        <td><?= htmlentities($chamados['fechado_por']) ?></td>
+                                        <td><?= htmlentities($chamados['data_fechamento']) ?></td>
                                         <td>
                                             <a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><i class="fa-solid fa-eye"></i></a>
                                         </td>
