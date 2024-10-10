@@ -75,19 +75,6 @@ $("#menu_05").click(function () {
 //______________________________________________________________________________________
 
 
-// MINHAS REQUISIÇÕES
-    // AO CLICAR NO BOTÃO VERDE SUPERIOR, O HISTÓRICO DE REQUISIÇÕES DO USUÁRIO LOGADO SERÁ EXIBIDA...
-$("#cabecalho-botao-verde, header div .fa-clock-rotate-left").click(function() {
-    $("#botao-verde-box").fadeToggle(100);
-});
-    // AO CLICAR NO BOTÃO DE FECHAR, O HISTÓRIDO DE REQUISIÇÕES DO USUÁRIO LOGADO SERÁ FECHADA...
-$("#btn-close-botao-verde-box").click(function() {
-    $("#botao-verde-box").fadeToggle(100);
-});
-
-//______________________________________________________________________________________
-
-
 // REQUISITOS DE SENHA
     // AO CLICAR NO BOTÃO A CAIXA COM OS REQUISITOS DE SENHA SERÁ EXIBIDA...
 $("#btn-req-senha").click(function() {
@@ -117,13 +104,22 @@ $("#box-ajuda-fechar-btn").click(function() {
 // BOX CONFIRMACAO
 
 // AO PRECIONAR O BOTÃO, A CAIXA DE CONFIRMAÇÃO SERÁ EXIBIDA...
-$("#btn-atalho[title='Excluir'], #btn-finaliza-inv").click(function() {
+$("#btn-atalho[title='Excluir'], #btn-red[title='Fechar chamado']").click(function() {
     $("#box-confirmacao").fadeToggle(100).css({'display': 'flex'});
 });
+
+$("button[title='Mover chamado']").click(function() {
+    $("#box-confirmacao[title='Mover chamado']").fadeToggle(100).css({'display': 'flex'});
+});
+
 
 // AO PRECIONAR O BOTÃO DE CANCELAR, A CAIXA SERÁ FECHADA...
 $("#box-confirmacao #btn-cancelar").click(function() {
     $("#box-confirmacao").fadeToggle(100);
+});
+
+$("#box-confirmacao #btn-cancelar[title='Cancelar movimento']").click(function() {
+    $("#box-confirmacao[title'Mover chamado']").fadeToggle(100);
 });
 //_____________________________________________________________________________________
 

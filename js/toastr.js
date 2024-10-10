@@ -86,6 +86,8 @@ $(document).ready(function () {
     exibeMensagemSucesso('chamado', 'chamado', 'resposta_enviada', 'Resposta enviada com sucesso!');
     // SUCESSO NA EDIÇÃO DE UM CHAMADO
     exibeMensagemSucesso('chamado', 'chamado', 'fechado', 'Chamado fechado com sucesso!');
+    // SUCESSO AO MOVER UM CHAMADO
+    exibeMensagemSucesso('chamado', 'chamado', 'movido', 'Chamado movido de departamento com sucesso!');
 
 
 // MENSAGENS DE VALIDAÇÃO DE SENHA...
@@ -120,8 +122,10 @@ $(document).ready(function () {
     exibeMensagemErro('verifica_campo', 'verifica_campo', 'campos_localidade', 'Todos os campos da localidade são de preenchimento obrigatório.', 'Erro!');
     // TODOS OS CAMPOS
     exibeMensagemErro('verifica_campo', 'verifica_campo', 'todos_campos', 'Todos os campos devem ser preenchidos.', 'Erro!');
-    // TODOS OS CAMPOS
+    // DISPOSITIVO SEM LINH AO APARELHO
     exibeMensagemErro('verifica_campo', 'verifica_campo', 'nenhum_dado', 'Não é possível cadastrar um dispositivo vazio.', 'Erro!');
+    // MOTIVO DO FECHAMENTO DE CHAMADO
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'motivo_fechamento_vazio', 'O motivo do fechamento é obrigatório', 'Erro!');
 
 
 // VALIDAÇÃO CAMPOS NUMÉRICOS...

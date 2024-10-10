@@ -117,7 +117,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                                 </div>
                             </label>
 
-                            <label for="descricao" style="width: 70%">Descreva o chamado<span style="color: red;"> *</span>
+                            <label for="descricao" id="label-textarea">Descreva o chamado<span style="color: red;"> *</span>
                                 <div>
                                     <textarea name="descricao"></textarea>
                                 </div>

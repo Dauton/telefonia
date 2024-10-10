@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                             </label>
                             <div>
-                                <button type="submit" name="btn-requisitar">Editar</button>
+                                <button type="submit">Editar</button>
                                 <a href="cadastrar_opcoes.php"><button type="button" id="btn-cancelar">Cancelar</button></a>
                             </div>
                         </section>

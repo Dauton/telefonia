@@ -11,15 +11,11 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $editaChamado = new Chamado($pdo);
-    $editaChamado->editaChamado(
+    $editaChamado->moveChamado(
         $_GET['id'],
-        $_POST['titulo'],
         $_POST['departamento'],
-        $_POST['categoria'],
-        $_POST['prioridade'],
-        $_POST['descricao'],
     );
-    header("Location: abrir_chamado.php?chamado=atualizado");
+    header("Location: visualiza_chamado.php?id=$_GET[id]&chamado=movido");
     die();
 }
 
@@ -29,7 +25,6 @@ $dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
 
 $respostas = new Chamado($pdo);
 $exibeRespostas = $respostas->exibeRespostas();
-
 
 ?>
 
@@ -64,25 +59,93 @@ $exibeRespostas = $respostas->exibeRespostas();
                 <header class="conteudo-cabecalho">
                     <h3><a href="inicio.php">INÍCIO</a> / PAINEL DE CHAMADOS</h3>
                 </header>
-                <section class="conteudo-center" name="cadastro-usuario">
-                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
-                        <header id="form-cabecalho">
-                            <h1>Atualizar chamado</h1>
-                            <i class="fa-solid fa-pen-to-square"></i>
+                <section class="conteudo-center">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>ID chamado</td>
+                                    <td>Titulo</t>
+                                    <td>Departamento</td>
+                                    <td>Categoria</td>
+                                    <td>Prioridade</td>
+                                    <td>Usuário</td>
+                                    <td>Unidade</td>
+                                    <td>Data abertura</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><?= htmlentities($dadoChamado['id']) ?></td>
+                                    <td><?= htmlentities($dadoChamado['titulo']) ?></td>
+                                    <td><?= htmlentities($dadoChamado['departamento']) ?></td>
+                                    <td><?= htmlentities($dadoChamado['categoria']) ?></td>
+                                    <td id="status">
+                                        <p><?= htmlentities($dadoChamado['prioridade']) ?></p>
+                                    </td>
+                                    <td><?= htmlentities($dadoChamado['usuario']) ?></td>
+                                    <td><?= htmlentities($dadoChamado['unidade_usuario']) ?></td>
+                                    <td><?= htmlentities($dadoChamado['data_abertura']) ?></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10" id="table-textarea"><textarea readonly><?= htmlentities($dadoChamado['descricao']) ?></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10" id="table-textarea">
+                                        <button type="button" id="btn-red" title="Fechar chamado">Fechar chamado</button>
+                                        <button type="button" title="Mover chamado">Mover chamado</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            
+                        </div>
+                    <div id="box-confirmacao">
+
+                        <header class="box-ajuda-cabecalho">
+                            <h1>Confirmação</h1>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
                         </header>
 
-                        <section class="form-secao-01" name="form-cadastro-usuario">
+                        <h2>Observações</h2>
 
-                            <h2>Preencha os campos</h2>
+                        <p>
+                            Tem certeza que deseja fechar esse chamado?<br><br>
+                        </p>
 
-                            <label for="titulo">Título do chamado<span style="color: red;"> *</span>
+                        <form method="post" action="src/manipulacoes_chamados/fecha_chamado.php" id="form-apenas-buttons">
+                            <input type="hidden" name="id" value="<?= $dadoChamado['id'] ?>">
+
+                            <label for="motivo_fechamento">Descreva o motivo do fechamento<span style="color: red;"> *</span>
                                 <div>
-                                    <i class="fa-solid fa-file-pen"></i>
-                                    <input type="text" name="titulo" placeholder="Insira o título do chamado" value="<?= htmlentities($dadoChamado['titulo']) ?>">
+                                    <textarea name="motivo_fechamento"></textarea>
                                 </div>
                             </label>
 
-                            <label for="departamento">Departamento<span style="color: red;"> *</span>
+                            <div id="box-confimarcao-btns">
+                                <button type="submit" id="btn-blue">Fechar chamado</button>
+                                <button type="button" id="btn-cancelar">Cancelar</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div id="box-confirmacao" title="Mover chamado">
+
+                        <header class="box-ajuda-cabecalho">
+                            <h1>Confirmação</h1>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </header>
+
+                        <h2>Confirmação</h2>
+
+                        <p>
+                            Selecione o departamento?<br><br>
+                        </p>
+
+                        <form method="post" action="" id="form-apenas-buttons">
+                            <label for="departamento">Departamentos<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-building-flag"></i>
                                     <select name="departamento">
@@ -93,51 +156,13 @@ $exibeRespostas = $respostas->exibeRespostas();
                                 </div>
                             </label>
 
-                            <label for="categoria">Categoria<span style="color: red;"> *</span>
-                                <div>
-                                    <i class="fa-solid fa-cube"></i>
-                                    <select name="categoria">
-                                        <option value="<?= $dadoChamado['categoria'] ?>"><?= htmlentities($dadoChamado['categoria']) ?></option>
-                                        <option value="AQUISIÇÃO DE LINHA">AQUISIÇÃO DE LINHA</option>
-                                        <option value="AQUISIÇÃO DE APARELHO">AQUISIÇÃO DE APARELHO</option>
-                                        <option value="AQUISIÇÃO DE LINHA E APARELHO">AQUISIÇÃO DE LINHA E APARELHO</option>
-                                        <option value="CANCELAMENTO DE LINHA">CANCELAMENTO DE LINHA</option>
-                                        <option value="TROCA DE NÚMERO OU DDD">TROCA DE NÚMERO OU DDD</option>
-                                        <option value="INCLUIR OU REMOVER MDM">INCLUIR OU REMOVER MDM</option>
-                                        <option value="NÃO FAZ OU NÃO RECEBE LIGAÇÃO">NÃO FAZ OU NÃO RECEBE LIGAÇÃO</option>
-                                        <option value="ROUBO OU PERDA DE LINHA OU APARELHO">ROUBO OU PERDA DE LINHA OU APARELHO</option>
-                                        <option value="REPARO DE APARELHO">REPARO DE APARELHO</option>
-                                        <option value="ATUALIZAÇÃO DE INVENTÁRIO">ATUALIZAÇÃO DE INVENTÁRIO</option>
-                                    </select>
-                                </div>
-                            </label>
-
-                            <label for="prioridade">Prioridade<span style="color: red;"> *</span>
-                                <div>
-                                    <i class="fa-solid fa-triangle-exclamation"></i>
-                                    <select name="prioridade">
-                                        <option value="<?= htmlentities($dadoChamado['prioridade']) ?>"><?= htmlentities($dadoChamado['prioridade']) ?></option>
-                                        <option value="BAIXA">BAIXA</option>
-                                        <option value="MÉDIA">MÉDIA</option>
-                                        <option value="ALTA">ALTA</option>
-                                        <option value="URGENTE">URGENTE</option>
-                                    </select>
-                                </div>
-                            </label>
-
-                            <label for="descricao" style="width: 70%">Descreva o chamado<span style="color: red;"> *</span>
-                                <div>
-                                    <textarea name="descricao"><?= htmlentities($dadoChamado['descricao']) ?></textarea>
-                                </div>
-                            </label>
-
-                            <div>
-                                <button type="submit">Atualizar</button>
-                                <a href="abrir_chamado.php"><button type="button" id="btn-cancelar">Cancelar</button></a>
+                            <div id="box-confimarcao-btns">
+                                <button type="submit" id="btn-blue">Mover chamado</button>
+                                <button type="button" id="btn-cancelar" title="Cancelar movimento">Cancelar</button>
                             </div>
 
-                        </section>
-                    </form>
+                        </form>
+                        </div>
 
                     <?php foreach ($exibeRespostas as $respostas) : ?>
                         <form class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
@@ -149,12 +174,7 @@ $exibeRespostas = $respostas->exibeRespostas();
                                 </div>
                                 <i class="fa-regular fa-comments"></i>
                             </header>
-
-                            <label for="descricao_resposta" style="width: 70%"></span>
-                                <div>
-                                    <textarea readonly><?= htmlentities($respostas['descricao_resposta']) ?></textarea>
-                                </div>
-                            </label>
+                            <textarea readonly><?= htmlentities($respostas['descricao_resposta']) ?></textarea>
                         </form>
                     <?php endforeach ?>
 
@@ -164,7 +184,7 @@ $exibeRespostas = $respostas->exibeRespostas();
                             <i class="fa-regular fa-comment-dots"></i>
                         </header>
 
-                        <section class="form-secao-01">
+                        <section style="display: flex;">
 
                             <h2>Preencha a resposta</h2>
 
@@ -182,12 +202,6 @@ $exibeRespostas = $respostas->exibeRespostas();
                         </section>
                     </form>
 
-                    <form method="post" action="src/manipulacoes_chamados/fecha_chamado.php">
-                        <input type="hidden" name="id" value="<?= $dadoChamado['id'] ?>">
-                        <input type="hidden" name="data_fechamento" value="<?= exibeDataAtual() ?>">
-                        <button type="submit" id="btn-red">Fechar chamado</button>
-                    </form>
-                    
                 </section>
 
                 <?php

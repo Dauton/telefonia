@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['descricao_resposta']
     );
 
-    header("Location: $_SERVER[HTTP_REFERER]&chamado=resposta_enviada");
+    header("Location: ../../visualiza_chamado.php?id=$_POST[id]&chamado=resposta_enviada");
     die();
 
 }

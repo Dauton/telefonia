@@ -68,7 +68,32 @@ table tr #btn-excluir {
     transition: .1s background;
 }
 
-table   a {
+table tr #table-textarea
+{
+    text-align: left;
+}
+
+table tr #table-textarea textarea {
+    width: 100% !important;
+    height: 150px;
+    padding: 10px;
+    resize: none;
+    border: 1px solid #cdcdcd;
+    border-radius: 3px;
+    font-family: 'Playpen Sans', cursive;
+    font-family: 'Ubuntu', sans-serif;
+}
+table tr #table-textarea textarea:focus {
+    outline: none;
+}
+table tr #table-textarea button {
+    width: fit-content;
+    padding: 7px 10px;
+    margin-right: 5px;
+    border: none;
+}
+
+table a {
     color: #000;
 }
 table form button {

@@ -4,7 +4,7 @@ USE `telefonia`;
 --
 -- Host: localhost    Database: telefonia
 -- ------------------------------------------------------
--- Server version	8.0.37
+-- Server version	8.0.36
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,8 +35,15 @@ CREATE TABLE `tb_chamados` (
   `unidade_usuario` varchar(100) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
   `data_abertura` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_resp_igual_id_chamado` int DEFAULT NULL,
+  `descricao_resposta` varchar(256) DEFAULT NULL,
+  `data_resposta` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_resposta` varchar(45) DEFAULT NULL,
+  `fechado_por` varchar(45) DEFAULT NULL,
+  `motivo_fechamento` varchar(256) DEFAULT NULL,
+  `data_fechamento` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +52,7 @@ CREATE TABLE `tb_chamados` (
 
 LOCK TABLES `tb_chamados` WRITE;
 /*!40000 ALTER TABLE `tb_chamados` DISABLE KEYS */;
-INSERT INTO `tb_chamados` VALUES (1,'INCLUSÃO DE MDM','MOBIT','INCLUIR OU REMOVER MDM','URGENTE','Boa tarde!\r\n\r\nPoderiam incluir MDM nos seguintes tablets?\r\n\r\nSegue IMEIs\r\n\r\n210349719208477\r\n983298732474383\r\n\r\nAt.te,\r\nDauton Pereira Félix','dpfelix','CDARCEX','EM ABERTO','2024-10-06 20:24:56'),(2,'COMPRA DE CELULAR','INFRAESTRUTURA IDL','AQUISIÇÃO DE LINHA E APARELHO','ALTA','Bom dia!\r\n\r\nPreciso que seja comprado um aparelho + linha para o novo supervisor da unidade CDARCEX','dpfelix','CDARCEX','EM ABERTO','2024-10-06 20:27:26'),(3,'GCVNHFGD','INFRAESTRUTURA IDL','AQUISIÇÃO DE APARELHO','BAIXA','FGHFG','dpfelix','CDARCEX','EM ABERTO','2024-10-06 20:32:26'),(4,'SDFSDF','MOBIT','AQUISIÇÃO DE APARELHO','BAIXA','sdfsd','dpfelix','CDARCEX','EM ABERTO','2024-10-06 20:50:37'),(5,'DFGDRFG','INFRAESTRUTURA IDL','AQUISIÇÃO DE APARELHO','MÉDIA','dsfgsd','dpfelix','CDARCEX','EM ABERTO','2024-10-06 20:50:49');
+INSERT INTO `tb_chamados` VALUES (1,'TESTE','INFRAESTRUTURA IDL','AQUISIÇÃO DE LINHA','ALTA','teste','dpfelix','CDARCEX','FECHADO','2024-10-09 21:45:00',NULL,NULL,'2024-10-09 21:45:00',NULL,'dpfelix','Feito','09/10/2024 às 20:03'),(2,'REMOVER MDM','MOBIT','INCLUIR OU REMOVER MDM','URGENTE','Ola, preciso que seja removido o pulsus do seguinte aparelho\r\n\r\nId pulsus 1230\r\n\r\nAt.te,\r\nDauton Félix','dpfelix','CDARCEX','FECHADO','2024-10-09 21:49:16',NULL,NULL,'2024-10-09 21:49:16',NULL,'dpfelix','Ajustado','09/10/2024 às 20:04'),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-10-09 22:05:49',2,'Olá, poderia realizar um teste?','2024-10-09 22:05:49','dpfelix',NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-10-09 22:28:51',1,'Teste','2024-10-09 22:28:51','dpfelix',NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-10-10 11:37:08',1,'Testando novamente','2024-10-10 11:37:08','dpfelix',NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-10-10 11:40:31',1,'Resposta','2024-10-10 11:40:31','dpfelix',NULL,NULL,NULL),(7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-10-10 11:40:56',1,'Testamdo nova,mente','2024-10-10 11:40:56','dpfelix',NULL,NULL,NULL),(8,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-10-10 11:41:17',1,'KJWDOWQ','2024-10-10 11:41:17','dpfelix',NULL,NULL,NULL),(9,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-10-10 13:21:49',1,'Olá, mundo!','2024-10-10 13:21:49','dpfelix',NULL,NULL,NULL),(10,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2024-10-10 14:21:52',1,'Olá mundo\r\n\r\nOlá mundo\r\n\r\nOlá mundo','2024-10-10 14:21:52','dpfelix',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `tb_chamados` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +65,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-06 17:56:11
+-- Dump completed on 2024-10-10 17:01:59

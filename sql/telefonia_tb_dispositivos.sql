@@ -4,7 +4,7 @@ USE `telefonia`;
 --
 -- Host: localhost    Database: telefonia
 -- ------------------------------------------------------
--- Server version	8.0.37
+-- Server version	8.0.36
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,6 +26,7 @@ DROP TABLE IF EXISTS `tb_dispositivos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tb_dispositivos` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `possui_linha` varchar(45) DEFAULT NULL,
   `linha` varchar(100) DEFAULT NULL,
   `operadora` varchar(100) DEFAULT NULL,
   `servico` varchar(100) DEFAULT NULL,
@@ -33,6 +34,7 @@ CREATE TABLE `tb_dispositivos` (
   `status` varchar(100) DEFAULT NULL,
   `data_ativacao` varchar(100) DEFAULT NULL,
   `sim_card` varchar(100) DEFAULT NULL,
+  `possui_aparelho` varchar(45) DEFAULT NULL,
   `marca_aparelho` varchar(100) DEFAULT NULL,
   `modelo_aparelho` varchar(100) DEFAULT NULL,
   `imei_aparelho` varchar(100) DEFAULT NULL,
@@ -43,13 +45,14 @@ CREATE TABLE `tb_dispositivos` (
   `canal` varchar(100) DEFAULT NULL,
   `ponto_focal` varchar(100) DEFAULT NULL,
   `gestor` varchar(100) DEFAULT NULL,
+  `possui_usuario` varchar(45) DEFAULT NULL,
   `nome` varchar(100) DEFAULT NULL,
   `matricula` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `funcao` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `linha` (`linha`,`operadora`,`servico`,`perfil`,`status`,`sim_card`,`marca_aparelho`,`modelo_aparelho`,`imei_aparelho`,`unidade`,`centro_custo`,`uf`,`ponto_focal`,`gestor`,`nome`,`matricula`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -58,7 +61,7 @@ CREATE TABLE `tb_dispositivos` (
 
 LOCK TABLES `tb_dispositivos` WRITE;
 /*!40000 ALTER TABLE `tb_dispositivos` DISABLE KEYS */;
-INSERT INTO `tb_dispositivos` VALUES (8,'35999940652','VIVO','MOVEL','VOZ ILIMITADO + 4G','ATIVADO','2024-12-31','1234567654323456','SAMSUNG','GALAXY A03 CORE','8973264982731','SIM','CDARCEX','219002','MG','ID DO BRASIL LOGÍSTICA LTDA','DAUTON PEREIRA FÉLIX','GILBERTO SIMÕES','DAUTON PEREIRA FÉLIX','500838','DPFELIX@ID-LOGISTICS.COM','ANALISTA DE TI'),(22,'546456','CLARO','MOVEL','HFGH','ATIVADO','6456-05-04','436545645645','','','','','CDAMBEX','219002','PE','ID DO BRASIL LOGÍSTICA LTDA','TRYHRH','FGHTERHJ','','','','');
+INSERT INTO `tb_dispositivos` VALUES (1,'Sim','35999988733','VIVO','MOVEL','VOL ILIMITADO + 4G','DESATIVADO','2020-12-30','213213','Sim','SAMSUNG','GALAXY A03 CORE','213458765432325','','CDARCEX','219002','MG','ID DO BRASIL LOGÍSTICA LTDA','DAUTON PEREIRA FELIX','GILBERTO SIMÕES','Sim','DAUTON PEREIRA FELIX','500838','DPFELIX@ID-LOGISTICS.COM','ANALISTA DE TI'),(2,'Não','','','','','','','','Sim','MOTOROLA','MOTO E22','0987654678902333','SIM','CDAMBEX','204303','MG','ID DO BRASIL LOGÍSTICA LTDA','DAUTON PEREIRA FÉLIX','MARCELO CARRIEL','Não','','','',''),(6,'Sim','987987','CLARO','MOVEL','','ATIVADO','2024-10-07','','Não','','','','','CDAMBEX','204303','AC','ID ARMAZENS GERAIS LTDA','EWFEWV','ERF','Não','','','',''),(7,'Sim','213213','OI','MOVEL','','','','WDFCWE','Não','','','','','CDAMBEX','204303','AC','ID ARMAZENS GERAIS LTDA','DFW','DFWE','Não','','','',''),(8,'Sim','2131231','OI','','','','','','Não','','','','','CDAMBEX','204303','AC','ID ARMAZENS GERAIS LTDA','ASF','SDFW','Não','','','',''),(9,'Sim','234234','CLARO','MOVEL','SAS','DESATIVADO','','213124213412','Não','MOTOROLA','GALAXY A03 CORE','','','CDAMBEX','204303','AC','ID ARMAZENS GERAIS LTDA','SAFW','SDFGS','Não','','','',''),(10,'Sim','213123','CLARO','MOVEL','SACW','ATIVADO','2024-12-31','ASCQ','Não','','','','','CDAMBEX','204303','AC','ID ARMAZENS GERAIS LTDA','CSCQ','CWEC','Não','','','',''),(14,'Sim','2132432','CLARO','MOVEL','DSCWD','ATIVADO','2024-12-30','dwed','Não','','','','','CDAMBEX','204303','AC','ID ARMAZENS GERAIS LTDA','CDCWV','RECFE','Não','','','',''),(15,'Sim','21323432','CLARO','MOVEL','WEFWEV','ATIVADO','2024-12-30','213123','Não','','','','','CDAMBEX','204303','AC','ID ARMAZENS GERAIS LTDA','WEFEWV','ERFREW','Não','','','','');
 /*!40000 ALTER TABLE `tb_dispositivos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -71,4 +74,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-06 17:56:11
+-- Dump completed on 2024-10-10 17:01:59

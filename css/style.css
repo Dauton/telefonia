@@ -474,7 +474,26 @@ body {
     background: #a60000;
     margin: 0;
 }
-
+#btn-red, #btn-blue {
+    width: fit-content !important;
+    padding: 5px 10px;
+    background: #ff0000;
+    color: #fff;
+    border-radius: 3px;
+    border: 1px solid #ff0000;
+    font-size: 10px;
+}
+#btn-blue {
+    background: var(--secundary-color) !important;
+    border: 1px solid var(--secundary-color) !important;
+}
+#btn-red:hover {
+    background: #a40000 !important;
+}
+#btn-blue:hover {
+    background: var(--terciary-color) !important;
+    border: 1px solid var(--terciary-color) !important;
+}
 #box-ajuda,
 #box-confirmacao {
     width: 280px;
@@ -491,11 +510,6 @@ body {
     overflow: hidden;
     display: none;
     z-index: 6
-}
-#box-confimarcao-btns {
-    width: 100%;
-    display: flex;
-    align-items: center;
 }
 
 .box-ajuda-cabecalho {
@@ -627,6 +641,15 @@ body {
     border: 1px solid var(--terciary-color) !important;
     color: #ffffff !important;
     transition: .1s;
+}
+#box-confirmacao form {
+    padding: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+}
+#box-confirmacao form label {
+    width: 100%;
 }
 
 .conteudo-rodape {
