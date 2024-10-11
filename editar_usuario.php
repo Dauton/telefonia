@@ -162,7 +162,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="reset_senha_usuario.php?id_usuario=<?= $buscaIdUsuario['id_usuario'] ?>"><button type="button" id="btn-atalho" title="Resetar a senha desse usuário"><i class="fa-solid fa-key"></i></button></a>
         <button type="button" id="btn-atalho" title="Excluir"><i class="fa-solid fa-trash-can"></i></button>
 
-        <div id="box-confirmacao">
+        <div id="box-confirmacao" title="Caixa de exclusão">
 
             <header class="box-ajuda-cabecalho">
                 <h1>Confirmação</h1>
@@ -178,11 +178,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div id="box-confimarcao-btns">
                 <form action="src/manipulacoes_usuario/exclui_usuario.php" method="post">
                     <input type="hidden" name="id_usuario" value="<?= $buscaIdUsuario['id_usuario'] ?>">
-                    <input type="hidden" name="usuario" value="<?= $buscaIdUsuario['usuario'] // PARA REGISTAR O NOME DO USUÁRIO EXCLUÍDO NO LOG 
-                                                                ?>">
-                    <button type="submit" title="Excluir esse usuário">Excluir</button>
+                    <input type="hidden" name="usuario" value="<?= $buscaIdUsuario['usuario'] ?>"> // PARA REGISTAR O NOME DO USUÁRIO EXCLUÍDO NO LOG 
+                    
+                    <div>
+                        <button type="submit" id="btn-red" title="Excluir esse usuário">Excluir</button>
+                        <button type="button" id="btn-cancelar" title="Cancelar exclusão">Cancelar</button>
+                    </div>
                 </form>
-                <button type="button" id="btn-cancelar">Cancelar</button>
             </div>
 
         </div>

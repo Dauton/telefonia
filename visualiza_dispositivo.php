@@ -439,7 +439,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
             <i class="fa-solid fa-trash-can"></i>
         </button>
 
-        <div id="box-confirmacao">
+        <div id="box-confirmacao" title="Caixa de exclusão">
 
             <header class="box-ajuda-cabecalho">
                 <h1>Confirmação</h1>
@@ -455,16 +455,18 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
             <div id="box-confimarcao-btns">
                 <form action="src/manipulacoes_dispositivo/exclui_dispositivo.php" method="post">
                     <input type="hidden" name="id" value="<?= $dadoDispositivo['id'] ?>">
-                    <button type="submit" title="Excluir esse dispositivo">Excluir</button>
+
+                    <div>
+                        <button type="submit" id="btn-red" title="Excluir esse dispositivo">Excluir</button>
+                        <button type="button" id="btn-cancelar" title="Cancelar exclusão">Cancelar</button>
+                    </div>
                 </form>
-                <button type="button" id="btn-cancelar">Cancelar</button>
             </div>
 
         </div>
 
     </div>
-
-
+    
     <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/javascript.js"></script>
     <script type="text/javascript" src="js/toastr.js"></script>

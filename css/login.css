@@ -125,22 +125,6 @@ body {
 .center form input:focus {
     outline-color: var(--secundary-color);
 }
-
-.center form button {
-    width: 80%;
-    margin: 15px 0;
-    padding: 7px;
-    background: var(--secundary-color);
-    border: none;
-    border-radius: 3px;
-    color: var(--white-color);
-    cursor: pointer;
-    transition: background .2s;
-}
-.center form button:hover {
-    background: var(--terciary-color);
-    transition: background .2s;
-}
 .center form p {
     text-align: center;
 }
@@ -204,9 +188,6 @@ body {
     }
     .center form p {
         margin: 10px 0;
-    }
-    .center form button {
-        padding: 10px;
     }
     .toast {
         top: 0 !important;

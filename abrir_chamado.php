@@ -70,14 +70,14 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                             <label for="titulo">Título do chamado<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-file-pen"></i>
-                                    <input type="text" name="titulo" placeholder="Insira o título do chamado">
+                                    <input type="text" name="titulo"  id="titulo" placeholder="Insira o título do chamado">
                                 </div>
                             </label>
 
                             <label for="departamento">Departamento<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-building-flag"></i>
-                                    <select name="departamento">
+                                    <select name="departamento" id="departamento">
                                         <option value="">Selecione</option>
                                         <option value="INFRAESTRUTURA IDL">INFRAESTRUTURA IDL</option>
                                         <option value="MOBIT">MOBIT</option>
@@ -88,7 +88,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                             <label for="categoria">Categoria<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-cube"></i>
-                                    <select name="categoria">
+                                    <select name="categoria" id="categoria">
                                         <option value="">Selecione o perfil</option>
                                         <option value="AQUISIÇÃO DE LINHA">AQUISIÇÃO DE LINHA</option>
                                         <option value="AQUISIÇÃO DE APARELHO">AQUISIÇÃO DE APARELHO</option>
@@ -107,7 +107,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                             <label for="prioridade">Prioridade<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-triangle-exclamation"></i>
-                                    <select name="prioridade">
+                                    <select name="prioridade"  id="prioridade">
                                         <option value="">Selecione</option>
                                         <option value="BAIXA">BAIXA</option>
                                         <option value="MÉDIA">MÉDIA</option>
@@ -119,7 +119,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
 
                             <label for="descricao" id="label-textarea">Descreva o chamado<span style="color: red;"> *</span>
                                 <div>
-                                    <textarea name="descricao"></textarea>
+                                    <textarea name="descricao" id="descricao"></textarea>
                                 </div>
                             </label>
 

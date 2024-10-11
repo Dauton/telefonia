@@ -1,0 +1,103 @@
+button {
+    width: fit-content;
+    min-width: 80px;
+    padding: 5px 15px;
+    border-radius: 2px;
+    border: none;
+    background: var(--secundary-color);
+    color: #fff;
+    font-size: 10px;
+    cursor: pointer;
+}
+button:hover {
+    background: var(--terciary-color);
+}
+
+#btn-green {
+    background: #00a800;
+}
+#btn-green:hover {
+    background: #007600;
+}
+#btn-red {
+    background: #a80000;
+}
+#btn-red:hover {
+    background: #760000;
+}
+
+#btn-sair {
+    background: var(--terciary-color);
+}
+
+#btn-cancelar {
+    background: #fff;
+    border: 1px solid var(--terciary-color);
+    color: var(--terciary-color);
+}
+#btn-cancelar:hover {
+    background: var(--terciary-color);
+    color: #fff;
+}
+
+
+
+.btns-atalhos {
+    width: 70px;
+    position: fixed;
+    bottom: 20px;
+    right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 2;
+}
+#btn-atalho {
+    width: 35px;
+    min-width: 0;
+    height: 35px;
+    padding: 5px;
+}
+#btn-atalho:hover {
+    filter: brightness(80%);
+}
+#btn-atalho i {
+    font-size: 15px;
+}
+
+#btn-atalho .fa-circle-question {
+    font-size: 20px;
+}
+
+#btn-atalho img {
+    width: 22px;
+}
+
+#btn-atalho[title='Excluir'] {
+    background: #c10000;
+}
+
+#box-ajuda button {
+    margin: 15px 0 0 0;
+}
+
+
+form button {
+    padding: 7px 15px;
+}
+table form button {
+    width: fit-content;
+    min-width: fit-content;
+    padding: 0;
+    background: transparent;
+}
+table form button:hover {
+    background: transparent;
+}
+
+table tr td button {
+    padding: 7px 15px;
+    margin-right: 5px;
+}

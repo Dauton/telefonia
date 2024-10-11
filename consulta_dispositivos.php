@@ -160,10 +160,10 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </header>
                                 <h2>Buscar dispositivo</h2>
-                                <label>Buscar
+                                <label for="busca">Buscar
                                     <div>
                                         <i class="fa-solid fa-magnifying-glass"></i>
-                                        <input type="search" name="busca" placeholder="Digite alguma informação do dispositivo">
+                                        <input type="search" name="busca" id="busca" placeholder="Digite alguma informação do dispositivo">
                                     </div>
                                 </label>
                                 <button type="submit">Buscar</button>

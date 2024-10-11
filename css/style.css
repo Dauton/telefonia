@@ -2,6 +2,7 @@
 @import url(form.css);
 @import url(table.css);
 @import url(calculadora.css);
+@import url(botoes.css);
 
 :root {
     --primary-color: #0088ff;
@@ -417,83 +418,6 @@ body {
     text-align: center;
 }
 
-.btns-atalhos {
-    position: fixed;
-    bottom: 35px;
-    right: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px 0;
-    z-index: 4;
-}
-
-.btns-atalhos form {
-    width: fit-content;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-    background: transparent;
-}
-
-#btn-atalho {
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 3px;
-    background: var(--secundary-color);
-    box-shadow: .1em .1em .2em #cdcdcd;
-    font-size: 16px;
-    color: var(--white-color);
-    cursor: pointer;
-    transition: .1s;
-}
-
-#btn-atalho:hover {
-    filter: brightness(80%);
-    transition: .1s;
-}
-
-#btn-atalho[title="Extrair para Excel"] img {
-    width: 100%;
-    filter: brightness(95%);
-}
-
-#btn-atalho[title="Caixa de ajuda"],
-#btn-atalho[title="Extrair para Excel"] {
-    font-size: 20px;
-}
-
-#btn-atalho[title="Extrair para Excel"] img {
-    width: 18px;
-}
-
-#btn-atalho[title="Excluir"] {
-    background: #a60000;
-    margin: 0;
-}
-#btn-red, #btn-blue {
-    width: fit-content !important;
-    padding: 5px 10px;
-    background: #ff0000;
-    color: #fff;
-    border-radius: 3px;
-    border: 1px solid #ff0000;
-    font-size: 10px;
-}
-#btn-blue {
-    background: var(--secundary-color) !important;
-    border: 1px solid var(--secundary-color) !important;
-}
-#btn-red:hover {
-    background: #a40000 !important;
-}
-#btn-blue:hover {
-    background: var(--terciary-color) !important;
-    border: 1px solid var(--terciary-color) !important;
-}
 #box-ajuda,
 #box-confirmacao {
     width: 280px;
@@ -523,7 +447,7 @@ body {
     top: 0;
     left: 0;
     box-shadow: 0 0 .3em #cdcdcd;
-    background: linear-gradient(to right, var(--primary-color), var(--terciary-color));
+    background: linear-gradient(to right, var(--secundary-color), var(--terciary-color));
     text-align: left;
 }
 
@@ -548,25 +472,6 @@ body {
     font-weight: bold;
     font-style: italic;
     text-decoration: underline;
-}
-
-#box-ajuda-fechar-btn {
-    width: 80px;
-    margin-top: 15px;
-    padding: 7px;
-    background: var(--secundary-color);
-    color: var(--white-color);
-    border: none;
-    border-radius: 2px;
-    font-size: 10px;
-    text-align: center;
-    cursor: pointer;
-    transition: .1s;
-}
-
-#box-ajuda-fechar-btn:hover {
-    background: var(--terciary-color);
-    transition: .1s;
 }
 
 #box-confirmacao {
@@ -598,49 +503,6 @@ body {
     font-size: 17px;
     font-weight: 100;
     text-align: center;
-}
-
-#box-confirmacao button {
-    width: 65px;
-    margin: 25px 5px 0 0;
-    background: #a60000;
-    border: 1px solid #a60000;
-    border-radius: 2px;
-    font-size: 10px;
-    cursor: pointer;
-    transition: .1s;
-}
-
-#box-confirmacao button:hover {
-    background: #5b0000;
-    border: 1px solid #5b0000;
-}
-#btn-finaliza-inv {
-    margin: 20px 0 10px 0;
-}
-#box-confirmacao[title='Finalizar inventário'] #btn-finaliza-inv {
-    width: 100px;
-    background: #008000;
-    border: none;
-}
-#box-confirmacao[title='Finalizar inventário'] #btn-finaliza-inv:hover {
-    background: #004200;
-}
-
-#box-confirmacao #btn-cancelar {
-    width: 65px;
-    height: fit-content;
-    padding: 5px;
-    background: #fff !important;
-    border: 1px solid var(--secundary-color) !important;
-    color: var(--terciary-color) !important;
-}
-
-#box-confirmacao #btn-cancelar:hover, #btn-cancelar:hover {
-    background: var(--terciary-color) !important;
-    border: 1px solid var(--terciary-color) !important;
-    color: #ffffff !important;
-    transition: .1s;
 }
 #box-confirmacao form {
     padding: 0;
@@ -674,7 +536,6 @@ body {
     z-index: 9;
 }
 
-
 .box-table-botao-verde {
     width: 98%;
     height: fit-content;
@@ -700,22 +561,6 @@ body {
     font-weight: 100;
 }
 
-#total-botao-verde,
-#btn-excel-minhas-req{
-    width: fit-content;
-    height: 25px;
-    margin: 5px 5px 5px 0;
-    padding: 5px;
-    border: none;
-    background: #006700;
-    border-radius: 2px;
-    color: #ffffff;
-}
-
-#btn-excel-minhas-req img {
-    width: 15px;
-}
-
 .fa-rectangle-xmark {
     font-size: 25px;
     color: #9b0000;
@@ -738,11 +583,6 @@ body {
 @media screen and (max-width: 1020px) {
 
     *::-webkit-scrollbar {
-        display: none;
-    }
-
-    #cabecalho-botao-amarelo,
-    #cabecalho-botao-verde {
         display: none;
     }
 
@@ -828,21 +668,6 @@ body {
         margin: 0 0 80px 0;
     }
 
-    #btn-atalho {
-        bottom: 30px;
-        right: 20px;
-        box-shadow: none;
-    }
-
-    #btn-atalho[title="Extrair para Excel"],
-    #btn-atalho[title="Caixa de ajuda"] {
-        bottom: 70px;
-    }
-
-    #btn-informativo {
-        bottom: 35px;
-    }
-
     .fa-rectangle-xmark {
         right: auto;
         left: 5px;
@@ -861,22 +686,6 @@ body {
     }
     .conteudo-center h1 {
         text-align: left;
-    }
-
-    #btn-menu {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        padding: 5px;
-        border-radius: 3px;
-        box-shadow: 0 0 .1em #000000;
-        background: var(--primary-color);
-    }
-
-    #btn-atalho[title="Extrair para Excel"],
-    #btn-atalho[title="Caixa de ajuda"] {
-        left: 10px;
-        bottom: 60px;
     }
 
     .conteudo-center {

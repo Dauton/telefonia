@@ -88,39 +88,42 @@ $("#btn-close-box-req-senha").click(function() {
 
 //_____________________________________________________________________________________
 
+// EXIBIÇÃO DE CAIXA...
+    // FUNÇÃO PARA ABRIR CAIXA DE CONFIRMAÇÃO...
+function abreCaixa($botao, $caixa)
+{
+    $($botao).click(function() {
+        $($caixa).fadeToggle(100).css({'display': 'flex'});
+    });
+}
+    // FUNÇÃO PARA FECHAR CAIXA DE CONFIRMAÇÃO...
+function fechaCaixa($botao, $caixa)
+{
+    $($botao).click(function() {
+        $($caixa).fadeToggle(100);
+    });
+}
 
-// BOX INFORMATIVO
+    // ABRE
+    // AO PRECIONAR O BOTÃO, A CAIXA DE AJUDA SERÁ EXIBIDA...
+abreCaixa("#btn-atalho[title='Caixa de ajuda']", "#box-ajuda");
+    // AO PRECIONAR O BOTÃO, A CAIXA DE EXCLUSÃO SERÁ EXIBIDA...
+abreCaixa("button[title='Excluir']", "#box-confirmacao[title='Caixa de exclusão']", "css({'display': 'flex'})");
+    // AO PRECIONAR O BOTÃO, A CAIXA DE CONFIRMAÇÃO DE MOVIMENTO DE CHAMADO SERÁ EXIBIDA...
+abreCaixa("button[title='Mover chamado']", "#box-confirmacao[title='Mover chamado']");
+    // AO PRECIONAR O BOTÃO, A CAIXA DE CONFIRMAÇÃO DE FECHAMENTO DE CHAMADO SERÁ EXIBIDA...
+abreCaixa("button[title='Fechar chamado']", "#box-confirmacao[title='Fechar chamado']");
 
-// AO PRECIONAR O BOTÃO, A CAIXA DE AJUDA SERÁ EXIBIDA...
-$("#btn-atalho[title='Caixa de ajuda']").click(function() {
-    $("#box-ajuda").fadeToggle(100);
-});
+    // FECHA
+    // AO PRECIONAR O BOTÃO DE FECHAR, A CAIXA DE AJUDA SERÁ FECHADA...
+fechaCaixa("#box-ajuda-fechar-btn", "#box-ajuda");
+    // AO PRECIONAR O BOTÃO DE CANCELAR, A CAIXA DE EXCLUSÃO SERÁ FECHADA...
+fechaCaixa("button[title='Cancelar exclusão']", "#box-confirmacao[title='Caixa de exclusão']");
+    // AO PRECIONAR O BOTÃO DE CANCELAR, A CAIXA DE MOVIMENTAÇÃO DE CHAMADO SERÁ FECHADA
+fechaCaixa("button[title='Cancelar movimento']", "#box-confirmacao[title='Mover chamado']");
+    // AO PRECIONAR O BOTÃO DE CANCELAR, A CAIXA DE FECHAMENTO DE CHAMADO SERÁ FECHADA
+fechaCaixa("button[title='Cancelar fechamento']", "#box-confirmacao[title='Fechar chamado']");
 
-// AO PRECIONAR O BOTÃO DE FECHAR, A CAIXA SERÁ FECHADA...
-$("#box-ajuda-fechar-btn").click(function() {
-    $("#box-ajuda").fadeToggle(100);
-});
-
-// BOX CONFIRMACAO
-
-// AO PRECIONAR O BOTÃO, A CAIXA DE CONFIRMAÇÃO SERÁ EXIBIDA...
-$("#btn-atalho[title='Excluir'], #btn-red[title='Fechar chamado']").click(function() {
-    $("#box-confirmacao").fadeToggle(100).css({'display': 'flex'});
-});
-
-$("button[title='Mover chamado']").click(function() {
-    $("#box-confirmacao[title='Mover chamado']").fadeToggle(100).css({'display': 'flex'});
-});
-
-
-// AO PRECIONAR O BOTÃO DE CANCELAR, A CAIXA SERÁ FECHADA...
-$("#box-confirmacao #btn-cancelar").click(function() {
-    $("#box-confirmacao").fadeToggle(100);
-});
-
-$("#box-confirmacao #btn-cancelar[title='Cancelar movimento']").click(function() {
-    $("#box-confirmacao[title'Mover chamado']").fadeToggle(100);
-});
 //_____________________________________________________________________________________
 
 

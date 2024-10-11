@@ -71,21 +71,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="nome">Nome completo<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user"></i>
-                                    <input type="text" name="nome" placeholder="Insira o nome do usuário">
+                                    <input type="text" name="nome" id="nome" placeholder="Insira o nome do usuário">
                                 </div>
                             </label>
 
                             <label for="matricula">Matrícula<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user-tag"></i>
-                                    <input type="text" name="matricula" placeholder="Apenas números Ex: 123456">
+                                    <input type="text" name="matricula" id="matricula" placeholder="Apenas números Ex: 123456">
                                 </div>
                             </label>
 
                             <label for="unidade">Unidade<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-map-location-dot"></i>
-                                    <select name="unidade">
+                                    <select name="unidade" id="unidade">
                                         <option value="">Selecione</option>
                                         <option value="CDARCEX">CDARCEX</option>
                                         <option value="CDAMBEX">CDAMBEX</option>
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="cargo">Cargo<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-briefcase"></i>
-                                    <select name="cargo">
+                                    <select name="cargo" id="cargo">
                                         <option value="">Selecione</option>
                                         <option value="ANALISTA DE TI">ANALISTA DE TI</option>
                                     </select>
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="perfil">Perfil<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user-shield"></i>
-                                    <select name="perfil">
+                                    <select name="perfil" id="perfil">
                                         <option value="">Selecione o perfil</option>
                                         <option value="CONSULTANTE">CONSULTANTE</option>
                                         <option value="ADMIN">ADMIN</option>
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="usuario">Usuário<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-id-card-clip"></i>
-                                    <input type="text" name="usuario" placeholder="Crie o usuário">
+                                    <input type="text" name="usuario" id="usuario" placeholder="Crie o usuário">
                                 </div>
                             </label>
 

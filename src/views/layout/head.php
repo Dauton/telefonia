@@ -13,8 +13,8 @@
 <title>Telefonia IDL</title>
 <link rel="shortcut icon" type="imagex/png" href="img/id-logo-browser.png">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name="desciption" content="Descrição do sistema">
-<meta name="author" content="Nome do desenvolvedor">
+<meta name="desciption" content="Inventário de telefonia e chamados.">
+<meta name="author" content="Dauton Pereira Félix, Analista de TI - 2024">
 <meta name="theme-color" content="#00384b">
 <meta name="google" content="notranslate">
 <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>

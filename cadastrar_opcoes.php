@@ -89,7 +89,7 @@ $listaCentroCustos = $centro_custo->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="descricao">Descrição<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-mobile-screen"></i>
-                                    <input type="text" id="descricao" name="descricao" placeholder="Descrição da opção">
+                                    <input type="text" id="descricao" id="descricao" name="descricao" placeholder="Descrição da opção">
                                 </div>
                             </label>
                             <div>

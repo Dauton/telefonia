@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <i class="fa-solid fa-trash-can"></i>
         </button>
 
-        <div id="box-confirmacao">
+        <div id="box-confirmacao" title="Caixa de exclusão">
 
             <header class="box-ajuda-cabecalho">
                 <h1>Confirmação</h1>
@@ -140,10 +140,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div id="box-confimarcao-btns">
                 <form action="src/manipulacoes_opcao/exclui_opcao.php" method="post">
-                    <input type="hidden" name="id" value="<?= $opcao['id'] ?>">
-                    <button type="submit" title="Excluir essa opção">Excluir</button>
+                    <input type="hidden" name="id" title="Cancelar exclusão" value="<?= $opcao['id'] ?>">
+                    
+                    <div>
+                        <button type="submit" id="btn-red" title="Excluir essa opção">Excluir</button>
+                        <button type="button" id="btn-cancelar" title="Cancelar exclusão    ">Cancelar</button>
+                    </div>
                 </form>
-                <button type="button" id="btn-cancelar">Cancelar</button>
             </div>
 
         </div>

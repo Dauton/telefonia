@@ -121,7 +121,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                         <label for="servico">Possui linha?<span style="color: red;"> *</span>
                             <div>
                                 <i class="fa-solid fa-sim-card"></i>
-                                <select name="possui_linha" required>
+                                <select name="possui_linha" id="servico" required>
                                     <option value="">Selecione</option>
                                     <option value="Sim">Sim</option>
                                     <option value="Não">Não</option>
@@ -135,14 +135,14 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="linha">Linha<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-phone"></i>
-                                    <input type="text" name="linha" placeholder="Apenas números Ex: 11912345678">
+                                    <input type="text" name="linha" id="linha" placeholder="Apenas números Ex: 11912345678">
                                 </div>
                             </label>
 
                             <label for="operadora">Operadora<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-tower-cell"></i>
-                                    <select name="operadora">
+                                    <select name="operadora" id="operadora">
                                         <option value="">Selecione</option>
                                         <option value="CLARO">CLARO</option>
                                         <option value="OI">OI</option>
@@ -155,7 +155,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="servico">Serviço
                                 <div>
                                     <i class="fa-solid fa-network-wired"></i>
-                                    <select name="servico">
+                                    <select name="servico" id="servico">
                                         <option value="">Selecione</option>
                                         <option value="MOVEL">MOVEL</option>
                                         <option value="BANDA LARGA">BANDA LARGA</option>
@@ -171,7 +171,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                     <input type="text" name="perfil" id="perfil" placeholder="Perfil da linha">
                                 </div>
                             </label>
-                            <label for="perfil">Status
+                            <label for="status">Status
                                 <div>
                                     <i class="fa-regular fa-circle-check"></i>
                                     <select name="status">
@@ -198,10 +198,10 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
 
                         </section>
 
-                        <label for="servico">Possui aparelho?<span style="color: red;">*</span>
+                        <label for="possui_aparelho">Possui aparelho?<span style="color: red;">*</span>
                             <div>
                                 <i class="fa-solid fa-mobile-screen"></i>
-                                <select name="possui_aparelho" required>
+                                <select name="possui_aparelho" id="possui_aparelho" required>
                                     <option value="">Selecione</option>
                                     <option value="Sim">Sim</option>
                                     <option value="Não">Não</option>
@@ -217,7 +217,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="marca_aparelho">Marca<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-mobile-screen"></i>
-                                    <select name="marca_aparelho">
+                                    <select name="marca_aparelho" id="marca_aparelho">
                                         <option value="">Selecione</option>
                                         <?php foreach ($listaMarcasAparelho as $marca) : ?>
                                             <option value="<?= htmlentities($marca['descricao']) ?>"><?= htmlentities($marca['descricao']) ?></option>
@@ -229,7 +229,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="modelo_aparelho">Modelo<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-mobile-screen"></i>
-                                    <select name="modelo_aparelho">
+                                    <select name="modelo_aparelho" id="modelo_aparelho">
                                         <option value="">Selecione</option>
                                         <?php foreach ($listaModelosAparelho as $modelo) : ?>
                                             <option value="<?= htmlentities($modelo['descricao']) ?>"><?= htmlentities($modelo['descricao']) ?></option>
@@ -248,7 +248,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="gestao_mdm">MDM
                                 <div>
                                     <i class="fa-solid fa-shield-halved"></i>
-                                    <select name="gestao_mdm">
+                                    <select name="gestao_mdm" id="gestao_mdm">
                                         <option value="">Selecione</option>
                                         <option value="Sim">Sim</option>
                                         <option value="Não">Não</option>
@@ -258,10 +258,10 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
 
                         </section>
 
-                        <label for="servico">Essa linha ou aparelho possui usuário?<span style="color: red;"> *</span>
+                        <label for="possui_usuario">Essa linha ou aparelho possui usuário?<span style="color: red;"> *</span>
                             <div>
                                 <i class="fa-solid fa-user"></i>
-                                <select name="possui_usuario" required>
+                                <select name="possui_usuario" id="possui_usuario" required>
                                     <option value="">Selecione</option>
                                     <option value="Sim">Sim</option>
                                     <option value="Não">Não</option>
@@ -276,7 +276,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="nome">Nome<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user"></i>
-                                    <input type="text" name="nome" placeholder="Nome do usuário">
+                                    <input type="text" name="nome" id="nome" placeholder="Nome do usuário">
                                 </div>
                             </label>
 
@@ -310,7 +310,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="unidade">Unidade<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-map-location-dot"></i>
-                                    <select name="unidade">
+                                    <select name="unidade" id="unidade">
                                         <option value="">Selecione</option>
                                         <?php foreach ($listaUnidades as $unidade) : ?>
                                             <option value="<?= htmlentities($unidade['descricao']) ?>"><?= htmlentities($unidade['descricao']) ?></option>
@@ -322,7 +322,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="centro_custo">Centro de custos<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-wallet"></i>
-                                    <select name="centro_custo">
+                                    <select name="centro_custo" id="centro_custo">
                                         <option value="">Selecione</option>
                                         <?php foreach ($listaCentrosDeCustos as $cdc) : ?>
                                             <option value="<?= htmlentities($cdc['descricao']) ?>"><?= htmlentities($cdc['descricao']) ?></option>
@@ -334,7 +334,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="uf">Estado UF<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-earth-americas"></i>
-                                    <select name="uf">
+                                    <select name="uf" id="uf">
                                         <option value="">Selecione</option>
                                         <option value="AC">AC</option>
                                         <option value="AL">AL</option>
@@ -370,7 +370,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="canal">Canal<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-building"></i>
-                                    <select name="canal">
+                                    <select name="canal" id="canal">
                                         <option value="">Canal</option>
                                         <option value="ID ARMAZENS GERAIS LTDA">ID ARMAZENS GERAIS LTDA</option>
                                         <option value="ID DO BRASIL LOGÍSTICA LTDA">ID DO BRASIL LOGÍSTICA LTDA</option>
@@ -379,7 +379,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                 </div>
                             </label>
 
-                            <label for="gestor">Nome do ponto focal<span style="color: red;"> *</span>
+                            <label for="ponto_focal">Nome do ponto focal<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-house-user"></i>
                                     <input type="text" name="ponto_focal" id="ponto_focal" placeholder="Nome do ponto focal">

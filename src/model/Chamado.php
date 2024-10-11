@@ -96,7 +96,7 @@ class Chamado
     public function fechaChamado(int $id, string $motivo_fechamento): void
     {
 
-        Validacoes::validaCampoVazio($motivo_fechamento, "$_SERVER[HTTP_REFERER]&verifica_campo=motivo_fechamento_vazio");
+        Validacoes::validaCampoVazio($motivo_fechamento, "../../visualiza_chamado.php?id=$_POST[id]&verifica_campo=motivo_fechamento_vazio");
 
         $sql = "UPDATE tb_chamados SET status = ?, fechado_por = ?, motivo_fechamento = ?, data_fechamento = DATE_FORMAT(NOW(), '%d/%m/%Y às %H:%i') WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
@@ -104,6 +104,17 @@ class Chamado
         $stmt->bindValue(2, trim($_SESSION['usuario']), PDO::PARAM_STR);
         $stmt->bindValue(3, trim($motivo_fechamento), PDO::PARAM_STR);
         $stmt->bindValue(4, $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    public function reabreChamado(int $id) : void 
+    {
+        $sql = "UPDATE tb_chamados SET status = ?, fechado_por = ?, data_fechamento = ?, motivo_fechamento = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, 'EM ABERTO', PDO::PARAM_STR);
+        $stmt->bindValue(2, "NÃO FECHADO", PDO::PARAM_STR);
+        $stmt->bindValue(3, "NÃO FECHADO", PDO::PARAM_STR);
+        $stmt->bindValue(4, "NÃO FECHADO", PDO::PARAM_STR);
+        $stmt->bindValue(5, $id, PDO::PARAM_INT);
         $stmt->execute();
     }
 

@@ -62,12 +62,6 @@ table tr #acoes  {
     justify-content: center;
 }
 
-table tr #btn-excluir {
-    background: #ffa4a4;
-    color: #6c0000;
-    transition: .1s background;
-}
-
 table tr #table-textarea
 {
     text-align: left;
@@ -86,27 +80,11 @@ table tr #table-textarea textarea {
 table tr #table-textarea textarea:focus {
     outline: none;
 }
-table tr #table-textarea button {
-    width: fit-content;
-    padding: 7px 10px;
-    margin-right: 5px;
-    border: none;
-}
 
 table a {
     color: #000;
 }
-table form button {
-    width: fit-content;
-    margin: 0;
-    padding: 0;
-    background: transparent;
-    cursor: pointer;
-}
-table form button:hover {
-    background: none;
-    transition: none;
-}
+
 table input {   
     padding: 5px;
     font-size: 12px;
@@ -115,46 +93,9 @@ table input {
     border-radius: 3px;
     text-align: center;
 }
-table button {
-    width: 70px;
-    padding: 5px;
-    border: none;
-    border-radius: 3px;
-    background: var(--secundary-color);
-    color: #fff;
-    font-size: 10px;
-    transition: background .1s;
-    cursor: pointer;
-}
-table button:hover {
-    background: var(--terciary-color);
-    transition: background .1s;
-}
-table form button i {
-    width: 35px;
-    padding: 3px;
-    margin: 0;
-    color: #008000;
-    font-size: 25px;
-    transition: .2s;
-}
-table form button i:hover, #btn-inventariar:hover {
-    filter: brightness(60%);
-    transition: .1s;
-}
 table i {
     color: var(--primary-color);
     font-size: 25px;
-}
-#table-form-btn-excluir i {
-    color: #ff3737;
-}
-#table-form-btn-editar i {
-    color: var(--primary-color);
-}
-#table-form-btn-senha i {
-    color: #daa520;
-    font-size: 17px;
 }
 
 #bottom-table {
@@ -188,14 +129,6 @@ table .fa-circle {
 }
 #table-cria-inv tr td form {
     margin: 100px;
-}
-#btn-inventariar {
-    padding: 0;
-    background: transparent;
-    box-shadow: none;
-    color: var(--primary-color);
-    font-size: 25px;
-    color: #008000;
 }
 #form-hidden-input {
     box-shadow: none;

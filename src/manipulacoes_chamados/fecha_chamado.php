@@ -11,6 +11,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $_POST['motivo_fechamento']
     );
 
-    header("Location: ../../abrir_chamado.php?chamado=fechado");
+    header("Location: ../../visualiza_chamado.php?id=$_POST[id]&chamado=fechado");
     die();
 }
