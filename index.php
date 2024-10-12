@@ -51,7 +51,7 @@
                         <i id="ocultar-senha" class="fa-solid fa-eye-slash" style="display: none;"></i>
                     </div>
                 </label>
-                <button type="submit">Entrar</button>
+                <button type="submit" id="btn-login">Entrar</button>
                 <p>Não possui usuário?<br>Verifique a disponibilidade com um administrador.</p>
                 <img src="img/id-logo-extenso.png" id="id-logo">
             </form>

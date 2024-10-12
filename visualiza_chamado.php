@@ -46,7 +46,7 @@ $exibeRespostas = $respostas->exibeRespostas();
 
             <article class="conteudo">
                 <header class="conteudo-cabecalho">
-                    <h3><a href="inicio.php">INÍCIO</a> / PAINEL DE CHAMADOS</h3>
+                    <h3><a href="inicio.php">INÍCIO</a> / <a href="gerenciar_chamados.php">GERENCIAR CHAMADOS / VISUALIZANDO CHAMADO</a></h3>
                 </header>
                 <section class="conteudo-center">
 
@@ -61,6 +61,7 @@ $exibeRespostas = $respostas->exibeRespostas();
                                 <td>Usuário</td>
                                 <td>Unidade</td>
                                 <td>Data abertura</td>
+                                <td>Status</td>
                             </tr>
                         </thead>
                         <tbody id="table-respostas-text-center">
@@ -75,17 +76,20 @@ $exibeRespostas = $respostas->exibeRespostas();
                                 <td><?= htmlentities($dadoChamado['usuario']) ?></td>
                                 <td><?= htmlentities($dadoChamado['unidade_usuario']) ?></td>
                                 <td><?= htmlentities($dadoChamado['data_abertura']) ?></td>
+                                <td id="status">
+                                    <p><?= htmlentities($dadoChamado['status']) ?></p>
+                                </td>
                             </tr>
                             <tr>
-                                <td colspan="8" id="table-textarea"><textarea readonly><?= htmlentities($dadoChamado['descricao']) ?></textarea></td>
+                                <td colspan="9" id="table-textarea"><textarea readonly><?= htmlentities($dadoChamado['descricao']) ?></textarea></td>
                             </tr>
                             <tr>
-                                <td colspan="8" id="table-textarea" style="text-align: left !important">
+                                <td colspan="9" id="table-textarea" style="text-align: left !important">
                                     <?php if ($dadoChamado['status'] === 'EM ABERTO'): ?>
                                         <button type='button' id='btn-green' title='Fechar chamado'>Fechar chamado</button>
                                         <button type='button' title='Mover chamado'>Mover chamado</button>
                                     <?php elseif ($dadoChamado['status'] === 'FECHADO'): ?>
-                                        <form class='form-labels-lado-a-lado' id='form-labels-lado-a-lado' autocomplete='off'>
+                                        <form class='form-labels-lado-a-lado' id='form-labels-lado-a-lado' style="padding: 40px 0 0 0" autocomplete='off'>
                                             <header id='form-cabecalho'>
                                                 <h1>Motivo de fechamento</h1>
                                                 <div>
@@ -96,7 +100,7 @@ $exibeRespostas = $respostas->exibeRespostas();
                                             <textarea readonly><?= htmlentities($dadoChamado['motivo_fechamento']) ?></textarea>
                                         </form>
                                         <tr>
-                                            <td colspan="8">
+                                            <td colspan="9">
                                                 <form method='post' action='src/manipulacoes_chamados/reabre_chamado.php?id=<?= $dadoChamado['id'] ?>'>
                                                     <button type='submit' id='btn-green' title='Reabrir chamado'>Reabrir chamado</button>
                                                 </form>
@@ -278,8 +282,8 @@ $exibeRespostas = $respostas->exibeRespostas();
 
     <div class="btns-atalhos">
         <button type="button" id="btn-atalho" title="Caixa de ajuda"><i class="fa-regular fa-circle-question"></i></button>
-        <a href="gerenciar_usuarios.php"><button id="btn-atalho" title="Gerenciar usuários">
-                <i class="fa-solid fa-users"></i>
+        <a href="gerenciar_chamados.php"><button id="btn-atalho" title="Gerenciar chamados">
+                <i class="fa-solid fa-headset"></i>
             </button></a>
     </div>
 

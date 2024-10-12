@@ -97,6 +97,9 @@ table i {
     color: var(--primary-color);
     font-size: 25px;
 }
+table i:hover {
+    filter: brightness(60%);
+}
 
 #bottom-table {
     width: 100%;

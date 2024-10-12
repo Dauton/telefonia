@@ -181,31 +181,8 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                 ?>
 
             </article>
-
-            <div id="box-ajuda">
-                <header class="box-ajuda-cabecalho">
-                    <h1>Requisitos de senha</h1>
-                    <i class="fa-solid fa-key"></i>
-                </header>
-                <p>
-                    <b>Caracteres</b>: a senha deve conter no mínimo 12 caracteres.<br><br>
-                    <b>Letras</b>: a senha deve conter letras maiúsculas e minúsculas.<br><br>
-                    <b>Números</b>: a senha deve conter pelo menos um número.<br><br>
-                    <b>Resumindo</b>: a senha deve possuir uma combinação de 12 caracteres sendo elas letras maiúsculas, minúsculas e números.
-                </p>
-                <button id="box-ajuda-fechar-btn">Fechar</button>
-
-            </div>
         </section>
     </main>
-
-    <div class="btns-atalhos">
-        <button type="button" id="btn-atalho" title="Caixa de ajuda"><i class="fa-regular fa-circle-question"></i></button>
-        <a href="gerenciar_usuarios.php"><button id="btn-atalho" title="Gerenciar usuários">
-                <i class="fa-solid fa-users"></i>
-            </button></a>
-    </div>
-
 
     <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/javascript.js"></script>

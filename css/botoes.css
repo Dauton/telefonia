@@ -26,7 +26,13 @@ button:hover {
     background: #760000;
 }
 
+#btn-login {
+    margin: 10px 0 10px 0;
+    width: 80%;
+}
+
 #btn-sair {
+    margin: 5px 0 0 0;
     background: var(--terciary-color);
 }
 

@@ -120,6 +120,9 @@ class Chamado
 
     public function respondeChamado(int $id_chamado, string $descricao_resposta) : void
     {
+
+        Validacoes::validaCampoVazio($descricao_resposta,"../../visualiza_chamado.php?id=$_GET[id]&verifica_campo=resposta_vazia");
+
         $sql = "INSERT INTO tb_chamados_respostas (id_chamado, descricao_resposta, respondido_por) VALUES ( ?,?,? )";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id_chamado, PDO::PARAM_INT);

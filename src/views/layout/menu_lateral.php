@@ -40,8 +40,8 @@ if (!isset($_SESSION['usuario'])) {
         </li>
         <li id='menu_04'><a><i class="fa-solid fa-headset"></i></i>Painel de chamados<i class='fa-solid fa-angle-right'></i></a>
             <ul id='menusub_04'>
-                <li><a href='abrir_chamado.php'><i class="fa-regular fa-comment"></i>Abrir um chamado<i class='fa-solid fa-angle-right'></i></a></li>
-                <li><a href='gerenciar_chamados.php'><i class="fa-regular fa-comments"></i>Gerenciar chamados<i class='fa-solid fa-angle-right'></i></a></li>
+                <li><a href='abrir_chamado.php'><i class="fa-solid fa-comment"></i></i>Abrir um chamado<i class='fa-solid fa-angle-right'></i></a></li>
+                <li><a href='gerenciar_chamados.php'><i class="fa-solid fa-comments"></i>Gerenciar chamados<i class='fa-solid fa-angle-right'></i></a></li>
             </ul>
         </li>
         <li id='menu_05'><a><i class='fa-solid fa-gear'></i>Admin<i class='fa-solid fa-angle-right'></i></a>

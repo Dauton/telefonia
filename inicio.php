@@ -86,7 +86,7 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                                 <div>
                                     <div id="box-infos-cinza">
                                         <span>
-                                            <h4>ABRIR CHAMADOO</h4>
+                                            <h4>ABRIR CHAMADO</h4>
                                         </span>
                                         <h3>Abrir</h3>
                                         <i class="fa-solid fa-headset"></i>

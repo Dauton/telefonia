@@ -132,6 +132,8 @@ $(document).ready(function () {
     exibeMensagemErro('verifica_campo', 'verifica_campo', 'nenhum_dado', 'Não é possível cadastrar um dispositivo vazio.', 'Erro!');
     // MOTIVO DO FECHAMENTO DE CHAMADO
     exibeMensagemErro('verifica_campo', 'verifica_campo', 'motivo_fechamento_vazio', 'O motivo do fechamento é obrigatório', 'Erro!');
+    // MOTIVO DO FECHAMENTO DE CHAMADO
+    exibeMensagemErro('verifica_campo', 'verifica_campo', 'resposta_vazia', 'A resposta deve ser preenchida', 'Erro!');
 
 
 // VALIDAÇÃO CAMPOS NUMÉRICOS...

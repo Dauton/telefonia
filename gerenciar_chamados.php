@@ -180,6 +180,12 @@ $exibeTodosChamados = $chamados->exibeTodosChamados();
         </section>
     </main>
 
+    <div class="btns-atalhos">
+        <a href="abrir_chamado.php"><button id="btn-atalho" title="Abrir um chamado">
+            <i class="fa-solid fa-square-plus"></i>
+        </button></a>
+    </div>
+
     <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/javascript.js"></script>
     <script type="text/javascript" src="js/toastr.js"></script>
