@@ -62,16 +62,10 @@ table tr #acoes  {
     justify-content: center;
 }
 
-table tr #table-textarea
-{
-    text-align: left;
-}
-
 table tr #table-textarea textarea {
     width: 100% !important;
     height: 150px;
     padding: 10px;
-    resize: none;
     border: 1px solid #cdcdcd;
     border-radius: 3px;
     font-family: 'Playpen Sans', cursive;

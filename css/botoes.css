@@ -32,6 +32,7 @@ button:hover {
 }
 
 #btn-sair {
+    width: 100%;
     margin: 5px 0 0 0;
     background: var(--terciary-color);
 }

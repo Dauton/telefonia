@@ -132,7 +132,7 @@ $exibeRespostas = $respostas->exibeRespostas();
                         <form method="post" action="src/manipulacoes_chamados/fecha_chamado.php" id="form-apenas-buttons">
                             <input type="hidden" name="id" value="<?= $dadoChamado['id'] ?>">
 
-                            <label for="motivo_fechamento">Descreva o motivo do fechamento<span style="color: red;">*</span>
+                            <label for="motivo_fechamento" #label-textarea>Descreva o motivo do fechamento<span style="color: red;">*</span>
                                 <div>
                                     <textarea name="motivo_fechamento"></textarea>
                                 </div>
@@ -195,9 +195,13 @@ $exibeRespostas = $respostas->exibeRespostas();
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td colspan="2">
                                         <form class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
-                                            <textarea readonly><?= htmlentities($respostas['descricao_resposta']) ?></textarea>
+                                            <label id="label-textarea">
+                                                <div>
+                                                    <textarea readonly><?= htmlentities($respostas['descricao_resposta']) ?></textarea>
+                                                </div>
+                                            </label>
                                         </form>
                                     </td>
                                 </tr>
@@ -233,7 +237,7 @@ $exibeRespostas = $respostas->exibeRespostas();
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td  colspan="2">
                                         <form method="post" action="src/manipulacoes_chamados/envia_resposta.php?id=<?= $dadoChamado['id'] ?>" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
                                             <label for="descricao_resposta" id="label-textarea">Responda o chamado<span style="color: red;"> *</span>
                                                 <div>

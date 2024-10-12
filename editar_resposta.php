@@ -70,7 +70,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td colspan="2">
                                         <form method="post"  class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
                                             <label for="descricao_resposta" id="label-textarea">Atualize a resposta<span style="color: red;"> *</span>
                                                 <div>

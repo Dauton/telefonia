@@ -23,6 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     die();
 }
 
+$unidade = new Opcoes($pdo);
+$listaUnidade = $unidade->listaOpcoes('UNIDADE');
+
 ?>
 
 
@@ -87,8 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <i class="fa-solid fa-map-location-dot"></i>
                                     <select name="unidade" id="unidade">
                                         <option value="">Selecione</option>
-                                        <option value="CDARCEX">CDARCEX</option>
-                                        <option value="CDAMBEX">CDAMBEX</option>
+                                        <?php foreach($listaUnidade as $unidade) : ?>
+                                            <option value="<?= htmlentities($unidade['descricao']) ?>"><?= htmlentities($unidade['descricao']) ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                             </label>

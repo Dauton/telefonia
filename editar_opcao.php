@@ -113,7 +113,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </p>
 
                 <button id="box-ajuda-fechar-btn">Fechar</button>
-                <a href="gerenciar_usuarios.php"><button type="button" id="btn-cancelar">Cancelar</button></a>
 
             </div>
         </section>
@@ -144,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     <div>
                         <button type="submit" id="btn-red" title="Excluir essa opção">Excluir</button>
-                        <button type="button" id="btn-cancelar" title="Cancelar exclusão    ">Cancelar</button>
+                        <button type="button" id="btn-cancelar" title="Cancelar exclusão">Cancelar</button>
                     </div>
                 </form>
             </div>
