@@ -129,11 +129,11 @@
 }
 
 .menu li ul li a {
-    background: var(--terciary-color);
+    background: #001c25;
 }
 
 .menu li ul li a:hover {
-    background: #001c25;
+    background: #00080a;
 }
 
 .menu-logo-id {

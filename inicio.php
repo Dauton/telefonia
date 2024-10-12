@@ -82,6 +82,18 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                                     </div>
                                 </div>
                             </a>
+                            <a href="abrir_chamado.php">
+                                <div>
+                                    <div id="box-infos-cinza">
+                                        <span>
+                                            <h4>ABRIR CHAMADOO</h4>
+                                        </span>
+                                        <h3>Abrir</h3>
+                                        <i class="fa-solid fa-headset"></i>
+                                        <p class="texto-filtro">Clique para abrir</p>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                         <div class="conteudo-center-box-02">
                             <h1>Minha unidade</h1>

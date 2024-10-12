@@ -50,8 +50,8 @@ $exibeRespostas = $respostas->exibeRespostas();
                 </header>
                 <section class="conteudo-center">
 
-                    <table>
-                        <thead>
+                    <table id="table-respostas">
+                        <thead id="table-respostas-text-center">
                             <tr>
                                 <td>ID chamado</td>
                                 <td>Titulo</t>
@@ -63,7 +63,7 @@ $exibeRespostas = $respostas->exibeRespostas();
                                 <td>Data abertura</td>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="table-respostas-text-center">
                             <tr>
                                 <td><?= htmlentities($dadoChamado['id']) ?></td>
                                 <td><?= htmlentities($dadoChamado['titulo']) ?></td>
@@ -80,7 +80,7 @@ $exibeRespostas = $respostas->exibeRespostas();
                                 <td colspan="8" id="table-textarea"><textarea readonly><?= htmlentities($dadoChamado['descricao']) ?></textarea></td>
                             </tr>
                             <tr>
-                                <td colspan="5" id="table-textarea" style="padding: 15px 5px 5px 5px">
+                                <td colspan="8" id="table-textarea" style="text-align: left !important">
                                     <?php if ($dadoChamado['status'] === 'EM ABERTO'): ?>
                                         <button type='button' id='btn-green' title='Fechar chamado'>Fechar chamado</button>
                                         <button type='button' title='Mover chamado'>Mover chamado</button>
@@ -93,14 +93,15 @@ $exibeRespostas = $respostas->exibeRespostas();
                                                     <span><?= htmlentities($dadoChamado['data_fechamento']) ?></span>
                                                 </div>
                                             </header>
-                                            <br><br><br><br>
                                             <textarea readonly><?= htmlentities($dadoChamado['motivo_fechamento']) ?></textarea>
                                         </form>
-                                        <br>
-                                        <form method='post' action='src/manipulacoes_chamados/reabre_chamado.php?id=<?= $dadoChamado['id'] ?>'>
-                                            <button type='submit' id='btn-green' title='Reabrir chamado'>Reabrir chamado</button>
-                                        </form>
-                                        <br>
+                                        <tr>
+                                            <td colspan="8">
+                                                <form method='post' action='src/manipulacoes_chamados/reabre_chamado.php?id=<?= $dadoChamado['id'] ?>'>
+                                                    <button type='submit' id='btn-green' title='Reabrir chamado'>Reabrir chamado</button>
+                                                </form>
+                                            </td>
+                                        </tr>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -122,6 +123,7 @@ $exibeRespostas = $respostas->exibeRespostas();
                             Tem certeza que deseja fechar esse chamado?<br>
                             Você poderá reabri-lo.
                         </p>
+
                         <br>
                         <form method="post" action="src/manipulacoes_chamados/fecha_chamado.php" id="form-apenas-buttons">
                             <input type="hidden" name="id" value="<?= $dadoChamado['id'] ?>">
@@ -164,51 +166,88 @@ $exibeRespostas = $respostas->exibeRespostas();
                                     </select>
                                 </div>
                             </label>
-                            
+
                             <div id="box-confimarcao-btns">
                                 <button type="submit">Mover chamado</button>
                                 <button type="button" id="btn-cancelar" title='Cancelar movimento'>Cancelar</button>
                             </div>
 
                         </form>
-                    </div>  
+                    </div>
 
                     <?php foreach ($exibeRespostas as $respostas) : ?>
-                        <form class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
-                            <header id="form-cabecalho">
-                                <h1>Resposta</h1>
-                                <div>
-                                    <span><b><?= $respostas['usuario_resposta'] ?></b></span>
-                                    <span><?= $respostas['data_resposta'] ?></span>
-                                </div>
-                                <i class="fa-regular fa-comments"></i>
-                            </header>
-                            <textarea readonly><?= htmlentities($respostas['descricao_resposta']) ?></textarea>
-                        </form>
+                        <table id="table-respostas">
+                            <thead>
+                                <tr>
+                                    <td style="text-align: left">
+                                        <h1>Resposta</h1>
+                                    </td>
+                                    <td style="text-align: right">
+                                        <span><b><?= $respostas['respondido_por'] ?></b></span>
+                                        <span><?= $respostas['data_resposta'] ?></span>
+                                        <i class="fa-solid fa-comments"></i>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <form class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
+                                            <textarea readonly><?= htmlentities($respostas['descricao_resposta']) ?></textarea>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <?php if($respostas['respondido_por'] === $_SESSION['usuario'] && $dadoChamado['status'] === 'EM ABERTO') : ?>
+                                    <td>
+                                        <div>
+                                            <form method="post" action="src/manipulacoes_chamados/exclui_resposta.php">
+                                                <input type="hidden" name="id" value="<?= $respostas['id'] ?>">
+                                                <button type="submit" id="btn-red">Excluir resposta</button>
+                                            </form>
+                                            <a href="editar_resposta.php?id=<?= $respostas['id']?>"><button type="busston">Atualizar resposta</button></a>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                    <?php endif ?>
+                                </tr>
+                            </tbody>
+                        </table>
                     <?php endforeach ?>
-                    
-                    <?php if($dadoChamado['status'] === 'EM ABERTO') : ?>
-                        <form method="post" action="src/manipulacoes_chamados/envia_resposta.php?id=<?= $dadoChamado['id'] ?>" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
-                            <header id="form-cabecalho">
-                                <h1>Adicionar resposta</h1>
-                                <i class="fa-regular fa-comment-dots"></i>
-                            </header>
 
-                            <section style="display: flex;">
-
-                                <h2>Preencha a resposta</h2>
-
-                                <label for="descricao_resposta" id="label-textarea-menor">Resposta<span style="color: red;"> *</span>
-                                    <div>
-                                        <textarea name="descricao_resposta"></textarea>
-                                    </div>
-                                </label>
-
-                                <div>
-                                    <button type="submit">Enviar</but>
-                                </div>
-                            </section>
-                        </form>
+                    <?php if ($dadoChamado['status'] === 'EM ABERTO') : ?>
+                        <table id="table-respostas">
+                            <thead>
+                                <tr>
+                                    <td style="text-align: left">
+                                        <h1>Adicionar resposta</h1>
+                                    </td>
+                                    <td style="text-align: right">
+                                        <i class="fa-solid fa-comment-dots"></i>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <form method="post" action="src/manipulacoes_chamados/envia_resposta.php?id=<?= $dadoChamado['id'] ?>" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
+                                            <label for="descricao_resposta" id="label-textarea">Responda o chamado<span style="color: red;"> *</span>
+                                                <div>
+                                                    <textarea name="descricao_resposta"></textarea>
+                                                </div>
+                                            </label>
+                                            
+                                            <tr>
+                                                <td>
+                                                    <button type="submit">Enviar resposta</but>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     <?php endif; ?>
 
                 </section>

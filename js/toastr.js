@@ -82,14 +82,18 @@ $(document).ready(function () {
     exibeMensagemSucesso('chamado', 'chamado', 'aberto', 'Chamado aberto com sucesso!');
     // SUCESSO NA EDIÇÃO DE UM CHAMADO
     exibeMensagemSucesso('chamado', 'chamado', 'atualizado', 'Chamado atualizado com sucesso!');
-    // SUCESSO AO RESPONDER UM CHAMADO
-    exibeMensagemSucesso('chamado', 'chamado', 'resposta_enviada', 'Resposta enviada com sucesso!');
     // SUCESSO AO FECHAR UM CHAMADO
     exibeMensagemSucesso('chamado', 'chamado', 'fechado', 'Chamado fechado com sucesso!');
     // SUCESSO AO REABRIR UM CHAMADO
     exibeMensagemSucesso('chamado', 'chamado', 'reaberto', 'Chamado reaberto com sucesso!');
     // SUCESSO AO MOVER UM CHAMADO
     exibeMensagemSucesso('chamado', 'chamado', 'movido', 'Chamado movido de departamento com sucesso!');
+    // SUCESSO AO RESPONDER UM CHAMADO
+    exibeMensagemSucesso('chamado', 'chamado', 'resposta_enviada', 'Resposta enviada com sucesso!');
+    // SUCESSO AO EXCLUIR UMA RESPOSTA
+    exibeMensagemSucesso('chamado', 'chamado', 'resposta_excluida', 'Resposta excluída com sucesso!');
+    // SUCESSO AO EXCLUIR UMA RESPOSTA
+    exibeMensagemSucesso('chamado', 'chamado', 'resposta_atualizada', 'Resposta atualizada com sucesso!');
 
 
 // MENSAGENS DE VALIDAÇÃO DE SENHA...

@@ -118,11 +118,11 @@ class Chamado
         $stmt->execute();
     }
 
-    public function respondeChamado(int $id_resp_igual_id_chamado, string $descricao_resposta) : void
+    public function respondeChamado(int $id_chamado, string $descricao_resposta) : void
     {
-        $sql = "INSERT INTO tb_chamados (id_resp_igual_id_chamado, descricao_resposta, usuario_resposta) VALUES ( ?,?,? )";
+        $sql = "INSERT INTO tb_chamados_respostas (id_chamado, descricao_resposta, respondido_por) VALUES ( ?,?,? )";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(1, $id_resp_igual_id_chamado, PDO::PARAM_INT);
+        $stmt->bindValue(1, $id_chamado, PDO::PARAM_INT);
         $stmt->bindValue(2, trim($descricao_resposta), PDO::PARAM_STR);
         $stmt->bindValue(3, $_SESSION['usuario'], PDO::PARAM_STR);
         $stmt->execute();
@@ -130,11 +130,38 @@ class Chamado
 
     public function exibeRespostas(): array
     {
-        $sql = "SELECT descricao_resposta, usuario_resposta, data_resposta, DATE_FORMAT(data_resposta, '%d/%m/%Y às %H:%i') AS data_resposta FROM tb_chamados WHERE id_resp_igual_id_chamado = ? ORDER BY data_resposta DESC";
+        $sql = "SELECT *, DATE_FORMAT(data_resposta, '%d/%m/%Y às %H:%i') AS data_resposta FROM tb_chamados_respostas WHERE id_chamado = ? ORDER BY data_resposta DESC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $_GET['id']);
         $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $resultado;
+    }
+
+    public function excluiResposta(int $id) : void
+    {
+        $sql = "DELETE FROM tb_chamados_respostas WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $id);
+        $stmt->execute();
+    }
+
+    public function buscaIdResposta(int $id) : array
+    {
+        $sql = "SELECT * FROM tb_chamados_respostas WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultado;
+    }
+
+    public function editaResposta(int $id, string $descricao_resposta) : void
+    {
+        $sql = "UPDATE tb_chamados_respostas SET descricao_resposta = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $descricao_resposta, PDO::PARAM_STR);
+        $stmt->bindValue(2, $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 }

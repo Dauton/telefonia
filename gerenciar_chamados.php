@@ -159,7 +159,7 @@ $exibeTodosChamados = $chamados->exibeTodosChamados();
                                                 <p><?= htmlentities($chamados['status']) ?></p>
                                             </td>
                                             <td>
-                                                <a href="visualiza_dispositivo.php?id=<?= $chamados['id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                                <a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><i class="fa-solid fa-eye"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>

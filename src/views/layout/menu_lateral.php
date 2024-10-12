@@ -31,7 +31,6 @@ if (!isset($_SESSION['usuario'])) {
             <ul id="menusub_02">
                 <li><a href="cadastrar_dispositivo.php"><i class="fa-solid fa-mobile-screen-button"></i>Dispositivo<i class="fa-solid fa-angle-right"></i></a></li>
                 <li><a href='cadastrar_opcoes.php'><i class="fa-solid fa-gears"></i>Cadastro de opções<i class='fa-solid fa-angle-right'></i></a></li>
-                <li><a href='#'><i class="fa-regular fa-circle"></i>Submenu 02/03<i class='fa-solid fa-angle-right'></i></a></li>
             </ul>
         </li>
         <li id='menu_03'><a><i class="fa-solid fa-magnifying-glass"></i>Consulta<i class='fa-solid fa-angle-right'></i></a>

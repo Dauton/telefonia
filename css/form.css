@@ -126,12 +126,8 @@ form label div .fa-eye {
     cursor: pointer;
 }
 
-#label-textarea-menor {
-    width: 70% !important;
-}
-
 form #label-textarea {
-    width: 70% !important;
+    width: 100% !important;
 }
 
 form input,
