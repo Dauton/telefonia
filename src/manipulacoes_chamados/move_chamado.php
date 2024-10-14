@@ -3,6 +3,8 @@
 require_once "../config/conexao_bd.php";
 require_once "../../vendor/autoload.php";
 
+
+// EXECUTA A MOVIMENTAÇÃO DO CHAMADO...
 if($_SERVER['REQUEST_METHOD'] === 'POST') 
 {
     $moveChamado = new Chamado($pdo);

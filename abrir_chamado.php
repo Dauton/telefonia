@@ -57,7 +57,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                     <h3><a href="inicio.php">INÍCIO</a> / PAINEL DE CHAMADOS</h3>
                 </header>
                 <section class="conteudo-center" name="cadastro-usuario">
-                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
+                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off" enctype="multipart/form-data">
                         <header id="form-cabecalho">
                             <h1>Abertura de chamado</h1>
                             <i class="fa-solid fa-user-plus"></i>
@@ -120,6 +120,11 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                             <label for="descricao" id="label-textarea">Descreva o chamado<span style="color: red;"> *</span>
                                 <div>
                                     <textarea name="descricao" id="descricao"></textarea>
+                                </div>
+                            </label>
+                            <label for="arquivo">Anexar arquivo
+                                <div>
+                                    <input type="file" name="arquivo" id="arquivo" accept=".doc,.docx,.pdf,.xls,.xlsx">
                                 </div>
                             </label>
 

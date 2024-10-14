@@ -108,3 +108,14 @@ table tr td button {
     padding: 7px 15px;
     margin-right: 5px;
 }
+
+form input[type=file]::-webkit-file-upload-button {
+    padding: 10px;
+    background: var(--secundary-color);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+form input[type=file]::-webkit-file-upload-button:hover {
+    background: var(--terciary-color);
+}
