@@ -34,46 +34,79 @@ if (isset($_POST['usuario']) && !empty($_POST['usuario']) && isset($_POST['senha
                 $_SESSION['senha_primeiro_acesso'] = $resultado['senha_primeiro_acesso'];
                 $_SESSION['id_usuario'] = $resultado['id_usuario'];
 
-                // ARMAZENA O LOG DE LOGIN NO BANCO DE DADOS COM UMA MENSAGEM DE SUCESSO...
-                $registraLog = new Logs($pdo);
-                $registraLog->registraLogAcesso($_POST['usuario'], "Sucesso: Usuário logado!");
+                // ARMAZENA A TENTATIVA DE ACESSO EM LOG...
+                $armazenaLog = new Logs($pdo);
+                $armazenaLog->armazenaLog(
+                    "Acesso",
+                    "$_POST[usuario]",
+                    "Acesso ao sistema",
+                    "Sucesso",
+                    ''
+                );
 
                 header("Location: ../../inicio.php");
                 die();
                 
             } else {
 
-                // CASO O USUÁRIO NÃO SEJA ENCONTRADO SERÁ RETORNADO UM ERRO, ALÉM DE ARMAZENAR UM LOG COM MENSAGEM DE ERRO NO BANCO DE DADOS...
-                $registraLog = new Logs($pdo);
-                $registraLog->registraLogAcesso($_POST['usuario'], "Erro: Senha incorreta!");
+                // ARMAZENA A TENTATIVA DE ACESSO EM LOG...
+                $armazenaLog = new Logs($pdo);
+                $armazenaLog->armazenaLog(
+                    "Acesso",
+                    "$_POST[usuario]",
+                    "Acesso ao sistema",
+                    "Senha incorreta",
+                    ''
+                );
 
                 header("Location: ../../index.php?valida_login=credenciais_invalidas");
                 die();
             }
+
         } else {
 
-            // CASO O USUÁRIO NÃO SEJA ENCONTRADO SERÁ RETORNADO UM ERRO, ALÉM DE ARMAZENAR UM LOG COM MENSAGEM DE ERRO NO BANCO DE DADOS...
-            $registraLog = new Logs($pdo);
-            $registraLog->registraLogAcesso($_POST['usuario'], "Erro: Usuário desativado!");
+            // ARMAZENA A TENTATIVA DE ACESSO EM LOG...
+            $armazenaLog = new Logs($pdo);
+            $armazenaLog->armazenaLog(
+                "Acesso",
+                "$_POST[usuario]",
+                "Acesso ao sistema",
+                "Usuário desativado",
+                ''
+            );
 
             header("Location: ../../index.php?valida_login=usuario_desativado");
             die();
         }
-    } else {
 
-        // CASO O USUÁRIO NÃO SEJA ENCONTRADO SERÁ RETORNADO UM ERRO, ALÉM DE ARMAZENAR UM LOG COM MENSAGEM DE ERRO NO BANCO DE DADOS...
-        $registraLog = new Logs($pdo);
-        $registraLog->registraLogAcesso($_POST['usuario'], "Erro: Usuário não encontrado!");
+    } else {
+            
+        // ARMAZENA A TENTATIVA DE ACESSO EM LOG...
+        $armazenaLog = new Logs($pdo);
+        $armazenaLog->armazenaLog(
+            "Acesso",
+            "$_POST[usuario]",
+            "Acesso ao sistema",
+            "Usuário não encontrado",
+            ''
+        );
 
         header("Location: ../../index.php?valida_login=credenciais_invalidas");
         die();
     }
+
 } else {
-
-    // CASO A SENHA INFORMADA SEJA INCORRETA SERÁ RETORNADO UMA MENSAGEM DE ERRO, ALÉM DE ARMAZENAR UM LOG COM MENSAGEM DE ERRO NO BANCO DE DADOS...
-    $registraLog = new Logs($pdo);
-    $registraLog->registraLogAcesso($_POST['usuario'], "Erro: Campos vazios!");
-
+            
+    // ARMAZENA A TENTATIVA DE ACESSO EM LOG...
+    $armazenaLog = new Logs($pdo);
+    $armazenaLog->armazenaLog(
+        "Acesso",
+        "$_POST[usuario]",
+        "Acesso ao sistema",
+        "Campo vazio",
+        ''
+    );
+    
     header("Location: ../../index.php?verifica_campos=erro_no_envio");
     die();
 }

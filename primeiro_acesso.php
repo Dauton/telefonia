@@ -17,8 +17,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
-        $regitraLogUsuario = new Logs($pdo);
-        $regitraLogUsuario->registraLogAcesso($_SESSION['usuario'], 'Alerou sua senha no primeiro acesso!');
+        $armazenaLog = new Logs($pdo);
+        $armazenaLog->armazenaLog(
+            'Usuarios',
+            $_SESSION['usuario  '],
+            'Resetou a própria senha no primeiro acesso',
+            'Sucesso',
+            ''
+        );
 
 
         session_destroy();
@@ -98,10 +104,11 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_SESSION['id_usuario']);
                     <i class="fa-solid fa-key"></i>
                 </header>
                 <p>
-                    <b>Caracteres</b>: a senha deve conter no mínimo 12 caracteres.<br><br>
-                    <b>Letras</b>: a senha deve conter letras maiúsculas e minúsculas.<br><br>
-                    <b>Números</b>: a senha deve conter pelo menos um número.<br><br>
-                    <b>Resumindo</b>: a senha deve possuir uma combinação de 12 caracteres sendo elas letras maiúsculas, minúsculas e números.
+                    <b>Caracteres</b>: a senha deve possuir no mínimo 12 caracteres.<br><br>
+                    <b>Letras</b>: a senha deve possuir letras maiúsculas e minúsculas.<br><br>
+                    <b>Números</b>: a senha deve possuir pelo menos um número.<br><br>
+                    <b>Caracteres especiais</b>: a senha deve possuir pelo menos um caractere especial.<br><br>
+                    <b>Resumindo</b>: a senha deve possuir uma combinação de 12 caracteres sendo elas letras maiúsculas, minúsculas, números e caracteres espeicias.
                 </p>
                 <button id="box-ajuda-fechar-btn">Fechar</button>
 
@@ -112,7 +119,6 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_SESSION['id_usuario']);
     <div class="btns-atalhos">
         <button type="button" id="btn-atalho" title="Caixa de ajuda"><i class="fa-regular fa-circle-question"></i></button>
     </div>
-
 
     <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/javascript.js"></script>

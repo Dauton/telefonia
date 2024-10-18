@@ -6,22 +6,25 @@ require_once "vendor/autoload.php";
 apenasAdmin();
 senhaPrimeiroAcesso();
 
+$buscaIdUsuario = new Usuario($pdo);
+$dadoUsuario = $buscaIdUsuario->buscaIdUsuario($_GET['id_usuario']);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resetaSenhaUsuario = new Usuario($pdo);
     $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
 
+    $armazenaLog = new Logs($pdo);
+    $armazenaLog->armazenaLog(
+        'Usuarios',
+        $_SESSION['usuario'],
+        'Resetou a senha do usuário "' . $dadoUsuario['usuario'] . '"',
+        'Sucesso',
+        ''
+    );
+
     header("Location: gerenciar_usuarios.php?verifica_senha=senha_resetada");
     die();
 }
-
-// BUSCA O ID DO USUÁRIO SELECIONADO PARA RESET DE SENHA, SE NÃO FOR INFORMADO O ID NA URL, SERÁ REDIRECIONADO PARA TELA DE GERENCIAMENTO DE USUÁRIO...
-if ($_GET['id_usuario'] ===  null) {
-    header("Location: gerenciar_usuarios.php");
-    die();
-}
-
-$idUsuario = new Usuario($pdo);
-$buscaIdUsuario = $idUsuario->buscaIdUsuario($_GET['id_usuario']);
 
 ?>
 
@@ -67,7 +70,7 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_GET['id_usuario']);
 
                             <i class='fa-solid fa-circle-user'></i>
 
-                            <h2 style="text-align: center"><?= htmlentities($buscaIdUsuario['nome']) ?></h2>
+                            <h2 style="text-align: center"><?= htmlentities($dadoUsuario['nome']) ?></h2>
 
                             <label for="senha">Nova senha
                                 <div>
@@ -87,8 +90,8 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_GET['id_usuario']);
                                 </div>
                             </label>
 
-                            <input type="hidden" name="id_usuario" value="<?= $buscaIdUsuario['id_usuario'] ?>">
-                            <input type="hidden" name="usuario" value="<?= $buscaIdUsuario['usuario'] // PARA ARMAZENAR O USUÁRIO ALTERADO NO LOG 
+                            <input type="hidden" name="id_usuario" value="<?= $dadoUsuario['id_usuario'] ?>">
+                            <input type="hidden" name="usuario" value="<?= $dadoUsuario['usuario'] // PARA ARMAZENAR O USUÁRIO ALTERADO NO LOG 
                                                                         ?>">
 
                             <div>
@@ -112,10 +115,11 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_GET['id_usuario']);
                     <i class="fa-solid fa-key"></i>
                 </header>
                 <p>
-                    <b>Caracteres</b>: a senha deve conter no mínimo 12 caracteres.<br><br>
-                    <b>Letras</b>: a senha deve conter letras maiúsculas e minúsculas.<br><br>
-                    <b>Números</b>: a senha deve conter pelo menos um número.<br><br>
-                    <b>Resumindo</b>: a senha deve possuir uma combinação de 12 caracteres sendo elas letras maiúsculas, minúsculas e números.
+                    <b>Caracteres</b>: a senha deve possuir no mínimo 12 caracteres.<br><br>
+                    <b>Letras</b>: a senha deve possuir letras maiúsculas e minúsculas.<br><br>
+                    <b>Números</b>: a senha deve possuir pelo menos um número.<br><br>
+                    <b>Caracteres especiais</b>: a senha deve possuir pelo menos um caractere especial.<br><br>
+                    <b>Resumindo</b>: a senha deve possuir uma combinação de 12 caracteres sendo elas letras maiúsculas, minúsculas, números e caracteres espeicias.
                 </p>
                 <button id="box-ajuda-fechar-btn">Fechar</button>
 

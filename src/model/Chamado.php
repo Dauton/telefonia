@@ -36,7 +36,7 @@ class Chamado
 
     public function exibeTodosChamados() : array
     {
-        $sql = "SELECT *, DATE_FORMAT(data_abertura, '%d/%m/%Y/ às %H:%i') AS data_abertura FROM tb_chamados WHERE titulo != ''";
+        $sql = "SELECT *, DATE_FORMAT(data_abertura, '%d/%m/%Y às %H:%i') AS data_abertura FROM tb_chamados WHERE titulo != ''";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -133,7 +133,7 @@ class Chamado
 
     public function exibeRespostas(): array
     {
-        $sql = "SELECT *, DATE_FORMAT(data_resposta, '%d/%m/%Y às %H:%i') AS data_resposta FROM tb_chamados_respostas WHERE id_chamado = ? ORDER BY data_resposta DESC";
+        $sql = "SELECT *, DATE_FORMAT(data_resposta, '%d/%m/%Y às %H:%i') AS data_resposta FROM tb_chamados_respostas WHERE id_chamado = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $_GET['id']);
         $stmt->execute();

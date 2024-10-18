@@ -241,10 +241,6 @@ form div {
         color: #707070;
     }
 
-    input[type=file]::-webkit-file-upload-button {
-        height: 40px;
-    }
-
     form label p {
         margin: 6px;
         text-align: left;

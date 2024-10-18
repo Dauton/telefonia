@@ -31,7 +31,7 @@ CREATE TABLE `tb_chamados_respostas` (
   `respondido_por` varchar(45) DEFAULT NULL,
   `data_resposta` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `tb_chamados_respostas` (
 
 LOCK TABLES `tb_chamados_respostas` WRITE;
 /*!40000 ALTER TABLE `tb_chamados_respostas` DISABLE KEYS */;
-INSERT INTO `tb_chamados_respostas` VALUES (1,1,'Teste','dpfelix','2024-10-12 14:45:25'),(4,2,'Testando resposta','dpfelix','2024-10-12 15:47:27'),(5,2,'testando','dpfelix','2024-10-12 16:07:47'),(6,2,'Resposta do usuário teste','teste','2024-10-12 17:18:03'),(7,1,'Atualizado','teste','2024-10-12 17:52:29'),(8,3,'Boa tarde!\r\n\r\nSegue código de postagem:\r\n\r\n1258625\r\n\r\nAtenciosamente\r\nEquipe Mobit','teste','2024-10-12 19:00:09');
+INSERT INTO `tb_chamados_respostas` VALUES (1,1,'Teste','dpfelix','2024-10-12 14:45:25'),(6,2,'Resposta do usuário teste','teste','2024-10-12 17:18:03'),(7,1,'Atualizado','teste','2024-10-12 17:52:29'),(8,3,'Boa tarde!\r\n\r\nSegue código de postagem:\r\n\r\n1258625\r\n\r\nAtenciosamente\r\nEquipe Mobit','teste','2024-10-12 19:00:09'),(10,3,'Bom dia!\r\n\r\nMuito obrigado!\r\n\r\nAt.te,\r\nDauton Pereira Félix','teste','2024-10-12 19:17:22'),(11,4,'Boa tarde!\r\n\r\nInstalação realizada, poderia validar?\r\n\r\nAtenciosamente,\r\nMobit','mobit','2024-10-12 20:48:43'),(12,4,'Boa tarde!\r\n\r\nDeu certo!\r\nMuito obrigado!!\r\n\r\nAt.te,\r\nDauton Pereira Félix','dpfelix','2024-10-12 21:05:09'),(18,5,'Boa tarde!\r\n\r\nAprovado\r\n\r\nMobit, por favor, enviar o aparelho.\r\n\r\nAt.te,\r\nInfraestrutura IDL','teste','2024-10-14 16:54:46'),(19,5,'Boa tarde!\r\n\r\nAparelho enviado\r\n\r\nSegue código de rastreio:\r\nBR0923740989FR\r\n\r\nAtenciosamente,\r\nMobit Soluções','mobit','2024-10-14 16:56:14'),(20,11,'Bom dia!\r\n\r\nSegue código de postagem:\r\n\r\n921873982173\r\n\r\nAtenciosamente, \r\nEquipe Mobit','dpfelix','2024-10-17 20:14:01'),(21,12,'Resposta teste','dpfelix','2024-10-18 16:46:39'),(22,12,'Resposta teste','dpfelix','2024-10-18 16:47:40'),(23,14,'pokjpods','dpfelix','2024-10-18 17:28:19'),(24,14,'ewfewf','dpfelix','2024-10-18 17:29:30'),(25,13,'Olá mundo','dpfelix','2024-10-18 17:44:33');
 /*!40000 ALTER TABLE `tb_chamados_respostas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-12 16:03:01
+-- Dump completed on 2024-10-18 15:57:44

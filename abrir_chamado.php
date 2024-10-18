@@ -15,6 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['prioridade'],
         $_POST['descricao']
     );
+
+    $armazenaLog = new Logs($pdo);
+    $armazenaLog->armazenaLog(
+        'Chamados',
+        $_SESSION['usuario'],
+        'Abriu o chamado "' . $dadoChamado['titulo'] . '"',
+        'Sucesso',
+        ''
+    );
+    
     header("Location: abrir_chamado.php?chamado=aberto");
     die();
 }

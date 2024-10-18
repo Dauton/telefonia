@@ -12,6 +12,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $_GET['id'],
         $_POST['departamento'],
     );
+
+    $armazenaLog = new Logs($pdo);
+    $armazenaLog->armazenaLog(
+        'Chamados',
+        $_SESSION['usuario'],
+        'Moveu o chamado para o departamento "' . $_POST['departamento'] . '"',
+        'Sucesso',
+        $_GET['id']
+    );
     
     header("Location: ../../visualiza_chamado.php?id=$_GET[id]&chamado=movido");
     die();

@@ -11,6 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['descricao'],
     );
 
+    $armazenaLog = new Logs($pdo);
+    $armazenaLog->armazenaLog(
+        'Opções',
+        $_SESSION['usuario'],
+        'Cadastrou a opção "' . $_POST['descricao'] . '" do tipo "' . $_POST['tipo'] . '"',
+        'Sucesso',
+        ''
+    );
+
     header("Location: cadastrar_opcoes.php?opcao=cadastrada");
     die();
 }

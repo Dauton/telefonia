@@ -674,34 +674,3 @@ body {
     }
 
 }
-
-@media (width <= 1020px) and (orientation: landscape) {
-    .conteudo-center {
-        width: 100%;
-        padding-top: 10px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background: #ffffff;
-    }
-    .conteudo-center h1 {
-        text-align: left;
-    }
-
-    .conteudo-center {
-        padding: 30px 5px 0 5px;
-    }
-
-    .conteudo-center-box-01 {
-        display: none;
-    }
-    #table-cria-inv {
-        width: 100%;
-        display: block;
-    }
-
-    .conteudo-center-box-02 p {
-        margin: 0 0 110px 0;
-    }
-
-}

@@ -24,6 +24,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     );
 
+    $armazenaLog = new Logs($pdo);
+    $armazenaLog->armazenaLog(
+        'Usuarios',
+        $_SESSION['usuario  '],
+        'Atualizou o usuário "' . $_POST['usuario'] . '" de nome "' . $_POST['nome'] . '"',
+        'Sucesso',
+        ''
+    );
+
     header("Location: gerenciar_usuarios.php?usuario=editado_com_sucesso");
     die();
 }

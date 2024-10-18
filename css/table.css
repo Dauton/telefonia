@@ -163,6 +163,7 @@ table .fa-circle {
 @media (width <= 1020px) and (orientation: landscape) {
     thead {
         top: -30px !important;
+        background: red;
     }
     table tr td {
         font-size: 7px;

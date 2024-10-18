@@ -39,6 +39,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['funcao']
         );
 
+        // ARMAZENA O CADASTRO EM LOG...
+        $armazenaLog = new Logs($pdo);
+        $armazenaLog->armazenaLog(
+            "Telefonia",
+            "$_SESSION[usuario]",
+            'Cadastrou o aparelho de IMEI "' . $_POST['imei_aparelho'] . '" e a linha "' .  $_POST['linha'] . '" para o usuário "' . $_POST['nome'] . '"',
+            "Sucesso",
+            ''
+        );
+
         header("Location: consulta_dispositivos.php?dispositivo=cadastrado");
         die();
     }
@@ -171,7 +181,8 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                     <input type="text" name="perfil" id="perfil" placeholder="Perfil da linha">
                                 </div>
                             </label>
-                            <label for="status">Status
+
+                            <label for="status">Status<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-regular fa-circle-check"></i>
                                     <select name="status">
@@ -238,14 +249,14 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                 </div>
                             </label>
 
-                            <label for="imei_aparelho">IMEI aparelho
+                            <label for="imei_aparelho">IMEI aparelho<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-mobile-screen"></i>
                                     <input type="text" name="imei_aparelho" id="imei_aparelho" placeholder="Apenas números Ex: 123456789123456">
                                 </div>
                             </label>
 
-                            <label for="gestao_mdm">MDM
+                            <label for="gestao_mdm">MDM<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-shield-halved"></i>
                                     <select name="gestao_mdm" id="gestao_mdm">

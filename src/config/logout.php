@@ -1,15 +1,21 @@
 <?php
 
-    require_once "../config/conexao_bd.php";
-    require_once "../../vendor/autoload.php";
+require_once "../config/conexao_bd.php";
+require_once "../../vendor/autoload.php";
 
-    $registraLog = new Logs($pdo);
-    $registraLog->registraLogAcesso($_SESSION['usuario'], 'Saiu do sistema realizando logout!');
-    
-    // REALIZA O LOG OUT DO USUÁRIO DESTRUINDO A SESSÃO...
-    session_start();
-    session_unset();
-    session_destroy();
+// ARMAZENA O LOGOUT EM LOG...
+$armazenaLog = new Logs($pdo);
+$armazenaLog->armazenaLog(
+    "Acesso",
+    "$_SESSION[usuario]",
+    "Logout do sistema",
+    "Sucesso",
+    ''
+);
 
-    header("Location: ../../index.php");
-    die();
+// REALIZA O LOGOUT DO USUÁRIO DESTRUINDO A SESSÃO...
+session_start();    
+session_destroy();
+
+header("Location: ../../index.php");
+die();

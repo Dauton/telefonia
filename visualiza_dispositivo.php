@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['nome'] = $_POST['matricula'] = $_POST['email'] = $_POST['funcao'] = null;
     }
 
-    $editaUsuario = new Telefonia($pdo);
-    $editaUsuario->atualizaDispositivo(
+    $atualizaDispositivo = new Telefonia($pdo);
+    $atualizaDispositivo->atualizaDispositivo(
 
         $_GET['id'],
 
@@ -51,7 +51,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['matricula'],
         $_POST['email'],
         $_POST['funcao']
+    );
 
+    // ARMAZENA A ATUALIZAÇÃO EM LOG...
+    $armazenaLog = new Logs($pdo);
+    $armazenaLog->armazenaLog(
+        'Telefonia',
+        $_SESSION['usuario'],
+        'Atualizou o aparelho de IMEI "' . $_POST['imei_aparelho'] . '" e a linha "' .  $_POST['linha'] . '" do usuário "' . $_POST['nome'] . '"',
+        'Sucesso',
+        ''
     );
 
     header("Location: consulta_dispositivos.php?dispositivo=atualizado");
