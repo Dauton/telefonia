@@ -49,11 +49,9 @@ if (!isset($_SESSION['usuario'])) {
                 <ul id='menusub_05'>
                     <li><a href='cadastrar_usuario.php'><i class="fa-solid fa-user-plus"></i>Cadastrar usuário<i class='fa-solid fa-angle-right'></i></a></li>
                     <li><a href='gerenciar_usuarios.php'><i class="fa-solid fa-users"></i>Gerenciar usuários<i class='fa-solid fa-angle-right'></i></a></li>
-                    <li><a href='log_logins.php'><i class="fa-regular fa-circle"></i>Registros de acesso<i class='fa-solid fa-angle-right'></i></a></li>
-                    <li><a href='log_usuarios.php'><i class="fa-regular fa-circle"></i>Registros de usuários<i class='fa-solid fa-angle-right'></i></a></li>
                 </ul>
             </li>
-            <li id='menu_06'><a><i class="fa-solid fa-clipboard-list"></i>Logs<i class='fa-solid fa-angle-right'></i></a>
+            <li id='menu_06'><a><i class="fa-solid fa-table-list"></i>Logs<i class='fa-solid fa-angle-right'></i></a>
                 <ul id='menusub_06'>
                     <li><a href='logs.php?acessos'><i class="fa-regular fa-circle"></i>Logs de acesso<i class='fa-solid fa-angle-right'></i></a></li>
                     <li><a href='logs.php?telefonia'><i class="fa-regular fa-circle"></i>Logs de telefonia<i class='fa-solid fa-angle-right'></i></a></li>

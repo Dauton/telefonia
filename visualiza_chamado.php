@@ -52,6 +52,8 @@ $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
                 </header>
                 <section class="conteudo-center">
 
+                    <h1>Dados do chamado</h1>
+
                     <table id="table-respostas">
                         <thead id="table-respostas-text-center">
                             <tr>
@@ -113,9 +115,9 @@ $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
                             </tr>
                         </tbody>
                     </table>
-                    <div>
+            
+                    <br><h1>Respostas do chamado</h1>
 
-                    </div>
                     <div id="box-confirmacao" title="Fechar chamado">
 
                         <header class="box-ajuda-cabecalho">
@@ -225,12 +227,14 @@ $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
                         </table>
                     <?php endforeach ?>
 
+                    <br><h1>Responder chamado</h1>
+
                     <?php if ($dadoChamado['status'] === 'EM ABERTO') : ?>
                         <table id="table-respostas">
                             <thead>
                                 <tr>
                                     <td style="text-align: left">
-                                        <h1>Adicionar resposta</h1>
+                                        <h1>Responder</h1>
                                     </td>
                                     <td style="text-align: right">
                                         <i class="fa-solid fa-comment-dots"></i>
