@@ -3,8 +3,8 @@
 require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
-apenasAdmin();
 senhaPrimeiroAcesso();
+liberacaoInfraIDL();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cadastraUsuario = new Usuario($pdo);
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $armazenaLog = new Logs($pdo);
     $armazenaLog->armazenaLog(
-        'Usuarios',
+        'Usuários',
         $_SESSION['usuario  '],
         'Cadastrou o usuário "' . $_POST['usuario'] . '" de nome "' . $_POST['nome'] . '"',
         'Sucesso',
@@ -122,8 +122,9 @@ $listaUnidade = $unidade->listaOpcoes('UNIDADE');
                                     <i class="fa-solid fa-user-shield"></i>
                                     <select name="perfil" id="perfil">
                                         <option value="">Selecione o perfil</option>
-                                        <option value="CONSULTANTE">CONSULTANTE</option>
-                                        <option value="ADMIN">ADMIN</option>
+                                        <option value="TI SITES">TI SITES</option>
+                                        <option value="INFRAESTRUTURA IDL">INFRAESTRUTURA IDL</option>
+                                        <option value="MOBIT">MOBIT</option>
                                     </select>
                                 </div>
                             </label>

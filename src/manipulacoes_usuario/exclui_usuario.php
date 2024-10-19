@@ -3,7 +3,7 @@
 require_once "../config/conexao_bd.php";
 require_once "../../vendor/autoload.php";
 
-apenasAdmin();
+liberacaoInfraIDL();
 
 // BUSCA ID DO USUÁRIO PARA ARMAZENAR OS DADOS DO USUÁRIO NO LOG...
 
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $armazenaLog = new Logs($pdo);
     $armazenaLog->armazenaLog(
-        'Usuarios',
+        'Usuários',
         $_SESSION['usuario  '],
         'Excluiu o usuário "' . $dadoUsuario['usuario'] . '" de nome "' . $dadoUsuario['nome'] . '"',
         'Sucesso',

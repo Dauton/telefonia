@@ -115,11 +115,12 @@ class Usuario
             Validacoes::validaSenhaRepeteSenha($senha, $_POST['repete_senha'], "$_SERVER[HTTP_REFERER]&verifica_senha=desiguais");
         }
 
-        $sql = "UPDATE tb_usuarios SET senha = ? WHERE id_usuario = ?";
+        $sql = "UPDATE tb_usuarios SET senha = ?, senha_primeiro_acesso = ? WHERE id_usuario = ?";
         $stmt = $this->pdo->prepare($sql);
         $senha = password_hash($senha, PASSWORD_ARGON2ID);
         $stmt->bindValue(1, $senha, PDO::PARAM_STR);
-        $stmt->bindValue(2, $id_usuario, PDO::PARAM_INT);
+        $stmt->bindValue(2, 'ALTERADA', PDO::PARAM_STR);
+        $stmt->bindValue(3, $id_usuario, PDO::PARAM_INT);
 
         $stmt->execute();
     }

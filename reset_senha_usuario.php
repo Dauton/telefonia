@@ -3,8 +3,8 @@
 require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
-apenasAdmin();
 senhaPrimeiroAcesso();
+liberacaoInfraIDL();
 
 $buscaIdUsuario = new Usuario($pdo);
 $dadoUsuario = $buscaIdUsuario->buscaIdUsuario($_GET['id_usuario']);
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $armazenaLog = new Logs($pdo);
     $armazenaLog->armazenaLog(
-        'Usuarios',
+        'Usuários',
         $_SESSION['usuario'],
         'Resetou a senha do usuário "' . $dadoUsuario['usuario'] . '"',
         'Sucesso',
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h3><a href="inicio.php">INÍCIO</a> / RESET SENHA</h3>
                 </header>
                 <section class="conteudo-center">
-                    <form method="post" class="form-requisicao" id="form-requisicao">
+                    <form method="post" id="form-altera-senha">
                         <section style="display: flex">
                             <header id="form-cabecalho">
                                 <h1>Reset de senha</h1>

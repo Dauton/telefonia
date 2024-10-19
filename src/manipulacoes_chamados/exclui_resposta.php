@@ -19,5 +19,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     
     header("Location: ../../visualiza_chamado.php?id=$resposta[id_chamado]&chamado=resposta_excluida");
     die();
-
 }

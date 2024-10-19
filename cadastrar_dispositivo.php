@@ -3,6 +3,8 @@
 require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
+senhaPrimeiroAcesso();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // VALIDA SE EXISTE ALGUM DADOS DE LINHA OU APARELHO PREENCHIDOS...

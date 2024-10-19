@@ -57,19 +57,23 @@ $("#btn-menu, #back-menu").click(function () {
     // DROPDOWN DO MENU LATERAL...
 $("#menu_02").click(function () {
     $("#menusub_02").slideToggle(200, "linear");
-    $("#menusub_03, #menusub_04, #menusub_05").slideUp(200, "linear");
+    $("#menusub_03, #menusub_04, #menusub_05, #menusub_06").slideUp(200, "linear");
 }); 
 $("#menu_03").click(function () {
     $("#menusub_03").slideToggle(200, "linear");
-    $("#menusub_02, #menusub_04, #menusub_05").slideUp(200, "linear");
+    $("#menusub_02, #menusub_04, #menusub_05, #menusub_06").slideUp(200, "linear");
 });
 $("#menu_04").click(function () {
     $("#menusub_04").slideToggle(200, "linear");
-    $("#menusub_02, #menusub_03, #menusub_05").slideUp(200, "linear");
+    $("#menusub_02, #menusub_03, #menusub_05, #menusub_06").slideUp(200, "linear");
 });
 $("#menu_05").click(function () {
     $("#menusub_05").slideToggle(200, "linear");
-    $("#menusub_02, #menusub_03, #menusub_04").slideUp(200, "linear");
+    $("#menusub_02, #menusub_03, #menusub_04, #menusub_06").slideUp(200, "linear");
+});
+$("#menu_06").click(function () {
+    $("#menusub_06").slideToggle(200, "linear");
+    $("#menusub_02, #menusub_03, #menusub_04, #menusub_05").slideUp(200, "linear");
 });
 
 //______________________________________________________________________________________

@@ -3,34 +3,22 @@
 require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
-if($_SERVER['REQUEST_METHOD'] === 'POST')
-{
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $resetaSenhaUsuario = new Usuario($pdo);
+    $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
 
-    if(validacaoSenhaPrimeiroAcesso($pdo)) {
+    $armazenaLog = new Logs($pdo);
+    $armazenaLog->armazenaLog(
+        'Usuários',
+        $_SESSION['usuario'],
+        'Resetou a própria senha no primeiro acesso',
+        'Sucesso',
+        ''
+    );
 
-    } else {
-        $resetaSenhaUsuario = new Usuario($pdo);
-        $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
-
-        $senhaUsuario = $_SESSION['id_usuario'];
-        $sql = "UPDATE tb_usuarios SET senha_primeiro_acesso = 'ALTERADA' WHERE id_usuario = $senhaUsuario";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-
-        $armazenaLog = new Logs($pdo);
-        $armazenaLog->armazenaLog(
-            'Usuarios',
-            $_SESSION['usuario  '],
-            'Resetou a própria senha no primeiro acesso',
-            'Sucesso',
-            ''
-        );
-
-
-        session_destroy();
-        header("Location: index.php?verifica_senha=primeiro_acesso");
-        die();
-    }
+    session_destroy();
+    header("Location: index.php?verifica_senha=primeiro_acesso");
+    die();
 }
 
 $idUsuario = new Usuario($pdo);
@@ -56,7 +44,7 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_SESSION['id_usuario']);
         
         <section class="principal">
                 <section class="conteudo-center" style="flex-direction: row">
-                    <form method="post">
+                    <form method="post" id="form-altera-senha">
                         <header id="form-cabecalho">
                             <h1>Primeiro acesso</h1>
                             <i class="fa-solid fa-key"></i>

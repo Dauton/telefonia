@@ -3,7 +3,6 @@
 require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
-apenasAdmin();
 senhaPrimeiroAcesso();
 
 $chamados = new Chamado($pdo);

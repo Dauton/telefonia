@@ -7,29 +7,21 @@ if ((!isset($_SESSION['usuario']) === true) && (!isset($_SESSION['senha']) === t
     die();
 }
 
-
-// FUNÇÃO DE LIBERAÇÃO DE ACESSO APENAS PARA ADMIN E MASTER
-    // RESUMINDO: usuários com perfil de 'Requisitante' tem acesso apenas a tela inicial, abertura de requisição e reset de sua senha;
-    // Para acesso completo, apenas usuários com perfil "Admin".
-
-
-// FUNÇÃO DE LIBERAÇÃO DE ACESSO APENAS PARA ADMIN
-function apenasAdmin()
+// ACESSO LIBERADO APENAS PARA TI SITES E INFRA IDL...
+function liberacaoIDL()
 {
-    if ($_SESSION['perfil'] != "ADMIN") {
-        header("Location: inicio.php");
+    if($_SESSION['perfil'] !== 'TI SITES' && $_SESSION['perfil'] !== 'IFRAESTRUTURA IDL') {
+        header("Location: ../inicio.php");
         die();
     }
 }
 
-// FUNÇÃO DE BLOQUEIO CASO O USUÁRIO ESTEJA DESATIVADO
-function usuarioDesativado()
+// ACESSO LIBERADO APENAS PARA INFRA IDL...
+function liberacaoInfraIDL()
 {
-    if($_SESSION['status'] != "ATIVADO") {
-
-        header("Location: index.php?valida_login=usuario_desativado");
+    if($_SESSION['perfil'] !== 'INFRAESTRUTURA IDL') {
+        header("Location: ../inicio.php");
         die();
-
     }
 }
 
@@ -37,9 +29,7 @@ function usuarioDesativado()
 function senhaPrimeiroAcesso()
 {
     if($_SESSION['senha_primeiro_acesso'] != "ALTERADA") {
-
         header("Location: primeiro_acesso.php");
         die();
-
     }
 }

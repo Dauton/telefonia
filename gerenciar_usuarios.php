@@ -3,12 +3,11 @@
 require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
-apenasAdmin();
 senhaPrimeiroAcesso();
 
-    // EXIBE TODOS OS USUÁRIOS CADASTRADOS
-    $exibeUsuarios = new Usuario($pdo);
-    $exibeTodosUsuarios = $exibeUsuarios->exibeUsuarios();
+// EXIBE TODOS OS USUÁRIOS CADASTRADOS
+$exibeUsuarios = new Usuario($pdo);
+$exibeTodosUsuarios = $exibeUsuarios->exibeUsuarios();
 
 ?>
 

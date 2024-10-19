@@ -200,6 +200,15 @@ form div {
     width: 32%;
 }
 
+#form-altera-senha {
+    width: 350px;
+    padding: 40px 0 0 0;
+    box-shadow: none;
+}
+#form-altera-senha label {
+    width: 100%;
+}
+
 @media (width <= 960px) {
 
     form section {
@@ -251,6 +260,9 @@ form div {
         width: 100%;
     }
     #form-labels-lado-a-lado label {
+        width: 100%;
+    }
+    #form-altera-senha {
         width: 100%;
     }
 }
