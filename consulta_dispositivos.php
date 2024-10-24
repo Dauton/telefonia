@@ -5,7 +5,14 @@ require_once "vendor/autoload.php";
 
 senhaPrimeiroAcesso();
 
-if (($_SERVER['QUERY_STRING'] ?? '') === 'linhas') {
+if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=' || !str_starts_with($_SERVER['QUERY_STRING'], 'busca=')) {
+
+    $titulo_tabela_filtrada = "Dispositivos cadastrados";
+
+    $dispositivo = new Telefonia($pdo);
+    $exibeDispositivos = $dispositivo->exibeDispositivos();
+}
+elseif (($_SERVER['QUERY_STRING'] ?? '') === 'linhas') {
 
     $titulo_tabela_filtrada = "Linhas cadastradas";
 
@@ -31,14 +38,8 @@ if (($_SERVER['QUERY_STRING'] ?? '') === 'linhas') {
     $titulo_tabela_filtrada = 'Resultado da busca';
 
     $dispositivo = new Telefonia($pdo);
-    $exibeDispositivos = $dispositivo->buscaDispositivo();
+    $exibeDispositivos = $dispositivo->buscaDispositivo($_GET['busca']);
 
-} else {
-
-    $titulo_tabela_filtrada = "Dispositivos cadastrados";
-
-    $dispositivo = new Telefonia($pdo);
-    $exibeDispositivos = $dispositivo->exibeDispositivos();
 }
 
 $mdm = new Telefonia($pdo);

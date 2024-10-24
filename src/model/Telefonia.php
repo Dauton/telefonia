@@ -268,12 +268,16 @@ class Telefonia
         return $resultado;
     }
 
-    public function buscaDispositivo(): array
+    // BUSCA UM DISPOSITIVO CONFORME DADO INFORMADO NO CAMPO DE BUSCA
+    public function buscaDispositivo($busca): array
     {
+        
+        $sql = "SELECT * FROM tb_dispositivos 
+                WHERE MATCH(linha, operadora, servico, perfil, marca_aparelho, modelo_aparelho, imei_aparelho, unidade, centro_custo, canal, ponto_focal, gestor, nome, matricula, email, funcao)
+                AGAINST (:busca)";
 
-        $sql = "SELECT * FROM tb_dispositivos WHERE MATCH(linha, operadora, servico, perfil, status, sim_card, marca_aparelho, modelo_aparelho, imei_aparelho, unidade, centro_custo, uf, ponto_focal, gestor, nome, matricula) AGAINST (:busca)";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(":busca", "busca=$_SERVER[QUERY_STRING]");
+        $stmt->bindValue(':busca', "%$busca%", PDO::PARAM_STR);
         $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $resultado;

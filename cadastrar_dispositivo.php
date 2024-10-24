@@ -121,6 +121,18 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                 </div>
                             </div>
                         </a>
+                        <a href="cadastrar_opcoes.php">
+                            <div>
+                                <div id="box-infos-azul">
+                                    <span>
+                                        <h4>CADASTRAR OPÇÃO</h4>
+                                    </span>
+                                    <h3>Cadastrar</h3>
+                                    <i class="fa-solid fa-gears"></i>
+                                    <p class="texto-filtro">Clique para abrir</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                     <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
                         <header id="form-cabecalho">

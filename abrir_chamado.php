@@ -131,7 +131,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                                     <textarea name="descricao" id="descricao"></textarea>
                                 </div>
                             </label>
-                            <label for="arquivo">Anexar documento
+                            <label for="arquivo">Anexar documento (.doc, .docx, .pdf, .xls ou .xlsx)
                                 <div>
                                     <input type="file" name="arquivo" id="arquivo" accept=".doc,.docx,.pdf,.xls,.xlsx">
                                 </div>

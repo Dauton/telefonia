@@ -5,8 +5,42 @@ require_once "vendor/autoload.php";
 
 senhaPrimeiroAcesso();
 
-$chamados = new Chamado($pdo);
-$exibeTodosChamados = $chamados->exibeTodosChamados();
+if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=') {
+
+    $titulo_tabela_filtrada = "Exibindo todos os chamados";
+
+    $chamados = new Chamado($pdo);
+    $exibeTodosChamados = $chamados->exibeTodosChamados();
+
+} elseif($_SERVER['QUERY_STRING'] === 'em_aberto') {
+
+    $titulo_tabela_filtrada = "Exibindo todos os chamados em aberto";
+
+    $chamados = new Chamado($pdo);
+    $exibeTodosChamados = $chamados->exibeChamadosEmAberto();
+
+} elseif($_SERVER['QUERY_STRING'] === 'meu_departamento') {
+
+    $titulo_tabela_filtrada = "Exibindo todos os chamados em meu departamento";
+
+    $chamados = new Chamado($pdo);
+    $exibeTodosChamados = $chamados->exibeChamadosMeuDepartamento();
+
+}  elseif($_SERVER['QUERY_STRING'] === 'minha_unidade') {
+
+    $titulo_tabela_filtrada = "Exibindo todos os chamados em minha unidade";
+
+    $chamados = new Chamado($pdo);
+    $exibeTodosChamados = $chamados->exibeChamadosMinhaUnidade();
+
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+    $titulo_tabela_filtrada = "Exibindo resultado da pesquisa";
+
+    $chamados = new Chamado($pdo);
+    $exibeTodosChamados = $chamados->buscaChamado($_GET['busca']);
+
+}
 
 ?>
 
@@ -46,69 +80,57 @@ $exibeTodosChamados = $chamados->exibeTodosChamados();
                     <article class="conteudo-center-boxs">
                         <div class="conteudo-center-box-01">
                             <h1>Alguns atalhos e informações</h1>
-                            <a href="cadastrar_dispositivo.php">
+                            <a href="abrir_chamado.php">
                                 <div>
                                     <div id="box-infos-amarela">
                                         <span>
-                                            <h4>PREENCHER</h4>
+                                            <h4>ABRIR CHAMADO</h4>
                                         </span>
-                                        <h3>PREENCHER</h3>
+                                        <h3>ABRIR</h3>
                                         <i class="fa-solid fa-square-plus"></i>
                                         <p class="texto-filtro">Clique para abrir</p>
                                     </div>
                                 </div>
                             </a>
-                            <a href="consulta_dispositivos.php?aparelhos">
+                            <a href="gerenciar_chamados.php?em_aberto">
                                 <div>
                                     <div id="box-infos-azul">
                                         <span>
-                                            <h4>PREENCHER</h4>
+                                            <h4>EM ABERTO</h4>
                                         </span>
-                                        <h3>PREENCHER</h3>
-                                        <i class="fa-solid fa-mobile-screen"></i>
+                                        <h3>EXIBIR</h3>
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
                                 </div>
                             </a>
-                            <a href="consulta_dispositivos.php?linhas">
+                            <a href="gerenciar_chamados.php?meu_departamento">
                                 <div>
                                     <div id="box-infos-verde">
                                         <span>
-                                            <h4>PREENCHER</h4>
+                                            <h4>MEU DEPARTAMENTO</h4>
                                         </span>
-                                        <h3>PREENCHER</h3>
-                                        <i class="fa-solid fa-sim-card"></i>
+                                        <h3>EXIBIR</h3>
+                                        <i class="fa-solid fa-building-user"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
                                 </div>
                             </a>
-                            <a href="consulta_dispositivos.php?mdm">
+                            <a href="gerenciar_chamados.php?minha_unidade">
                                 <div>
                                     <div id="box-infos-roxa">
                                         <span>
-                                            <h4>PREENCHER</h4>
+                                            <h4>MINHA UNIDADE</h4>
                                         </span>
-                                        <h3>PREENCHER</h3>
-                                        <i class="fa-solid fa-shield-halved"></i>
-                                        <p class="texto-filtro">Clique para filtrar</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="consulta_dispositivos.php">
-                                <div>
-                                    <div id="box-infos-cinza">
-                                        <span>
-                                            <h4>PREENCHER</h4>
-                                        </span>
-                                        <h3>PREENCHER</h3>
-                                        <i class="fa-solid fa-globe"></i>
+                                        <h3>EXIBIR</h3>
+                                        <i class="fa-solid fa-map-location-dot"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div>
-                            <form method="get" action="consulta_dispositivos.php">
+                            <form method="get">
                                 <header id="form-cabecalho">
                                     <h1>Consulta de chamados</h1>
                                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -126,7 +148,7 @@ $exibeTodosChamados = $chamados->exibeTodosChamados();
                         </div>
                         <div>
 
-                            <h1>Gerenciar chamados em aberto</h1>
+                            <h1><?= $titulo_tabela_filtrada ?></h1>
                             <table>
                                 <thead>
                                     <tr>
@@ -145,8 +167,8 @@ $exibeTodosChamados = $chamados->exibeTodosChamados();
                                 <tbody>
                                     <?php foreach ($exibeTodosChamados as $chamados) : ?>
                                         <tr>
-                                            <td><a href="gerencia_chamado.php?id=<?= $chamados['id'] ?>"><?= htmlentities($chamados['id']) ?></a></td>
-                                            <td><a href="gerencia_chamado.php?id=<?= $chamados['id'] ?>"><?= htmlentities($chamados['titulo']) ?></a></td>
+                                            <td><a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><?= htmlentities($chamados['id']) ?></a></td>
+                                            <td><a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><?= htmlentities($chamados['titulo']) ?></a></td>
                                             <td><?= htmlentities($chamados['departamento']) ?></td>
                                             <td><?= htmlentities($chamados['categoria']) ?></td>
                                             <td id="status">
