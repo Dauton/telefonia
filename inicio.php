@@ -13,7 +13,7 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
 <!DOCTYPE html>
 <html>
 
-<head>
+<head>  
 
     <?php
     // META TAGS E LINKS DO HEAD...

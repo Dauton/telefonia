@@ -53,7 +53,7 @@ CREATE TABLE `tb_dispositivos` (
   PRIMARY KEY (`id`),
   FULLTEXT KEY `linha` (`linha`,`operadora`,`servico`,`perfil`,`status`,`sim_card`,`marca_aparelho`,`modelo_aparelho`,`imei_aparelho`,`unidade`,`centro_custo`,`uf`,`ponto_focal`,`gestor`,`nome`,`matricula`),
   FULLTEXT KEY `busca` (`linha`,`operadora`,`servico`,`perfil`,`marca_aparelho`,`modelo_aparelho`,`imei_aparelho`,`unidade`,`centro_custo`,`canal`,`ponto_focal`,`gestor`,`nome`,`matricula`,`email`,`funcao`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +62,6 @@ CREATE TABLE `tb_dispositivos` (
 
 LOCK TABLES `tb_dispositivos` WRITE;
 /*!40000 ALTER TABLE `tb_dispositivos` DISABLE KEYS */;
-INSERT INTO `tb_dispositivos` VALUES (1,'Sim','11970414344','TIM','MOVEL','VOZ ILIMITADO + 4G','ATIVADO','2024-12-31','','Sim','SAMSUNG','GALAXY A03 CORE','23456765432','SIM','CDARCEX','219002','MG','ID DO BRASIL LOGÍSTICA LTDA','DAUTON PEREIRA FÉLIX','GILBERTO SIMÕES','Sim','DAUTON FÉLIX','123456','DPFELIX@ID-LOGISTICS.COM','ANALISTA DE TI'),(2,'Não','','','','','','','','Sim','IPHONE','GALAXY A03 CORE','2312321','SIM','CDARCEX','204303','AC','ID ARMAZENS GERAIS LTDA','SAFS','ASDFE','Sim','FULANO JUNIOR','2121','','');
 /*!40000 ALTER TABLE `tb_dispositivos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -75,4 +74,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-24 17:10:39
+-- Dump completed on 2024-10-25 16:48:20

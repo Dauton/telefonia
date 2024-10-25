@@ -95,6 +95,14 @@ table i:hover {
     filter: brightness(60%);
 }
 
+#box-anexo a {
+    margin-top: 8px;
+    padding: 7px 10px;
+    border-radius: 2px;
+    background: var(--terciary-color);
+    color: #fff;
+}
+
 #bottom-table {
     width: 100%;
     display: flex;

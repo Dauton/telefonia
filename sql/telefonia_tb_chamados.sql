@@ -31,6 +31,7 @@ CREATE TABLE `tb_chamados` (
   `categoria` varchar(100) DEFAULT NULL,
   `prioridade` varchar(100) DEFAULT NULL,
   `descricao` varchar(9999) DEFAULT NULL,
+  `anexo` varchar(100) DEFAULT NULL,
   `usuario` varchar(100) DEFAULT NULL,
   `unidade_usuario` varchar(100) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE `tb_chamados` (
   `data_fechamento` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `busca` (`titulo`,`departamento`,`categoria`,`usuario`,`unidade_usuario`,`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +50,6 @@ CREATE TABLE `tb_chamados` (
 
 LOCK TABLES `tb_chamados` WRITE;
 /*!40000 ALTER TABLE `tb_chamados` DISABLE KEYS */;
-INSERT INTO `tb_chamados` VALUES (1,'COMPRA DE CELULAR','INFRAESTRUTURA IDL','AQUISIÇÃO DE APARELHO','URGENTE','Boa tarde!\r\n\r\nPrecisamos de um celular para nova demanda no quadro\r\n\r\nAt.te,\r\nDauton Pereira Félix','dpfelix','CDARCEX','EM ABERTO','2024-10-19 17:39:54','NÃO FECHADO','NÃO FECHADO','NÃO FECHADO'),(2,'TROCA DE TELA TABLET','MOBIT','REPARO DE APARELHO','URGENTE','Boa tarde!\r\n\r\nPoderiam encaminhar um eticket de despacho do correio?\r\n\r\nPrecisamos enviar o seguinte tablet para troca de tela\r\n\r\nIMEI: 121249325898437\r\n\r\nAt.te,\r\nDauton Pereira Félix','dpfelix','CDARCEX','EM ABERTO','2024-10-23 17:48:18','NÃO FECHADO','NÃO FECHADO','NÃO FECHADO');
 /*!40000 ALTER TABLE `tb_chamados` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-24 17:10:40
+-- Dump completed on 2024-10-25 16:48:21

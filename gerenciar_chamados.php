@@ -86,7 +86,7 @@ if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=') {
                                         <span>
                                             <h4>ABRIR CHAMADO</h4>
                                         </span>
-                                        <h3>ABRIR</h3>
+                                        <h3>Abrir</h3>
                                         <i class="fa-solid fa-square-plus"></i>
                                         <p class="texto-filtro">Clique para abrir</p>
                                     </div>
@@ -98,7 +98,7 @@ if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=') {
                                         <span>
                                             <h4>EM ABERTO</h4>
                                         </span>
-                                        <h3>EXIBIR</h3>
+                                        <h3>Exibir</h3>
                                         <i class="fa-solid fa-triangle-exclamation"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
@@ -110,7 +110,7 @@ if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=') {
                                         <span>
                                             <h4>MEU DEPARTAMENTO</h4>
                                         </span>
-                                        <h3>EXIBIR</h3>
+                                        <h3>Exibir</h3>
                                         <i class="fa-solid fa-building-user"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
@@ -122,7 +122,7 @@ if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=') {
                                         <span>
                                             <h4>MINHA UNIDADE</h4>
                                         </span>
-                                        <h3>EXIBIR</h3>
+                                        <h3>Exibir</h3>
                                         <i class="fa-solid fa-map-location-dot"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>

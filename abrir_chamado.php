@@ -6,13 +6,24 @@ require_once "vendor/autoload.php";
 senhaPrimeiroAcesso();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $arquivo = $_FILES['arquivo'];
+    $nome = $arquivo['name'];
+    $tmp_name = $arquivo['tmp_name'];
+
+    $extensao = pathinfo($nome, PATHINFO_EXTENSION);
+    $novo_nome = uniqid() . '.' . $extensao;
+    move_uploaded_file($tmp_name, "uploads/" . $novo_nome);
+
     $abreChamado = new Chamado($pdo);
     $abreChamado->abreChamado(
         $_POST['titulo'],
         $_POST['departamento'],
         $_POST['categoria'],
         $_POST['prioridade'],
-        $_POST['descricao']
+        $_POST['descricao'],
+        "uploads/" . $novo_nome
+        
     );
 
     $armazenaLog = new Logs($pdo);
@@ -27,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: abrir_chamado.php?chamado=aberto");
     die();
 }
+
 
 $chamados = new Chamado($pdo);
 $exibeMeusChamados = $chamados->exibeMeusChamados();
@@ -66,7 +78,7 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                     <h3><a href="inicio.php">INÍCIO</a> / PAINEL DE CHAMADOS</h3>
                 </header>
                 <section class="conteudo-center" name="cadastro-usuario">
-                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off" enctype="multipart/form-data">
+                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off" enctype="multipart/form-data" multiple>
                         <header id="form-cabecalho">
                             <h1>Abertura de chamado</h1>
                             <i class="fa-solid fa-user-plus"></i>

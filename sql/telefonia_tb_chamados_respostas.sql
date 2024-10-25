@@ -31,7 +31,7 @@ CREATE TABLE `tb_chamados_respostas` (
   `respondido_por` varchar(45) DEFAULT NULL,
   `data_resposta` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,6 @@ CREATE TABLE `tb_chamados_respostas` (
 
 LOCK TABLES `tb_chamados_respostas` WRITE;
 /*!40000 ALTER TABLE `tb_chamados_respostas` DISABLE KEYS */;
-INSERT INTO `tb_chamados_respostas` VALUES (2,1,'Olá mundo','dpfelix','2024-10-19 18:45:42'),(3,2,'Bom dia!\r\n\r\nSegue E-ticket de postagem\r\n\r\n982876468047\r\n\r\nAtenciosamente,\r\nEquipe Mobit','mobit','2024-10-23 17:49:12');
 /*!40000 ALTER TABLE `tb_chamados_respostas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-24 17:10:40
+-- Dump completed on 2024-10-25 16:48:20

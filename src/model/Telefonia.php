@@ -13,58 +13,68 @@ class Telefonia
 
     public static function executaValidacoes(string $possui_linha, string $linha, string $operadora, string $status, string $sim_card, string $possui_aparelho, ?string $marca_aparelho, ?string $modelo_aparelho, ?string $imei_aparelho, ?string $gestao_mdm, string $unidade, string $centro_custo, string $uf, string $canal, string $ponto_focal, string $gestor, string $possui_usuario, ?string $nome, ?string $matricula, ?string $email): void
     {
+        if(!empty($_GET['id']))
+        {
+            // CASO A VALIDAÇÃO ESTEJA OCORRENDO NO MOMENTO DA VISUALIZAÇÃO DE UM DIDPOSITIVO, SERÁ RETORNADO A PÁGINA DE VISUALIZAÇÃO EM CASO DE ERRO DE VALIDAÇÃO DE ALGUM CAMPO,
+            $caminho = "visualiza_dispositivo.php?id=$_GET[id]&";
+
+        } else {
+            // CASO ESTEJA NA PÁGINA DE CADASTRO DE UM DISPOSITIVO, SERÁ RETORNADO A PÁGINA DE CADASTRO EM CASO DE ERRO DE VALIDAÇÃO DE ALGUM CAMPO...
+            $caminho = "cadastrar_dispositivo.php?";
+        }
+
         // VALIDA CAMPOS VAZIOS E NUMÉRICOS...
-        Validacoes::validaCampoVazio($possui_linha, "../../cadastrar_dispositivo.php?verifica_campo=campo_possui_linha");
-        Validacoes::validaCampoVazio($possui_aparelho, "../../cadastrar_dispositivo.php?verifica_campo=campo_possui_aparelho");
-        Validacoes::validaCampoVazio($possui_usuario, "../../cadastrar_dispositivo.php?verifica_campo=campo_possui_usuario");
+        Validacoes::validaCampoVazio($possui_linha, "$caminho" . "verifica_campo=campo_possui_linha");
+        Validacoes::validaCampoVazio($possui_aparelho, "$caminho" . "verifica_campo=campo_possui_aparelho");
+        Validacoes::validaCampoVazio($possui_usuario, "$caminho" . "verifica_campo=campo_possui_usuario");
 
         // CASO POSSUA LINHA, OS CAMPOS REFERNETES À LINHA SERÃO VALIDADOS...
         if ($_POST['possui_linha'] === 'Sim') {
-            Validacoes::validaCampoVazio($linha, "../../cadastrar_dispositivo.php?verifica_campo=campo_linha_vazio");
-            Validacoes::validaCampoVazio($operadora, "../../cadastrar_dispositivo.php?verifica_campo=campo_operadora_vazio");
-            Validacoes::validaCampoVazio($status, "../../cadastrar_dispositivo.php?verifica_campo=campo_status_vazio");
-            Validacoes::validaCampoNumerico('linha', "../../cadastrar_dispositivo.php?verifica_campo=linha_nao_numerico");
+            Validacoes::validaCampoVazio($linha, "$caminho" . "verifica_campo=campo_linha_vazio");
+            Validacoes::validaCampoVazio($operadora, "$caminho" . "verifica_campo=campo_operadora_vazio");
+            Validacoes::validaCampoVazio($status, "$caminho" . "verifica_campo=campo_status_vazio");
+            Validacoes::validaCampoNumerico('linha', "$caminho" . "verifica_campo=linha_nao_numerico");
 
             // VALIDA O CAMPO DO SIM CARD APENAS QUANDO ELE NÃO ESTIVER VAZIO...
             if (!empty($sim_card)) {
-                Validacoes::validaCampoNumerico('sim_card', "../../cadastrar_dispositivo.php?verifica_campo=sim_card_nao_numerico");
+                Validacoes::validaCampoNumerico('sim_card', ".$caminho" . "verifica_campo=sim_card_nao_numerico");
             }
         }
 
         // CASO POSSUA APARELHO, OS CAMPOS REFERNETES AO APARELHO SERÃO VALIDADOS...
         if ($_POST['possui_aparelho'] === 'Sim') {
-            Validacoes::validaCampoVazio($marca_aparelho, "../../cadastrar_dispositivo.php?verifica_campo=campo_marca_vazio");
-            Validacoes::validaCampoVazio($modelo_aparelho, "../../cadastrar_dispositivo.php?verifica_campo=campo_modelo_vazio");
-            Validacoes::validaCampoVazio($imei_aparelho, "../../cadastrar_dispositivo.php?verifica_campo=campo_imei_vazio");
-            Validacoes::validaCampoVazio($gestao_mdm, "../../cadastrar_dispositivo.php?verifica_campo=campo_mdm_vazio");
-            Validacoes::validaCampoNumerico('imei_aparelho', "../../cadastrar_dispositivo.php?verifica_campo=imei_nao_numerico");
+            Validacoes::validaCampoVazio($marca_aparelho, "$caminho" . "verifica_campo=campo_marca_vazio");
+            Validacoes::validaCampoVazio($modelo_aparelho, "$caminho" . "verifica_campo=campo_modelo_vazio");
+            Validacoes::validaCampoVazio($imei_aparelho, "$caminho" . "verifica_campo=campo_imei_vazio");
+            Validacoes::validaCampoVazio($gestao_mdm, "$caminho" . "verifica_campo=campo_mdm_vazio");
+            Validacoes::validaCampoNumerico('imei_aparelho', "$caminho" . "verifica_campo=imei_nao_numerico");
         }
         if ($_POST['possui_usuario'] === 'Sim') {
-            Validacoes::validaCampoVazio($nome, "../../cadastrar_dispositivo.php?verifica_campo=campo_nome_vazio");
+            Validacoes::validaCampoVazio($nome, "$caminho" . "verifica_campo=campo_nome_vazio");
 
             // VALIDA O CAMPO DA MATRICULA APENAS QUANDO ELE NÃO ESTIVER VAZIO...
             if (!empty($matricula)) {
-                Validacoes::validaCampoNumerico('matricula', "../../cadastrar_dispositivo.php?verifica_campo=matricula_nao_numerico");
+                Validacoes::validaCampoNumerico('matricula', "$caminho" . "verifica_campo=matricula_nao_numerico");
             }
         }
 
         // CASO POSSUA USUÁRIO, OS CAMPOS REFERNETES AO USUÁRIO SERÃO VALIDADOS...
         if ($_POST['possui_linha'] === 'Sim' || $_POST['possui_aparelho'] === 'Sim' || $_POST['possui_usuario'] === 'Sim') {
-            Validacoes::validaCampoVazio($unidade, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
-            Validacoes::validaCampoVazio($centro_custo, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
-            Validacoes::validaCampoVazio($uf, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
-            Validacoes::validaCampoVazio($canal, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
-            Validacoes::validaCampoVazio($ponto_focal, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
-            Validacoes::validaCampoVazio($gestor, "../../cadastrar_dispositivo.php?verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($unidade, "$caminho" . "verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($centro_custo, "$caminho" . "verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($uf, "$caminho" . "verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($canal, "$caminho" . "verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($ponto_focal, "$caminho" . "verifica_campo=campos_localidade");
+            Validacoes::validaCampoVazio($gestor, "$caminho" . "verifica_campo=campos_localidade");
         }
 
         // VALIDA CAMPO DE E-MAIL APENAS QUANDO O CAMPO NÃO ESTIVER VAZIO...
         if (!empty($email)) {
-            Validacoes::validaCampoEmail('email', "../../cadastrar_dispositivo.php?verifica_campo=email_invalido");
+            Validacoes::validaCampoEmail('email', "$caminho" . "verifica_campo=email_invalido");
         }
 
         // VALIDA O CAMPO NUMPERICO CENTRO DE CUSTO...
-        Validacoes::validaCampoNumerico('centro_custo', "../../cadastrar_dispositivo.php?verifica_campo=centro_custo_nao_numerico");
+        Validacoes::validaCampoNumerico('centro_custo', "$caminho" . "verifica_campo=centro_custo_nao_numerico");
     }
 
     // CADASTRA DISPOSITIVO...

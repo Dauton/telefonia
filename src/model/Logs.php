@@ -25,7 +25,7 @@ class Logs
     // LISTA OS LOGS DE ACESSOS...
     public function listaLogsAcessos() : array
     {
-        $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
+        $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY id DESC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, 'Acesso', PDO::PARAM_STR);
         $stmt->execute();
@@ -36,7 +36,7 @@ class Logs
     // LISTA OS LOGS DE TEÇEFONIA...
     public function listaLogsTelefonia() : array
     {
-        $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
+        $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY id DESC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, 'Telefonia', PDO::PARAM_STR);
         $stmt->execute();
@@ -47,7 +47,7 @@ class Logs
     // LISTA OS LOGS DE OPÇÕES...
     public function listaLogsOpcoes() : array
     {
-        $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
+        $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY id DESC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, 'Opções', PDO::PARAM_STR);
         $stmt->execute();
@@ -58,7 +58,7 @@ class Logs
     // LISTA OS LOGS DE USUÁRIOS...
     public function listaLogsUsuarios() : array
     {
-        $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
+        $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY id DESC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, 'Usuários', PDO::PARAM_STR);
         $stmt->execute();

@@ -85,7 +85,14 @@ $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="9" id="table-textarea"><textarea readonly><?= htmlentities($dadoChamado['descricao']) ?></textarea></td>
+                                <td colspan="9" id="table-textarea">
+                                    <textarea readonly><?= htmlentities($dadoChamado['descricao']) ?></textarea>
+                                    <?php if(!empty($dadoChamado['anexo'])) :?>
+                                    <div id="box-anexo">
+                                        <a href="<?= htmlentities($dadoChamado['anexo']) ?>" target="_blank">Arquivo anexado</a>
+                                    </div>
+                                    <?php endif ?>
+                                </td>
                             </tr>
                             <tr>
                                 <td colspan="9" id="table-textarea" style="text-align: left !important">

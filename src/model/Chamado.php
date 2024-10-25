@@ -12,7 +12,7 @@ class Chamado
     }
 
     // ABRE UM CHAMADO...
-    public function abreChamado(string $titulo, string $departamento, string $categoria, string $prioridade, string $descricao): void   
+    public function abreChamado(string $titulo, string $departamento, string $categoria, string $prioridade, string $descricao, string $anexo): void   
     {
         Validacoes::validaCampoVazio($titulo, "../../abrir_chamado.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($departamento, "../../abrir_chamado.php?verifica_campo=todos_campos");
@@ -20,18 +20,19 @@ class Chamado
         Validacoes::validaCampoVazio($prioridade, "../../abrir_chamado.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($descricao, "../../abrir_chamado.php?verifica_campo=todos_campos");
 
-        $sql = "INSERT INTO tb_chamados (titulo, departamento, categoria, prioridade, descricao, usuario, unidade_usuario, status, fechado_por, data_fechamento) VALUES ( ?,?,?,?,?,?,?,?,?,? )";
+        $sql = "INSERT INTO tb_chamados (titulo, departamento, categoria, prioridade, descricao, anexo, usuario, unidade_usuario, status, fechado_por, data_fechamento) VALUES ( ?,?,?,?,?,?,?,?,?,?,? )";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, trim(mb_strtoupper($titulo)), PDO::PARAM_STR);
         $stmt->bindValue(2, trim(mb_strtoupper($departamento)), PDO::PARAM_STR);
         $stmt->bindValue(3, trim(mb_strtoupper($categoria)), PDO::PARAM_STR);
         $stmt->bindValue(4, trim(mb_strtoupper($prioridade)), PDO::PARAM_STR);
         $stmt->bindValue(5, trim($descricao), PDO::PARAM_STR);
-        $stmt->bindValue(6, $_SESSION['usuario'], PDO::PARAM_STR);
-        $stmt->bindValue(7, $_SESSION['unidade'], PDO::PARAM_STR);
-        $stmt->bindValue(8, 'EM ABERTO', PDO::PARAM_STR);
-        $stmt->bindValue(9, 'NÃO FECHADO', PDO::PARAM_STR);
+        $stmt->bindValue(6, trim($anexo), PDO::PARAM_STR);
+        $stmt->bindValue(7, $_SESSION['usuario'], PDO::PARAM_STR);
+        $stmt->bindValue(8, $_SESSION['unidade'], PDO::PARAM_STR);
+        $stmt->bindValue(9, 'EM ABERTO', PDO::PARAM_STR);
         $stmt->bindValue(10, 'NÃO FECHADO', PDO::PARAM_STR);
+        $stmt->bindValue(11, 'NÃO FECHADO', PDO::PARAM_STR);
         $stmt->execute();
     }
 
@@ -39,7 +40,7 @@ class Chamado
     // LISTA TODOS OS CHAMADOS...
     public function exibeTodosChamados() : array
     {
-        $sql = "SELECT *, DATE_FORMAT(data_abertura, '%d/%m/%Y às %H:%i') AS data_abertura FROM tb_chamados WHERE titulo != ''";
+        $sql = "SELECT *, DATE_FORMAT(data_abertura, '%d/%m/%Y às %H:%i') AS data_abertura FROM tb_chamados ORDER BY id DESC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
