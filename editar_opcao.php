@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $editaDispositivo->editaOpcao(
         $_POST['tipo'],
         $_POST['descricao'],
+        $pdo
     );
 
     $armazenaLog = new Logs($pdo);

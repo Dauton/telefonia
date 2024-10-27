@@ -102,7 +102,36 @@ class Validacoes
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if($usuario === $resultado['usuario']) {
-            header("Location: editar_usuario.php?id_usuario=$_GET[id_usuario]&usuario=usuario_ja_cadastrado");
+            header("Location: $caminho");
+            die();
+        }
+    }
+
+    public static function validaOpcaoExistenteCadastro(string $descricao, string $caminho, PDO $pdo)
+    {
+        $sql = "SELECT * FROM tb_cadastros_opcoes WHERE descricao = :descricao";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":descricao", $descricao);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($descricao === $resultado['descricao']) {
+            header("Location: $caminho");
+            die();
+        }
+    }
+
+    public static function validaOpcaoExistenteEdicao(string $descricao, string $caminho, PDO $pdo)
+    {
+        $sql = "SELECT * FROM tb_cadastros_opcoes WHERE descricao = :descricao and id != :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":descricao", $descricao);
+        $stmt->bindValue(":id", $_GET['id']);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($descricao === $resultado['descricao']) {
+            header("Location: $caminho");
             die();
         }
     }

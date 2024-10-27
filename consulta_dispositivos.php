@@ -5,9 +5,10 @@ require_once "vendor/autoload.php";
 
 senhaPrimeiroAcesso();
 
-if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=' || !str_starts_with($_SERVER['QUERY_STRING'], 'busca=')) {
+if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=' || $_SERVER['QUERY_STRING'] === 'dispositivo=atualizado' || $_SERVER['QUERY_STRING'] === 'dispositivo=cadastrado' || $_SERVER['QUERY_STRING'] === 'dispositivo=excluido') {
 
     $titulo_tabela_filtrada = "Dispositivos cadastrados";
+    $caminho_extracao = "extrair_tudo";
 
     $dispositivo = new Telefonia($pdo);
     $exibeDispositivos = $dispositivo->exibeDispositivos();
@@ -15,6 +16,7 @@ if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=' || !
 elseif (($_SERVER['QUERY_STRING'] ?? '') === 'linhas') {
 
     $titulo_tabela_filtrada = "Linhas cadastradas";
+    $caminho_extracao = "linhas";
 
     $dispositivo = new Telefonia($pdo);
     $exibeDispositivos = $dispositivo->exibeLinhas();
@@ -22,6 +24,7 @@ elseif (($_SERVER['QUERY_STRING'] ?? '') === 'linhas') {
 } elseif(($_SERVER['QUERY_STRING'] ?? '') === 'aparelhos') {
 
     $titulo_tabela_filtrada = "Aparelhos cadastrados";
+    $caminho_extracao = "aparelhos";
     
     $dispositivo = new Telefonia($pdo);
     $exibeDispositivos = $dispositivo->exibeAparelhos();
@@ -29,6 +32,7 @@ elseif (($_SERVER['QUERY_STRING'] ?? '') === 'linhas') {
 } elseif(($_SERVER['QUERY_STRING'] ?? '') === 'mdm') {
 
     $titulo_tabela_filtrada = "Aparelhos com MDM";
+    $caminho_extracao = "mdm";
 
     $dispositivo = new Telefonia($pdo);
     $exibeDispositivos = $dispositivo->exibeComMDM();
@@ -36,6 +40,7 @@ elseif (($_SERVER['QUERY_STRING'] ?? '') === 'linhas') {
 } elseif(($_SERVER['QUERY_STRING'] ?? '') !== 'mdm' && ($_SERVER['QUERY_STRING'] ?? '') !== 'linha' && ($_SERVER['QUERY_STRING'] ?? '') !== 'aparelho' && ($_SERVER['QUERY_STRING'] ?? '') !== '') {
     
     $titulo_tabela_filtrada = 'Resultado da busca';
+    $caminho_extracao = "extrair_tudo";
 
     $dispositivo = new Telefonia($pdo);
     $exibeDispositivos = $dispositivo->buscaDispositivo($_GET['busca']);
@@ -221,7 +226,14 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
 
             </article>
         </section>
+        
     </main>
+
+    <div class="btns-atalhos">
+        <a href="src/excel/extrair_telefonia.php?<?= $caminho_extracao ?>"><button id="btn-atalho" title="Extrair para Excel">
+                <img src="img/logo-excel.png">
+            </button></a>
+    </div>
 
     <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/javascript.js"></script>

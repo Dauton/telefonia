@@ -64,7 +64,7 @@ class Usuario
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id_usuario, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     // MÉTODO QUE EDITA O USUÁRIO SELECIONADO

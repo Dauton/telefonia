@@ -8,7 +8,7 @@ liberacaoInfraIDL();
 // BUSCA ID DO USUÁRIO PARA ARMAZENAR OS DADOS DO USUÁRIO NO LOG...
 
 $buscaIdUsuario = new Usuario($pdo);
-$dadoUsuario = $buscaIdUsuario->buscaIdUsuario($_POST['id']);
+$dadoUsuario = $buscaIdUsuario->buscaIdUsuario($_POST['id_usuario']);
 
 // EXCLUI O USUÁRIO SELECIONADO
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $armazenaLog = new Logs($pdo);
     $armazenaLog->armazenaLog(
         'Usuários',
-        $_SESSION['usuario  '],
+        $_SESSION['usuario'],
         'Excluiu o usuário "' . $dadoUsuario['usuario'] . '" de nome "' . $dadoUsuario['nome'] . '"',
         'Sucesso',
         ''

@@ -122,8 +122,6 @@ $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
                             </tr>
                         </tbody>
                     </table>
-            
-                    <br><h1>Respostas do chamado</h1>
 
                     <div id="box-confirmacao" title="Fechar chamado">
 
@@ -191,22 +189,23 @@ $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
                     </div>
 
                     <?php foreach ($exibeRespostas as $respostas) : ?>
+
+                        <br><h1>Respostas</h1>
+
                         <table id="table-respostas">
                             <thead>
                                 <tr>
-                                    <td style="text-align: left">
-                                        <h1>Resposta</h1>
-                                    </td>
-                                    <td style="text-align: right">
+                                    <td id="thead-resposta">
+                                        <i class="fa-solid fa-comments"></i>
                                         <span><b><?= $respostas['respondido_por'] ?></b></span>
                                         <span><?= $respostas['data_resposta'] ?></span>
-                                        <i class="fa-solid fa-comments"></i>
+                                            
                                     </td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colspan="2">
+                                    <td>
                                         <form class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
                                             <label id="label-textarea">
                                                 <div>
@@ -227,7 +226,6 @@ $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
                                             <a href="editar_resposta.php?id=<?= $respostas['id']?>"><button type="busston">Atualizar resposta</button></a>
                                         </div>
                                     </td>
-                                    <td></td>
                                     <?php endif ?>
                                 </tr>
                             </tbody>
@@ -240,17 +238,14 @@ $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
                         <table id="table-respostas">
                             <thead>
                                 <tr>
-                                    <td style="text-align: left">
-                                        <h1>Responder</h1>
-                                    </td>
-                                    <td style="text-align: right">
+                                    <td id="thead-resposta">
                                         <i class="fa-solid fa-comment-dots"></i>
                                     </td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td  colspan="2">
+                                    <td>
                                         <form method="post" action="src/manipulacoes_chamados/envia_resposta.php?id=<?= $dadoChamado['id'] ?>" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
                                             <label for="descricao_resposta" id="label-textarea">Responda o chamado<span style="color: red;"> *</span>
                                                 <div>
@@ -262,7 +257,6 @@ $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
                                                 <td>
                                                     <button type="submit">Enviar resposta</but>
                                                 </td>
-                                                <td></td>
                                             </tr>
                                         </form>
                                     </td>

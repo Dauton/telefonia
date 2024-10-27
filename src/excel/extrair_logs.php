@@ -28,6 +28,11 @@
         $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = 'Usuários'";
         $nome_arquivo = 'LOGS_USUARIOS.xls';
 
+    } elseif($_SERVER['QUERY_STRING'] === 'aparelhos') {
+        
+        $sql = "SELECT * FROM tb_dispositivos WHERE marca_aparelho != '' AND marca_aparelho != null";
+        $nome_arquivo = 'APARELHOS_CADASTRADOS.xls';
+
     } else {
         header('Location: inicio.php');
         die();
@@ -50,11 +55,11 @@
         $html = '';
         $html .= '<table border="1">';
         $html .= '<tr style="color: #ffffff; text-align: center; font-family: Calibri">';
-        $html .= '<td style="background: #0088ff"><b>ID registro</b></td>';
-        $html .= '<td style="background: #0088ff"><b>Usuário</b></td>';
-        $html .= '<td style="background: #0088ff"><b>Atividade</b></td>';
-        $html .= '<td style="background: #0088ff"><b>Resultado da atividade</b></td>';
-        $html .= '<td style="background: #0088ff"><b>Data da atividade</b></td>';
+        $html .= '<td style="background: #00384b"><b>ID registro</b></td>';
+        $html .= '<td style="background: #00384b"><b>Usuário</b></td>';
+        $html .= '<td style="background: #00384b"><b>Atividade</b></td>';
+        $html .= '<td style="background: #00384b"><b>Resultado da atividade</b></td>';
+        $html .= '<td style="background: #00384b"><b>Data da atividade</b></td>';
         $html .= '</tr>';
 
         try {

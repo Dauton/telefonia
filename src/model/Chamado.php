@@ -226,4 +226,34 @@ class Chamado
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $resultado;
     }
+
+    public function contagemChamadosEmAberto() 
+    {
+        $sql = "SELECT COUNT(*) FROM tb_chamados WHERE status = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, 'EM ABERTO');
+        $stmt->execute();
+        $resultado = $stmt->fetchColumn();
+        return $resultado;
+    }
+
+    public function contagemChamadosMeuDepartamento() 
+    {
+        $sql = "SELECT COUNT(*) FROM tb_chamados WHERE departamento = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $_SESSION['perfil']);
+        $stmt->execute();
+        $resultado = $stmt->fetchColumn();
+        return $resultado;
+    }
+
+    public function contagemChamadosMinhaUnidade() 
+    {
+        $sql = "SELECT COUNT(*) FROM tb_chamados WHERE unidade_usuario = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $_SESSION['unidade']);
+        $stmt->execute();
+        $resultado = $stmt->fetchColumn();
+        return $resultado;
+    }
 }

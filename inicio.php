@@ -83,7 +83,7 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                             </a>
                             <a href="abrir_chamado.php">
                                 <div>
-                                    <div id="box-infos-cinza">
+                                    <div id="box-infos-roxa">
                                         <span>
                                             <h4>ABRIR CHAMADO</h4>
                                         </span>

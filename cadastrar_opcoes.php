@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cadastraDispositivo->cadastraOpcao(
         $_POST['tipo'],
         $_POST['descricao'],
+        $pdo
     );
 
     $armazenaLog = new Logs($pdo);
@@ -78,6 +79,58 @@ $listaCentroCustos = $centro_custo->listaOpcoes('CENTRO DE CUSTOS');
                 </header>
                 <section class="conteudo-center">
 
+                    <div class="conteudo-center-box-01">
+                        <h1>Alguns atalhos</h1>
+                        <a href="#marcas">
+                            <div>
+                                <div id="box-infos-amarela">
+                                    <span>
+                                        <h4>MARCAS DE APARELHO</h4>
+                                    </span>
+                                    <h3>Ir até</h3>
+                                    <i class="fa-solid fa-gears"></i>
+                                    <p class="texto-filtro">Clique para ir</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#modelos">
+                            <div>
+                                <div id="box-infos-azul">
+                                    <span>
+                                        <h4>MODELOS DE APARELHO</h4>
+                                    </span>
+                                    <h3>Ir até</h3>
+                                    <i class="fa-solid fa-gears"></i>
+                                    <p class="texto-filtro">Clique para ir</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#unidades">
+                            <div>
+                                <div id="box-infos-verde">
+                                    <span>
+                                        <h4>UNIDADES</h4>
+                                    </span>
+                                    <h3>Ir té</h3>
+                                    <i class="fa-solid fa-gears"></i>
+                                    <p class="texto-filtro">Clique para ir</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#centros_de_custos">
+                            <div>
+                                <div id="box-infos-roxa">
+                                    <span>
+                                        <h4>CENTROS DE CUSTOS</h4>
+                                    </span>
+                                    <h3>Ir até</h3>
+                                    <i class="fa-solid fa-gears"></i>
+                                    <p class="texto-filtro">Clique para ir</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
                     <form method="post" action="">
                         <header id="form-cabecalho">
                             <h1>Cadastrar e gerenciar opções</h1>
@@ -108,7 +161,7 @@ $listaCentroCustos = $centro_custo->listaOpcoes('CENTRO DE CUSTOS');
                             </div>
                         </section>
 
-                        <section style="display: flex;">
+                        <section style="display: flex;" id="marcas">
                             <h2>Marcas de aparelho</h2>
                             <table>
                                 <thead>
@@ -132,8 +185,8 @@ $listaCentroCustos = $centro_custo->listaOpcoes('CENTRO DE CUSTOS');
                             </table>
                         </section>
 
-                        <section style="display: flex;">
-                            <h2>Modelos de aparelho</h2>
+                        <section style="display: flex;" id="modelos">
+                            <h2 >Modelos de aparelho</h2>
                             <table>
                                 <thead>
                                     <tr>
@@ -156,7 +209,7 @@ $listaCentroCustos = $centro_custo->listaOpcoes('CENTRO DE CUSTOS');
                             </table>
                         </section>
 
-                        <section style="display: flex;">
+                        <section style="display: flex;" id="unidades">
                             <h2>Unidades</h2>
                             <table>
                                 <thead>
@@ -180,7 +233,7 @@ $listaCentroCustos = $centro_custo->listaOpcoes('CENTRO DE CUSTOS');
                             </table>
                         </section>
 
-                        <section style="display: flex;">
+                        <section style="display: flex;" id="centros_de_custos">
                             <h2>Centros de custos</h2>
                             <table>
                                 <thead>

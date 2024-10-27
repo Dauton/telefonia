@@ -37,7 +37,7 @@ class Telefonia
 
             // VALIDA O CAMPO DO SIM CARD APENAS QUANDO ELE NÃO ESTIVER VAZIO...
             if (!empty($sim_card)) {
-                Validacoes::validaCampoNumerico('sim_card', ".$caminho" . "verifica_campo=sim_card_nao_numerico");
+                Validacoes::validaCampoNumerico('sim_card', "$caminho" . "verifica_campo=sim_card_nao_numerico");
             }
         }
 

@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $armazenaLog = new Logs($pdo);
     $armazenaLog->armazenaLog(
         'Usuários',
-        $_SESSION['usuario  '],
+        $_SESSION['usuario'],
         'Atualizou o usuário "' . $_POST['usuario'] . '" de nome "' . $_POST['nome'] . '"',
         'Sucesso',
         ''
@@ -187,7 +187,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div id="box-confimarcao-btns">
                 <form action="src/manipulacoes_usuario/exclui_usuario.php" method="post">
                     <input type="hidden" name="id_usuario" value="<?= $buscaIdUsuario['id_usuario'] ?>">
-                    <input type="hidden" name="usuario" value="<?= $buscaIdUsuario['usuario'] ?>"> // PARA REGISTAR O NOME DO USUÁRIO EXCLUÍDO NO LOG 
+                    <input type="hidden" name="usuario" value="<?= $buscaIdUsuario['usuario'] // PARA REGISTAR O NOME DO USUÁRIO EXCLUÍDO NO LOG  ?>">
                     
                     <div>
                         <button type="submit" id="btn-red" title="Excluir esse usuário">Excluir</button>

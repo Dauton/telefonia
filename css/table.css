@@ -146,8 +146,11 @@ table .fa-circle {
 .conteudo-center-tables table thead {
     background: var(--secundary-color);
 }
+#table-respostas {
+    overflow: hidden;
+}
 #table-respostas thead tr td i {
-    margin: 0 0 0 10px  ;
+    margin: 0 5px 0 0;
     color: #fff;
     font-size: 18px;
 }
@@ -166,6 +169,13 @@ table .fa-circle {
 }
 #table-respostas-text-center tr td {
     text-align: center !important;
+}
+
+#thead-resposta {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 5px;
 }
 
 @media (width <= 1020px) and (orientation: landscape) {

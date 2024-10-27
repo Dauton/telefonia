@@ -34,7 +34,7 @@ class Opcoes
 
 
     // CADASTRA UMA OPÇÃO...
-    public function cadastraOpcao(string $tipo, string $descricao) : void
+    public function cadastraOpcao(string $tipo, string $descricao, PDO $pdo) : void
     {
         
         // VALIDA SE O CAMPO DA DESCRIÇÃO É NUMERICA CASO O TIPO SELECIONADO SEJA CENTRO DE CUSTOS...
@@ -44,6 +44,9 @@ class Opcoes
         // VALIDA SE TODOS OS CAMPOS FORAM PREENCHIDOS...
         Validacoes::validaCampoVazio($tipo, "cadastrar_opcoes.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($descricao, "cadastrar_opcoes.php?verifica_campo=todos_campos");
+
+        // VALIDA SE A DESCRIÇÃO INFORMADA JÁ EXISTE...
+        Validacoes::validaOpcaoExistenteCadastro($descricao, '../../cadastrar_opcoes.php?opcao=ja_cadastrada', $pdo);
 
         $sql = "INSERT INTO tb_cadastros_opcoes (tipo, descricao) VALUES ( ?,? )";
         $stmt = $this->pdo->prepare($sql);
@@ -62,7 +65,7 @@ class Opcoes
         return $resultado;
     }
 
-    public function editaOpcao(string $tipo, string $descricao) : void
+    public function editaOpcao(string $tipo, string $descricao, PDO $pdo) : void
     {    
         // VALIDA SE O CAMPO DA DESCRIÇÃO É NUMERICA CASO O TIPO SELECIONADO SEJA CENTRO DE CUSTOS...
         if($tipo === 'CENTRO DE CUSTOS') {
@@ -72,6 +75,9 @@ class Opcoes
         // VALIDA SE TODOS OS CAMPOS FORAM PREENCHIDOS...
         Validacoes::validaCampoVazio($tipo, "$_GET[id]&verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($descricao, "$_GET[id]&verifica_campo=todos_campos");
+
+        // VALIDA SE A DESCRIÇÃO INFORMADA JÁ EXISTE...
+        Validacoes::validaOpcaoExistenteEdicao($descricao, '../../cadastrar_opcoes.php?opcao=ja_cadastrada', $pdo);
 
         $sql = "UPDATE tb_cadastros_opcoes SET tipo = ?, descricao = ? WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);

@@ -264,11 +264,6 @@ form div {
     }
     #form-altera-senha {
         width: 100%;
-    }
-}
-
-@media (width <= 1020px) {
-    form {
-        margin: 0;
+        padding: 60px 0 0 0;
     }
 }

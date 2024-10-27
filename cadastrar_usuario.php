@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $armazenaLog = new Logs($pdo);
     $armazenaLog->armazenaLog(
         'Usuários',
-        $_SESSION['usuario  '],
+        $_SESSION['usuario'],
         'Cadastrou o usuário "' . $_POST['usuario'] . '" de nome "' . $_POST['nome'] . '"',
         'Sucesso',
         ''

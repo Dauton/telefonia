@@ -42,6 +42,15 @@ if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=') {
 
 }
 
+$chamados = new Chamado($pdo);
+$emAberto = $chamados->contagemChamadosEmAberto();
+
+$chamados = new Chamado($pdo);
+$meuDepartamento = $chamados->contagemChamadosMeuDepartamento();
+
+$chamados = new Chamado($pdo);
+$minhaUnidade = $chamados->contagemChamadosMinhaUnidade();
+
 ?>
 
 
@@ -98,7 +107,7 @@ if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=') {
                                         <span>
                                             <h4>EM ABERTO</h4>
                                         </span>
-                                        <h3>Exibir</h3>
+                                        <h3><?= $emAberto; ?> chamados</h3>
                                         <i class="fa-solid fa-triangle-exclamation"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
@@ -110,7 +119,7 @@ if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=') {
                                         <span>
                                             <h4>MEU DEPARTAMENTO</h4>
                                         </span>
-                                        <h3>Exibir</h3>
+                                        <h3><?= $meuDepartamento; ?> chamados</h3>
                                         <i class="fa-solid fa-building-user"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
@@ -122,7 +131,7 @@ if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=') {
                                         <span>
                                             <h4>MINHA UNIDADE</h4>
                                         </span>
-                                        <h3>Exibir</h3>
+                                        <h3><?= $minhaUnidade; ?> chamados</h3>
                                         <i class="fa-solid fa-map-location-dot"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
