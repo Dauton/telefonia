@@ -232,9 +232,10 @@ $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
                         </table>
                     <?php endforeach ?>
 
-                    <br><h1>Responder chamado</h1>
-
                     <?php if ($dadoChamado['status'] === 'EM ABERTO') : ?>
+
+                        <br><h1>Responder chamado</h1>
+                        
                         <table id="table-respostas">
                             <thead>
                                 <tr>

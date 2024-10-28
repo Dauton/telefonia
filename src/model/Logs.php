@@ -8,7 +8,8 @@ class Logs
     {
         $this->pdo = $pdo;
     }
-
+    
+    // MÉTODO QUE ARMAZENA OS LOGS...
     public function armazenaLog(string $area_log, string $usuario_log, string $atividade_log, string $result_atividade_log, string $id_chamado) : void
     {
 
@@ -22,7 +23,7 @@ class Logs
         $stmt->execute();
     }
 
-    // LISTA OS LOGS DE ACESSOS...
+    // MÉTODO QUE LISTA OS LOGS DE ACESSOS...
     public function listaLogsAcessos() : array
     {
         $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY id DESC";
@@ -33,7 +34,7 @@ class Logs
         return $resultado;
     }
 
-    // LISTA OS LOGS DE TEÇEFONIA...
+    // MÉTODO QUE LISTA OS LOGS DE TEÇEFONIA...
     public function listaLogsTelefonia() : array
     {
         $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY id DESC";
@@ -44,7 +45,7 @@ class Logs
         return $resultado;
     }
 
-    // LISTA OS LOGS DE OPÇÕES...
+    // MÉTODO QUE LISTA OS LOGS DE OPÇÕES...
     public function listaLogsOpcoes() : array
     {
         $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY id DESC";
@@ -55,7 +56,7 @@ class Logs
         return $resultado;
     }
 
-    // LISTA OS LOGS DE USUÁRIOS...
+    // MÉTODO QUE LISTA OS LOGS DE USUÁRIOS...
     public function listaLogsUsuarios() : array
     {
         $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = ? AND data_log >= DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY id DESC";
@@ -66,9 +67,10 @@ class Logs
         return $resultado;
     }
 
+    // MÉTODO QUE EXIBE O HISTÓRICO DO CHAMADO...
     public function exibeHistoricoChamado(string $id_chamado) : array
     {
-        $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = 'Chamados' AND id_chamado = ?";
+        $sql = "SELECT *, DATE_FORMAT(data_log, '%W, %d/%m/%Y às %m:%i') AS data_log FROM tb_logs WHERE area_log = 'Chamados' AND id_chamado = ? ORDER BY id DESC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id_chamado, PDO::PARAM_STR);
         $stmt->execute();

@@ -11,7 +11,7 @@ class Opcoes
         $this->pdo = $pdo;
     }
 
-    // LISTA OPÇÕES NOS SELECTS CONFORME O TIPO...
+    // MÉTODO QUE LISTA AS OPÇÕES NOS SELECTS CONFORME O TIPO...
     public function listaOpcoes(string $tipo) : array
     {
         $sql = "SELECT * FROM tb_cadastros_opcoes WHERE tipo = ? ORDER BY descricao";
@@ -22,7 +22,7 @@ class Opcoes
         return $resultado;
     }
 
-    // LISTA OS TIPOS DE OPÇÕES...
+    // MÉTODO QUE LISTA OS TIPOS DE OPÇÕES...
     public function listaTiposOpcoes() : array
     {
         $sql = "SELECT * FROM tb_tipos_opcoes";
@@ -33,7 +33,7 @@ class Opcoes
     }
 
 
-    // CADASTRA UMA OPÇÃO...
+    // MÉTODO QUE CADASTRA UMA OPÇÃO...
     public function cadastraOpcao(string $tipo, string $descricao, PDO $pdo) : void
     {
         
@@ -55,6 +55,7 @@ class Opcoes
         $stmt->execute();
     }
 
+    // MÉTODO QUE BUSCA O ID DA OPÇÃO PARA EDIÇÃO...
     public function buscaIdOpcao(int $id) : array
     {
         $sql = "SELECT * FROM tb_cadastros_opcoes WHERE id = ?";
@@ -65,6 +66,7 @@ class Opcoes
         return $resultado;
     }
 
+    // MÉTODO QUE EDITA A OPÇÃO...
     public function editaOpcao(string $tipo, string $descricao, PDO $pdo) : void
     {    
         // VALIDA SE O CAMPO DA DESCRIÇÃO É NUMERICA CASO O TIPO SELECIONADO SEJA CENTRO DE CUSTOS...
@@ -87,7 +89,7 @@ class Opcoes
         $stmt->execute();
 
     }
-
+    // MÉTODO QUE EXCLUI A OPÇÃO...
     public function excluiOpcao(int $id) : void
     {
         $sql = "DELETE FROM tb_cadastros_opcoes WHERE id = ?";

@@ -227,31 +227,31 @@ class Chamado
         return $resultado;
     }
 
-    public function contagemChamadosEmAberto() 
+    public function contagemChamadosEmAberto(): int
     {
         $sql = "SELECT COUNT(*) FROM tb_chamados WHERE status = ?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(1, 'EM ABERTO');
+        $stmt->bindValue(1, 'EM ABERTO', PDO::PARAM_STR);
         $stmt->execute();
         $resultado = $stmt->fetchColumn();
         return $resultado;
     }
 
-    public function contagemChamadosMeuDepartamento() 
+    public function contagemChamadosMeuDepartamento(): int 
     {
         $sql = "SELECT COUNT(*) FROM tb_chamados WHERE departamento = ?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(1, $_SESSION['perfil']);
+        $stmt->bindValue(1, $_SESSION['perfil'], PDO::PARAM_STR);
         $stmt->execute();
         $resultado = $stmt->fetchColumn();
         return $resultado;
     }
 
-    public function contagemChamadosMinhaUnidade() 
+    public function contagemChamadosMinhaUnidade(): int 
     {
         $sql = "SELECT COUNT(*) FROM tb_chamados WHERE unidade_usuario = ?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(1, $_SESSION['unidade']);
+        $stmt->bindValue(1, $_SESSION['unidade'], PDO::PARAM_STR);
         $stmt->execute();
         $resultado = $stmt->fetchColumn();
         return $resultado;

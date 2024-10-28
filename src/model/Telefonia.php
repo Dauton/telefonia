@@ -11,6 +11,7 @@ class Telefonia
         $this->pdo = $pdo;
     }
 
+    // MÉTODO QUE EXECUTA AS VALIDAÇÕES...
     public static function executaValidacoes(string $possui_linha, string $linha, string $operadora, string $status, string $sim_card, string $possui_aparelho, ?string $marca_aparelho, ?string $modelo_aparelho, ?string $imei_aparelho, ?string $gestao_mdm, string $unidade, string $centro_custo, string $uf, string $canal, string $ponto_focal, string $gestor, string $possui_usuario, ?string $nome, ?string $matricula, ?string $email): void
     {
         if(!empty($_GET['id']))
@@ -77,7 +78,7 @@ class Telefonia
         Validacoes::validaCampoNumerico('centro_custo', "$caminho" . "verifica_campo=centro_custo_nao_numerico");
     }
 
-    // CADASTRA DISPOSITIVO...
+    // MÉTODO QUE CADASTRA DISPOSITIVO...
     public function cadastraDispositivo(string $possui_linha, string $linha, string $operadora, string $servico, string $perfil, string $status, string $data_ativacao, string $sim_card, string $possui_aparelho, string $marca_aparelho, string $modelo_aparelho, string $imei_aparelho, string $gestao_mdm, string $unidade, string $centro_custo, string $uf, string $canal, string $ponto_focal, string $gestor, string $possui_usuario, string $nome, string $matricula, string $email, string $funcao): void
     {
 
@@ -124,7 +125,7 @@ class Telefonia
         $stmt->execute();
     }
 
-    // LISTA TODOS OS DISPOSITIVOS...
+    // MÉTODO QUE LISTA TODOS OS DISPOSITIVOS...
     public function exibeDispositivos(): array
     {
         $sql = "SELECT * FROM tb_dispositivos";
@@ -134,7 +135,7 @@ class Telefonia
         return $resultado;
     }
 
-    // LISTA TODOS OS DISPOSITIVOS DA UNIDADE SO USUÁRIO LOGADO...
+    // MÉTODO QUE LISTA TODOS OS DISPOSITIVOS DA UNIDADE SO USUÁRIO LOGADO...
     public function exibeDispositivosMinhaUnidade(): array
     {
         $sql = "SELECT * FROM tb_dispositivos WHERE unidade = :unidade_usuario";
@@ -145,7 +146,7 @@ class Telefonia
         return $resultado;
     }
 
-    // LISTA APARELHOS COM MDM...
+    // MÉTODO QUE LISTA APARELHOS COM MDM...
     public function exibeComMDM(): array
     {
         $sql = "SELECT * FROM tb_dispositivos WHERE gestao_mdm = 'Sim'";
@@ -155,7 +156,7 @@ class Telefonia
         return $resultado;
     }
 
-    // LISTA DISPOSITIVOS COM LINHA...
+    // MÉTODO QUE LISTA DISPOSITIVOS COM LINHA...
     public function exibeLinhas(): array
     {
         $sql = "SELECT * FROM tb_dispositivos WHERE linha != ''";
@@ -165,7 +166,7 @@ class Telefonia
         return $resultado;
     }
 
-    // LISTA DISPOSITIVOS COM APARELHOS
+    // MÉTODO QUE LISTA DISPOSITIVOS COM APARELHOS
     public function exibeAparelhos(): array
     {
         $sql = "SELECT * FROM tb_dispositivos WHERE marca_aparelho != ''";
@@ -175,7 +176,7 @@ class Telefonia
         return $resultado;
     }
 
-    // BUSCA O ID DO DISPOSITIVO NA TELA DE ATUALIZAÇÃO...
+    // MÉTODO QUE BUSCA O ID DO DISPOSITIVO NA TELA DE ATUALIZAÇÃO...
     public function buscaIdDispositivo(int $id): array
     {
         $sql = "SELECT * FROM tb_dispositivos WHERE id = ?";
@@ -186,7 +187,7 @@ class Telefonia
         return $reslutado;
     }
 
-    // ATUALIZA O DISPOSITIVO...
+    // MÉTODO QUE ATUALIZA O DISPOSITIVO...
     public function atualizaDispositivo(int $id, string $possui_linha, ?string $linha, ?string $operadora, ?string $servico, ?string $perfil, ?string $status, ?string $data_ativacao, ?string $sim_card, string $possui_aparelho, ?string $marca_aparelho, ?string $modelo_aparelho, ?string $imei_aparelho, ?string $gestao_mdm, string $unidade, string $centro_custo, string $uf, string $canal, string $ponto_focal, string $gestor, string $possui_usuario, ?string $nome, ?string $matricula, ?string $email, ?string $funcao): void
     {
 
@@ -229,7 +230,7 @@ class Telefonia
         $stmt->execute();
     }
 
-    // EXCLUI O DISPOSITIVO...
+    // MÉTODO QUE EXCLUI O DISPOSITIVO...
     public function excluiDispositivo(int $id): void
     {
         $sql = "DELETE FROM tb_dispositivos WHERE id = ?";
@@ -238,7 +239,7 @@ class Telefonia
         $stmt->execute();
     }
 
-    // CONTA E RETORNA A QUANTIDADE DE DISPOSITIVOS CADASTRADOS...
+    // MÉTODO QUE CONTA E RETORNA A QUANTIDADE DE DISPOSITIVOS CADASTRADOS...
     public function contagemDispositivos(): int
     {
         $sql = "SELECT COUNT(*) FROM tb_dispositivos";
@@ -248,7 +249,7 @@ class Telefonia
         return $resultado;
     }
 
-    // CONTA E RETORNA A QUANTIDADE DE LINHAS CADASTRADAS...
+    // MÉTODO QUE CONTA E RETORNA A QUANTIDADE DE LINHAS CADASTRADAS...
     public function contagemLinhas(): int
     {
         $sql = "SELECT COUNT(*) FROM tb_dispositivos WHERE linha != ''";
@@ -258,7 +259,7 @@ class Telefonia
         return $resultado;
     }
 
-    // CONTA E RETORNA A QUANTIDADE DE APARELHOS CADASTRADOS...
+    // MÉTODO QUE CONTA E RETORNA A QUANTIDADE DE APARELHOS CADASTRADOS...
     public function contagemAparelhos(): int
     {
         $sql = "SELECT COUNT(*) FROM tb_dispositivos WHERE marca_aparelho != ''";
@@ -268,7 +269,7 @@ class Telefonia
         return $resultado;
     }
 
-    // CONTA E RETORNA A QUANTIDADE DE APARELHOS COM MDM...
+    // MÉTODO QUE CONTA E RETORNA A QUANTIDADE DE APARELHOS COM MDM...
     public function contagemMDM(): int
     {
         $sql = "SELECT COUNT(*) FROM tb_dispositivos WHERE gestao_mdm = 'Sim'";
@@ -278,7 +279,7 @@ class Telefonia
         return $resultado;
     }
 
-    // BUSCA UM DISPOSITIVO CONFORME DADO INFORMADO NO CAMPO DE BUSCA
+    // MÉTODO QUE BUSCA UM DISPOSITIVO CONFORME DADO INFORMADO NO CAMPO DE BUSCA
     public function buscaDispositivo($busca): array
     {
         
