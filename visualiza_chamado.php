@@ -17,6 +17,9 @@ $exibeRespostas = $respostas->exibeRespostas();
 $historico = new Logs($pdo);
 $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
 
+$unidade = new Opcoes($pdo);
+$listaUnidades = $unidade->listaOpcoes('UNIDADE');
+
 ?>
 
 <!DOCTYPE html>
@@ -174,8 +177,9 @@ $historico_chamado = $historico->exibeHistoricoChamado($_GET['id']);
                                     <i class="fa-solid fa-building-flag"></i>
                                     <select name="departamento">
                                         <option value="<?= htmlentities($dadoChamado['departamento']) ?>"><?= htmlentities($dadoChamado['departamento']) ?></option>
-                                        <option value="INFRAESTRUTURA IDL">INFRAESTRUTURA IDL</option>
-                                        <option value="MOBIT">MOBIT</option>
+                                        <?php foreach($listaUnidades as $unidade) : ?>
+                                            <option value="<?= htmlentities($unidade['descricao']) ?>"><?= htmlentities($unidade['descricao']) ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                             </label>

@@ -210,23 +210,13 @@ class Chamado
     {
         $sql = "SELECT *, DATE_FORMAT(data_abertura, '%d/%m/%Y às %H:%i') AS data_abertura FROM tb_chamados WHERE departamento = ?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(1, $_SESSION['perfil'], PDO::PARAM_STR);
-        $stmt->execute();
-        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $resultado;
-    }
-
-    // EXIBE CHAMADOS DA MINHA UNIDADE...
-    public function exibeChamadosMinhaUnidade() : array
-    {
-        $sql = "SELECT *, DATE_FORMAT(data_abertura, '%d/%m/%Y às %H:%i') AS data_abertura FROM tb_chamados WHERE unidade_usuario = ?";
-        $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $_SESSION['unidade'], PDO::PARAM_STR);
         $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $resultado;
     }
 
+    // MÉTODO QUE CONTA OS CHAMADOS EM ABERTO...
     public function contagemChamadosEmAberto(): int
     {
         $sql = "SELECT COUNT(*) FROM tb_chamados WHERE status = ?";
@@ -237,19 +227,10 @@ class Chamado
         return $resultado;
     }
 
+    // MÉTODO QUE CONTA OS CHAMADOS EM MEU DEPARTAMENTO...
     public function contagemChamadosMeuDepartamento(): int 
     {
         $sql = "SELECT COUNT(*) FROM tb_chamados WHERE departamento = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(1, $_SESSION['perfil'], PDO::PARAM_STR);
-        $stmt->execute();
-        $resultado = $stmt->fetchColumn();
-        return $resultado;
-    }
-
-    public function contagemChamadosMinhaUnidade(): int 
-    {
-        $sql = "SELECT COUNT(*) FROM tb_chamados WHERE unidade_usuario = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $_SESSION['unidade'], PDO::PARAM_STR);
         $stmt->execute();

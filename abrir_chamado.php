@@ -43,6 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $chamados = new Chamado($pdo);
 $exibeMeusChamados = $chamados->exibeMeusChamados();
 
+$unidade = new Opcoes($pdo);
+$listaUnidades = $unidade->listaOpcoes('UNIDADE');
+
 ?>
 
 
@@ -100,8 +103,9 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                                     <i class="fa-solid fa-building-flag"></i>
                                     <select name="departamento" id="departamento">
                                         <option value="">Selecione</option>
-                                        <option value="INFRAESTRUTURA IDL">INFRAESTRUTURA IDL</option>
-                                        <option value="MOBIT">MOBIT</option>
+                                        <?php foreach($listaUnidades as $unidade) : ?>
+                                            <option value="<?= htmlentities($unidade['descricao']) ?>"><?= htmlentities($unidade['descricao']) ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                             </label>
@@ -116,6 +120,8 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
                                         <option value="AQUISIÇÃO DE LINHA E APARELHO">AQUISIÇÃO DE LINHA E APARELHO</option>
                                         <option value="CANCELAMENTO DE LINHA">CANCELAMENTO DE LINHA</option>
                                         <option value="TROCA DE NÚMERO OU DDD">TROCA DE NÚMERO OU DDD</option>
+                                        <option value="TROCA DE PERFIL">TROCA DE PERFIL</option>
+                                        <option value="ATIVAR / DESATIVAR LINHA">ATIVAR / DESATIVAR LINHA</option>
                                         <option value="INCLUIR OU REMOVER MDM">INCLUIR OU REMOVER MDM</option>
                                         <option value="NÃO FAZ OU NÃO RECEBE LIGAÇÃO">NÃO FAZ OU NÃO RECEBE LIGAÇÃO</option>
                                         <option value="ROUBO OU PERDA DE LINHA OU APARELHO">ROUBO OU PERDA DE LINHA OU APARELHO</option>

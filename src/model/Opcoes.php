@@ -14,7 +14,7 @@ class Opcoes
     // MÉTODO QUE LISTA AS OPÇÕES NOS SELECTS CONFORME O TIPO...
     public function listaOpcoes(string $tipo) : array
     {
-        $sql = "SELECT * FROM tb_cadastros_opcoes WHERE tipo = ? ORDER BY descricao";
+        $sql = "SELECT * FROM tb_cadastros_opcoes WHERE tipo = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $tipo, PDO::PARAM_STR);
         $stmt->execute();

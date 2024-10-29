@@ -35,6 +35,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: gerenciar_usuarios.php?usuario=editado_com_sucesso");
     die();
 }
+
+$unidade = new Opcoes($pdo);
+$listaUnidades = $unidade->listaOpcoes('UNIDADE');
+
 ?>
 
 
@@ -103,8 +107,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <i class="fa-solid fa-map-location-dot"></i>
                                     <select name="unidade" required>
                                         <option value="<?= $buscaIdUsuario['unidade'] ?>"><?= $buscaIdUsuario['unidade'] ?></option>
-                                        <option value="CDARCEX">CDARCEX</option>
-                                        <option value="CDAMBEX">CDAMBEX</option>
+                                        <?php foreach($listaUnidades as $unidade) : ?>
+                                            <option value="<?= htmlentities($unidade['descricao']) ?>"><?= htmlentities($unidade['descricao']) ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </label>

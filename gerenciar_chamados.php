@@ -26,13 +26,6 @@ if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=') {
     $chamados = new Chamado($pdo);
     $exibeTodosChamados = $chamados->exibeChamadosMeuDepartamento();
 
-}  elseif($_SERVER['QUERY_STRING'] === 'minha_unidade') {
-
-    $titulo_tabela_filtrada = "Exibindo todos os chamados em minha unidade";
-
-    $chamados = new Chamado($pdo);
-    $exibeTodosChamados = $chamados->exibeChamadosMinhaUnidade();
-
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $titulo_tabela_filtrada = "Exibindo resultado da pesquisa";
@@ -47,9 +40,6 @@ $emAberto = $chamados->contagemChamadosEmAberto();
 
 $chamados = new Chamado($pdo);
 $meuDepartamento = $chamados->contagemChamadosMeuDepartamento();
-
-$chamados = new Chamado($pdo);
-$minhaUnidade = $chamados->contagemChamadosMinhaUnidade();
 
 ?>
 
@@ -121,18 +111,6 @@ $minhaUnidade = $chamados->contagemChamadosMinhaUnidade();
                                         </span>
                                         <h3><?= $meuDepartamento; ?> chamados</h3>
                                         <i class="fa-solid fa-building-user"></i>
-                                        <p class="texto-filtro">Clique para filtrar</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="gerenciar_chamados.php?minha_unidade">
-                                <div>
-                                    <div id="box-infos-roxa">
-                                        <span>
-                                            <h4>MINHA UNIDADE</h4>
-                                        </span>
-                                        <h3><?= $minhaUnidade; ?> chamados</h3>
-                                        <i class="fa-solid fa-map-location-dot"></i>
                                         <p class="texto-filtro">Clique para filtrar</p>
                                     </div>
                                 </div>
