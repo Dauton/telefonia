@@ -31,6 +31,8 @@ CREATE TABLE `tb_chamados` (
   `categoria` varchar(100) DEFAULT NULL,
   `prioridade` varchar(100) DEFAULT NULL,
   `descricao` varchar(9999) DEFAULT NULL,
+  `inclui_linha` varchar(45) DEFAULT NULL,
+  `inclui_aparelho` varchar(45) DEFAULT NULL,
   `anexo` varchar(100) DEFAULT NULL,
   `usuario` varchar(100) DEFAULT NULL,
   `unidade_usuario` varchar(100) DEFAULT NULL,
@@ -62,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-25 16:48:21
+-- Dump completed on 2024-10-30 17:22:19

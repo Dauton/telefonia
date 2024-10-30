@@ -12,7 +12,7 @@ class Chamado
     }
 
     // ABRE UM CHAMADO...
-    public function abreChamado(string $titulo, string $departamento, string $categoria, string $prioridade, string $descricao, string $anexo): void   
+    public function abreChamado(string $titulo, string $departamento, string $categoria, string $prioridade, string $descricao, string $inclui_linha, string $inclui_aparelho, string $anexo): void   
     {
         Validacoes::validaCampoVazio($titulo, "../../abrir_chamado.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($departamento, "../../abrir_chamado.php?verifica_campo=todos_campos");
@@ -20,19 +20,23 @@ class Chamado
         Validacoes::validaCampoVazio($prioridade, "../../abrir_chamado.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($descricao, "../../abrir_chamado.php?verifica_campo=todos_campos");
 
-        $sql = "INSERT INTO tb_chamados (titulo, departamento, categoria, prioridade, descricao, anexo, usuario, unidade_usuario, status, fechado_por, data_fechamento) VALUES ( ?,?,?,?,?,?,?,?,?,?,? )";
+        Validacoes::validaArquivoAnexado($anexo, '../abrir_chamado.php?verifica_campo=arquivo_invalido');
+
+        $sql = "INSERT INTO tb_chamados (titulo, departamento, categoria, prioridade, descricao, inclui_linha, inclui_aparelho, anexo, usuario, unidade_usuario, status, fechado_por, data_fechamento) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,? )";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, trim(mb_strtoupper($titulo)), PDO::PARAM_STR);
         $stmt->bindValue(2, trim(mb_strtoupper($departamento)), PDO::PARAM_STR);
         $stmt->bindValue(3, trim(mb_strtoupper($categoria)), PDO::PARAM_STR);
         $stmt->bindValue(4, trim(mb_strtoupper($prioridade)), PDO::PARAM_STR);
         $stmt->bindValue(5, trim($descricao), PDO::PARAM_STR);
-        $stmt->bindValue(6, trim($anexo), PDO::PARAM_STR);
-        $stmt->bindValue(7, $_SESSION['usuario'], PDO::PARAM_STR);
-        $stmt->bindValue(8, $_SESSION['unidade'], PDO::PARAM_STR);
-        $stmt->bindValue(9, 'EM ABERTO', PDO::PARAM_STR);
-        $stmt->bindValue(10, 'NÃO FECHADO', PDO::PARAM_STR);
-        $stmt->bindValue(11, 'NÃO FECHADO', PDO::PARAM_STR);
+        $stmt->bindValue(6, trim($inclui_linha), PDO::PARAM_STR);
+        $stmt->bindValue(7, trim($inclui_aparelho), PDO::PARAM_STR);
+        $stmt->bindValue(8, trim($anexo), PDO::PARAM_STR);
+        $stmt->bindValue(9, $_SESSION['usuario'], PDO::PARAM_STR);
+        $stmt->bindValue(10, $_SESSION['unidade'], PDO::PARAM_STR);
+        $stmt->bindValue(11, 'EM ABERTO', PDO::PARAM_STR);
+        $stmt->bindValue(12, 'NÃO FECHADO', PDO::PARAM_STR);
+        $stmt->bindValue(13, 'NÃO FECHADO', PDO::PARAM_STR);
         $stmt->execute();
     }
 

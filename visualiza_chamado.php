@@ -64,6 +64,8 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                                 <td>Titulo</t>
                                 <td>Departamento</td>
                                 <td>Categoria</td>
+                                <td>Linha inlcuída</td>
+                                <td>Aparelho incluído</td>
                                 <td>Prioridade</td>
                                 <td>Usuário</td>
                                 <td>Unidade</td>
@@ -77,6 +79,8 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                                 <td><?= htmlentities($dadoChamado['titulo']) ?></td>
                                 <td><?= htmlentities($dadoChamado['departamento']) ?></td>
                                 <td><?= htmlentities($dadoChamado['categoria']) ?></td>
+                                <td><?= htmlentities($dadoChamado['inclui_linha']) ?></td>
+                                <td><?= htmlentities($dadoChamado['inclui_aparelho']) ?></td>
                                 <td id="status">
                                     <p><?= htmlentities($dadoChamado['prioridade']) ?></p>
                                 </td>
@@ -88,7 +92,7 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="9" id="table-textarea">
+                                <td colspan="11" id="table-textarea">
                                     <textarea readonly><?= htmlentities($dadoChamado['descricao']) ?></textarea>
                                     <?php if(!empty($dadoChamado['anexo'])) :?>
                                     <div id="box-anexo">

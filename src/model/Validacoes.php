@@ -41,6 +41,27 @@ class Validacoes
         return $valor;
     }
 
+    // MÉTODO QUE VALIDA SE A EXTENSÃO DO ARQUIVO ANEXADO É UM DOS PERMITIDOS...
+    public static function validaArquivoAnexado(string $arquivo, string $caminho) : void
+    {
+        $paphinfo = pathinfo($arquivo, PATHINFO_EXTENSION);
+
+        if(
+            $paphinfo != 'doc' &&
+            $paphinfo != 'docx' &&
+            $paphinfo != 'pdf' &&
+            $paphinfo != 'xls' &&
+            $paphinfo != 'xlsx' &&
+            $paphinfo != 'jpg' &&
+            $paphinfo != 'jpeg' &&
+            $paphinfo != 'png'
+        ) {
+
+            header("Location: $caminho");
+            die();
+        }
+    }
+
     // MÉTODO QUE VALIDA SE O NOME DE USUÁRIO POSSUI SOBRENOME...
     public static function validaNomeCompleto(string $campo, string $caminho): void
     {

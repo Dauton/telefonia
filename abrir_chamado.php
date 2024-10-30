@@ -22,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['categoria'],
         $_POST['prioridade'],
         $_POST['descricao'],
+        $_POST['inclui_linha'],
+        $_POST['inclui_aparelho'],
         "uploads/" . $novo_nome
         
     );
@@ -45,6 +47,12 @@ $exibeMeusChamados = $chamados->exibeMeusChamados();
 
 $unidade = new Opcoes($pdo);
 $listaUnidades = $unidade->listaOpcoes('UNIDADE');
+
+$linha = new Telefonia($pdo);
+$listaLinhas = $linha->exibeLinhas();
+
+$aparelho = new Telefonia($pdo);
+$listaAparelhos = $aparelho->exibeAparelhos();
 
 ?>
 
@@ -143,15 +151,40 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                                     </select>
                                 </div>
                             </label>
+                                            
+                            <label for="inclui_linha">Incluir linha (opcional)
+                                <div>
+                                    <i class="fa-solid fa-sim-card"></i>
+                                    <select name="inclui_linha"  id="inclui_linha">
+                                        <option value="">Selecione a linha</option>
+                                        <?php foreach($listaLinhas as $linha): ?>
+                                            <option value="<?= htmlentities($linha['linha']) ?>"><?= htmlentities($linha['linha']) ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                            </label>
+
+                            <label for="inclui_aparelho">Incluir aparelho (opcional)
+                                <div>
+                                    <i class="fa-solid fa-mobile-screen-button"></i>
+                                    <select name="inclui_aparelho"  id="inclui_aparelho">
+                                        <option value="">Selecione o IMEI</option>
+                                        <?php foreach($listaAparelhos as $aparelho): ?>
+                                            <option value="<?= htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['imei_aparelho']) ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                            </label>
 
                             <label for="descricao" id="label-textarea">Descreva o chamado<span style="color: red;"> *</span>
                                 <div>
                                     <textarea name="descricao" id="descricao"></textarea>
                                 </div>
                             </label>
-                            <label for="arquivo">Anexar documento (.doc, .docx, .pdf, .xls ou .xlsx)
+                            
+                            <label for="arquivo">Anexar (.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, ou .png) opcional
                                 <div>
-                                    <input type="file" name="arquivo" id="arquivo" accept=".doc,.docx,.pdf,.xls,.xlsx">
+                                    <input type="file" name="arquivo" id="arquivo" accept=".doc,.docx,.pdf,.xls,.xlsx,.jpg,.jpeg,.png">
                                 </div>
                             </label>
 
