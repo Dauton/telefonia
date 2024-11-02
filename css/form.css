@@ -130,6 +130,16 @@ form #label-textarea {
     width: 100% !important;
 }
 
+form #label_checkbox {
+    margin: 5px 0 0 0;
+    display: flex;
+    justify-content: left;
+    gap: 5px;
+}
+form #label_checkbox input {
+    width: fit-content;
+}
+
 form input,
 form select {
     width: 100%;
@@ -202,8 +212,7 @@ form div {
 
 #form-altera-senha {
     width: 350px;
-    padding: 40px 0 0 0;
-    box-shadow: none;
+    padding: 60px 30px 30px 30px;
 }
 #form-altera-senha label {
     width: 100%;

@@ -5,7 +5,7 @@ require_once "vendor/autoload.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resetaSenhaUsuario = new Usuario($pdo);
-    $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
+    $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha'], 'ALTERADA');
 
     $armazenaLog = new Logs($pdo);
     $armazenaLog->armazenaLog(
@@ -57,41 +57,39 @@ $buscaIdUsuario = $idUsuario->buscaIdUsuario($_SESSION['id_usuario']);
                 <header class="conteudo-cabecalho">
                     <h3><a href="inicio.php">INÍCIO</a> / RESET MINHA SENHA</h3>
                 </header>
-                <section class="conteudo-center">
+                <section class="conteudo-center"  name="altera_senha">
                     <form method="post" id="form-altera-senha">
-                        <section style="display: flex">
-                            <header id="form-cabecalho">
-                                <h1>Reset minha senha</h1>
-                                <i class="fa-solid fa-key"></i>
-                            </header>
-                            <i class='fa-solid fa-circle-user'></i>
-                            <h2 style="text-align: center"><?= htmlentities($_SESSION['nome']) ?></h2>
+                        <header id="form-cabecalho">
+                            <h1>Reset minha senha</h1>
+                            <i class="fa-solid fa-key"></i>
+                        </header>
+                        <i class='fa-solid fa-circle-user'></i>
+                        <h2 style="text-align: center"><?= htmlentities($_SESSION['nome']) ?></h2>
 
-                            <label for="senha">Nova senha
-                                <div>
-                                    <i class="fa-solid fa-key"></i>
-                                    <input type="password" name="senha" id="senha" placeholder="Nova senha" required>
-                                    <i id="mostrar-senha" class="fa-solid fa-eye"></i>
-                                    <i id="ocultar-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
-                                </div>
-                            </label>
-
-                            <label for="repete_senha">Repita a nova senha
-                                <div>
-                                    <i class="fa-solid fa-key"></i>
-                                    <input type="password" name="repete_senha" id="repete-senha" placeholder="Nova senha novamente" required>
-                                    <i id="mostrar-repete-senha" class="fa-solid fa-eye"></i>
-                                    <i id="ocultar-repete-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
-                                </div>
-                            </label>
-
-                            <input type="hidden" name="id_usuario" value="<?= $buscaIdUsuario['id_usuario'] ?>">
-
+                        <label for="senha">Nova senha
                             <div>
-                                <button type="submit">Concluir</button>
-                                <a href="inicio.php"><button type="button" id="btn-cancelar">Cancelar</button></a>
+                                <i class="fa-solid fa-key"></i>
+                                <input type="password" name="senha" id="senha" placeholder="Nova senha" required>
+                                <i id="mostrar-senha" class="fa-solid fa-eye"></i>
+                                <i id="ocultar-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
                             </div>
-                        </section>
+                        </label>
+
+                        <label for="repete_senha">Repita a nova senha
+                            <div>
+                                <i class="fa-solid fa-key"></i>
+                                <input type="password" name="repete_senha" id="repete-senha" placeholder="Nova senha novamente" required>
+                                <i id="mostrar-repete-senha" class="fa-solid fa-eye"></i>
+                                <i id="ocultar-repete-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
+                            </div>
+                        </label>
+
+                        <input type="hidden" name="id_usuario" value="<?= $buscaIdUsuario['id_usuario'] ?>">
+
+                        <div>
+                            <button type="submit">Concluir</button>
+                            <a href="inicio.php"><button type="button" id="btn-cancelar">Cancelar</button></a>
+                        </div>
                     </form>
                 </section>
 

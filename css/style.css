@@ -185,6 +185,10 @@ body {
     flex-direction: column;
     overflow: scroll;
 }
+.conteudo-center[name='altera_senha'] {
+    align-content: center;
+    justify-content: center;
+}
 
 .conteudo-center h1 {
     width: 100%;
@@ -643,7 +647,6 @@ body {
         padding: 10px;
         flex-direction: column;
     }
-
     .conteudo-center h1 {
         margin-bottom: 10px;
         font-size: 15px;

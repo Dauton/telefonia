@@ -99,7 +99,7 @@ class Usuario
     }
 
     // MÉTODO QUE RESETA A MINHA SENHA OU DO USUÁRIO SELECIONADO
-    public function resetaSenhaUsuario(int $id_usuario, string $senha): void
+    public function resetaSenhaUsuario(int $id_usuario, string $senha, string $senha_primeiro_acesso): void
     {
             // VALIDA A MINHA SENHA
         if($_GET['id_usuario'] === null) {
@@ -119,7 +119,7 @@ class Usuario
         $stmt = $this->pdo->prepare($sql);
         $senha = password_hash($senha, PASSWORD_ARGON2ID);
         $stmt->bindValue(1, $senha, PDO::PARAM_STR);
-        $stmt->bindValue(2, 'ALTERADA', PDO::PARAM_STR);
+        $stmt->bindValue(2, $senha_primeiro_acesso, PDO::PARAM_STR);
         $stmt->bindValue(3, $id_usuario, PDO::PARAM_INT);
 
         $stmt->execute();

@@ -5,7 +5,7 @@ require_once "vendor/autoload.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resetaSenhaUsuario = new Usuario($pdo);
-    $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
+    $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha'], 'ALTERADA');
 
     $armazenaLog = new Logs($pdo);
     $armazenaLog->armazenaLog(

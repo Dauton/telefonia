@@ -10,8 +10,16 @@ $buscaIdUsuario = new Usuario($pdo);
 $dadoUsuario = $buscaIdUsuario->buscaIdUsuario($_GET['id_usuario']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // VERIFICA SE O CHECKBOX DE ALTERAR A SENHA NO PROXIMO LOGIN ESTÁ ATIVADO...
+    if (isset($_POST['primeiro_acesso'])) {
+        $senha_primeiro_acesso = 'PENDENTE';
+    } else {
+        $senha_primeiro_acesso = 'ALTERADA';
+    }
+
     $resetaSenhaUsuario = new Usuario($pdo);
-    $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha']);
+    $resetaSenhaUsuario->resetaSenhaUsuario($_POST['id_usuario'], $_POST['senha'], $senha_primeiro_acesso);
 
     $armazenaLog = new Logs($pdo);
     $armazenaLog->armazenaLog(
@@ -60,45 +68,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <header class="conteudo-cabecalho">
                     <h3><a href="inicio.php">INÍCIO</a> / RESET SENHA</h3>
                 </header>
-                <section class="conteudo-center">
+                <section class="conteudo-center" name="altera_senha">
                     <form method="post" id="form-altera-senha">
-                        <section style="display: flex">
-                            <header id="form-cabecalho">
-                                <h1>Reset de senha</h1>
-                                <i class="fa-solid fa-key"></i>
-                            </header>
+                        <header id="form-cabecalho">
+                            <h1>Reset de senha</h1>
+                            <i class="fa-solid fa-key"></i>
+                        </header>
 
-                            <i class='fa-solid fa-circle-user'></i>
+                        <i class='fa-solid fa-circle-user'></i>
 
-                            <h2 style="text-align: center"><?= htmlentities($dadoUsuario['nome']) ?></h2>
+                        <h2 style="text-align: center"><?= htmlentities($dadoUsuario['nome']) ?></h2>
 
-                            <label for="senha">Nova senha
-                                <div>
-                                    <i class="fa-solid fa-key"></i>
-                                    <input type="password" name="senha" id="senha" placeholder="Nova senha" required>
-                                    <i id="mostrar-senha" class="fa-solid fa-eye"></i>
-                                    <i id="ocultar-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
-                                </div>
-                            </label>
-
-                            <label for="repete_senha">Repita a nova senha
-                                <div>
-                                    <i class="fa-solid fa-key"></i>
-                                    <input type="password" name="repete_senha" id="repete-senha" placeholder="Nova senha novamente" required>
-                                    <i id="mostrar-repete-senha" class="fa-solid fa-eye"></i>
-                                    <i id="ocultar-repete-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
-                                </div>
-                            </label>
-
-                            <input type="hidden" name="id_usuario" value="<?= $dadoUsuario['id_usuario'] ?>">
-                            <input type="hidden" name="usuario" value="<?= $dadoUsuario['usuario'] // PARA ARMAZENAR O USUÁRIO ALTERADO NO LOG 
-                                                                        ?>">
-
+                        <label for="senha">Nova senha
                             <div>
-                                <button type="submit">Concluir</button>
-                                <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><button type="button" id="btn-cancelar">Cancelar</button></a>
+                                <i class="fa-solid fa-key"></i>
+                                <input type="password" name="senha" id="senha" placeholder="Nova senha" required>
+                                <i id="mostrar-senha" class="fa-solid fa-eye"></i>
+                                <i id="ocultar-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
                             </div>
-                        </section>
+                        </label>
+
+                        <label for="repete_senha">Repita a nova senha
+                            <div>
+                                <i class="fa-solid fa-key"></i>
+                                <input type="password" name="repete_senha" id="repete-senha" placeholder="Nova senha novamente" required>
+                                <i id="mostrar-repete-senha" class="fa-solid fa-eye"></i>
+                                <i id="ocultar-repete-senha" class="fa-solid fa-eye-slash" style="display: none"></i>
+                            </div>
+                        </label>
+
+                        <label for="primeiro_acesso" id="label_checkbox">
+                            <input type="checkbox" name="primeiro_acesso" id="primeiro_acesso" checked> Obrigar alteração no próximo acesso
+                        </label>
+
+                        <input type="hidden" name="id_usuario" value="<?= $dadoUsuario['id_usuario'] ?>">
+                        <input type="hidden" name="usuario" value="<?= $dadoUsuario['usuario'] // PARA ARMAZENAR O USUÁRIO ALTERADO NO LOG 
+                                                                    ?>">
+
+                        <div>
+                            <button type="submit">Concluir</button>
+                            <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><button type="button" id="btn-cancelar">Cancelar</button></a>
+                        </div>
                     </form>
                 </section>
 

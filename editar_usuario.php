@@ -3,6 +3,7 @@
 require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
+senhaPrimeiroAcesso();
 liberacaoInfraIDL();
 
 $idUsuario = new Usuario($pdo);

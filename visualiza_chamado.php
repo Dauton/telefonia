@@ -95,14 +95,14 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                                 <td colspan="11" id="table-textarea">
                                     <textarea readonly><?= htmlentities($dadoChamado['descricao']) ?></textarea>
                                     <?php if(!empty($dadoChamado['anexo'])) :?>
-                                    <div id="box-anexo">
-                                        <a href="<?= htmlentities($dadoChamado['anexo']) ?>" target="_blank">Arquivo anexado</a>
+                                    <div>
+                                        <a href="<?= htmlentities($dadoChamado['anexo']) ?>" target="_blank"><button type="button" title="Visualizar ou baixar anexo">Arquivo anexado</button></a>
                                     </div>
                                     <?php endif ?>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="9" id="table-textarea" style="text-align: left !important">
+                                <td colspan="11" id="table-textarea" style="text-align: left !important">
                                     <?php if ($dadoChamado['status'] === 'EM ABERTO'): ?>
                                         <button type='button' id='btn-green' title='Fechar chamado'>Fechar chamado</button>
                                         <button type='button' title='Mover chamado'>Mover chamado</button>
@@ -118,7 +118,7 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                                             <textarea readonly><?= htmlentities($dadoChamado['motivo_fechamento']) ?></textarea>
                                         </form>
                                         <tr>
-                                            <td colspan="9">
+                                            <td colspan="11">
                                                 <form method='post' action='src/manipulacoes_chamados/reabre_chamado.php?id=<?= $dadoChamado['id'] ?>'>
                                                     <button type='submit' id='btn-green' title='Reabrir chamado'>Reabrir chamado</button>
                                                 </form>
