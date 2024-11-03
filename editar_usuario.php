@@ -18,7 +18,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['unidade'],
         $_POST['cargo'],
         $_POST['perfil'],
-        $_POST['usuario'],
         $_POST['status'],
         $pdo // PASSADO POR PARÂMETRO POR CONTA DA VALIDAÇÃO DE USUÁRIO EXISTENTE, POIS O MÉTODO É ESTÁTICO...
 
@@ -137,13 +136,6 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                                 </div>
                             </label>
 
-                            <label for="usuario">Usuário<span style="color: red;"> *</span>
-                                <div>
-                                    <i class="fa-solid fa-id-card-clip"></i>
-                                    <input type="text" name="usuario" value="<?= $buscaIdUsuario['usuario'] ?>" placeholder="Crie o usuário" required>
-                                </div>
-                            </label>
-
                             <label for="status">Ativar / Desativar<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-user-slash"></i>
@@ -156,7 +148,7 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                             </label>
 
                             <div>
-                                <button type="submit" name="btn-requisitar">Editar</button>
+                                <button type="submit">Editar</button>
                                 <a href="gerenciar_usuarios.php"><button type="button" id="btn-cancelar">Cancelar</button></a>
                             </div>
 

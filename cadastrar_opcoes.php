@@ -157,7 +157,7 @@ $listaCentroCustos = $centro_custo->listaOpcoes('CENTRO DE CUSTOS');
                                 </div>
                             </label>
                             <div>
-                                <button type="submit" name="btn-requisitar">Cadastrar</button>
+                                <button type="submit">Cadastrar</button>
                             </div>
                         </section>
 

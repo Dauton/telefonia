@@ -74,7 +74,7 @@ class Chamado
     }
 
     // EDITA UM CHAMADO
-    public function editaChamado(int $id, string $titulo, string $departamento, string $categoria, string $prioridade, string $descricao) : void
+    public function editaChamado(int $id, string $titulo, string $departamento, string $categoria, string $prioridade, string $descricao, string $inclui_linha, string $inclui_aparelho) : void
     {
         Validacoes::validaCampoVazio($titulo, "../../abrir_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($departamento, "../../abrir_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
@@ -82,14 +82,16 @@ class Chamado
         Validacoes::validaCampoVazio($prioridade, "../../abrir_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($descricao, "../../abrir_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
 
-        $sql = "UPDATE tb_chamados SET titulo = ?, departamento = ?, categoria = ?, prioridade = ?, descricao = ? WHERE id = ?";
+        $sql = "UPDATE tb_chamados SET titulo = ?, departamento = ?, categoria = ?, prioridade = ?, descricao = ?, inclui_linha = ?, inclui_aparelho = ? WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, trim(mb_strtoupper($titulo)), PDO::PARAM_STR);
         $stmt->bindValue(2, trim(mb_strtoupper($departamento)), PDO::PARAM_STR);
         $stmt->bindValue(3, trim(mb_strtoupper($categoria)), PDO::PARAM_STR);
         $stmt->bindValue(4, trim(mb_strtoupper($prioridade)), PDO::PARAM_STR);
         $stmt->bindValue(5, trim($descricao), PDO::PARAM_STR);
-        $stmt->bindValue(6, $id, PDO::PARAM_INT);
+        $stmt->bindValue(6, trim($inclui_linha), PDO::PARAM_STR);
+        $stmt->bindValue(7, trim($inclui_aparelho), PDO::PARAM_STR);
+        $stmt->bindValue(8, $id, PDO::PARAM_INT);
         $stmt->execute();
     }
 

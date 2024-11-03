@@ -159,7 +159,7 @@ class Telefonia
     // MÉTODO QUE LISTA DISPOSITIVOS COM LINHA...
     public function exibeLinhas(): array
     {
-        $sql = "SELECT * FROM tb_dispositivos WHERE linha != ''";
+        $sql = "SELECT * FROM tb_dispositivos WHERE linha != '' ORDER BY nome";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -169,7 +169,7 @@ class Telefonia
     // MÉTODO QUE LISTA DISPOSITIVOS COM APARELHOS
     public function exibeAparelhos(): array
     {
-        $sql = "SELECT * FROM tb_dispositivos WHERE marca_aparelho != ''";
+        $sql = "SELECT * FROM tb_dispositivos WHERE marca_aparelho != '' ORDER BY nome";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);

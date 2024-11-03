@@ -155,7 +155,7 @@ $listaUnidade = $unidade->listaOpcoes('UNIDADE');
                             </label>
 
                             <div>
-                                <button type="submit" name="btn-requisitar">Cadastrar</but>
+                                <button type="submit">Cadastrar</but>
                             </div>
                         </section>
                     </form>

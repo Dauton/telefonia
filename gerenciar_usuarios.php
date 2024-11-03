@@ -83,7 +83,7 @@ $exibeTodosUsuarios = $exibeUsuarios->exibeUsuarios();
                                 <td><?= htmlentities($exibeUsuarios['data_cadastro']) ?></td>
                                 <td id="acoes">
                                     <form>
-                                        <button type="button" id="table-form-btn-editar"><a href="editar_usuario.php?id_usuario=<?= $exibeUsuarios['id_usuario'] ?>" title="Editar esse usuário"><i class="fa-solid fa-square-pen"></i></a></button>
+                                        <button type="button"><a href="editar_usuario.php?id_usuario=<?= $exibeUsuarios['id_usuario'] ?>" title="Editar esse usuário"><i class="fa-solid fa-square-pen"></i></a></button>
                                     </form>
                                 </td>
                             </tr>

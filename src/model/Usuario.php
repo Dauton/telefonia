@@ -68,9 +68,9 @@ class Usuario
     }
 
     // MÉTODO QUE EDITA O USUÁRIO SELECIONADO
-    public function editaUsuario(string $nome, string $matricula, string $unidade, string $cargo, string $perfil, string $usuario, string $status, PDO $pdo): void
+    public function editaUsuario(string $nome, string $matricula, string $unidade, string $cargo, string $perfil, string $status, PDO $pdo): void
     {
-        $sql = "UPDATE tb_usuarios SET nome = ?, matricula = ?, unidade = ?, cargo = ?, perfil = ?, usuario = ?, status = ? WHERE id_usuario = ?";
+        $sql = "UPDATE tb_usuarios SET nome = ?, matricula = ?, unidade = ?, cargo = ?, perfil = ?, status = ? WHERE id_usuario = ?";
 
         // VALIDA SE EXISTE ALGUM CAMPO NÃO PREENCHIDO...
         Validacoes::validaCampoVazio($nome, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
@@ -78,11 +78,9 @@ class Usuario
         Validacoes::validaCampoVazio($unidade, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($cargo, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($perfil, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
-        Validacoes::validaCampoVazio($usuario, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($status, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=todos_campos");
         Validacoes::validaNomeCompleto($nome, "../../cadastrar_usuario.php?usuario=nome_incompleto");
         Validacoes::validaCampoNumerico('matricula', "../../cadastrar_usuario.php?verifica_campo=matricula_nao_numerico");
-        Validacoes::validaUsuarioExistenteEdição($usuario,"editar_usuario.php?id_usuario=$_GET[id_usuario]&usuario=usuario_ja_cadastrado", $pdo);
         Validacoes::validaNomeCompleto($nome, "../../editar_usuario.php?id_usuario=$_GET[id_usuario]&verifica_campo=nome_incompleto");
 
         $stmt = $this->pdo->prepare($sql);
@@ -91,7 +89,6 @@ class Usuario
         $stmt->bindValue(3, mb_strtoupper(trim($unidade)), PDO::PARAM_STR);
         $stmt->bindValue(4, mb_strtoupper(trim($cargo)), PDO::PARAM_STR);
         $stmt->bindValue(5, mb_strtoupper(trim($perfil)), PDO::PARAM_STR);
-        $stmt->bindValue(6, mb_strtolower(trim($usuario)), PDO::PARAM_STR);
         $stmt->bindValue(7, trim($status), PDO::PARAM_STR);
         $stmt->bindValue(8, $_GET['id_usuario'], PDO::PARAM_INT);
 

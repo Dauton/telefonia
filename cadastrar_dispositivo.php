@@ -293,7 +293,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                 </select>
                             </div>
                         </label>
-
+                        
                         <section class="form-secao-03">
 
                             <h2>Informações do usuário</h2>
@@ -420,7 +420,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                         </section>
 
                         <div>
-                            <button type="submit" name="btn-requisitar">Cadastrar</button>
+                            <button type="submit">Cadastrar</button>
                         </div>
 
                     </form>

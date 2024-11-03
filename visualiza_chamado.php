@@ -104,8 +104,10 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                             <tr>
                                 <td colspan="11" id="table-textarea" style="text-align: left !important">
                                     <?php if ($dadoChamado['status'] === 'EM ABERTO'): ?>
+                                        
                                         <button type='button' id='btn-green' title='Fechar chamado'>Fechar chamado</button>
                                         <button type='button' title='Mover chamado'>Mover chamado</button>
+
                                     <?php elseif ($dadoChamado['status'] === 'FECHADO'): ?>
                                         <form class='form-labels-lado-a-lado' id='form-labels-lado-a-lado' style="padding: 40px 0 0 0" autocomplete='off'>
                                             <header id='form-cabecalho'>
@@ -125,6 +127,10 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                                             </td>
                                         </tr>
                                     <?php endif; ?>
+
+                                    <?php if($dadoChamado['status'] === 'EM ABERTO' && $dadoChamado['usuario'] === $_SESSION['usuario']) : ?>
+                                        <a href="editar_chamado.php?id=<?= $dadoChamado['id'] ?>"><button type="button">Atualizar chamado</button></a>
+                                    <?php endif ?>
                                 </td>
                             </tr>
                         </tbody>
@@ -189,7 +195,7 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                             </label>
 
                             <div id="box-confimarcao-btns">
-                                <button type="submit">Mover chamado</button>
+                                <button type="button">Mover chamado</button>
                                 <button type="button" id="btn-cancelar" title='Cancelar movimento'>Cancelar</button>
                             </div>
 

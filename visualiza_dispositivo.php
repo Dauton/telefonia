@@ -409,7 +409,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                         </section>
 
                         <div>
-                            <button type="submit" name="btn-requisitar">Atualizar</button>
+                            <button type="submit">Atualizar</button>
                             <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><button type="button" id="btn-cancelar">Cancelar</button></a>
                         </div>
 

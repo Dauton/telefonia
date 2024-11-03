@@ -53,10 +53,10 @@ if (!isset($_SESSION['usuario'])) {
             </li>
             <li id='menu_06'><a><i class="fa-solid fa-table-list"></i>Logs<i class='fa-solid fa-angle-right'></i></a>
                 <ul id='menusub_06'>
-                    <li><a href='logs.php?acessos'><i class="fa-regular fa-circle"></i>Logs de acesso<i class='fa-solid fa-angle-right'></i></a></li>
                     <li><a href='logs.php?telefonia'><i class="fa-regular fa-circle"></i>Logs de telefonia<i class='fa-solid fa-angle-right'></i></a></li>
                     <li><a href='logs.php?opcoes'><i class="fa-regular fa-circle"></i>Logs de opções<i class='fa-solid fa-angle-right'></i></a></li>
                     <li><a href='logs.php?usuarios'><i class="fa-regular fa-circle"></i>Logs de usuários<i class='fa-solid fa-angle-right'></i></a></li>
+                    <li><a href='logs.php?acessos'><i class="fa-regular fa-circle"></i>Logs de acesso<i class='fa-solid fa-angle-right'></i></a></li>
                 </ul>
             </li>
         <?php endif ?>

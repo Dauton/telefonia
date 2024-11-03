@@ -5,42 +5,34 @@ require_once "vendor/autoload.php";
 
 senhaPrimeiroAcesso();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+$buscaIdChamado = new Chamado($pdo);
+$dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
 
-    $arquivo = $_FILES['arquivo'];
-    $nome = $arquivo['name'];
-    $tmp_name = $arquivo['tmp_name'];
+// SE O CHAMADO JÁ ESTIVER FECHADO OU O CHAMADO NÃO PERTENCER AO USUÁRIO LOGADO, NÃO SERÁ POSSIVEL EDITA-LO...
+if($dadoChamado['status'] === 'FECHADO' || $dadoChamado['usuario'] != $_SESSION['usuario'])  {
+    header("Location: abrir_chamado.php");
+    die();
+}
 
-    $extensao = pathinfo($nome, PATHINFO_EXTENSION);
-    $novo_nome = uniqid() . '.' . $extensao;
-    move_uploaded_file($tmp_name, "uploads/" . $novo_nome);
-
-    $abreChamado = new Chamado($pdo);
-    $abreChamado->abreChamado(
+// EXECUTA A EDIÇÃO DO CHAMADO...
+if($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    $editaChamado = new Chamado($pdo);
+    $editaChamado->editaChamado(
+        $_GET['id'],
         $_POST['titulo'],
         $_POST['departamento'],
         $_POST['categoria'],
         $_POST['prioridade'],
         $_POST['descricao'],
         $_POST['inclui_linha'],
-        $_POST['inclui_aparelho'],
-        "uploads/" . $novo_nome
-        
+        $_POST['inclui_aparelho']
     );
 
-    $armazenaLog = new Logs($pdo);
-    $armazenaLog->armazenaLog(
-        'Chamados',
-        $_SESSION['usuario'],
-        'Abriu o chamado "' . $dadoChamado['titulo'] . '"',
-        'Sucesso',
-        ''
-    );
-    
-    header("Location: abrir_chamado.php?chamado=aberto");
+    header("Location: abrir_chamado.php?chamado=atualizado");
     die();
-}
 
+}
 
 $chamados = new Chamado($pdo);
 $exibeMeusChamados = $chamados->exibeMeusChamados();
@@ -91,7 +83,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                 <section class="conteudo-center" name="cadastro-usuario">
                     <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off" enctype="multipart/form-data" multiple>
                         <header id="form-cabecalho">
-                            <h1>Abertura de chamado</h1>
+                            <h1>Atualização de chamado</h1>
                             <i class="fa-solid fa-user-plus"></i>
                         </header>
 
@@ -102,7 +94,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                             <label for="titulo">Título do chamado<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-file-pen"></i>
-                                    <input type="text" name="titulo"  id="titulo" placeholder="Insira o título do chamado">
+                                    <input type="text" name="titulo"  id="titulo" value="<?= htmlentities($dadoChamado['titulo']) ?>" placeholder="Insira o título do chamado">
                                 </div>
                             </label>
 
@@ -110,7 +102,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                 <div>
                                     <i class="fa-solid fa-building-flag"></i>
                                     <select name="departamento" id="departamento">
-                                        <option value="">Selecione</option>
+                                        <option value="<?= htmlentities($dadoChamado['departamento']) ?>"><?= htmlentities($dadoChamado['departamento']) ?></option>
                                         <?php foreach($listaUnidades as $unidade) : ?>
                                             <option value="<?= htmlentities($unidade['descricao']) ?>"><?= htmlentities($unidade['descricao']) ?></option>
                                         <?php endforeach ?>
@@ -122,7 +114,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                 <div>
                                     <i class="fa-solid fa-cube"></i>
                                     <select name="categoria" id="categoria">
-                                        <option value="">Selecione o perfil</option>
+                                        <option value="<?= htmlentities($dadoChamado['categoria']) ?>"><?= htmlentities($dadoChamado['categoria']) ?></option>
                                         <option value="AQUISIÇÃO DE LINHA">AQUISIÇÃO DE LINHA</option>
                                         <option value="AQUISIÇÃO DE APARELHO">AQUISIÇÃO DE APARELHO</option>
                                         <option value="AQUISIÇÃO DE LINHA E APARELHO">AQUISIÇÃO DE LINHA E APARELHO</option>
@@ -143,7 +135,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                 <div>
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                     <select name="prioridade"  id="prioridade">
-                                        <option value="">Selecione</option>
+                                        <option value="<?= htmlentities($dadoChamado['prioridade']) ?>"><?= htmlentities($dadoChamado['prioridade']) ?></option>
                                         <option value="BAIXA">BAIXA</option>
                                         <option value="MÉDIA">MÉDIA</option>
                                         <option value="ALTA">ALTA</option>
@@ -156,9 +148,9 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                 <div>
                                     <i class="fa-solid fa-sim-card"></i>
                                     <select name="inclui_linha"  id="inclui_linha">
-                                        <option value="">Selecione a linha</option>
+                                        <option value="<?= htmlentities($dadoChamado['inclui_linha']) ?>"><?= htmlentities($dadoChamado['inclui_linha']) ?></option>
                                         <?php foreach($listaLinhas as $linha): ?>
-                                            <option value="<?= htmlentities($linha['nome']) . " - " .  htmlentities($linha['linha']) ?>"><?= htmlentities($linha['nome']) . " - " . htmlentities($linha['linha']) ?></option>
+                                            <option value="<?= htmlentities($linha['nome']) . " - " .  htmlentities($linha['linha']) ?>"><?= htmlentities($linha['nome']) . " - " .  htmlentities($linha['linha']) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
@@ -168,9 +160,9 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                 <div>
                                     <i class="fa-solid fa-mobile-screen-button"></i>
                                     <select name="inclui_aparelho"  id="inclui_aparelho">
-                                        <option value="">Selecione o IMEI</option>
+                                        <option value="<?= htmlentities($dadoChamado['inclui_aparelho']) ?>"><?= htmlentities($dadoChamado['inclui_aparelho']) ?></option>
                                         <?php foreach($listaAparelhos as $aparelho): ?>
-                                            <option value="<?= htmlentities($aparelho['nome']) . " - " .  htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['nome']) . " - " . htmlentities($aparelho['imei_aparelho']) ?></option>
+                                            <option value="<?= htmlentities($aparelho['nome']) . " - " .  htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['nome']) . " - " .  htmlentities($aparelho['imei_aparelho']) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
@@ -178,7 +170,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
 
                             <label for="descricao" id="label-textarea">Descreva o chamado<span style="color: red;"> *</span>
                                 <div>
-                                    <textarea name="descricao" id="descricao"></textarea>
+                                    <textarea name="descricao" id="descricao"><?= htmlentities($dadoChamado['descricao']) ?></textarea>
                                 </div>
                             </label>
                             
@@ -189,61 +181,10 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                             </label>
 
                             <div>
-                                <button type="submit">Abrir</but>
+                                <button type="submit">Atualizar</button>
+                                <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><button type="button" id="btn-cancelar">Cancelar</button></a>
                             </div>
                         </section>
-
-                        <h2>Meus chamados</h2>
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>ID chamado</td>
-                                    <td>Título</td>
-                                    <td>Departamento</td>
-                                    <td>Categoria</td>
-                                    <td>Prioridade</td>
-                                    <td>Usuário</td>
-                                    <td>Unidade</td>
-                                    <td>Data abertura</td>
-                                    <td>Status</td>
-                                    <td>Fechado por</td>
-                                    <td>Data fechamento</td>
-                                    <td>Atualizar</td>
-                                    <td>Visualizar</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($exibeMeusChamados as $chamados) : ?>
-                                    <tr>
-                                        <td><?= htmlentities($chamados['id']) ?></td>
-                                        <td><?= htmlentities($chamados['titulo']) ?></td>
-                                        <td><?= htmlentities($chamados['departamento']) ?></td>
-                                        <td><?= htmlentities($chamados['categoria']) ?></td>
-                                        <td id="status">
-                                            <p><?= htmlentities($chamados['prioridade']) ?></p>
-                                        </td>
-                                        <td><?= htmlentities($chamados['usuario']) ?></td>
-                                        <td><?= htmlentities($chamados['unidade_usuario']) ?></td>
-                                        <td><?= htmlentities($chamados['data_abertura']) ?></td>
-                                        <td id="status">
-                                            <p><?= htmlentities($chamados['status']) ?></p>
-                                        </td>
-                                        <td><?= htmlentities($chamados['fechado_por']) ?></td>
-                                        <td><?= htmlentities($chamados['data_fechamento']) ?></td>
-                                        <td>
-                                            <?php if($chamados['status'] === 'EM ABERTO') :?>
-                                                <a href="editar_chamado.php?id=<?= $chamados['id'] ?>" title="Atualizar esse chamado"><i class="fa-solid fa-square-pen"></i></a>
-                                            <?php endif ?>
-                                        </td>
-                                        <td>
-                                            <a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><i class="fa-solid fa-eye"></i></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach ?>
-                            </tbody>
-                        </table>
-                    </form>
                 </section>
 
                 <?php
