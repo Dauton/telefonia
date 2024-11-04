@@ -89,8 +89,8 @@ class Usuario
         $stmt->bindValue(3, mb_strtoupper(trim($unidade)), PDO::PARAM_STR);
         $stmt->bindValue(4, mb_strtoupper(trim($cargo)), PDO::PARAM_STR);
         $stmt->bindValue(5, mb_strtoupper(trim($perfil)), PDO::PARAM_STR);
-        $stmt->bindValue(7, trim($status), PDO::PARAM_STR);
-        $stmt->bindValue(8, $_GET['id_usuario'], PDO::PARAM_INT);
+        $stmt->bindValue(6, trim($status), PDO::PARAM_STR);
+        $stmt->bindValue(7, $_GET['id_usuario'], PDO::PARAM_INT);
 
         $stmt->execute();
     }

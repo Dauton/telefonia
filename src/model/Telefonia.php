@@ -12,7 +12,7 @@ class Telefonia
     }
 
     // MÉTODO QUE EXECUTA AS VALIDAÇÕES...
-    public static function executaValidacoes(string $possui_linha, string $linha, string $operadora, string $status, string $sim_card, string $possui_aparelho, ?string $marca_aparelho, ?string $modelo_aparelho, ?string $imei_aparelho, ?string $gestao_mdm, string $unidade, string $centro_custo, string $uf, string $canal, string $ponto_focal, string $gestor, string $possui_usuario, ?string $nome, ?string $matricula, ?string $email): void
+    public static function executaValidacoes(string $possui_linha, ?string $linha, ?string $operadora, ?string $status, ?string $sim_card, string $possui_aparelho, ?string $tipo_aparelho, ?string $marca_aparelho, ?string $modelo_aparelho, ?string $imei_aparelho, ?string $gestao_mdm, string $unidade, string $centro_custo, string $uf, string $canal, string $ponto_focal, string $gestor, string $possui_usuario, ?string $nome, ?string $matricula, ?string $email): void
     {
         if(!empty($_GET['id']))
         {
@@ -44,6 +44,7 @@ class Telefonia
 
         // CASO POSSUA APARELHO, OS CAMPOS REFERNETES AO APARELHO SERÃO VALIDADOS...
         if ($_POST['possui_aparelho'] === 'Sim') {
+            Validacoes::validaCampoVazio($tipo_aparelho, "$caminho" . "verifica_campo=campo_tipo_vazio");
             Validacoes::validaCampoVazio($marca_aparelho, "$caminho" . "verifica_campo=campo_marca_vazio");
             Validacoes::validaCampoVazio($modelo_aparelho, "$caminho" . "verifica_campo=campo_modelo_vazio");
             Validacoes::validaCampoVazio($imei_aparelho, "$caminho" . "verifica_campo=campo_imei_vazio");
@@ -74,28 +75,23 @@ class Telefonia
             Validacoes::validaCampoEmail('email', "$caminho" . "verifica_campo=email_invalido");
         }
 
-        // VALIDA O CAMPO NUMPERICO CENTRO DE CUSTO...
+        // VALIDA O CAMPO NUMERICO CENTRO DE CUSTO...
         Validacoes::validaCampoNumerico('centro_custo', "$caminho" . "verifica_campo=centro_custo_nao_numerico");
     }
 
     // MÉTODO QUE CADASTRA DISPOSITIVO...
-    public function cadastraDispositivo(string $possui_linha, string $linha, string $operadora, string $servico, string $perfil, string $status, string $data_ativacao, string $sim_card, string $possui_aparelho, string $marca_aparelho, string $modelo_aparelho, string $imei_aparelho, string $gestao_mdm, string $unidade, string $centro_custo, string $uf, string $canal, string $ponto_focal, string $gestor, string $possui_usuario, string $nome, string $matricula, string $email, string $funcao): void
+    public function cadastraDispositivo(string $possui_linha, string $linha, string $operadora, string $servico, string $perfil, string $status, string $data_ativacao, string $sim_card, string $possui_aparelho, string $tipo_aparelho, string $marca_aparelho, string $modelo_aparelho, string $imei_aparelho, string $gestao_mdm, string $unidade, string $centro_custo, string $uf, string $canal, string $ponto_focal, string $gestor, string $possui_usuario, string $nome, string $matricula, string $email, string $funcao): void
     {
 
         // CAHAMA O MÉTODO ESTATICO QUE VALIDA OS CAMPOS...
-        self::executaValidacoes($possui_linha, $linha, $operadora, $status, $sim_card, $possui_aparelho, $marca_aparelho, $modelo_aparelho, $imei_aparelho, $gestao_mdm, $unidade, $centro_custo, $uf, $canal, $ponto_focal, $gestor, $possui_usuario, $nome, $matricula, $email);
+        self::executaValidacoes($possui_linha, $linha, $operadora, $status, $sim_card, $possui_aparelho, $tipo_aparelho, $marca_aparelho, $modelo_aparelho, $imei_aparelho, $gestao_mdm, $unidade, $centro_custo, $uf, $canal, $ponto_focal, $gestor, $possui_usuario, $nome, $matricula, $email);
 
         $sql = "INSERT INTO tb_dispositivos (
-            possui_linha, linha, operadora, servico, perfil, status, data_ativacao, sim_card, possui_aparelho, marca_aparelho, modelo_aparelho, imei_aparelho, gestao_mdm, unidade, centro_custo, uf, canal, ponto_focal, gestor, possui_usuario, nome, matricula, email, funcao
+            possui_linha, linha, operadora, servico, perfil, status, data_ativacao, sim_card, possui_aparelho, tipo_aparelho, marca_aparelho, modelo_aparelho, imei_aparelho, gestao_mdm, unidade, centro_custo, uf, canal, ponto_focal, gestor, possui_usuario, nome, matricula, email, funcao
         ) VALUES (
-            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
         )";
 
-        $sql = "INSERT INTO tb_dispositivos (
-            possui_linha, linha, operadora, servico, perfil, status, data_ativacao, sim_card, possui_aparelho, marca_aparelho, modelo_aparelho, imei_aparelho, gestao_mdm, unidade, centro_custo, uf, canal, ponto_focal, gestor, possui_usuario, nome, matricula, email, funcao
-        ) VALUES (
-            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
-        )";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $possui_linha, PDO::PARAM_STR);
         $stmt->bindValue(2, trim($linha), PDO::PARAM_STR);
@@ -105,22 +101,25 @@ class Telefonia
         $stmt->bindValue(6, trim(mb_strtoupper($status)), PDO::PARAM_STR);
         $stmt->bindValue(7, trim($data_ativacao), PDO::PARAM_STR);
         $stmt->bindValue(8, trim($sim_card), PDO::PARAM_STR);
+
         $stmt->bindValue(9, $possui_aparelho, PDO::PARAM_STR);
-        $stmt->bindValue(10, trim(mb_strtoupper($marca_aparelho)), PDO::PARAM_STR);
-        $stmt->bindValue(11, trim(mb_strtoupper($modelo_aparelho)), PDO::PARAM_STR);
-        $stmt->bindValue(12, trim($imei_aparelho), PDO::PARAM_STR);
-        $stmt->bindValue(13, trim(mb_strtoupper($gestao_mdm)), PDO::PARAM_STR);
-        $stmt->bindValue(14, trim(mb_strtoupper($unidade)), PDO::PARAM_STR);
-        $stmt->bindValue(15, trim($centro_custo), PDO::PARAM_STR);
-        $stmt->bindValue(16, trim(mb_strtoupper($uf)), PDO::PARAM_STR);
-        $stmt->bindValue(17, trim(mb_strtoupper($canal)), PDO::PARAM_STR);
-        $stmt->bindValue(18, trim(mb_strtoupper($ponto_focal)), PDO::PARAM_STR);
-        $stmt->bindValue(19, trim(mb_strtoupper($gestor)), PDO::PARAM_STR);
-        $stmt->bindValue(20, $possui_usuario, PDO::PARAM_STR);
-        $stmt->bindValue(21, trim(mb_strtoupper($nome)), PDO::PARAM_STR);
-        $stmt->bindValue(22, trim($matricula), PDO::PARAM_STR);
-        $stmt->bindValue(23, trim(mb_strtoupper($email)), PDO::PARAM_STR);
-        $stmt->bindValue(24, trim(mb_strtoupper($funcao)), PDO::PARAM_STR);
+        $stmt->bindValue(10, trim(mb_strtoupper($tipo_aparelho)), PDO::PARAM_STR);
+        $stmt->bindValue(11, trim(mb_strtoupper($marca_aparelho)), PDO::PARAM_STR);
+        $stmt->bindValue(12, trim(mb_strtoupper($modelo_aparelho)), PDO::PARAM_STR);
+        $stmt->bindValue(13, trim($imei_aparelho), PDO::PARAM_STR);
+        $stmt->bindValue(14, trim(mb_strtoupper($gestao_mdm)), PDO::PARAM_STR);
+        $stmt->bindValue(15, trim(mb_strtoupper($unidade)), PDO::PARAM_STR);
+        $stmt->bindValue(16, trim($centro_custo), PDO::PARAM_STR);
+        $stmt->bindValue(17, trim(mb_strtoupper($uf)), PDO::PARAM_STR);
+        $stmt->bindValue(18, trim(mb_strtoupper($canal)), PDO::PARAM_STR);
+        $stmt->bindValue(19, trim(mb_strtoupper($ponto_focal)), PDO::PARAM_STR);
+        $stmt->bindValue(20, trim(mb_strtoupper($gestor)), PDO::PARAM_STR);
+
+        $stmt->bindValue(21, $possui_usuario, PDO::PARAM_STR);
+        $stmt->bindValue(22, trim(mb_strtoupper($nome)), PDO::PARAM_STR);
+        $stmt->bindValue(23, trim($matricula), PDO::PARAM_STR);
+        $stmt->bindValue(24, trim(mb_strtoupper($email)), PDO::PARAM_STR);
+        $stmt->bindValue(25, trim(mb_strtoupper($funcao)), PDO::PARAM_STR);
 
         $stmt->execute();
     }
@@ -188,16 +187,17 @@ class Telefonia
     }
 
     // MÉTODO QUE ATUALIZA O DISPOSITIVO...
-    public function atualizaDispositivo(int $id, string $possui_linha, ?string $linha, ?string $operadora, ?string $servico, ?string $perfil, ?string $status, ?string $data_ativacao, ?string $sim_card, string $possui_aparelho, ?string $marca_aparelho, ?string $modelo_aparelho, ?string $imei_aparelho, ?string $gestao_mdm, string $unidade, string $centro_custo, string $uf, string $canal, string $ponto_focal, string $gestor, string $possui_usuario, ?string $nome, ?string $matricula, ?string $email, ?string $funcao): void
+    public function atualizaDispositivo(int $id, string $possui_linha, ?string $linha, ?string $operadora, ?string $servico, ?string $perfil, ?string $status, ?string $data_ativacao, ?string $sim_card, string $possui_aparelho, ?string $tipo_aparelho, ?string $marca_aparelho, ?string $modelo_aparelho, ?string $imei_aparelho, ?string $gestao_mdm, string $unidade, string $centro_custo, string $uf, string $canal, string $ponto_focal, string $gestor, string $possui_usuario, ?string $nome, ?string $matricula, ?string $email, ?string $funcao): void
     {
 
         // CAHAMA O MÉTODO ESTATICO QUE VALIDA OS CAMPOS...
-        self::executaValidacoes($possui_linha, $linha, $operadora, $status, $sim_card, $possui_aparelho, $marca_aparelho, $modelo_aparelho, $imei_aparelho, $gestao_mdm, $unidade, $centro_custo, $uf, $canal, $ponto_focal, $gestor, $possui_usuario, $nome, $matricula, $email);
+        self::executaValidacoes($possui_linha, $linha, $operadora, $status, $sim_card, $possui_aparelho, $tipo_aparelho, $marca_aparelho, $modelo_aparelho, $imei_aparelho, $gestao_mdm, $unidade, $centro_custo, $uf, $canal, $ponto_focal, $gestor, $possui_usuario, $nome, $matricula, $email);
 
         $sql =
             "UPDATE tb_dispositivos
-         SET possui_linha = ?, linha = ?, operadora = ?, servico = ?, perfil = ?, status = ?, data_ativacao = ?, sim_card = ?, possui_aparelho = ?, marca_aparelho = ?, modelo_aparelho = ?, imei_aparelho = ?, gestao_mdm = ?, unidade = ?, centro_custo = ?, uf = ?, canal = ?, ponto_focal = ?, gestor = ?, possui_usuario = ?, nome = ?, matricula = ?, email = ?, funcao = ?
+         SET possui_linha = ?, linha = ?, operadora = ?, servico = ?, perfil = ?, status = ?, data_ativacao = ?, sim_card = ?, possui_aparelho = ?, tipo_aparelho = ?, marca_aparelho = ?, modelo_aparelho = ?, imei_aparelho = ?, gestao_mdm = ?, unidade = ?, centro_custo = ?, uf = ?, canal = ?, ponto_focal = ?, gestor = ?, possui_usuario = ?, nome = ?, matricula = ?, email = ?, funcao = ?
          WHERE id = ?
+
         ";
 
         $stmt = $this->pdo->prepare($sql);
@@ -209,23 +209,26 @@ class Telefonia
         $stmt->bindValue(6, trim(mb_strtoupper($status)), PDO::PARAM_STR);
         $stmt->bindValue(7, trim($data_ativacao), PDO::PARAM_STR);
         $stmt->bindValue(8, trim($sim_card), PDO::PARAM_STR);
+
         $stmt->bindValue(9, $possui_aparelho, PDO::PARAM_STR);
-        $stmt->bindValue(10, trim(mb_strtoupper($marca_aparelho)), PDO::PARAM_STR);
-        $stmt->bindValue(11, trim(mb_strtoupper($modelo_aparelho)), PDO::PARAM_STR);
-        $stmt->bindValue(12, trim($imei_aparelho), PDO::PARAM_STR);
-        $stmt->bindValue(13, trim(mb_strtoupper($gestao_mdm)), PDO::PARAM_STR);
-        $stmt->bindValue(14, trim(mb_strtoupper($unidade)), PDO::PARAM_STR);
-        $stmt->bindValue(15, trim($centro_custo), PDO::PARAM_STR);
-        $stmt->bindValue(16, trim(mb_strtoupper($uf)), PDO::PARAM_STR);
-        $stmt->bindValue(17, trim(mb_strtoupper($canal)), PDO::PARAM_STR);
-        $stmt->bindValue(18, trim(mb_strtoupper($ponto_focal)), PDO::PARAM_STR);
-        $stmt->bindValue(19, trim(mb_strtoupper($gestor)), PDO::PARAM_STR);
-        $stmt->bindValue(20, $possui_usuario, PDO::PARAM_STR);
-        $stmt->bindValue(21, trim(mb_strtoupper($nome)), PDO::PARAM_STR);
-        $stmt->bindValue(22, trim($matricula), PDO::PARAM_STR);
-        $stmt->bindValue(23, trim(mb_strtoupper($email)), PDO::PARAM_STR);
-        $stmt->bindValue(24, trim(mb_strtoupper($funcao)), PDO::PARAM_STR);
-        $stmt->bindValue(25, $id, PDO::PARAM_INT);
+        $stmt->bindValue(10, trim(mb_strtoupper($tipo_aparelho)), PDO::PARAM_STR);
+        $stmt->bindValue(11, trim(mb_strtoupper($marca_aparelho)), PDO::PARAM_STR);
+        $stmt->bindValue(12, trim(mb_strtoupper($modelo_aparelho)), PDO::PARAM_STR);
+        $stmt->bindValue(13, trim($imei_aparelho), PDO::PARAM_STR);
+        $stmt->bindValue(14, trim(mb_strtoupper($gestao_mdm)), PDO::PARAM_STR);
+        $stmt->bindValue(15, trim(mb_strtoupper($unidade)), PDO::PARAM_STR);
+        $stmt->bindValue(16, trim($centro_custo), PDO::PARAM_STR);
+        $stmt->bindValue(17, trim(mb_strtoupper($uf)), PDO::PARAM_STR);
+        $stmt->bindValue(18, trim(mb_strtoupper($canal)), PDO::PARAM_STR);
+        $stmt->bindValue(19, trim(mb_strtoupper($ponto_focal)), PDO::PARAM_STR);
+        $stmt->bindValue(20, trim(mb_strtoupper($gestor)), PDO::PARAM_STR);
+        
+        $stmt->bindValue(21, $possui_usuario, PDO::PARAM_STR);
+        $stmt->bindValue(22, trim(mb_strtoupper($nome)), PDO::PARAM_STR);
+        $stmt->bindValue(23, trim($matricula), PDO::PARAM_STR);
+        $stmt->bindValue(24, trim(mb_strtoupper($email)), PDO::PARAM_STR);
+        $stmt->bindValue(25, trim(mb_strtoupper($funcao)), PDO::PARAM_STR);
+        $stmt->bindValue(26, $id, PDO::PARAM_INT);
 
         $stmt->execute();
     }
@@ -284,7 +287,7 @@ class Telefonia
     {
         
         $sql = "SELECT * FROM tb_dispositivos 
-                WHERE MATCH(linha, operadora, servico, perfil, marca_aparelho, modelo_aparelho, imei_aparelho, unidade, centro_custo, canal, ponto_focal, gestor, nome, matricula, email, funcao)
+                WHERE MATCH(linha, operadora, status, tipo_aparelho, marca_aparelho, modelo_aparelho, imei_aparelho, unidade, centro_custo, canal, ponto_focal, gestor, nome, matricula, email, funcao)
                 AGAINST (:busca)";
 
         $stmt = $this->pdo->prepare($sql);

@@ -27,12 +27,15 @@ if (!isset($_SESSION['usuario'])) {
     <ul>
         <li><a href="inicio.php"><i class="fa-solid fa-house"></i></i>Início<i class="fa-solid fa-angle-right"></i></a></li>
 
-        <li id="menu_02"><a><i class="fa-solid fa-database"></i>Cadastros<i class="fa-solid fa-angle-right"></i></a>
-            <ul id="menusub_02">
-                <li><a href="cadastrar_dispositivo.php"><i class="fa-solid fa-mobile-screen-button"></i>Dispositivo<i class="fa-solid fa-angle-right"></i></a></li>
-                <li><a href='cadastrar_opcoes.php'><i class="fa-solid fa-gears"></i>Cadastro de opções<i class='fa-solid fa-angle-right'></i></a></li>
-            </ul>
-        </li>
+        <?php if($_SESSION['perfil'] === 'INFRAESTRUTURA IDL' || $_SESSION['perfil'] === 'TI SITES') : ?>
+            <li id="menu_02"><a><i class="fa-solid fa-database"></i>Cadastros<i class="fa-solid fa-angle-right"></i></a>
+                <ul id="menusub_02">
+                    <li><a href="cadastrar_dispositivo.php"><i class="fa-solid fa-mobile-screen-button"></i>Dispositivo<i class="fa-solid fa-angle-right"></i></a></li>
+                    <li><a href='cadastrar_opcoes.php'><i class="fa-solid fa-gears"></i>Cadastro de opções<i class='fa-solid fa-angle-right'></i></a></li>
+                </ul>
+            </li>
+        <?php endif ?>
+
         <li id='menu_03'><a><i class="fa-solid fa-magnifying-glass"></i>Consulta<i class='fa-solid fa-angle-right'></i></a>
             <ul id='menusub_03'>
                 <li><a href='consulta_dispositivos.php'><i class="fa-solid fa-mobile-screen"></i>Consultar dispositivos<i class='fa-solid fa-angle-right'></i></a></li>

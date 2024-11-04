@@ -19,7 +19,7 @@
 }
 
 .menu-user-info {
-    min-width: 100%;    
+    width: 100%;    
     position: relative;
     display: flex;
     justify-content: center;
@@ -29,26 +29,14 @@
     border-radius: 3px;
     font-size: 12px;
 }
-.menu-user-info a {
-    color: var(--terciary-color);
+.menu-user-info p, .menu-user-info h3 {
+    margin: 0 0 3px 0;
 }
 
 .menu-user-info i {
     font-size: 50px;
     margin-bottom: 5px;
     color: var(--terciary-color);
-}
-.menu-user-info img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50px;
-    box-shadow: 0 0 1em #cdcdcd;
-    transition: .2s;
-}
-.menu-user-info img:hover {
-    filter: brightness(70%);
-    transition: .2s;
 }
 
 .menu-user-info div {
@@ -66,7 +54,7 @@
     height: 4px;
     margin: 0 2px;
     border-radius: 50px;
-    background: var(--secundary-color);
+    background: var(--terciary-color);
 }
 
 .menu ul {

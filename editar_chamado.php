@@ -89,7 +89,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
 
                         <section class="form-secao-01" name="form-cadastro-usuario">
 
-                            <h2>Preencha os campos</h2>
+                            <h2>Atualize algum campo</h2>
 
                             <label for="titulo">Título do chamado<span style="color: red;"> *</span>
                                 <div>
@@ -162,7 +162,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                     <select name="inclui_aparelho"  id="inclui_aparelho">
                                         <option value="<?= htmlentities($dadoChamado['inclui_aparelho']) ?>"><?= htmlentities($dadoChamado['inclui_aparelho']) ?></option>
                                         <?php foreach($listaAparelhos as $aparelho): ?>
-                                            <option value="<?= htmlentities($aparelho['nome']) . " - " .  htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['nome']) . " - " .  htmlentities($aparelho['imei_aparelho']) ?></option>
+                                            <option value="<?= htmlentities($aparelho['tipo_aparelho']) . " " . htmlentities($aparelho['nome']) . " " .  htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['tipo_aparelho']) . " " . htmlentities($aparelho['nome']) . " " .  htmlentities($aparelho['imei_aparelho']) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>

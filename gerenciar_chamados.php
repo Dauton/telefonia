@@ -26,7 +26,14 @@ if(empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] === 'busca=') {
     $chamados = new Chamado($pdo);
     $exibeTodosChamados = $chamados->exibeChamadosMeuDepartamento();
 
-} elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+} elseif($_SERVER['QUERY_STRING'] === 'abertos_meu_departamento') {
+
+    $titulo_tabela_filtrada = "Exibindo todos os chamados abertos em meu departamento";
+
+    $chamados = new Chamado($pdo);
+    $exibeTodosChamados = $chamados->exibeChamadosAbertosMeuDepartamento();
+
+}  elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $titulo_tabela_filtrada = "Exibindo resultado da pesquisa";
 
@@ -40,6 +47,9 @@ $emAberto = $chamados->contagemChamadosEmAberto();
 
 $chamados = new Chamado($pdo);
 $meuDepartamento = $chamados->contagemChamadosMeuDepartamento();
+
+$chamados = new Chamado($pdo);
+$emAbertoMeuDepartamento = $chamados->contagemChamadosAbertosMeuDepartamento();
 
 ?>
 
@@ -115,6 +125,18 @@ $meuDepartamento = $chamados->contagemChamadosMeuDepartamento();
                                     </div>
                                 </div>
                             </a>
+                            <a href="gerenciar_chamados.php?abertos_meu_departamento">
+                                <div>
+                                    <div id="box-infos-roxa">
+                                        <span>
+                                            <h4>ABERTOS EM MEU DEPARTAMENTO</h4>
+                                        </span>
+                                        <h3><?= $emAbertoMeuDepartamento; ?> chamados</h3>
+                                        <i class="fa-solid fa-building-user"></i>
+                                        <p class="texto-filtro">Clique para filtrar</p>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                         <div>
                             <form method="get">
@@ -139,7 +161,6 @@ $meuDepartamento = $chamados->contagemChamadosMeuDepartamento();
                             <table>
                                 <thead>
                                     <tr>
-                                        <td>ID chamado</td>
                                         <td>Título</td>
                                         <td>Departamento</td>
                                         <td>Categoria</td>
@@ -154,7 +175,6 @@ $meuDepartamento = $chamados->contagemChamadosMeuDepartamento();
                                 <tbody>
                                     <?php foreach ($exibeTodosChamados as $chamados) : ?>
                                         <tr>
-                                            <td><a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><?= htmlentities($chamados['id']) ?></a></td>
                                             <td><a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><?= htmlentities($chamados['titulo']) ?></a></td>
                                             <td><?= htmlentities($chamados['departamento']) ?></td>
                                             <td><?= htmlentities($chamados['categoria']) ?></td>

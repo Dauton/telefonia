@@ -3,6 +3,8 @@
 require_once "../config/conexao_bd.php";
 require_once "../../vendor/autoload.php";
 
+liberacaoIDL();
+
 // BUSCA O ID DO DISPOSITIVO PARA ARMAZENAR OS DADOS DO DISPOSITIVOS NO LOG...
 $buscaIdDispositivo = new Telefonia($pdo);
 $dadoDispositivo = $buscaIdDispositivo->buscaIdDispositivo($_POST['id']);

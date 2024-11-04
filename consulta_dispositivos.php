@@ -98,18 +98,21 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
                     <article class="conteudo-center-boxs">
                         <div class="conteudo-center-box-01">
                             <h1>Alguns atalhos e informações</h1>
-                            <a href="cadastrar_dispositivo.php">
-                                <div>
-                                    <div id="box-infos-amarela">
-                                        <span>
-                                            <h4>CADASTRAR DISPOSITIVO</h4>
-                                        </span>
-                                        <h3>Cadastrar</h3>
-                                        <i class="fa-solid fa-square-plus"></i>
-                                        <p class="texto-filtro">Clique para abrir</p>
+
+                            <?php if($_SESSION['perfil'] === 'INFRAESTRUTURA IDL' || $_SESSION['perfil'] === 'TI SITES') : ?>
+                                <a href="cadastrar_dispositivo.php">
+                                    <div>
+                                        <div id="box-infos-amarela">
+                                            <span>
+                                                <h4>CADASTRAR DISPOSITIVO</h4>
+                                            </span>
+                                            <h3>Cadastrar</h3>
+                                            <i class="fa-solid fa-square-plus"></i>
+                                            <p class="texto-filtro">Clique para abrir</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            <?php endif ?>
                             <a href="consulta_dispositivos.php?aparelhos">
                                 <div>
                                     <div id="box-infos-azul">
@@ -185,6 +188,7 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
                                         <td>Nome usuário</td>
                                         <td>Linha</td>
                                         <td>Status da linha</td>
+                                        <td>Tipo do aparelho</td>
                                         <td>Modelo do aparelho</td>
                                         <td>IMEI aparelho</td>
                                         <td>MDM</td>
@@ -200,6 +204,7 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
                                         <td><?= htmlentities($dispositivo['nome']) ?></td>
                                         <td><?= htmlentities($dispositivo['linha']) ?></td>
                                         <td id="Status"><p><?= htmlentities($dispositivo['status']) ?></p></td>
+                                        <td><?= htmlentities($dispositivo['tipo_aparelho']) ?></td>
                                         <td><?= htmlentities($dispositivo['modelo_aparelho']) ?></td>
                                         <td><?= htmlentities($dispositivo['imei_aparelho']) ?></td>
                                         <td><?= htmlentities($dispositivo['gestao_mdm']) ?></td>

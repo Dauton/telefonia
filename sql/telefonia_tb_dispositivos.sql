@@ -35,6 +35,7 @@ CREATE TABLE `tb_dispositivos` (
   `data_ativacao` varchar(100) DEFAULT NULL,
   `sim_card` varchar(100) DEFAULT NULL,
   `possui_aparelho` varchar(45) DEFAULT NULL,
+  `tipo_aparelho` varchar(45) DEFAULT NULL,
   `marca_aparelho` varchar(100) DEFAULT NULL,
   `modelo_aparelho` varchar(100) DEFAULT NULL,
   `imei_aparelho` varchar(100) DEFAULT NULL,
@@ -52,7 +53,7 @@ CREATE TABLE `tb_dispositivos` (
   `funcao` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `linha` (`linha`,`operadora`,`servico`,`perfil`,`status`,`sim_card`,`marca_aparelho`,`modelo_aparelho`,`imei_aparelho`,`unidade`,`centro_custo`,`uf`,`ponto_focal`,`gestor`,`nome`,`matricula`),
-  FULLTEXT KEY `busca` (`linha`,`operadora`,`servico`,`perfil`,`marca_aparelho`,`modelo_aparelho`,`imei_aparelho`,`unidade`,`centro_custo`,`canal`,`ponto_focal`,`gestor`,`nome`,`matricula`,`email`,`funcao`)
+  FULLTEXT KEY `busca` (`linha`,`operadora`,`status`,`tipo_aparelho`,`marca_aparelho`,`modelo_aparelho`,`imei_aparelho`,`unidade`,`centro_custo`,`canal`,`ponto_focal`,`gestor`,`nome`,`matricula`,`email`,`funcao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -74,4 +75,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-30 17:22:18
+-- Dump completed on 2024-11-04 17:13:24

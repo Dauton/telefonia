@@ -13,58 +13,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     // CASO O USUÁRIO ATUALIZE ESSE DISPOSITIVO INFORMANDO QUE NÃO CONTÉM APARELHO, OS CAMPOS REFERENTES AO APARELHO SERÃO LIMPOS.
     if ($_POST['possui_aparelho'] === 'Não') {
-        $_POST['marca_aparelho'] = $_POST['modelo_aparelho'] = $_POST['imei_aparelho'] = $_POST['gestao_mdm'] = null;
+        $_POST['tipo_aparelho'] = $_POST['marca_aparelho'] = $_POST['modelo_aparelho'] = $_POST['imei_aparelho'] = $_POST['gestao_mdm'] = null;
     }
     // CASO O USUÁRIO ATUALIZE ESSE DISPOSITIVO INFORMANDO QUE NÃO CONTÉM USUÁRIO, OS CAMPOS REFERENTES AO USUÁRIO SERÃO LIMPOS.
     if ($_POST['possui_usuario'] === 'Não') {
         $_POST['nome'] = $_POST['matricula'] = $_POST['email'] = $_POST['funcao'] = null;
     }
+    
+    // VALIDA SE EXISTE ALGUM DADOS DE LINHA OU APARELHO PREENCHIDOS...
+    if ($_POST['possui_linha'] === "Não" && $_POST['possui_aparelho'] === "Não") {
 
-    $atualizaDispositivo = new Telefonia($pdo);
-    $atualizaDispositivo->atualizaDispositivo(
+        header("Location: $visualiza_dispositivo?id=$_GET[id]&verifica_campo=nenhum_dado");
+        die();
 
-        $_GET['id'],
+    } elseif($_SESSION['perfil'] === 'INFRAESTRUTURA IDL' || $_SESSION['perfil'] === 'TI SITES') {
 
-        $_POST['possui_linha'],
-        $_POST['linha'],
-        $_POST['operadora'],
-        $_POST['servico'],
-        $_POST['perfil'],
-        $_POST['status'],
-        $_POST['data_ativacao'],
-        $_POST['sim_card'],
+        $atualizaDispositivo = new Telefonia($pdo);
+        $atualizaDispositivo->atualizaDispositivo(
 
-        $_POST['possui_aparelho'],
-        $_POST['marca_aparelho'],
-        $_POST['modelo_aparelho'],
-        $_POST['imei_aparelho'],
-        $_POST['gestao_mdm'],
-        $_POST['unidade'],
-        $_POST['centro_custo'],
-        $_POST['uf'],
-        $_POST['canal'],
-        $_POST['ponto_focal'],
-        $_POST['gestor'],
+            $_GET['id'],
 
-        $_POST['possui_usuario'],
-        $_POST['nome'],
-        $_POST['matricula'],
-        $_POST['email'],
-        $_POST['funcao']
-    );
+            $_POST['possui_linha'],
+            $_POST['linha'],
+            $_POST['operadora'],
+            $_POST['servico'],
+            $_POST['perfil'],
+            $_POST['status'],
+            $_POST['data_ativacao'],
+            $_POST['sim_card'],
 
-    // ARMAZENA A ATUALIZAÇÃO EM LOG...
-    $armazenaLog = new Logs($pdo);
-    $armazenaLog->armazenaLog(
-        'Telefonia',
-        $_SESSION['usuario'],
-        'Atualizou o aparelho de IMEI "' . $_POST['imei_aparelho'] . '" e a linha "' .  $_POST['linha'] . '" do usuário "' . $_POST['nome'] . '"',
-        'Sucesso',
-        ''
-    );
+            $_POST['possui_aparelho'],
+            $_POST['tipo_aparelho'],
+            $_POST['marca_aparelho'],
+            $_POST['modelo_aparelho'],
+            $_POST['imei_aparelho'],
+            $_POST['gestao_mdm'],
+            $_POST['unidade'],
+            $_POST['centro_custo'],
+            $_POST['uf'],
+            $_POST['canal'],
+            $_POST['ponto_focal'],
+            $_POST['gestor'],
 
-    header("Location: consulta_dispositivos.php?dispositivo=atualizado");
-    die();
+            $_POST['possui_usuario'],
+            $_POST['nome'],
+            $_POST['matricula'],
+            $_POST['email'],
+            $_POST['funcao']
+        );
+
+        // ARMAZENA A ATUALIZAÇÃO EM LOG...
+        $armazenaLog = new Logs($pdo);
+        $armazenaLog->armazenaLog(
+            'Telefonia',
+            $_SESSION['usuario'],
+            'Atualizou o aparelho de IMEI "' . $_POST['imei_aparelho'] . '" e a linha "' .  $_POST['linha'] . '" do usuário "' . $_POST['nome'] . '"',
+            'Sucesso',
+            ''
+        );
+
+        header("Location: consulta_dispositivos.php?dispositivo=atualizado");
+        die();
+    } else {
+        liberacaoIDL();
+    }
 }
 
 // LISTA TODOS AS MARCAS DE APARELHOS CADASTRADAS...
@@ -227,6 +239,18 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                         <section class="form-secao-02">
 
                             <h2>Informações do aparelho</h2>
+
+                            <label for="tipo_aparelho">Tipo do equipamento<span style="color: red;"> *</span>
+                                <div>
+                                    <i class="fa-solid fa-microchip"></i>
+                                    <select name="tipo_aparelho" id="tipo_aparelho">
+                                        <option value="<?= htmlentities($dadoDispositivo['tipo_aparelho']) ?>"><?= htmlentities($dadoDispositivo['tipo_aparelho']) ?></option>
+                                        <option value="CELULAR">CELULAR</option>
+                                        <option value="TABLET">TABLET</option>
+                                        <option value="MODEM">MODEM</option>
+                                    </select>
+                                </div>
+                            </label>
 
                             <label for="marca_aparelho">Marca<span style="color: red;"> *</span>
                                 <div>
@@ -409,7 +433,9 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                         </section>
 
                         <div>
-                            <button type="submit">Atualizar</button>
+                            <?php if($_SESSION['perfil'] === 'INFRAESTRUTURA IDL' || $_SESSION['perfil'] === 'TI SITES') : ?>
+                                <button type="submit">Atualizar</butto>
+                            <?php endif ?>
                             <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><button type="button" id="btn-cancelar">Cancelar</button></a>
                         </div>
 

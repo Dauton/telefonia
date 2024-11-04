@@ -88,7 +88,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                 <header class="conteudo-cabecalho">
                     <h3><a href="inicio.php">INÍCIO</a> / PAINEL DE CHAMADOS</h3>
                 </header>
-                <section class="conteudo-center" name="cadastro-usuario">
+                <section class="conteudo-center">
                     <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off" enctype="multipart/form-data" multiple>
                         <header id="form-cabecalho">
                             <h1>Abertura de chamado</h1>
@@ -170,7 +170,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                     <select name="inclui_aparelho"  id="inclui_aparelho">
                                         <option value="">Selecione o IMEI</option>
                                         <?php foreach($listaAparelhos as $aparelho): ?>
-                                            <option value="<?= htmlentities($aparelho['nome']) . " - " .  htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['nome']) . " - " . htmlentities($aparelho['imei_aparelho']) ?></option>
+                                            <option value="<?= htmlentities($aparelho['tipo_aparelho']) . " " . htmlentities($aparelho['nome']) . " " .  htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['tipo_aparelho']) . " " . htmlentities($aparelho['nome']) . " " . htmlentities($aparelho['imei_aparelho']) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
@@ -198,7 +198,6 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                         <table>
                             <thead>
                                 <tr>
-                                    <td>ID chamado</td>
                                     <td>Título</td>
                                     <td>Departamento</td>
                                     <td>Categoria</td>
@@ -207,8 +206,6 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                     <td>Unidade</td>
                                     <td>Data abertura</td>
                                     <td>Status</td>
-                                    <td>Fechado por</td>
-                                    <td>Data fechamento</td>
                                     <td>Atualizar</td>
                                     <td>Visualizar</td>
                                 </tr>
@@ -216,7 +213,6 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                             <tbody>
                                 <?php foreach ($exibeMeusChamados as $chamados) : ?>
                                     <tr>
-                                        <td><?= htmlentities($chamados['id']) ?></td>
                                         <td><?= htmlentities($chamados['titulo']) ?></td>
                                         <td><?= htmlentities($chamados['departamento']) ?></td>
                                         <td><?= htmlentities($chamados['categoria']) ?></td>
@@ -229,8 +225,6 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                         <td id="status">
                                             <p><?= htmlentities($chamados['status']) ?></p>
                                         </td>
-                                        <td><?= htmlentities($chamados['fechado_por']) ?></td>
-                                        <td><?= htmlentities($chamados['data_fechamento']) ?></td>
                                         <td>
                                             <?php if($chamados['status'] === 'EM ABERTO') :?>
                                                 <a href="editar_chamado.php?id=<?= $chamados['id'] ?>" title="Atualizar esse chamado"><i class="fa-solid fa-square-pen"></i></a>

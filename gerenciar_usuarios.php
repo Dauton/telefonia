@@ -52,6 +52,7 @@ $exibeTodosUsuarios = $exibeUsuarios->exibeUsuarios();
                                 <td></td>
                                 <td>Nome</td>
                                 <td>Usuário</td>
+                                <td>Unidade</td>
                                 <td>Perfil</td>
                                 <td>Status</td>
                                 <td>Cadastrado por</td>
@@ -77,6 +78,7 @@ $exibeTodosUsuarios = $exibeUsuarios->exibeUsuarios();
                                 </td>
                                 <td><?= htmlentities($exibeUsuarios['nome']) ?></td>
                                 <td><?= htmlentities($exibeUsuarios['usuario']) ?></td>
+                                <td><?= htmlentities($exibeUsuarios['unidade']) ?></td>
                                 <td><?= htmlentities($exibeUsuarios['perfil']) ?></td>
                                 <td><?= htmlentities($exibeUsuarios['status']) ?></td>
                                 <td><?= htmlentities($exibeUsuarios['cadastrado_por']) ?></td>

@@ -45,19 +45,38 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                 <section class="conteudo-center">
                     <article class="conteudo-center-boxs">
                         <div class="conteudo-center-box-01">
+
                             <h1>Alguns atalhos</h1>
-                            <a href="cadastrar_dispositivo.php">
+
+                            <?php if($_SESSION['perfil'] === 'INFRAESTRUTURA IDL' || $_SESSION['perfil'] === 'TI SITES') : ?>
+                                <a href="cadastrar_dispositivo.php">
+                                    <div>
+                                        <div id="box-infos-amarela">
+                                            <span>
+                                                <h4>CADASTRAR DISPOSITIVO</h4>
+                                            </span>
+                                            <h3>Cadastrar</h3>
+                                            <i class="fa-solid fa-square-plus"></i>
+                                            <p class="texto-filtro">Clique para abrir</p>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a href="cadastrar_opcoes.php">
                                 <div>
-                                    <div id="box-infos-amarela">
+                                    <div id="box-infos-verde">
                                         <span>
-                                            <h4>CADASTRAR DISPOSITIVO</h4>
+                                            <h4>CADASTRO DE OPÇÕES</h4>
                                         </span>
                                         <h3>Cadastrar</h3>
-                                        <i class="fa-solid fa-square-plus"></i>
+                                        <i class="fa-solid fa-gears"></i>
                                         <p class="texto-filtro">Clique para abrir</p>
                                     </div>
                                 </div>
                             </a>
+
+                            <?php endif ?>
+
                             <a href="consulta_dispositivos.php">
                                 <div>
                                     <div id="box-infos-azul">
@@ -70,18 +89,7 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                                     </div>
                                 </div>
                             </a>
-                            <a href="cadastrar_opcoes.php">
-                                <div>
-                                    <div id="box-infos-verde">
-                                        <span>
-                                            <h4>CADASTRO DE OPÇÕES</h4>
-                                        </span>
-                                        <h3>Cadastrar</h3>
-                                        <i class="fa-solid fa-gears"></i>
-                                        <p class="texto-filtro">Clique para abrir</p>
-                                    </div>
-                                </div>
-                            </a>
+ 
                             <a href="abrir_chamado.php">
                                 <div>
                                     <div id="box-infos-roxa">
@@ -90,6 +98,19 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                                         </span>
                                         <h3>Abrir</h3>
                                         <i class="fa-solid fa-headset"></i>
+                                        <p class="texto-filtro">Clique para abrir</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="gerenciar_chamados.php">
+                                <div>
+                                    <div id="box-infos-cinza">
+                                        <span>
+                                            <h4>GERENCIAR CHAMADO</h4>
+                                        </span>
+                                        <h3>Gerenciar</h3>
+                                        <i class="fa-solid fa-comments"></i>
                                         <p class="texto-filtro">Clique para abrir</p>
                                     </div>
                                 </div>

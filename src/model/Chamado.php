@@ -222,6 +222,17 @@ class Chamado
         return $resultado;
     }
 
+    // EXIBE CHAMADOS QUE ESTÃO NA FILA DO MEU DEPARTAMENTO...
+    public function exibeChamadosAbertosMeuDepartamento(): array
+    {
+        $sql = "SELECT *, DATE_FORMAT(data_abertura, '%d/%m/%Y às %H:%i') AS data_abertura FROM tb_chamados WHERE departamento = ? AND status = 'EM ABERTO'";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $_SESSION['unidade'], PDO::PARAM_STR);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $resultado;
+    }
+
     // MÉTODO QUE CONTA OS CHAMADOS EM ABERTO...
     public function contagemChamadosEmAberto(): int
     {
@@ -243,4 +254,15 @@ class Chamado
         $resultado = $stmt->fetchColumn();
         return $resultado;
     }
+
+        // MÉTODO QUE CONTA OS CHAMADOS EM MEU DEPARTAMENTO...
+        public function contagemChamadosAbertosMeuDepartamento(): int 
+        {
+            $sql = "SELECT COUNT(*) FROM tb_chamados WHERE departamento = ? AND status = 'EM ABERTO'";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(1, $_SESSION['unidade'], PDO::PARAM_STR);
+            $stmt->execute();
+            $resultado = $stmt->fetchColumn();
+            return $resultado;
+        }
 }

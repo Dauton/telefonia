@@ -3,6 +3,8 @@
 require_once "../config/conexao_bd.php";
 require_once "../../vendor/autoload.php";
 
+liberacaoIDL();
+
 $buscaIdOpcao = new Opcoes($pdo);
 $dadoOpcao = $buscaIdOpcao->buscaIdOpcao($_POST['id']);
 

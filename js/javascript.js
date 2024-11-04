@@ -158,196 +158,14 @@ function corStatus() {
             cell.style.backgroundColor = '#0088ff';
 
         } 
-
-        
-        
     });
 }
 corStatus();
 
-
-// MUDA COR CONFORME QUANTIDADE EM ESTOQUE X ESTOQUE MÍNIMO
-document.addEventListener("DOMContentLoaded", function() {
-    var estoqueCells = document.querySelectorAll('#estoque');
-    var estoqueMinimoCells = document.querySelectorAll('#estoque_minimo');
-
-    estoqueCells.forEach(function(estoqueCell, index) {
-        var estoque = parseInt(estoqueCell.innerText);
-        var estoqueMinimo = parseInt(estoqueMinimoCells[index].innerText);
-
-        // SE O VALOR EM ESTOQUE FOR MENOR DO QUE O VALOE DE ESTOQUE MÍNIMO, O FUNDO DO VALOR EM ESTOQUE FICARÁ VERMELHO...
-        if (estoque < estoqueMinimo) {
-            estoqueCell.style.backgroundColor = '#ffb4b4';
-            estoqueCell.style.fontWeight = 'bold';
-            estoqueCell.style.boxShadow = '0 0 .2em #808080';
-
-        }
-
-        // SE O VALOR EM ESTOQUE FOR MAIOR QUE O VALOR DO ESTOQUE MÍNIMO, O FUNDO DO VALOR EM ESTOQUE FICARÁ VERDE...
-        if (estoque > estoqueMinimo) {
-            estoqueCell.style.backgroundColor = '#b4ffb4';
-            estoqueCell.style.fontWeight = 'bold';
-            estoqueCell.style.boxShadow = '0 0 .2em #808080';
-        }
-
-        // SE O VALOR EM ESTOQUE FOR IGUAL AO VALOR DO ESTOQUE MÍNIMO, O FUNDO DO VALOR EM ESTOQUE FICARÁ AMARELO...
-        if (estoque === estoqueMinimo) {
-            estoqueCell.style.backgroundColor = '#fcffb4';
-            estoqueCell.style.fontWeight = 'bold';
-            estoqueCell.style.boxShadow = '0 0 .2em #808080';
-        }
-    });
-});
+//_____________________________________________________________________________________
 
 
-// FUNÇÃO QUE FILTRA A TABELA PRA EXIBIR APENAS AS REQUISIÇÕES COM STATUS "RECUSADA"
-function filtrarRecusadas() {
-
-    var linhas = document.querySelectorAll("#tabela tbody tr");
-
-    linhas.forEach(function(linha) {
-        var status = linha.cells[6].innerText;
-        if (status === "RECUSADA") {
-            linha.classList.remove("hidden");
-        } else {    
-            linha.classList.add("hidden");
-        }
-    });
-}
-
-// FUNÇÃO QUE FILTRA A TABELA PRA EXIBIR APENAS AS REQUISIÇÕES COM STATUS "EM ABERTO"
-function filtrarEmAberto() {
-
-    var linhas = document.querySelectorAll("#tabela tbody tr");
-
-    linhas.forEach(function(linha) {
-        var status = linha.cells[6].innerText;
-        if (status === "EM ABERTO") {
-            linha.classList.remove("hidden");
-        } else {
-            linha.classList.add("hidden");
-        }
-    });
-}
-
-// FUNÇÃO QUE FILTRA A TABELA PRA EXIBIR APENAS AS REQUISIÇÕES COM STATUS "ENTREGUE"
-function filtrarEntregues() {
-
-    var linhas = document.querySelectorAll("#tabela tbody tr");
-
-    linhas.forEach(function(linha) {
-        var status = linha.cells[6].innerText;
-        if (status === "ENTREGUE") {
-            linha.classList.remove("hidden");
-        } else {
-            linha.classList.add("hidden");
-        }
-    });
-}
-
-// FUNÇÃO QUE REMOVE O FILTRO E VOLTA A EXIBIR TODAS AS REQUISIÇÕES
-function exibirTodas() {
-    var linhas = document.querySelectorAll("#tabela tbody tr");
-    linhas.forEach(function(linha) {
-        linha.classList.remove("hidden");
-    });
-}
-
-// ADICIONA FILTRO AO ESTOQUE, ABAIXO DO ESTOQUE MÍNIMO, NO ESTOQUE MÍNIMO E ABAIXO DO ESTOQUE MÍNIMO
-document.addEventListener('DOMContentLoaded', () => {
-    const tabela = document.querySelector('table tbody');
-    
-    const filtrarTabela = (tipo) => {
-        const linhas = tabela.querySelectorAll('tr');
-        linhas.forEach(linha => {
-            const estoque = parseInt(linha.querySelector('#estoque').textContent, 10);
-            const estoqueMinimo = parseInt(linha.querySelector('#estoque_minimo').textContent, 10);
-
-            let mostrar = false;
-            
-            switch(tipo) {
-                case 'abaixo-do-minimo':
-                    mostrar = estoque < estoqueMinimo;
-                    break;
-                case 'no-estoque-minimo':
-                    mostrar = estoque === estoqueMinimo;
-                    break;
-                case 'acima-do-minimo':
-                    mostrar = estoque > estoqueMinimo;
-                    break;
-                default:
-                    mostrar = true;
-            }
-
-            linha.style.display = mostrar ? '' : 'none';
-        });
-    };
-
-    document.getElementById('filtro-abaixo-do-minimo').addEventListener('click', () => filtrarTabela('abaixo-do-minimo'));
-    document.getElementById('filtro-no-estoque-minimo').addEventListener('click', () => filtrarTabela('no-estoque-minimo'));
-    document.getElementById('filtro-acima-do-minimo').addEventListener('click', () => filtrarTabela('acima-do-minimo'));
-    document.getElementById('filtro-todos-produtos').addEventListener('click', () => filtrarTabela(''));
-
-    filtrarTabela(''); 
-});
-
-
-// FUNÇÕES DA CALCULADORA
-function insert(num) {
-    var numero = document.getElementById('resultado').innerHTML;
-    document.getElementById('resultado').innerHTML = numero + num;
-}
-
-function clean() {
-    document.getElementById('resultado').innerHTML = "";
-}
-
-function back() {
-    var resultado = document.getElementById('resultado').innerHTML;
-    document.getElementById('resultado').innerHTML = resultado.substring(0, resultado.length -1);
-}
-
-function calcular()
-{
-    var resultado = document.getElementById('resultado').innerHTML;
-    if(resultado) {
-        document.getElementById('resultado').innerHTML = eval(resultado);
-    } else {
-        document.getElementById('resultado').innerHTML = "";
-    }
-}
-
-$("#btn-atalho[title=Calculadora]").click(function() 
-{
-    $(".calculadora").fadeToggle(100).css({"display": "flex"});
-});
-$("#limpar").click(function() 
-{
-    $(".calculadora").fadeToggle(100);
-});
-
-
-// EXIBE A DIFERENÇA QUANTIDADE VS ESTOQUE NO MOMENTO DO INVENTÁRIO DO PRODUTO..
-document.addEventListener('DOMContentLoaded', function () {
-
-    const estoqueInputs = document.querySelectorAll('.estoque-input');
-    const diferencaInputs = document.querySelectorAll('.diferenca-input');
-
-    function atualizarDiferenca() {
-        estoqueInputs.forEach((input, index) => {
-
-            const quantidade = parseFloat(input.getAttribute('value')) || 0;
-            const estoque = parseFloat(input.value) || 0;
-            const diferenca = estoque - quantidade;
-            diferencaInputs[index].value = diferenca.toFixed(0);
-        });
-    }
-    estoqueInputs.forEach(input => {
-        input.addEventListener('input', atualizarDiferenca);
-    });
-    atualizarDiferenca();
-});
-
+// EXIBE A SESSÃO SE A OPÇÃO FOR IGUAL A "Sim", E OCULTA SE FOR IGUAL A "Não"...
 document.addEventListener('DOMContentLoaded', function() {
     const selectPossuiLinha = document.querySelector('select[name="possui_linha"]');
     const selectPossuiAparelho = document.querySelector('select[name="possui_aparelho"]');
@@ -356,20 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const secaoLinha = document.querySelector('.form-secao-01');
     const secaoAparelho = document.querySelector('.form-secao-02');
     const secaoUsuario = document.querySelector('.form-secao-03');
-
-    const linha = secaoLinha.querySelector('input[name="linha"]');
-    const operadora = secaoLinha.querySelector('select[name="operadora"]');
-
-    const marcaAparelho = secaoAparelho.querySelector('select[name="marca_aparelho"]');
-    const modeloAparelho = secaoAparelho.querySelector('input[name="modelo_aparelho"]');
-    const imeiAparelho = secaoAparelho.querySelector('input[name="imei_aparelho"]');
-    const mdmAparelho = secaoAparelho.querySelector('select[name="gestao_mdm"]');
-
-    const nomeUsuario = secaoUsuario.querySelector('input[name="nome"]');
-
-    secaoLinha.style.display = 'none';
-    secaoAparelho.style.display = 'none';
-    secaoUsuario.style.display = 'none';
 
     function toggleSection(select, section) {
         if (select.value === 'Sim') {
@@ -380,14 +184,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     selectPossuiLinha.addEventListener('change', function() {
-        toggleSection(selectPossuiLinha, secaoLinha, [linha, operadora]);
+        toggleSection(selectPossuiLinha, secaoLinha);
     });
 
     selectPossuiAparelho.addEventListener('change', function() {
-        toggleSection(selectPossuiAparelho, secaoAparelho, [marcaAparelho, modeloAparelho, imeiAparelho, mdmAparelho]);
+        toggleSection(selectPossuiAparelho, secaoAparelho);
     });
 
     selectPossuiUsuario.addEventListener('change', function() {
-        toggleSection(selectPossuiUsuario, secaoUsuario, [nomeUsuario]);
+        toggleSection(selectPossuiUsuario, secaoUsuario);
     });
+
+    toggleSection(selectPossuiLinha, secaoLinha);
+    toggleSection(selectPossuiAparelho, secaoAparelho);
+    toggleSection(selectPossuiUsuario, secaoUsuario);
 });
+
+//_____________________________________________________________________________________
+

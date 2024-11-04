@@ -10,8 +10,8 @@ if ((!isset($_SESSION['usuario']) === true) && (!isset($_SESSION['senha']) === t
 // ACESSO LIBERADO APENAS PARA TI SITES E INFRA IDL...
 function liberacaoIDL()
 {
-    if($_SESSION['perfil'] !== 'TI SITES' && $_SESSION['perfil'] !== 'IFRAESTRUTURA IDL') {
-        header("Location: ../inicio.php");
+    if($_SESSION['perfil'] !== 'TI SITES' && $_SESSION['perfil'] !== 'INFRAESTRUTURA IDL') {
+        header("Location: ../../inicio.php?acesso=negado");
         die();
     }
 }
@@ -20,7 +20,7 @@ function liberacaoIDL()
 function liberacaoInfraIDL()
 {
     if($_SESSION['perfil'] !== 'INFRAESTRUTURA IDL') {
-        header("Location: ../inicio.php");
+        header("Location: ../../inicio.php?acesso=negado");
         die();
     }
 }
@@ -29,7 +29,7 @@ function liberacaoInfraIDL()
 function senhaPrimeiroAcesso()
 {
     if($_SESSION['senha_primeiro_acesso'] != "ALTERADA") {
-        header("Location: primeiro_acesso.php");
+        header("Location: ../../primeiro_acesso.php");
         die();
     }
 }

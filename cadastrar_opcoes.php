@@ -4,6 +4,7 @@ require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
 senhaPrimeiroAcesso();
+liberacaoIDL();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

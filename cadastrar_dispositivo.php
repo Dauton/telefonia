@@ -4,6 +4,7 @@ require_once "src/config/conexao_bd.php";
 require_once "vendor/autoload.php";
 
 senhaPrimeiroAcesso();
+liberacaoIDL();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -23,17 +24,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['status'],
             $_POST['data_ativacao'],
             $_POST['sim_card'],
+
             $_POST['possui_aparelho'],
+            $_POST['tipo_aparelho'],
             $_POST['marca_aparelho'],
             $_POST['modelo_aparelho'],
             $_POST['imei_aparelho'],
             $_POST['gestao_mdm'],
+            
             $_POST['unidade'],
             $_POST['centro_custo'],
             $_POST['uf'],
             $_POST['canal'],
             $_POST['ponto_focal'],
             $_POST['gestor'],
+
             $_POST['possui_usuario'],
             $_POST['nome'],
             $_POST['matricula'],
@@ -156,6 +161,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                         <section class="form-secao-01">
 
                             <h2>Informações da linha</h2>
+
                             <label for="linha">Linha<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-phone"></i>
@@ -238,6 +244,18 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                         <section class="form-secao-02">
 
                             <h2>Informações do aparelho</h2>
+
+                            <label for="tipo_aparelho">Tipo equipamento<span style="color: red;"> *</span>
+                                <div>
+                                    <i class="fa-solid fa-microchip"></i>
+                                    <select name="tipo_aparelho" id="tipo_aparelho">
+                                        <option value="">Selecione</option>
+                                        <option value="CELULAR">CELULAR</option>
+                                        <option value="TABLET">TABLET</option>
+                                        <option value="MODEM">MODEM</option>
+                                    </select>
+                                </div>
+                            </label>
 
                             <label for="marca_aparelho">Marca<span style="color: red;"> *</span>
                                 <div>
