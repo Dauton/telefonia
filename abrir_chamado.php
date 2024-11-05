@@ -7,9 +7,9 @@ senhaPrimeiroAcesso();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $arquivo = $_FILES['arquivo'];
-    $nome = $arquivo['name'];
-    $tmp_name = $arquivo['tmp_name'];
+    $anexo = $_FILES['anexo'];
+    $nome = $anexo['name'];
+    $tmp_name = $anexo['tmp_name'];
 
     $extensao = pathinfo($nome, PATHINFO_EXTENSION);
     $novo_nome = uniqid() . '.' . $extensao;
@@ -184,7 +184,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                             
                             <label for="arquivo">Anexar (.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, ou .png) opcional
                                 <div>
-                                    <input type="file" name="arquivo" id="arquivo" accept=".doc,.docx,.pdf,.xls,.xlsx,.jpg,.jpeg,.png">
+                                    <input type="file" name="anexo" id="anexo" accept=".doc,.docx,.pdf,.xls,.xlsx,.jpg,.jpeg,.png">
                                 </div>
                             </label>
 

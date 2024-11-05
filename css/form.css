@@ -1,31 +1,52 @@
- form section {
+form section {
     width: 100%;
-    margin-bottom: 20px;
+    margin: 0 0 20px 0;
     padding: 20px;
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     gap: 2%;
     display: none;
     box-shadow: 0 0 .3em #cdcdcd;
     border-radius: 3px;
- }
- form section[name='form-cadastro-usuario'] {
+    overflow: hidden;
+}
+
+form[name="dispositivo"] section {
+    padding: 70px 20px 20px 20px;
+}
+
+form section .conteudo-cabecalho {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to right, var(--secundary-color), var(--terciary-color));
+}
+
+form section .conteudo-cabecalho i {
+    font-size: 20px;
+}
+
+form section[name='form-cadastro-usuario'] {
     display: flex !important;
- }
- .form-secao-04 {
+
+}
+
+.form-secao-04 {
     display: flex;
- }
- form {
+}
+
+form {
     width: 100%;
     height: fit-content;
     margin: 13px auto;
-    padding: 60px 30px 30px 30px;
+    padding: 70px 30px 30px 30px;
     position: relative;
     display: flex;
     flex-direction: column;
     border-radius: 3px;
     box-shadow: 0 0 1em #cdcdcd;
-    background:#fff;
+    background: #fff;
     font-size: 10px;
 }
 
@@ -62,6 +83,7 @@ form::-webkit-scrollbar {
     color: var(--white-color);
     font-size: 19px;
 }
+
 #form-cabecalho div {
     width: 100%;
     margin: 0;
@@ -70,6 +92,7 @@ form::-webkit-scrollbar {
     justify-content: right;
     font-size: 12px;
 }
+
 #form-foto-perfil {
     width: 40px;
     height: 40px;
@@ -86,6 +109,7 @@ form .fa-circle-user {
     font-size: 40px;
     color: var(--terciary-color);
 }
+
 form h2 {
     width: 100%;
     font-size: 18px;
@@ -98,16 +122,18 @@ form label {
     margin: 0 0 10px 0;
     font-size: 13px;
 }
+
 form label div {
     position: relative;
     display: flex;
     align-items: center;
     margin: 3px 0 0 0;
-    border: 1px solid #cdcdcd   ;
+    border: 1px solid #cdcdcd;
     border-radius: 3px;
 }
+
 form label div i {
-    width: 30px;    
+    width: 30px;
     min-width: 30px;
     margin: 0;
     position: absolute;
@@ -136,6 +162,7 @@ form #label_checkbox {
     justify-content: left;
     gap: 5px;
 }
+
 form #label_checkbox input {
     width: fit-content;
 }
@@ -148,6 +175,7 @@ form select {
     border: none;
     border-radius: 3px;
 }
+
 form input[type=file] {
     padding: 0;
 }
@@ -181,6 +209,7 @@ form select option {
 input[type=number]::-webkit-inner-spin-button {
     appearance: none;
 }
+
 input[type=date] {
     padding: 8px 8px 8px 25px;
 }
@@ -188,6 +217,7 @@ input[type=date] {
 form p {
     text-align: left !important;
 }
+
 form a:focus {
     outline: none;
 }
@@ -200,7 +230,7 @@ form div {
 
 }
 
-#form-labels-lado-a-lado{
+#form-labels-lado-a-lado {
     width: 100%;
     gap: 2% 2%;
     justify-content: left;
@@ -212,17 +242,22 @@ form div {
 
 #form-altera-senha {
     width: 350px;
-    padding: 60px 30px 30px 30px;
+    padding: 70px 30px 30px 30px;
 }
+
 #form-altera-senha label {
     width: 100%;
 }
 
-@media (width <= 960px) {
+@media (width <=960px) {
 
     form section {
         padding: 0;
         box-shadow: none;
+    }
+    form[name="dispositivo"] section {
+        padding: 70px 0 0 0;
+        margin: 0;
     }
 
     form {
@@ -241,12 +276,15 @@ form div {
         border-radius: 5px;
         background: white;
     }
+
     form #label-textarea {
         width: 100% !important;
     }
+
     #label-textarea-menor {
         width: 100% !important;
     }
+
     form input,
     form select {
         width: 100%;
@@ -268,9 +306,11 @@ form div {
     #form-labels-lado-a-lado {
         width: 100%;
     }
+
     #form-labels-lado-a-lado label {
         width: 100%;
     }
+
     #form-altera-senha {
         width: 100%;
         padding: 60px 0 0 0;

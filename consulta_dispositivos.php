@@ -199,24 +199,31 @@ $totaldispositivos = $dispositivos->contagemDispositivos();
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($exibeDispositivos as $dispositivo) : ?>
-                                    <tr>
-                                        <td><?= htmlentities($dispositivo['nome']) ?></td>
-                                        <td><?= htmlentities($dispositivo['linha']) ?></td>
-                                        <td id="Status"><p><?= htmlentities($dispositivo['status']) ?></p></td>
-                                        <td><?= htmlentities($dispositivo['tipo_aparelho']) ?></td>
-                                        <td><?= htmlentities($dispositivo['modelo_aparelho']) ?></td>
-                                        <td><?= htmlentities($dispositivo['imei_aparelho']) ?></td>
-                                        <td><?= htmlentities($dispositivo['gestao_mdm']) ?></td>
-                                        <td><?= htmlentities($dispositivo['unidade']) ?></td>
-                                        <td><?= htmlentities($dispositivo['centro_custo']) ?></td>
-                                        <td><?= htmlentities($dispositivo['ponto_focal']) ?></td>
-                                        <td id="status">
-                                            <a href="visualiza_dispositivo.php?id=<?= $dispositivo['id'] ?>"><i class="fa-solid fa-eye"></i></a>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach ?>
+                                    <?php if(count($exibeDispositivos) > 0): ?>
+                                        <?php foreach($exibeDispositivos as $dispositivo): ?>
+                                            <tr>
+                                                <td><?= htmlentities($dispositivo['nome']) ?></td>
+                                                <td><?= htmlentities($dispositivo['linha']) ?></td>
+                                                <td id="Status"><p><?= htmlentities($dispositivo['status']) ?></p></td>
+                                                <td><?= htmlentities($dispositivo['tipo_aparelho']) ?></td>
+                                                <td><?= htmlentities($dispositivo['modelo_aparelho']) ?></td>
+                                                <td><?= htmlentities($dispositivo['imei_aparelho']) ?></td>
+                                                <td><?= htmlentities($dispositivo['gestao_mdm']) ?></td>
+                                                <td><?= htmlentities($dispositivo['unidade']) ?></td>
+                                                <td><?= htmlentities($dispositivo['centro_custo']) ?></td>
+                                                <td><?= htmlentities($dispositivo['ponto_focal']) ?></td>
+                                                <td id="status">
+                                                    <a href="visualiza_dispositivo.php?id=<?= $dispositivo['id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr>
+                                            <td colspan="11"><p id="nenhum_resultado_encontrado">Nenhum resultado encontrado para o valor "<?= $_GET['busca'] ?>".</p></td>
+                                        </tr>
+                                    <?php endif; ?>
                                 </tbody>
+
                             </table>
                             <p>Não há mais dados a serem exibidos</p>
                         </div>

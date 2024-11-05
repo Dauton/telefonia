@@ -57,6 +57,7 @@
         $html .= '<td style="background: #00384b"><b>STATUS</b></td>';
         $html .= '<td style="background: #00384b"><b>DATA ATIVAÇÃO</b></td>';
         $html .= '<td style="background: #00384b"><b>SIM CARD</b></td>';
+        $html .= '<td style="background: #00384b"><b>TIPO APARELHO</b></td>';
         $html .= '<td style="background: #00384b"><b>MARCA APARELHO</b></td>';
         $html .= '<td style="background: #00384b"><b>MODELO APARELHO</b></td>';
         $html .= '<td style="background: #00384b"><b>IMEI APARELHO</b></td>';
@@ -88,6 +89,7 @@
                 $html .= '<td>' . $linha_tabela["data_ativacao"] . '</td>';
                 $html .= '<td>*' . $linha_tabela["sim_card"] . '</td>';
                 $html .= '<td>' . $linha_tabela["marca_aparelho"] . '</td>';
+                $html .= '<td>' . $linha_tabela["tipo_aparelho"] . '</td>';
                 $html .= '<td>' . $linha_tabela["modelo_aparelho"] . '</td>';
                 $html .= '<td>*' . $linha_tabela["imei_aparelho"] . '</td>';
                 $html .= '<td>' . $linha_tabela["gestao_mdm"] . '</td>';

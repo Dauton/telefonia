@@ -173,25 +173,31 @@ $emAbertoMeuDepartamento = $chamados->contagemChamadosAbertosMeuDepartamento();
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($exibeTodosChamados as $chamados) : ?>
+                                    <?php if(count($exibeTodosChamados) > 0) : ?>
+                                        <?php foreach ($exibeTodosChamados as $chamados) : ?> 
+                                            <tr>
+                                                <td><a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><?= htmlentities($chamados['titulo']) ?></a></td>
+                                                <td><?= htmlentities($chamados['departamento']) ?></td>
+                                                <td><?= htmlentities($chamados['categoria']) ?></td>
+                                                <td id="status">
+                                                    <p><?= htmlentities($chamados['prioridade']) ?></p>
+                                                </td>
+                                                <td><?= htmlentities($chamados['usuario']) ?></td>
+                                                <td><?= htmlentities($chamados['unidade_usuario']) ?></td>
+                                                <td><?= htmlentities($chamados['data_abertura']) ?></td>
+                                                <td id="status">
+                                                    <p><?= htmlentities($chamados['status']) ?></p>
+                                                </td>
+                                                <td>
+                                                    <a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
                                         <tr>
-                                            <td><a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><?= htmlentities($chamados['titulo']) ?></a></td>
-                                            <td><?= htmlentities($chamados['departamento']) ?></td>
-                                            <td><?= htmlentities($chamados['categoria']) ?></td>
-                                            <td id="status">
-                                                <p><?= htmlentities($chamados['prioridade']) ?></p>
-                                            </td>
-                                            <td><?= htmlentities($chamados['usuario']) ?></td>
-                                            <td><?= htmlentities($chamados['unidade_usuario']) ?></td>
-                                            <td><?= htmlentities($chamados['data_abertura']) ?></td>
-                                            <td id="status">
-                                                <p><?= htmlentities($chamados['status']) ?></p>
-                                            </td>
-                                            <td>
-                                                <a href="visualiza_chamado.php?id=<?= $chamados['id'] ?>"><i class="fa-solid fa-eye"></i></a>
-                                            </td>
+                                            <td colspan="11"><p id="nenhum_resultado_encontrado">Nenhum resultado encontrado para o valor "<?= $_GET['busca'] ?>".</p></td>
                                         </tr>
-                                    <?php endforeach ?>
+                                    <?php endif ?>
                                 </tbody>
                             </table>
                             <p>Não há mais dados a serem exibidos</p>

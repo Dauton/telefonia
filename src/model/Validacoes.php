@@ -54,7 +54,9 @@ class Validacoes
             $paphinfo != 'xlsx' &&
             $paphinfo != 'jpg' &&
             $paphinfo != 'jpeg' &&
-            $paphinfo != 'png'
+            $paphinfo != 'png' &&
+            $paphinfo != '' &&
+            $paphinfo != null
         ) {
 
             header("Location: $caminho");

@@ -107,7 +107,7 @@ $exibeDispositivosMinhaUnidade = $dadoDispositivo->exibeDispositivosMinhaUnidade
                                 <div>
                                     <div id="box-infos-cinza">
                                         <span>
-                                            <h4>GERENCIAR CHAMADO</h4>
+                                            <h4>GERENCIAR CHAMADOS</h4>
                                         </span>
                                         <h3>Gerenciar</h3>
                                         <i class="fa-solid fa-comments"></i>

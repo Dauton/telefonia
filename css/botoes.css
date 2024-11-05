@@ -150,3 +150,9 @@ form input[type=file]::-webkit-file-upload-button:hover {
     background: var(--terciary-color);
 
 }
+
+@media (width <= 960px) {
+    #btn-login {
+        padding: 10px;
+    }
+}

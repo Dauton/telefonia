@@ -9,14 +9,21 @@ $buscaIdChamado = new Chamado($pdo);
 $dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
 
 // SE O CHAMADO JÁ ESTIVER FECHADO OU O CHAMADO NÃO PERTENCER AO USUÁRIO LOGADO, NÃO SERÁ POSSIVEL EDITA-LO...
-if($dadoChamado['status'] === 'FECHADO' || $dadoChamado['usuario'] != $_SESSION['usuario'])  {
+if ($dadoChamado['status'] === 'FECHADO' || $dadoChamado['usuario'] != $_SESSION['usuario']) {
     header("Location: abrir_chamado.php");
     die();
 }
 
 // EXECUTA A EDIÇÃO DO CHAMADO...
-if($_SERVER['REQUEST_METHOD'] === 'POST')
-{
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $anexo = $_FILES['anexo'];
+    $nome = $anexo['name'];
+    $tmp_name = $anexo['tmp_name'];
+
+    $extensao = pathinfo($nome, PATHINFO_EXTENSION);
+    $novo_nome = uniqid() . '.' . $extensao;
+    move_uploaded_file($tmp_name, "uploads/" . $novo_nome);
+
     $editaChamado = new Chamado($pdo);
     $editaChamado->editaChamado(
         $_GET['id'],
@@ -26,12 +33,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $_POST['prioridade'],
         $_POST['descricao'],
         $_POST['inclui_linha'],
-        $_POST['inclui_aparelho']
+        $_POST['inclui_aparelho'],
+        "uploads/" . $novo_nome
     );
+
+    // SE NÃO FOR ADICIONADO NEM UM ANEXO NA EDIÇÃO, O ANEXO PERMANECERÁ SENDO O JÁ ANEXADO...
+    if ($_POST['anexo'] === '' || $_POST['anexo'] === null) {
+
+        $_POST['anexo'] === $dadoChamado['anexo'];
+    }
 
     header("Location: abrir_chamado.php?chamado=atualizado");
     die();
-
 }
 
 $chamados = new Chamado($pdo);
@@ -94,7 +107,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                             <label for="titulo">Título do chamado<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-file-pen"></i>
-                                    <input type="text" name="titulo"  id="titulo" value="<?= htmlentities($dadoChamado['titulo']) ?>" placeholder="Insira o título do chamado">
+                                    <input type="text" name="titulo" id="titulo" value="<?= htmlentities($dadoChamado['titulo']) ?>" placeholder="Insira o título do chamado">
                                 </div>
                             </label>
 
@@ -103,7 +116,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                     <i class="fa-solid fa-building-flag"></i>
                                     <select name="departamento" id="departamento">
                                         <option value="<?= htmlentities($dadoChamado['departamento']) ?>"><?= htmlentities($dadoChamado['departamento']) ?></option>
-                                        <?php foreach($listaUnidades as $unidade) : ?>
+                                        <?php foreach ($listaUnidades as $unidade) : ?>
                                             <option value="<?= htmlentities($unidade['descricao']) ?>"><?= htmlentities($unidade['descricao']) ?></option>
                                         <?php endforeach ?>
                                     </select>
@@ -134,7 +147,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                             <label for="prioridade">Prioridade<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-triangle-exclamation"></i>
-                                    <select name="prioridade"  id="prioridade">
+                                    <select name="prioridade" id="prioridade">
                                         <option value="<?= htmlentities($dadoChamado['prioridade']) ?>"><?= htmlentities($dadoChamado['prioridade']) ?></option>
                                         <option value="BAIXA">BAIXA</option>
                                         <option value="MÉDIA">MÉDIA</option>
@@ -143,13 +156,13 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                     </select>
                                 </div>
                             </label>
-                                            
+
                             <label for="inclui_linha">Incluir linha (opcional)
                                 <div>
                                     <i class="fa-solid fa-sim-card"></i>
-                                    <select name="inclui_linha"  id="inclui_linha">
+                                    <select name="inclui_linha" id="inclui_linha">
                                         <option value="<?= htmlentities($dadoChamado['inclui_linha']) ?>"><?= htmlentities($dadoChamado['inclui_linha']) ?></option>
-                                        <?php foreach($listaLinhas as $linha): ?>
+                                        <?php foreach ($listaLinhas as $linha): ?>
                                             <option value="<?= htmlentities($linha['nome']) . " - " .  htmlentities($linha['linha']) ?>"><?= htmlentities($linha['nome']) . " - " .  htmlentities($linha['linha']) ?></option>
                                         <?php endforeach ?>
                                     </select>
@@ -159,9 +172,9 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                             <label for="inclui_aparelho">Incluir aparelho (opcional)
                                 <div>
                                     <i class="fa-solid fa-mobile-screen-button"></i>
-                                    <select name="inclui_aparelho"  id="inclui_aparelho">
+                                    <select name="inclui_aparelho" id="inclui_aparelho">
                                         <option value="<?= htmlentities($dadoChamado['inclui_aparelho']) ?>"><?= htmlentities($dadoChamado['inclui_aparelho']) ?></option>
-                                        <?php foreach($listaAparelhos as $aparelho): ?>
+                                        <?php foreach ($listaAparelhos as $aparelho): ?>
                                             <option value="<?= htmlentities($aparelho['tipo_aparelho']) . " " . htmlentities($aparelho['nome']) . " " .  htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['tipo_aparelho']) . " " . htmlentities($aparelho['nome']) . " " .  htmlentities($aparelho['imei_aparelho']) ?></option>
                                         <?php endforeach ?>
                                     </select>
@@ -173,10 +186,14 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                     <textarea name="descricao" id="descricao"><?= htmlentities($dadoChamado['descricao']) ?></textarea>
                                 </div>
                             </label>
-                            
-                            <label for="arquivo">Anexar (.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, ou .png) opcional
+
+                            <label id="label-textarea">
+                                <a href="<?= htmlentities($dadoChamado['anexo']) ?>" target="_blank"><button type="button">Arquivo anexado</button></a>
+                            </label>
+
+                            <label for="anexo">Alterar anexo (o arquivo anexado será substituído)
                                 <div>
-                                    <input type="file" name="arquivo" id="arquivo" accept=".doc,.docx,.pdf,.xls,.xlsx,.jpg,.jpeg,.png">
+                                    <input type="file" name="anexo" id="anexo" accept=".doc,.docx,.pdf,.xls,.xlsx,.jpg,.jpeg,.png">
                                 </div>
                             </label>
 
@@ -184,7 +201,9 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                 <button type="submit">Atualizar</button>
                                 <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><button type="button" id="btn-cancelar">Cancelar</button></a>
                             </div>
+
                         </section>
+                    </form>
                 </section>
 
                 <?php

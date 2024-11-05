@@ -178,6 +178,13 @@ table .fa-circle {
     gap: 5px;
 }
 
+#nenhum_resultado_encontrado {
+    width: fit-content !important;
+    color: #ff0000;
+    border: 1px solid #ff0000;
+    background: #ffebeb
+}
+
 @media (width <= 1020px) and (orientation: landscape) {
     thead {
         top: -30px !important;

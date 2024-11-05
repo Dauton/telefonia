@@ -105,47 +105,6 @@ body {
     font-size: 25px;
 }
 
-#cabecalho-botao-verde {
-    background: #00a000;
-    transition: background .2s;
-}
-
-#cabecalho-botao-amarelo {
-    background: #ffa500;
-    transition: background .2s;
-}
-
-#cabecalho-botao-verde i {
-    color: #008000;
-    transition: .2s;
-}
-
-#cabecalho-botao-amarelo i {
-    color: #c78100;
-    transition: .2s;
-}
-
-
-#cabecalho-botao-verde:hover {
-    background: #008000;
-    transition: background .2s;
-}
-
-#cabecalho-botao-amarelo:hover {
-    background: #c78100;
-    transition: background .2s;
-}
-
-#cabecalho-botao-verde:hover i {
-    color: #005300;
-    transition: .2s;
-}
-
-#cabecalho-botao-amarelo:hover i {
-    color: #976200;
-    transition: .2s;
-}
-
 .conteudo {
     width: 100%;
     height: 100%;
@@ -527,44 +486,6 @@ body {
     font-size: 12px;
 }
 
-#botao-verde-box {
-    width: 100%;
-    height: 100%;
-    padding: 30px 0;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    background: #303030cc;
-    display: none;
-    overflow: scroll;
-    z-index: 9;
-}
-
-.box-table-botao-verde {
-    width: 98%;
-    height: fit-content;
-    margin: 0 auto;
-    padding: 10px 30px;
-    background: #ffffff;
-    border-radius: 3px;
-    position: relative;
-    font-size: 10px;
-    overflow: scroll;
-}
-
-.box-table-botao-verde table p {
-    width: 70px;
-}
-.box-table-botao-verde p {
-    text-align: center;
-}
-
-.box-table-botao-verde h3 {
-    margin: 10px;
-    font-size: 15px;
-    font-weight: 100;
-}
-
 .fa-rectangle-xmark {
     font-size: 25px;
     color: #9b0000;
@@ -615,20 +536,6 @@ body {
     .cabecalho div {
         position: fixed;
         z-index: 2;
-    }
-
-    #cabecalho-abrir-requisicao,
-    #cabecalho-botao-verde {
-        padding: 10px;
-        position: fixed;
-        right: -125px;
-        bottom: 40px;
-        z-index: 2;
-    }
-
-    #cabecalho-abrir-requisicao {
-        right: -97px;
-        bottom: 100px;
     }
 
     .conteudo {

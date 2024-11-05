@@ -136,7 +136,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                     <h3><a href="inicio.php">INÍCIO</a> / <a href="<?= $_SERVER['HTTP_REFERER'] ?>">CONSULTAR DISPOSITIVO</a> / VISUALIZAR DISPOSITIVO</h3>
                 </header>
                 <section class="conteudo-center">
-                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off">
+                    <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off" name="dispositivo">
                         <header id="form-cabecalho">
                             <h1>Visualização de dispositivo</h1>
                             <i class="fa-solid fa-sim-card"></i>
@@ -157,7 +157,11 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
 
                         <section class="form-secao-01">
 
-                            <h2>Informações da linha</h2>
+                            <header class="conteudo-cabecalho">
+                                <h3>Informações da linha</h3>
+                                <i class="fa-solid fa-sim-card"></i>
+                            </header>
+
                             <label for="linha">Linha<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-phone"></i>
@@ -223,7 +227,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             </label>
 
                         </section>
-
+                        <br>
                         <label for="possui_aparelho">Possui aparelho?<span style="color: red;">*</span>
                             <div>
                                 <i class="fa-solid fa-mobile-screen"></i>
@@ -234,11 +238,13 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                 </select>
                             </div>
                         </label>
-
-
+                        <br>    
                         <section class="form-secao-02">
 
-                            <h2>Informações do aparelho</h2>
+                            <header class="conteudo-cabecalho">
+                                <h3>Informações do aparelho</h3>
+                                <i class="fa-solid fa-mobile-screen-button"></i>
+                            </header>
 
                             <label for="tipo_aparelho">Tipo do equipamento<span style="color: red;"> *</span>
                                 <div>
@@ -295,7 +301,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             </label>
 
                         </section>
-
+                        <br>
                         <label for="possui_usuario">Essa linha ou aparelho possui usuário?<span style="color: red;"> *</span>
                             <div>
                                 <i class="fa-solid fa-user"></i>
@@ -309,7 +315,10 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
 
                         <section class="form-secao-03">
 
-                            <h2>Informações do usuário</h2>
+                            <header class="conteudo-cabecalho">
+                                <h3>Informações do usuário</h3>
+                                <i class="fa-solid fa-clipboard-user"></i>
+                            </header>
 
                             <label for="nome">Nome<span style="color: red;"> *</span>
                                 <div>
@@ -340,10 +349,13 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             </label>
 
                         </section>
-
+                        <br>
                         <section class="form-secao-04">
 
-                            <h2>Informações da localidade</h2>
+                            <header class="conteudo-cabecalho">
+                                <h3>Informações da unidade</h3>
+                                <i class="fa-solid fa-map-location-dot"></i>
+                            </header>
 
                             <label for="unidade">Unidade<span style="color: red;"> *</span>
                                 <div>

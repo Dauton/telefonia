@@ -195,7 +195,7 @@ $listaUnidades = $unidade->listaOpcoes('UNIDADE');
                             </label>
 
                             <div id="box-confimarcao-btns">
-                                <button type="button">Mover chamado</button>
+                                <button type="submit">Mover chamado</button>
                                 <button type="button" id="btn-cancelar" title='Cancelar movimento'>Cancelar</button>
                             </div>
 
