@@ -249,7 +249,7 @@ form div {
     width: 100%;
 }
 
-@media (width <=960px) {
+@media (width <= 960px) {
 
     form section {
         padding: 0;
