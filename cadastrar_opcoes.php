@@ -112,7 +112,7 @@ $listaCentroCustos = $centro_custo->listaOpcoes('CENTRO DE CUSTOS');
                                     <span>
                                         <h4>UNIDADES</h4>
                                     </span>
-                                    <h3>Ir té</h3>
+                                    <h3>Ir até</h3>
                                     <i class="fa-solid fa-gears"></i>
                                     <p class="texto-filtro">Clique para ir</p>
                                 </div>

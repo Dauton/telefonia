@@ -144,6 +144,10 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <i class="fa-solid fa-clipboard-user"></i>
                         </header>
 
+                        <div id="dados_cadastro">
+                            <p>Cadastrado em <?= $dadoDispositivo['data_cadastro'] . " por " . $dadoDispositivo['cadastrado_por'] ?></p>
+                        </div>
+
                         <label for="possui_linha">Possui linha?<span style="color: red;"> *</span>
                             <div>
                                 <i class="fa-solid fa-sim-card"></i>
@@ -285,7 +289,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             <label for="imei_aparelho">IMEI aparelho
                                 <div>
                                     <i class="fa-solid fa-mobile-screen"></i>
-                                    <input type="text" name="imei_aparelho" id="imei_aparelho" placeholder="Apenas números Ex: 123456789123456" value="<?= htmlentities($dadoDispositivo['imei_aparelho']) ?>">
+                                    <input type="text" name="imei_aparelho" id="imei_aparelho" placeholder="Apenas números Ex: 351456789123456" value="<?= htmlentities($dadoDispositivo['imei_aparelho']) ?>">
                                 </div>
                             </label>
 
@@ -467,8 +471,8 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                     <i class="fa-solid fa-clipboard-question"></i>
                 </header>
                 <p>
-                    <b>Linha:</b> Se houver uma linha, os campos "linha" e "operadora" devem ser preenchidos obrigatoriamente.<br><br>
-                    <b>Aparelho:</b> Se houver um aparelho, os campos "marca" e "modelo" devem ser preenchidos obrigatoriamente.<br><br>
+                    <b>Linha:</b> Se houver uma linha, os campos "linha", "operadora" e "status" devem ser preenchidos obrigatoriamente.<br><br>
+                    <b>Aparelho:</b> Se houver um aparelho, todos campos relacionados serão obrigatórios.<br><br>
                     <b>Usuário:</b> Se houver um usuário, todos os campos relacionados serão obrigatórios.<br><br>
                     <b>Localidade:</b> Todos os campos referentes à localidade são de preenchimento obrigatório.<br><br>
                     Para que o cadastro seja bem-sucedido, é necessário incluir pelo menos uma linha ou um aparelho.

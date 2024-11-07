@@ -163,7 +163,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                     <select name="inclui_linha" id="inclui_linha">
                                         <option value="<?= htmlentities($dadoChamado['inclui_linha']) ?>"><?= htmlentities($dadoChamado['inclui_linha']) ?></option>
                                         <?php foreach ($listaLinhas as $linha): ?>
-                                            <option value="<?= htmlentities($linha['nome']) . " - " .  htmlentities($linha['linha']) ?>"><?= htmlentities($linha['nome']) . " - " .  htmlentities($linha['linha']) ?></option>
+                                            <option value="<?= htmlentities($linha['linha']) ?>"><?= htmlentities($linha['nome']) . " - " .  htmlentities($linha['linha']) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
@@ -175,7 +175,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                     <select name="inclui_aparelho" id="inclui_aparelho">
                                         <option value="<?= htmlentities($dadoChamado['inclui_aparelho']) ?>"><?= htmlentities($dadoChamado['inclui_aparelho']) ?></option>
                                         <?php foreach ($listaAparelhos as $aparelho): ?>
-                                            <option value="<?= htmlentities($aparelho['tipo_aparelho']) . " " . htmlentities($aparelho['nome']) . " " .  htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['tipo_aparelho']) . " " . htmlentities($aparelho['nome']) . " " .  htmlentities($aparelho['imei_aparelho']) ?></option>
+                                            <option value="<?= htmlentities($aparelho['nome']) . " " .  htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['tipo_aparelho']) . " " . htmlentities($aparelho['nome']) . " " .  htmlentities($aparelho['imei_aparelho']) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>

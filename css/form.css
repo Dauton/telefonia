@@ -24,7 +24,7 @@ form section .conteudo-cabecalho {
 }
 
 form section .conteudo-cabecalho i {
-    font-size: 20px;
+    font-size: 19px;
 }
 
 form section[name='form-cadastro-usuario'] {
@@ -247,6 +247,13 @@ form div {
 
 #form-altera-senha label {
     width: 100%;
+}
+
+#dados_cadastro {
+    width: fit-content;
+    position: absolute;
+    top: 40px;
+    right: 10px;
 }
 
 @media (width <= 960px) {

@@ -87,9 +87,9 @@ class Telefonia
         self::executaValidacoes($possui_linha, $linha, $operadora, $status, $sim_card, $possui_aparelho, $tipo_aparelho, $marca_aparelho, $modelo_aparelho, $imei_aparelho, $gestao_mdm, $unidade, $centro_custo, $uf, $canal, $ponto_focal, $gestor, $possui_usuario, $nome, $matricula, $email);
 
         $sql = "INSERT INTO tb_dispositivos (
-            possui_linha, linha, operadora, servico, perfil, status, data_ativacao, sim_card, possui_aparelho, tipo_aparelho, marca_aparelho, modelo_aparelho, imei_aparelho, gestao_mdm, unidade, centro_custo, uf, canal, ponto_focal, gestor, possui_usuario, nome, matricula, email, funcao
+            possui_linha, linha, operadora, servico, perfil, status, data_ativacao, sim_card, possui_aparelho, tipo_aparelho, marca_aparelho, modelo_aparelho, imei_aparelho, gestao_mdm, unidade, centro_custo, uf, canal, ponto_focal, gestor, possui_usuario, nome, matricula, email, funcao, cadastrado_por
         ) VALUES (
-            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
         )";
 
         $stmt = $this->pdo->prepare($sql);
@@ -120,6 +120,7 @@ class Telefonia
         $stmt->bindValue(23, trim($matricula), PDO::PARAM_STR);
         $stmt->bindValue(24, trim(mb_strtoupper($email)), PDO::PARAM_STR);
         $stmt->bindValue(25, trim(mb_strtoupper($funcao)), PDO::PARAM_STR);
+        $stmt->bindValue(26, trim($_SESSION['nome']), PDO::PARAM_STR);
 
         $stmt->execute();
     }
@@ -178,7 +179,7 @@ class Telefonia
     // MÉTODO QUE BUSCA O ID DO DISPOSITIVO NA TELA DE ATUALIZAÇÃO...
     public function buscaIdDispositivo(int $id): array
     {
-        $sql = "SELECT * FROM tb_dispositivos WHERE id = ?";
+        $sql = "SELECT *, DATE_FORMAT(data_cadastro, '%d/%m/%Y') AS data_cadastro FROM tb_dispositivos WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $id);
         $stmt->execute();
@@ -277,6 +278,17 @@ class Telefonia
     {
         $sql = "SELECT COUNT(*) FROM tb_dispositivos WHERE gestao_mdm = 'Sim'";
         $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $resultado = $stmt->fetchColumn();
+        return $resultado;
+    }
+
+    // MÉTODO QUE CONTA E RETORNA A QUANTIDADE DE DISPOSITIVOS CADASTRADOS EM MINHA UNIDADE...
+    public function contagemMinhaUnidade() : int
+    {
+        $sql = "SELECT COUNT(*) FROM tb_dispositivos WHERE unidade = ? ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $_SESSION['unidade']);
         $stmt->execute();
         $resultado = $stmt->fetchColumn();
         return $resultado;

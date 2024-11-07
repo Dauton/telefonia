@@ -195,7 +195,7 @@ $emAbertoMeuDepartamento = $chamados->contagemChamadosAbertosMeuDepartamento();
                                         <?php endforeach; ?>
                                     <?php else: ?>
                                         <tr>
-                                            <td colspan="11"><p id="nenhum_resultado_encontrado">Nenhum resultado encontrado para o valor "<?= $_GET['busca'] ?>".</p></td>
+                                            <td colspan="11"><p id="nenhum_resultado_encontrado">Nenhum resultado encontrado para o filtro ou valor informado.</p></td>
                                         </tr>
                                     <?php endif ?>
                                 </tbody>

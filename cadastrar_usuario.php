@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['usuario'],
         $_POST['senha'],
         $_POST['repete_senha'],
-        $pdo // PASSADO POR PARÂMETRO POR CONTA DA VALIDAÇÃO DE USUÁRIO EXISTENTE, POS O MÉTODO É ESTÁTICO...
+        $pdo // PASSADO POR PARÂMETRO POR CONTA DA VALIDAÇÃO DE USUÁRIO EXISTENTE, POIS O MÉTODO É ESTÁTICO...
     );
 
     $armazenaLog = new Logs($pdo);
