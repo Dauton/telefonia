@@ -152,8 +152,8 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                 <i class="fa-solid fa-sim-card"></i>
                                 <select name="possui_linha" id="servico" required>
                                     <option value="">Selecione</option>
-                                    <option value="Sim">Sim</option>
-                                    <option value="Não">Não</option>
+                                    <option value="SIM">SIM</option>
+                                    <option value="NÃO">NÃO</option>
                                 </select>
                             </div>
                         </label>
@@ -230,18 +230,17 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                 </div>
                             </label>
                         </section>
-                        <br>
+
                         <label for="possui_aparelho">Possui aparelho?<span style="color: red;"> *</span>
                             <div>
                                 <i class="fa-solid fa-mobile-screen"></i>
                                 <select name="possui_aparelho" id="possui_aparelho" required>
                                     <option value="">Selecione</option>
-                                    <option value="Sim">Sim</option>
-                                    <option value="Não">Não</option>
+                                    <option value="SIM">SIM</option>
+                                    <option value="NÃO">NÃO</option>
                                 </select>
                             </div>
                         </label>
-
 
                         <section class="form-secao-02">
 
@@ -305,14 +304,14 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             </label>
 
                         </section>
-                        <br>
+
                         <label for="possui_usuario">Essa linha ou aparelho possui usuário?<span style="color: red;"> *</span>
                             <div>
                                 <i class="fa-solid fa-user"></i>
                                 <select name="possui_usuario" id="possui_usuario" required>
                                     <option value="">Selecione</option>
-                                    <option value="Sim">Sim</option>
-                                    <option value="Não">Não</option>
+                                    <option value="SIM">SIM</option>
+                                    <option value="NÃO">NÃO</option>
                                 </select>
                             </div>
                         </label>
@@ -353,7 +352,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             </label>
 
                         </section>
-                        <br>
+                        
                         <section class="form-secao-04">
 
                             <header class="conteudo-cabecalho">

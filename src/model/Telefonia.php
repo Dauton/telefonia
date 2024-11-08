@@ -30,7 +30,7 @@ class Telefonia
         Validacoes::validaCampoVazio($possui_usuario, "$caminho" . "verifica_campo=campo_possui_usuario");
 
         // CASO POSSUA LINHA, OS CAMPOS REFERNETES À LINHA SERÃO VALIDADOS...
-        if ($_POST['possui_linha'] === 'Sim') {
+        if ($_POST['possui_linha'] === 'SIM') {
             Validacoes::validaCampoVazio($linha, "$caminho" . "verifica_campo=campo_linha_vazio");
             Validacoes::validaCampoVazio($operadora, "$caminho" . "verifica_campo=campo_operadora_vazio");
             Validacoes::validaCampoVazio($status, "$caminho" . "verifica_campo=campo_status_vazio");
@@ -43,7 +43,7 @@ class Telefonia
         }
 
         // CASO POSSUA APARELHO, OS CAMPOS REFERNETES AO APARELHO SERÃO VALIDADOS...
-        if ($_POST['possui_aparelho'] === 'Sim') {
+        if ($_POST['possui_aparelho'] === 'SIM') {
             Validacoes::validaCampoVazio($tipo_aparelho, "$caminho" . "verifica_campo=campo_tipo_vazio");
             Validacoes::validaCampoVazio($marca_aparelho, "$caminho" . "verifica_campo=campo_marca_vazio");
             Validacoes::validaCampoVazio($modelo_aparelho, "$caminho" . "verifica_campo=campo_modelo_vazio");
@@ -51,7 +51,7 @@ class Telefonia
             Validacoes::validaCampoVazio($gestao_mdm, "$caminho" . "verifica_campo=campo_mdm_vazio");
             Validacoes::validaCampoNumerico('imei_aparelho', "$caminho" . "verifica_campo=imei_nao_numerico");
         }
-        if ($_POST['possui_usuario'] === 'Sim') {
+        if ($_POST['possui_usuario'] === 'SIM') {
             Validacoes::validaCampoVazio($nome, "$caminho" . "verifica_campo=campo_nome_vazio");
 
             // VALIDA O CAMPO DA MATRICULA APENAS QUANDO ELE NÃO ESTIVER VAZIO...
@@ -61,7 +61,7 @@ class Telefonia
         }
 
         // CASO POSSUA USUÁRIO, OS CAMPOS REFERNETES AO USUÁRIO SERÃO VALIDADOS...
-        if ($_POST['possui_linha'] === 'Sim' || $_POST['possui_aparelho'] === 'Sim' || $_POST['possui_usuario'] === 'Sim') {
+        if ($_POST['possui_linha'] === 'SIM' || $_POST['possui_aparelho'] === 'Sim' || $_POST['possui_usuario'] === 'Sim') {
             Validacoes::validaCampoVazio($unidade, "$caminho" . "verifica_campo=campos_localidade");
             Validacoes::validaCampoVazio($centro_custo, "$caminho" . "verifica_campo=campos_localidade");
             Validacoes::validaCampoVazio($uf, "$caminho" . "verifica_campo=campos_localidade");
@@ -128,7 +128,7 @@ class Telefonia
     // MÉTODO QUE LISTA TODOS OS DISPOSITIVOS...
     public function exibeDispositivos(): array
     {
-        $sql = "SELECT * FROM tb_dispositivos";
+        $sql = "SELECT * FROM tb_dispositivos ORDER BY ponto_focal DESC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);

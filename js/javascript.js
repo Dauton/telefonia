@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const secaoUsuario = document.querySelector('.form-secao-03');
 
     function toggleSection(select, section) {
-        if (select.value === 'Sim') {
+        if (select.value === 'SIM') {
             section.style.display = 'flex';
         } else {
             section.style.display = 'none';

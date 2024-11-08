@@ -8,20 +8,20 @@ $dadoDispositivo = $buscaIdUsuario->buscaIdDispositivo($_GET['id']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // CASO O USUÁRIO ATUALIZE ESSE DISPOSITIVO INFORMANDO QUE NÃO CONTÉM LINHA, OS CAMPOS REFERENTES A LINHA SERÃO LIMPOS.
-    if ($_POST['possui_linha'] === 'Não') {
+    if ($_POST['possui_linha'] === 'NÃO') {
         $_POST['linha'] = $_POST['operadora'] = $_POST['servico'] = $_POST['perfil'] = $_POST['status'] = $_POST['data_ativacao'] = $_POST['sim_card'] = null;
     }
     // CASO O USUÁRIO ATUALIZE ESSE DISPOSITIVO INFORMANDO QUE NÃO CONTÉM APARELHO, OS CAMPOS REFERENTES AO APARELHO SERÃO LIMPOS.
-    if ($_POST['possui_aparelho'] === 'Não') {
+    if ($_POST['possui_aparelho'] === 'NÃO') {
         $_POST['tipo_aparelho'] = $_POST['marca_aparelho'] = $_POST['modelo_aparelho'] = $_POST['imei_aparelho'] = $_POST['gestao_mdm'] = null;
     }
     // CASO O USUÁRIO ATUALIZE ESSE DISPOSITIVO INFORMANDO QUE NÃO CONTÉM USUÁRIO, OS CAMPOS REFERENTES AO USUÁRIO SERÃO LIMPOS.
-    if ($_POST['possui_usuario'] === 'Não') {
+    if ($_POST['possui_usuario'] === 'NÃO') {
         $_POST['nome'] = $_POST['matricula'] = $_POST['email'] = $_POST['funcao'] = null;
     }
     
     // VALIDA SE EXISTE ALGUM DADOS DE LINHA OU APARELHO PREENCHIDOS...
-    if ($_POST['possui_linha'] === "Não" && $_POST['possui_aparelho'] === "Não") {
+    if ($_POST['possui_linha'] === "NÃO" && $_POST['possui_aparelho'] === "NÃO") {
 
         header("Location: $visualiza_dispositivo?id=$_GET[id]&verifica_campo=nenhum_dado");
         die();
@@ -153,12 +153,11 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                 <i class="fa-solid fa-sim-card"></i>
                                 <select name="possui_linha" required>
                                     <option value="<?= htmlentities($dadoDispositivo['possui_linha']) ?>"><?= htmlentities($dadoDispositivo['possui_linha']) ?></option>
-                                    <option value="Sim">Sim</option>
-                                    <option value="Não">Não</option>
+                                    <option value="SIM">SIM</option>
+                                    <option value="NÃO">NÃO</option>
                                 </select>
                             </div>
                         </label>
-
                         <section class="form-secao-01">
 
                             <header class="conteudo-cabecalho">
@@ -205,7 +204,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                     <input type="text" name="perfil" id="perfil" placeholder="Perfil da linha" value="<?= htmlentities($dadoDispositivo['perfil']) ?>">
                                 </div>
                             </label>
-                            <label for="perfil">Status
+                            <label for="perfil">Status<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-regular fa-circle-check"></i>
                                     <select name="status">
@@ -231,18 +230,18 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             </label>
 
                         </section>
-                        <br>
+                        
                         <label for="possui_aparelho">Possui aparelho?<span style="color: red;">*</span>
                             <div>
                                 <i class="fa-solid fa-mobile-screen"></i>
                                 <select name="possui_aparelho" required>
                                     <option value="<?= htmlentities($dadoDispositivo['possui_aparelho']) ?>"><?= htmlentities($dadoDispositivo['possui_aparelho']) ?></option>
-                                    <option value="Sim">Sim</option>
-                                    <option value="Não">Não</option>
+                                    <option value="SIM">SIM</option>
+                                    <option value="NÃO">NÃO</option>
                                 </select>
                             </div>
                         </label>
-                        <br>    
+
                         <section class="form-secao-02">
 
                             <header class="conteudo-cabecalho">
@@ -286,33 +285,33 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                 </div>
                             </label>
 
-                            <label for="imei_aparelho">IMEI aparelho
+                            <label for="imei_aparelho">IMEI aparelho<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-mobile-screen"></i>
                                     <input type="text" name="imei_aparelho" id="imei_aparelho" placeholder="Apenas números Ex: 351456789123456" value="<?= htmlentities($dadoDispositivo['imei_aparelho']) ?>">
                                 </div>
                             </label>
 
-                            <label for="gestao_mdm">MDM
+                            <label for="gestao_mdm">MDM<span style="color: red;"> *</span>
                                 <div>
                                     <i class="fa-solid fa-shield-halved"></i>
                                     <select name="gestao_mdm">
                                         <option value="<?= htmlentities($dadoDispositivo['gestao_mdm']) ?>"><?= htmlentities($dadoDispositivo['gestao_mdm']) ?></option>
-                                        <option value="Sim">Sim</option>
-                                        <option value="Não">Não</option>
+                                        <option value="SIM">SIM</option>
+                                        <option value="NÃO">NÃO</option>
                                     </select>
                                 </div>
                             </label>
 
                         </section>
-                        <br>
+
                         <label for="possui_usuario">Essa linha ou aparelho possui usuário?<span style="color: red;"> *</span>
                             <div>
                                 <i class="fa-solid fa-user"></i>
                                 <select name="possui_usuario" required>
                                     <option value="<?= htmlentities($dadoDispositivo['possui_usuario']) ?>"><?= htmlentities($dadoDispositivo['possui_usuario']) ?></option>
-                                    <option value="Sim">Sim</option>
-                                    <option value="Não">Não</option>
+                                    <option value="SIM">SIM</option>
+                                    <option value="NÃO">NÃO</option>
                                 </select>
                             </div>
                         </label>
@@ -353,7 +352,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                             </label>
 
                         </section>
-                        <br>
+
                         <section class="form-secao-04">
 
                             <header class="conteudo-cabecalho">

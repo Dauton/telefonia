@@ -10,11 +10,11 @@ senhaPrimeiroAcesso();
 
 if ($_SERVER['QUERY_STRING'] === 'aparelhos') {
 
-    $sql = "SELECT * FROM tb_dispositivos WHERE marca_aparelho != '' AND marca_aparelho != null";
+    $sql = "SELECT * FROM tb_dispositivos WHERE marca_aparelho != '' OR marca_aparelho != null";
     $nome_arquivo = 'APARELHOS_CADASTRADOS.xls';
 } elseif ($_SERVER['QUERY_STRING'] === 'linhas') {
 
-    $sql = "SELECT * FROM tb_dispositivos WHERE linha != '' AND linha != null";
+    $sql = "SELECT * FROM tb_dispositivos WHERE linha != '' OR linha != null";
     $nome_arquivo = 'LINHAS_CADASTRADAS.xls';
 } elseif ($_SERVER['QUERY_STRING'] === 'mdm') {
 
