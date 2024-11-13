@@ -252,7 +252,9 @@ $totalMinhaUnidade = $dispositivos->contagemMinhaUnidade();
                                 </tbody>
 
                             </table>
+
                             <p>Não há mais dados a serem exibidos</p>
+                            
                         </div>
 
                     </article>

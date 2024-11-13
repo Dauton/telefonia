@@ -424,7 +424,7 @@ $listaCentrosDeCustos = $cdc->listaOpcoes('CENTRO DE CUSTOS');
                                 <div>
                                     <i class="fa-solid fa-building"></i>
                                     <select name="canal">
-                                        <option value="<?= htmlentities($dadoDispositivo['canal']) ?>">Canal</option>
+                                        <option value="<?= htmlentities($dadoDispositivo['canal']) ?>"><?= htmlentities($dadoDispositivo['canal']) ?></option>
                                         <option value="ID ARMAZENS GERAIS LTDA">ID ARMAZENS GERAIS LTDA</option>
                                         <option value="ID DO BRASIL LOGÍSTICA LTDA">ID DO BRASIL LOGÍSTICA LTDA</option>
                                         <option value="PROSERV LTDA">PROSERV LTDA</option>

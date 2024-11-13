@@ -193,7 +193,6 @@ $listaUnidade = $unidade->listaOpcoes('UNIDADE');
             </button></a>
     </div>
 
-
     <script src="js/jquery.js"></script>
     <script type="text/javascript" src="js/javascript.js"></script>
     <script type="text/javascript" src="js/toastr.js"></script>

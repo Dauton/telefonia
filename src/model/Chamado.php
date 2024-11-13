@@ -12,7 +12,7 @@ class Chamado
     }
 
     // ABRE UM CHAMADO...
-    public function abreChamado(string $titulo, string $departamento, string $categoria, string $prioridade, string $descricao, string $inclui_linha, string $inclui_aparelho, string $anexo): void
+    public function abreChamado(string $titulo, string $departamento, string $categoria, string $prioridade, string $descricao, string $inclui_linha, string $inclui_aparelho, ?string $anexo): void
     {
         Validacoes::validaCampoVazio($titulo, "../../abrir_chamado.php?verifica_campo=todos_campos");
         Validacoes::validaCampoVazio($departamento, "../../abrir_chamado.php?verifica_campo=todos_campos");

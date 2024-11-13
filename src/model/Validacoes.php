@@ -42,7 +42,7 @@ class Validacoes
     }
 
     // MÉTODO QUE VALIDA SE A EXTENSÃO DO ARQUIVO ANEXADO É UM DOS PERMITIDOS...
-    public static function validaArquivoAnexado(string $arquivo, string $caminho) : void
+    public static function validaArquivoAnexado(?string $arquivo, string $caminho) : void
     {
         $paphinfo = pathinfo($arquivo, PATHINFO_EXTENSION);
 

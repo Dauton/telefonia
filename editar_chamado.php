@@ -16,14 +16,22 @@ if ($dadoChamado['status'] === 'FECHADO' || $dadoChamado['usuario'] != $_SESSION
 
 // EXECUTA A EDIÇÃO DO CHAMADO...
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
     $anexo = $_FILES['anexo'];
-    $nome = $anexo['name'];
-    $tmp_name = $anexo['tmp_name'];
+    $caminhoArquivo =  null;
 
-    $extensao = pathinfo($nome, PATHINFO_EXTENSION);
-    $novo_nome = uniqid() . '.' . $extensao;
-    move_uploaded_file($tmp_name, "uploads/" . $novo_nome);
+    if(!empty($anexo['name'])) {
 
+        $nome = $anexo['name'];
+        $tmp_name = $anexo['tmp_name'];
+    
+        $extensao = pathinfo($nome, PATHINFO_EXTENSION);
+        $novo_nome = uniqid() . '.' . $extensao;
+        move_uploaded_file($tmp_name, "uploads/" . $novo_nome);
+
+        $caminhoArquivo = "uploads/" . $novo_nome;
+    }
+    
     $editaChamado = new Chamado($pdo);
     $editaChamado->editaChamado(
         $_GET['id'],
@@ -34,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['descricao'],
         $_POST['inclui_linha'],
         $_POST['inclui_aparelho'],
-        "uploads/" . $novo_nome
+        $caminhoArquivo
     );
 
     // SE NÃO FOR ADICIONADO NEM UM ANEXO NA EDIÇÃO, O ANEXO PERMANECERÁ SENDO O JÁ ANEXADO...
@@ -43,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['anexo'] === $dadoChamado['anexo'];
     }
 
-    header("Location: abrir_chamado.php?chamado=atualizado");
+    header("Location: abrir_chamado.php?id=$dadoChamado[id]&chamado=atualizado");
     die();
 }
 
@@ -163,7 +171,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                     <select name="inclui_linha" id="inclui_linha">
                                         <option value="<?= htmlentities($dadoChamado['inclui_linha']) ?>"><?= htmlentities($dadoChamado['inclui_linha']) ?></option>
                                         <?php foreach ($listaLinhas as $linha): ?>
-                                            <option value="<?= htmlentities($linha['linha']) ?>"><?= htmlentities($linha['nome']) . " - " .  htmlentities($linha['linha']) ?></option>
+                                            <option value="<?= htmlentities($linha['nome']) . " - LINHA: " . htmlentities($linha['linha']) ?>"><?= htmlentities($linha['nome']) . " - LINHA: " . htmlentities($linha['linha']) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
@@ -175,7 +183,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                     <select name="inclui_aparelho" id="inclui_aparelho">
                                         <option value="<?= htmlentities($dadoChamado['inclui_aparelho']) ?>"><?= htmlentities($dadoChamado['inclui_aparelho']) ?></option>
                                         <?php foreach ($listaAparelhos as $aparelho): ?>
-                                            <option value="<?= htmlentities($aparelho['nome']) . " " .  htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['tipo_aparelho']) . " " . htmlentities($aparelho['nome']) . " " .  htmlentities($aparelho['imei_aparelho']) ?></option>
+                                            <option value="<?= htmlentities($aparelho['nome']) . " - IMEI: " .  htmlentities($aparelho['imei_aparelho']) ?>"><?= htmlentities($aparelho['nome']) . " - IMEI: " . htmlentities($aparelho['imei_aparelho']) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
