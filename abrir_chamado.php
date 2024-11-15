@@ -163,7 +163,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                     <select name="inclui_linha"  id="inclui_linha">
                                         <option value="">Selecione a linha</option>
                                         <?php foreach($listaLinhas as $linha): ?>
-                                            <option value="<?= htmlentities($linha['linha']) ?>"><?= htmlentities($linha['nome']) . " - " . htmlentities($linha['linha']) ?></option>
+                                            <option value="<?= htmlentities($linha['nome']) . " " .  htmlentities($linha['linha'])?>"><?= htmlentities($linha['nome']) . " - " . htmlentities($linha['linha']) ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>

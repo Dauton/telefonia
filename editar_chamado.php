@@ -8,6 +8,7 @@ senhaPrimeiroAcesso();
 $buscaIdChamado = new Chamado($pdo);
 $dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
 
+
 // SE O CHAMADO JÁ ESTIVER FECHADO OU O CHAMADO NÃO PERTENCER AO USUÁRIO LOGADO, NÃO SERÁ POSSIVEL EDITA-LO...
 if ($dadoChamado['status'] === 'FECHADO' || $dadoChamado['usuario'] != $_SESSION['usuario']) {
     header("Location: abrir_chamado.php");
@@ -16,22 +17,38 @@ if ($dadoChamado['status'] === 'FECHADO' || $dadoChamado['usuario'] != $_SESSION
 
 // EXECUTA A EDIÇÃO DO CHAMADO...
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+
     $anexo = $_FILES['anexo'];
-    $caminhoArquivo =  null;
+    $caminhoArquivo = null;
 
-    if(!empty($anexo['name'])) {
+    if (!empty($anexo['name'])) {
 
+        // GRAVA E SALVA O ARQUIVO...
         $nome = $anexo['name'];
         $tmp_name = $anexo['tmp_name'];
-    
+
         $extensao = pathinfo($nome, PATHINFO_EXTENSION);
+        Validacoes::validaArquivoAnexado($nome, "editar_chamado.php?id=$_GET[id]&verifica_campo=arquivo_invalido");
+
         $novo_nome = uniqid() . '.' . $extensao;
         move_uploaded_file($tmp_name, "uploads/" . $novo_nome);
 
         $caminhoArquivo = "uploads/" . $novo_nome;
+
+        // EXCLUI O ARQUIVO ANTIGO, CASO EXISTA...
+        $arquivoAntigo = $dadoChamado['anexo'];
+
+        if (file_exists($arquivoAntigo)) {
+            unlink($arquivoAntigo);
+        }
+
+    } else {
+
+        // SE NÃO FOR ANEXADO UM NOVO ARQUIVO, O ANEXO PERMENECERÁ SENDO O ARQUIVO JÁ GRAVADO...
+        $caminhoArquivo = $dadoChamado['anexo'];
     }
-    
+
+    // ATUALIZA O CHAMADO
     $editaChamado = new Chamado($pdo);
     $editaChamado->editaChamado(
         $_GET['id'],
@@ -45,15 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $caminhoArquivo
     );
 
-    // SE NÃO FOR ADICIONADO NEM UM ANEXO NA EDIÇÃO, O ANEXO PERMANECERÁ SENDO O JÁ ANEXADO...
-    if ($_POST['anexo'] === '' || $_POST['anexo'] === null) {
-
-        $_POST['anexo'] === $dadoChamado['anexo'];
-    }
-
-    header("Location: abrir_chamado.php?id=$dadoChamado[id]&chamado=atualizado");
-    die();
+    header("Location: visualiza_chamado.php?id=$dadoChamado[id]&chamado=atualizado");
+    exit();
 }
+
 
 $chamados = new Chamado($pdo);
 $exibeMeusChamados = $chamados->exibeMeusChamados();
@@ -195,9 +207,13 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                 </div>
                             </label>
 
-                            <label id="label-textarea">
-                                <a href="<?= htmlentities($dadoChamado['anexo']) ?>" target="_blank"><button type="button">Arquivo anexado</button></a>
-                            </label>
+                            <?php if (!empty($dadoChamado['anexo'])) : ?>
+                                <label id="label-textarea">
+                                    <a href="<?= htmlentities($dadoChamado['anexo']) ?>" target="_blank"><button type="button">Arquivo anexado</button></a>
+                                </label>
+                            <?php else : ?>
+                                <p>Não há nenhum arquivo anexado nesse chmado</p>
+                            <?php endif ?>
 
                             <label for="anexo">Alterar anexo (o arquivo anexado será substituído)
                                 <div>

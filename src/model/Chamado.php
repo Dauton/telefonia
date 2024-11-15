@@ -76,13 +76,13 @@ class Chamado
     // EDITA UM CHAMADO
     public function editaChamado(int $id, string $titulo, string $departamento, string $categoria, string $prioridade, string $descricao, string $inclui_linha, string $inclui_aparelho, string $anexo): void
     {
-        Validacoes::validaCampoVazio($titulo, "../../abrir_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
-        Validacoes::validaCampoVazio($departamento, "../../abrir_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
-        Validacoes::validaCampoVazio($categoria, "../../abrir_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
-        Validacoes::validaCampoVazio($prioridade, "../../abrir_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
-        Validacoes::validaCampoVazio($descricao, "../../abrir_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
+        Validacoes::validaCampoVazio($titulo, "../../editar_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
+        Validacoes::validaCampoVazio($departamento, "../../editar_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
+        Validacoes::validaCampoVazio($categoria, "../../editar_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
+        Validacoes::validaCampoVazio($prioridade, "../../editar_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
+        Validacoes::validaCampoVazio($descricao, "../../editar_chamado.php?id=$_GET[id]&verifica_campo=todos_campos");
 
-        Validacoes::validaArquivoAnexado($anexo, "../../abrir_chamado.php?id=$_GET[id]&verifica_campo=arquivo_invalido");
+        Validacoes::validaArquivoAnexado($anexo, "../../editar_chamado.php?id=$_GET[id]&verifica_campo=arquivo_invalido");
 
         $sql = "UPDATE tb_chamados SET titulo = ?, departamento = ?, categoria = ?, prioridade = ?, descricao = ?, inclui_linha = ?, inclui_aparelho = ?, anexo = ? WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
