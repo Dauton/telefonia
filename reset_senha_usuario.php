@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </label>
 
-                        <label for="primeiro_acesso" id="label_checkbox">
+                        <label for="primeiro_acesso" id="label_ checkbox">
                             <input type="checkbox" name="primeiro_acesso" id="primeiro_acesso" checked> Obrigar alteração no próximo acesso
                         </label>
 

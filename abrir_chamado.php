@@ -7,19 +7,8 @@ senhaPrimeiroAcesso();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $anexo = $_FILES['anexo'];
-    $caminhoArquivo =  null;
-
-    if(!empty($anexo['name'])) {
-        $nome = $anexo['name'];
-        $tmp_name = $anexo['tmp_name'];
-    
-        $extensao = pathinfo($nome, PATHINFO_EXTENSION);
-        $novo_nome = uniqid() . '.' . $extensao;
-        move_uploaded_file($tmp_name, "uploads/" . $novo_nome);
-
-        $caminhoArquivo = "uploads/" . $novo_nome;
-    }
+    // GRAVA O ARQUIVO ANEXADO...
+    Uploads::gravaArquivo();
 
     $abreChamado = new Chamado($pdo);
     $abreChamado->abreChamado(
@@ -30,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['descricao'],
         $_POST['inclui_linha'],
         $_POST['inclui_aparelho'],
-        $caminhoArquivo
+        $_FILES['anexo']
     );
 
     $armazenaLog = new Logs($pdo);

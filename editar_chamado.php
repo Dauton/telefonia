@@ -8,44 +8,19 @@ senhaPrimeiroAcesso();
 $buscaIdChamado = new Chamado($pdo);
 $dadoChamado = $buscaIdChamado->buscaIdChamado($_GET['id']);
 
-
-// SE O CHAMADO JÁ ESTIVER FECHADO OU O CHAMADO NÃO PERTENCER AO USUÁRIO LOGADO, NÃO SERÁ POSSIVEL EDITA-LO...
-if ($dadoChamado['status'] === 'FECHADO' || $dadoChamado['usuario'] != $_SESSION['usuario']) {
-    header("Location: abrir_chamado.php");
-    die();
-}
-
 // EXECUTA A EDIÇÃO DO CHAMADO...
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $anexo = $_FILES['anexo'];
-    $caminhoArquivo = null;
-
-    if (!empty($anexo['name'])) {
+    if (!empty($_FILES['anexo']['name'])) {
 
         // GRAVA E SALVA O ARQUIVO...
-        $nome = $anexo['name'];
-        $tmp_name = $anexo['tmp_name'];
-
-        $extensao = pathinfo($nome, PATHINFO_EXTENSION);
-        Validacoes::validaArquivoAnexado($nome, "editar_chamado.php?id=$_GET[id]&verifica_campo=arquivo_invalido");
-
-        $novo_nome = uniqid() . '.' . $extensao;
-        move_uploaded_file($tmp_name, "uploads/" . $novo_nome);
-
-        $caminhoArquivo = "uploads/" . $novo_nome;
-
-        // EXCLUI O ARQUIVO ANTIGO, CASO EXISTA...
-        $arquivoAntigo = $dadoChamado['anexo'];
-
-        if (file_exists($arquivoAntigo)) {
-            unlink($arquivoAntigo);
-        }
+        Uploads::gravaArquivo();
+        Uploads::excluiArquivo($dadoChamado['anexo']);
 
     } else {
 
         // SE NÃO FOR ANEXADO UM NOVO ARQUIVO, O ANEXO PERMENECERÁ SENDO O ARQUIVO JÁ GRAVADO...
-        $caminhoArquivo = $dadoChamado['anexo'];
+        $_FILES['anexo'] = $dadoChamado['anexo'];
     }
 
     // ATUALIZA O CHAMADO
@@ -59,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['descricao'],
         $_POST['inclui_linha'],
         $_POST['inclui_aparelho'],
-        $caminhoArquivo
+        $_FILES['anexo']
     );
 
     header("Location: visualiza_chamado.php?id=$dadoChamado[id]&chamado=atualizado");
@@ -117,7 +92,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                     <form method="post" class="form-labels-lado-a-lado" id="form-labels-lado-a-lado" autocomplete="off" enctype="multipart/form-data" multiple>
                         <header id="form-cabecalho">
                             <h1>Atualização de chamado</h1>
-                            <i class="fa-solid fa-user-plus"></i>
+                            <i class="fa-solid fa-pen-to-square"></i>
                         </header>
 
                         <section class="form-secao-01" name="form-cadastro-usuario">
@@ -208,13 +183,12 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                             </label>
 
                             <?php if (!empty($dadoChamado['anexo'])) : ?>
-                                <label id="label-textarea">
+                                <div style="margin: 10px 0">
                                     <a href="<?= htmlentities($dadoChamado['anexo']) ?>" target="_blank"><button type="button">Arquivo anexado</button></a>
-                                </label>
-                            <?php else : ?>
-                                <p>Não há nenhum arquivo anexado nesse chmado</p>
+                                    <a href="src/manipulacoes_anexo/exclui_anexo.php?id=<?= $dadoChamado['id'] ?>"><button type="button" id="btn-red">Remover anexo</button></a>
+                                </div>
                             <?php endif ?>
-
+                            
                             <label for="anexo">Alterar anexo (o arquivo anexado será substituído)
                                 <div>
                                     <input type="file" name="anexo" id="anexo" accept=".doc,.docx,.pdf,.xls,.xlsx,.jpg,.jpeg,.png">
@@ -223,7 +197,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
 
                             <div>
                                 <button type="submit">Atualizar</button>
-                                <a href="<?= $_SERVER['HTTP_REFERER'] ?>"><button type="button" id="btn-cancelar">Cancelar</button></a>
+                                <a href="visualiza_chamado.php?id=<?= $dadoChamado['id'] ?>"><button type="button" id="btn-cancelar">Cancelar</button></a>
                             </div>
 
                         </section>

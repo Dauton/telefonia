@@ -230,6 +230,23 @@ form div {
 
 }
 
+form #bottom-form {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+}
+form #bottom-form #label-checkbox {
+    width: fit-content;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+form #bottom-form #label-checkbox div {
+    width: fit-content;
+    padding: 0 5px 0 0;
+    border: none;
+}
+
 #form-labels-lado-a-lado {
     width: 100%;
     gap: 2% 2%;
