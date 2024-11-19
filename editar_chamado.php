@@ -189,7 +189,7 @@ $listaAparelhos = $aparelho->exibeAparelhos();
                                 </div>
                             <?php endif ?>
                             
-                            <label for="anexo">Alterar anexo (o arquivo anexado será substituído)
+                            <label for="anexo">Incluir ou alterar anexo (em caso de alteração, o arquivo anexado será substituído)
                                 <div>
                                     <input type="file" name="anexo" id="anexo" accept=".doc,.docx,.pdf,.xls,.xlsx,.jpg,.jpeg,.png">
                                 </div>

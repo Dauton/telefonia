@@ -1,8 +1,13 @@
 <?php
 
-if (!isset($_SESSION['usuario'])) {
-    header("Location: ../../../index.php");
-    die();
+// CASO HAJA CHAMADO EM ABERTO NO DEPARTAMENTO DO USUÁRIO LOGADO, SERÁ EXIBIDO UMA NOTIFICAÇÃO NO MENU LATERAL...
+$chamados = new Chamado($pdo);
+$emAbertoMeuDepartamento = $chamados->contagemChamadosAbertosMeuDepartamento();
+
+if($emAbertoMeuDepartamento >= 1) {
+    $notificacao = "<p class='notificacao' title='Há $emAbertoMeuDepartamento chamado(os) em aberto no seu departamento'>$emAbertoMeuDepartamento</p>";
+} else {
+    $notificacao = "<i class='fa-solid fa-angle-right'></i>";
 }
 
 ?>
@@ -24,6 +29,7 @@ if (!isset($_SESSION['usuario'])) {
         <div></div>
         <div></div>
     </div>
+    
     <ul>
         <li><a href="inicio.php"><i class="fa-solid fa-house"></i></i>Início<i class="fa-solid fa-angle-right"></i></a></li>
 
@@ -41,10 +47,10 @@ if (!isset($_SESSION['usuario'])) {
                 <li><a href='consulta_dispositivos.php'><i class="fa-solid fa-mobile-screen"></i>Consultar dispositivos<i class='fa-solid fa-angle-right'></i></a></li>
             </ul>
         </li>
-        <li id='menu_04'><a><i class="fa-solid fa-headset"></i></i>Painel de chamados<i class='fa-solid fa-angle-right'></i></a>
+        <li id='menu_04'><a><i class="fa-solid fa-headset"></i></i>Painel de chamados <?= $notificacao ?></a>
             <ul id='menusub_04'>
                 <li><a href='abrir_chamado.php'><i class="fa-solid fa-comment"></i></i>Abrir um chamado<i class='fa-solid fa-angle-right'></i></a></li>
-                <li><a href='gerenciar_chamados.php'><i class="fa-solid fa-comments"></i>Gerenciar chamados<i class='fa-solid fa-angle-right'></i></a></li>
+                <li><a href='gerenciar_chamados.php'><i class="fa-solid fa-comments"></i>Gerenciar chamados<?= $notificacao ?></a></li>
             </ul>
         </li>
         <?php if($_SESSION['perfil'] === 'INFRAESTRUTURA IDL') : ?>
